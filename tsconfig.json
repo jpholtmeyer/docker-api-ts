@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "es2017", /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
+    "module": "Preserve", /* Specify what module code is generated. */
+    "moduleResolution": "Node10",
+    "esModuleInterop": true, /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */
+    "forceConsistentCasingInFileNames": true, /* Ensure that casing is correct in imports. */
+    "strict": true,
+    "outDir": "dist/",
+    "declaration": true
+  },
+  "include": [
+    "src/generated/**/*",
+    "src/__tests__/**/*"
+  ]
+}

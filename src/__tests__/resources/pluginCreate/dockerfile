@@ -1,0 +1,4 @@
+FROM alpine:latest
+COPY ./plugin /plugin
+WORKDIR /plugin
+ENTRYPOINT ["./hello.sh"]

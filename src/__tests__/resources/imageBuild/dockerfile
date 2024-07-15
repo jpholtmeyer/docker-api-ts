@@ -1,0 +1,5 @@
+FROM alpine:latest
+
+RUN echo "Hello, World!" > /var/log/helloworld.log
+
+CMD ["sleep infinity"]
