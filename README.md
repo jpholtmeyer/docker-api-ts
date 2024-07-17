@@ -81,7 +81,7 @@ const response = await docker.containerDelete(containerId)
 
 ## API
 Comprehensive TypeDoc generated documentation is available at:  
-https://jholtmeyer.github.io/docker-api-ts
+https://jpholtmeyer.github.io/docker-api-ts
 
 The `Docker` class provides the following functions:
 - configCreate
