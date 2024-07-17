@@ -1,0 +1,8 @@
+{
+    "Description": "A simple Hello World plugin for Docker",
+    "Interface": {
+        "Types": ["docker.volumedriver/1.0"],
+        "Socket": "hello.sock"
+    },
+    "Entrypoint": ["/plugin/hello.sh"]
+}
