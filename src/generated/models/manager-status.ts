@@ -19,26 +19,22 @@ import type { Reachability } from './reachability.js';
 
 /**
  * ManagerStatus represents the status of a manager.  It provides the current status of a node\'s manager component, if the node is a manager. 
- * @export
  * @interface ManagerStatus
  */
 export interface ManagerStatus {
     /**
      * 
      * @type {boolean}
-     * @memberof ManagerStatus
      */
     'Leader'?: boolean;
     /**
      * 
      * @type {Reachability}
-     * @memberof ManagerStatus
      */
     'Reachability'?: Reachability;
     /**
      * The IP address and port at which the manager is reachable. 
      * @type {string}
-     * @memberof ManagerStatus
      */
     'Addr'?: string;
 }

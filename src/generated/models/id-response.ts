@@ -16,14 +16,12 @@
 
 /**
  * Response to an API call that returns just an Id
- * @export
  * @interface IdResponse
  */
 export interface IdResponse {
     /**
      * The id of the newly created object.
      * @type {string}
-     * @memberof IdResponse
      */
     'Id': string;
 }

@@ -28,38 +28,32 @@ import type { TLSInfo } from './tlsinfo.js';
 
 /**
  * NodeDescription encapsulates the properties of the Node as reported by the agent. 
- * @export
  * @interface NodeDescription
  */
 export interface NodeDescription {
     /**
      * 
      * @type {string}
-     * @memberof NodeDescription
      */
     'Hostname'?: string;
     /**
      * 
      * @type {Platform}
-     * @memberof NodeDescription
      */
     'Platform'?: Platform;
     /**
      * 
      * @type {ResourceObject}
-     * @memberof NodeDescription
      */
     'Resources'?: ResourceObject;
     /**
      * 
      * @type {EngineDescription}
-     * @memberof NodeDescription
      */
     'Engine'?: EngineDescription;
     /**
      * 
      * @type {TLSInfo}
-     * @memberof NodeDescription
      */
     'TLSInfo'?: TLSInfo;
 }

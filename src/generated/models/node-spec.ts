@@ -16,38 +16,32 @@
 
 /**
  * 
- * @export
  * @interface NodeSpec
  */
 export interface NodeSpec {
     /**
      * Name for the node.
      * @type {string}
-     * @memberof NodeSpec
      */
     'Name'?: string;
     /**
      * User-defined key/value metadata.
      * @type {{ [key: string]: string; }}
-     * @memberof NodeSpec
      */
     'Labels'?: { [key: string]: string; };
     /**
      * Role of the node.
      * @type {string}
-     * @memberof NodeSpec
      */
     'Role'?: NodeSpecRoleEnum;
     /**
      * Availability of the node.
      * @type {string}
-     * @memberof NodeSpec
      */
     'Availability'?: NodeSpecAvailabilityEnum;
 }
 
 /**
-    * @export
     * @enum {string}
     */
 export enum NodeSpecRoleEnum {
@@ -55,7 +49,6 @@ export enum NodeSpecRoleEnum {
     Manager = 'manager'
 }
 /**
-    * @export
     * @enum {string}
     */
 export enum NodeSpecAvailabilityEnum {

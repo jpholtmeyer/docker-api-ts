@@ -16,20 +16,17 @@
 
 /**
  * 
- * @export
  * @interface ImageDeleteResponseItem
  */
 export interface ImageDeleteResponseItem {
     /**
      * The image ID of an image that was untagged
      * @type {string}
-     * @memberof ImageDeleteResponseItem
      */
     'Untagged'?: string;
     /**
      * The image ID of an image that was deleted
      * @type {string}
-     * @memberof ImageDeleteResponseItem
      */
     'Deleted'?: string;
 }

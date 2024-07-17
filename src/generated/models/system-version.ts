@@ -22,80 +22,67 @@ import type { SystemVersionPlatform } from './system-version-platform.js';
 
 /**
  * Response of Engine API: GET \"/version\" 
- * @export
  * @interface SystemVersion
  */
 export interface SystemVersion {
     /**
      * 
      * @type {SystemVersionPlatform}
-     * @memberof SystemVersion
      */
     'Platform'?: SystemVersionPlatform;
     /**
      * Information about system components 
      * @type {Array<SystemVersionComponentsInner>}
-     * @memberof SystemVersion
      */
     'Components'?: Array<SystemVersionComponentsInner>;
     /**
      * The version of the daemon
      * @type {string}
-     * @memberof SystemVersion
      */
     'Version'?: string;
     /**
      * The default (and highest) API version that is supported by the daemon 
      * @type {string}
-     * @memberof SystemVersion
      */
     'ApiVersion'?: string;
     /**
      * The minimum API version that is supported by the daemon 
      * @type {string}
-     * @memberof SystemVersion
      */
     'MinAPIVersion'?: string;
     /**
      * The Git commit of the source code that was used to build the daemon 
      * @type {string}
-     * @memberof SystemVersion
      */
     'GitCommit'?: string;
     /**
      * The version Go used to compile the daemon, and the version of the Go runtime in use. 
      * @type {string}
-     * @memberof SystemVersion
      */
     'GoVersion'?: string;
     /**
      * The operating system that the daemon is running on (\"linux\" or \"windows\") 
      * @type {string}
-     * @memberof SystemVersion
      */
     'Os'?: string;
     /**
      * The architecture that the daemon is running on 
      * @type {string}
-     * @memberof SystemVersion
      */
     'Arch'?: string;
     /**
      * The kernel version (`uname -r`) that the daemon is running on.  This field is omitted when empty. 
      * @type {string}
-     * @memberof SystemVersion
      */
     'KernelVersion'?: string;
     /**
      * Indicates if the daemon is started with experimental features enabled.  This field is omitted when empty / false. 
      * @type {boolean}
-     * @memberof SystemVersion
      */
     'Experimental'?: boolean;
     /**
      * The date and time that the daemon was compiled. 
      * @type {string}
-     * @memberof SystemVersion
      */
     'BuildTime'?: string;
 }

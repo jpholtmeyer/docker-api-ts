@@ -19,32 +19,27 @@ import type { PluginPrivilege } from './plugin-privilege.js';
 
 /**
  * Plugin spec for the service.  *(Experimental release only.)*  <p><br /></p>  > **Note**: ContainerSpec, NetworkAttachmentSpec, and PluginSpec are > mutually exclusive. PluginSpec is only used when the Runtime field > is set to `plugin`. NetworkAttachmentSpec is used when the Runtime > field is set to `attachment`. 
- * @export
  * @interface TaskSpecPluginSpec
  */
 export interface TaskSpecPluginSpec {
     /**
      * The name or \'alias\' to use for the plugin.
      * @type {string}
-     * @memberof TaskSpecPluginSpec
      */
     'Name'?: string;
     /**
      * The plugin image reference to use.
      * @type {string}
-     * @memberof TaskSpecPluginSpec
      */
     'Remote'?: string;
     /**
      * Disable the plugin once scheduled.
      * @type {boolean}
-     * @memberof TaskSpecPluginSpec
      */
     'Disabled'?: boolean;
     /**
      * 
      * @type {Array<PluginPrivilege>}
-     * @memberof TaskSpecPluginSpec
      */
     'PluginPrivilege'?: Array<PluginPrivilege>;
 }

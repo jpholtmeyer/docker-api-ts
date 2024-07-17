@@ -22,7 +22,6 @@ import type { SecretSpec } from './secret-spec.js';
 
 /**
  * @type SecretCreateRequest
- * @export
  */
 export type SecretCreateRequest = SecretSpec;
 

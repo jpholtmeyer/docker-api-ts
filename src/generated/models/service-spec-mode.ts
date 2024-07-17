@@ -22,32 +22,27 @@ import type { ServiceSpecModeReplicatedJob } from './service-spec-mode-replicate
 
 /**
  * Scheduling mode for the service.
- * @export
  * @interface ServiceSpecMode
  */
 export interface ServiceSpecMode {
     /**
      * 
      * @type {ServiceSpecModeReplicated}
-     * @memberof ServiceSpecMode
      */
     'Replicated'?: ServiceSpecModeReplicated;
     /**
      * 
      * @type {object}
-     * @memberof ServiceSpecMode
      */
     'Global'?: object;
     /**
      * 
      * @type {ServiceSpecModeReplicatedJob}
-     * @memberof ServiceSpecMode
      */
     'ReplicatedJob'?: ServiceSpecModeReplicatedJob;
     /**
      * The mode used for services which run a task to the completed state on each valid node. 
      * @type {object}
-     * @memberof ServiceSpecMode
      */
     'GlobalJob'?: object;
 }

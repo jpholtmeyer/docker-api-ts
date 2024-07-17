@@ -16,20 +16,17 @@
 
 /**
  * Actor describes something that generates events, like a container, network, or a volume. 
- * @export
  * @interface EventActor
  */
 export interface EventActor {
     /**
      * The ID of the object emitting the event
      * @type {string}
-     * @memberof EventActor
      */
     'ID'?: string;
     /**
      * Various key/value attributes of the object, depending on its type. 
      * @type {{ [key: string]: string; }}
-     * @memberof EventActor
      */
     'Attributes'?: { [key: string]: string; };
 }

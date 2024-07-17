@@ -16,20 +16,17 @@
 
 /**
  * 
- * @export
  * @interface PluginConfigUser
  */
 export interface PluginConfigUser {
     /**
      * 
      * @type {number}
-     * @memberof PluginConfigUser
      */
     'UID'?: number;
     /**
      * 
      * @type {number}
-     * @memberof PluginConfigUser
      */
     'GID'?: number;
 }

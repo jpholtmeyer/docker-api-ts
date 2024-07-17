@@ -16,20 +16,17 @@
 
 /**
  * 
- * @export
  * @interface ThrottleDevice
  */
 export interface ThrottleDevice {
     /**
      * Device path
      * @type {string}
-     * @memberof ThrottleDevice
      */
     'Path'?: string;
     /**
      * Rate
      * @type {number}
-     * @memberof ThrottleDevice
      */
     'Rate'?: number;
 }

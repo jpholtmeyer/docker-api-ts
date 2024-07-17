@@ -16,20 +16,17 @@
 
 /**
  * Platform represents the platform (Arch/OS). 
- * @export
  * @interface Platform
  */
 export interface Platform {
     /**
      * Architecture represents the hardware architecture (for example, `x86_64`). 
      * @type {string}
-     * @memberof Platform
      */
     'Architecture'?: string;
     /**
      * OS represents the Operating System (for example, `linux` or `windows`). 
      * @type {string}
-     * @memberof Platform
      */
     'OS'?: string;
 }

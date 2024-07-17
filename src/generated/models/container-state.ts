@@ -19,86 +19,72 @@ import type { Health } from './health.js';
 
 /**
  * ContainerState stores container\'s running state. It\'s part of ContainerJSONBase and will be returned by the \"inspect\" command. 
- * @export
  * @interface ContainerState
  */
 export interface ContainerState {
     /**
      * String representation of the container state. Can be one of \"created\", \"running\", \"paused\", \"restarting\", \"removing\", \"exited\", or \"dead\". 
      * @type {string}
-     * @memberof ContainerState
      */
     'Status'?: ContainerStateStatusEnum;
     /**
      * Whether this container is running.  Note that a running container can be _paused_. The `Running` and `Paused` booleans are not mutually exclusive:  When pausing a container (on Linux), the freezer cgroup is used to suspend all processes in the container. Freezing the process requires the process to be running. As a result, paused containers are both `Running` _and_ `Paused`.  Use the `Status` field instead to determine if a container\'s state is \"running\". 
      * @type {boolean}
-     * @memberof ContainerState
      */
     'Running'?: boolean;
     /**
      * Whether this container is paused.
      * @type {boolean}
-     * @memberof ContainerState
      */
     'Paused'?: boolean;
     /**
      * Whether this container is restarting.
      * @type {boolean}
-     * @memberof ContainerState
      */
     'Restarting'?: boolean;
     /**
      * Whether this container has been killed because it ran out of memory. 
      * @type {boolean}
-     * @memberof ContainerState
      */
     'OOMKilled'?: boolean;
     /**
      * 
      * @type {boolean}
-     * @memberof ContainerState
      */
     'Dead'?: boolean;
     /**
      * The process ID of this container
      * @type {number}
-     * @memberof ContainerState
      */
     'Pid'?: number;
     /**
      * The last exit code of this container
      * @type {number}
-     * @memberof ContainerState
      */
     'ExitCode'?: number;
     /**
      * 
      * @type {string}
-     * @memberof ContainerState
      */
     'Error'?: string;
     /**
      * The time when this container was last started.
      * @type {string}
-     * @memberof ContainerState
      */
     'StartedAt'?: string;
     /**
      * The time when this container last exited.
      * @type {string}
-     * @memberof ContainerState
      */
     'FinishedAt'?: string;
     /**
      * 
      * @type {Health}
-     * @memberof ContainerState
      */
     'Health'?: Health | null;
 }
 
 /**
-    * @export
     * @enum {string}
     */
 export enum ContainerStateStatusEnum {

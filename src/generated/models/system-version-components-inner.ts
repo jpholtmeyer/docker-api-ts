@@ -16,26 +16,22 @@
 
 /**
  * 
- * @export
  * @interface SystemVersionComponentsInner
  */
 export interface SystemVersionComponentsInner {
     /**
      * Name of the component 
      * @type {string}
-     * @memberof SystemVersionComponentsInner
      */
     'Name': string;
     /**
      * Version of the component 
      * @type {string}
-     * @memberof SystemVersionComponentsInner
      */
     'Version': string;
     /**
      * Key/value pairs of strings with additional information about the component. These values are intended for informational purposes only, and their content is not defined, and not part of the API specification.  These messages can be printed by the client as information to the user. 
      * @type {object}
-     * @memberof SystemVersionComponentsInner
      */
     'Details'?: object | null;
 }

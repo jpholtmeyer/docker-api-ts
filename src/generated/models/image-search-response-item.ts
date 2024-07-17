@@ -16,38 +16,32 @@
 
 /**
  * 
- * @export
  * @interface ImageSearchResponseItem
  */
 export interface ImageSearchResponseItem {
     /**
      * 
      * @type {string}
-     * @memberof ImageSearchResponseItem
      */
     'description'?: string;
     /**
      * 
      * @type {boolean}
-     * @memberof ImageSearchResponseItem
      */
     'is_official'?: boolean;
     /**
      * 
      * @type {boolean}
-     * @memberof ImageSearchResponseItem
      */
     'is_automated'?: boolean;
     /**
      * 
      * @type {string}
-     * @memberof ImageSearchResponseItem
      */
     'name'?: string;
     /**
      * 
      * @type {number}
-     * @memberof ImageSearchResponseItem
      */
     'star_count'?: number;
 }

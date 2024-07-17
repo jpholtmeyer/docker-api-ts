@@ -16,20 +16,17 @@
 
 /**
  * change item in response to ContainerChanges operation
- * @export
  * @interface ContainerChangeResponseItem
  */
 export interface ContainerChangeResponseItem {
     /**
      * Path to file that has changed
      * @type {string}
-     * @memberof ContainerChangeResponseItem
      */
     'Path': string;
     /**
      * Kind of change
      * @type {number}
-     * @memberof ContainerChangeResponseItem
      */
     'Kind': number;
 }

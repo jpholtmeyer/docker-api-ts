@@ -28,104 +28,87 @@ import type { PeerInfo } from './peer-info.js';
 
 /**
  * 
- * @export
  * @interface Network
  */
 export interface Network {
     /**
      * Name of the network. 
      * @type {string}
-     * @memberof Network
      */
     'Name'?: string;
     /**
      * ID that uniquely identifies a network on a single machine. 
      * @type {string}
-     * @memberof Network
      */
     'Id'?: string;
     /**
      * Date and time at which the network was created in [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds. 
      * @type {string}
-     * @memberof Network
      */
     'Created'?: string;
     /**
      * The level at which the network exists (e.g. `swarm` for cluster-wide or `local` for machine level) 
      * @type {string}
-     * @memberof Network
      */
     'Scope'?: string;
     /**
      * The name of the driver used to create the network (e.g. `bridge`, `overlay`). 
      * @type {string}
-     * @memberof Network
      */
     'Driver'?: string;
     /**
      * Whether the network was created with IPv6 enabled. 
      * @type {boolean}
-     * @memberof Network
      */
     'EnableIPv6'?: boolean;
     /**
      * 
      * @type {IPAM}
-     * @memberof Network
      */
     'IPAM'?: IPAM;
     /**
      * Whether the network is created to only allow internal networking connectivity. 
      * @type {boolean}
-     * @memberof Network
      */
     'Internal'?: boolean;
     /**
      * Wheter a global / swarm scope network is manually attachable by regular containers from workers in swarm mode. 
      * @type {boolean}
-     * @memberof Network
      */
     'Attachable'?: boolean;
     /**
      * Whether the network is providing the routing-mesh for the swarm cluster. 
      * @type {boolean}
-     * @memberof Network
      */
     'Ingress'?: boolean;
     /**
      * 
      * @type {ConfigReference}
-     * @memberof Network
      */
     'ConfigFrom'?: ConfigReference;
     /**
      * Whether the network is a config-only network. Config-only networks are placeholder networks for network configurations to be used by other networks. Config-only networks cannot be used directly to run containers or services. 
      * @type {boolean}
-     * @memberof Network
      */
     'ConfigOnly'?: boolean;
     /**
      * Contains endpoints attached to the network. 
      * @type {{ [key: string]: NetworkContainer; }}
-     * @memberof Network
      */
     'Containers'?: { [key: string]: NetworkContainer; };
     /**
      * Network-specific options uses when creating the network. 
      * @type {{ [key: string]: string; }}
-     * @memberof Network
      */
     'Options'?: { [key: string]: string; };
     /**
      * User-defined key/value metadata.
      * @type {{ [key: string]: string; }}
-     * @memberof Network
      */
     'Labels'?: { [key: string]: string; };
     /**
      * List of peer nodes for an overlay network. This field is only present for overlay networks, and omitted for other network types. 
      * @type {Array<PeerInfo>}
-     * @memberof Network
      */
     'Peers'?: Array<PeerInfo> | null;
 }

@@ -19,26 +19,22 @@ import type { EndpointPortConfig } from './endpoint-port-config.js';
 
 /**
  * Properties that can be configured to access and load balance a service.
- * @export
  * @interface EndpointSpec
  */
 export interface EndpointSpec {
     /**
      * The mode of resolution to use for internal load balancing between tasks. 
      * @type {string}
-     * @memberof EndpointSpec
      */
     'Mode'?: EndpointSpecModeEnum;
     /**
      * List of exposed ports that this service is accessible on from the outside. Ports can only be provided if `vip` resolution mode is used. 
      * @type {Array<EndpointPortConfig>}
-     * @memberof EndpointSpec
      */
     'Ports'?: Array<EndpointPortConfig>;
 }
 
 /**
-    * @export
     * @enum {string}
     */
 export enum EndpointSpecModeEnum {

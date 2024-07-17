@@ -16,14 +16,12 @@
 
 /**
  * 
- * @export
  * @interface TaskSpecPlacementPreferencesInnerSpread
  */
 export interface TaskSpecPlacementPreferencesInnerSpread {
     /**
      * label descriptor, such as `engine.labels.az`. 
      * @type {string}
-     * @memberof TaskSpecPlacementPreferencesInnerSpread
      */
     'SpreadDescriptor'?: string;
 }

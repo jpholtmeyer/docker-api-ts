@@ -19,26 +19,22 @@ import type { NodeState } from './node-state.js';
 
 /**
  * NodeStatus represents the status of a node.  It provides the current status of the node, as seen by the manager. 
- * @export
  * @interface NodeStatus
  */
 export interface NodeStatus {
     /**
      * 
      * @type {NodeState}
-     * @memberof NodeStatus
      */
     'State'?: NodeState;
     /**
      * 
      * @type {string}
-     * @memberof NodeStatus
      */
     'Message'?: string;
     /**
      * IP address of the node.
      * @type {string}
-     * @memberof NodeStatus
      */
     'Addr'?: string;
 }

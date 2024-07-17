@@ -16,20 +16,17 @@
 
 /**
  * 
- * @export
  * @interface NetworkCreateResponse
  */
 export interface NetworkCreateResponse {
     /**
      * The ID of the created network.
      * @type {string}
-     * @memberof NetworkCreateResponse
      */
     'Id'?: string;
     /**
      * 
      * @type {string}
-     * @memberof NetworkCreateResponse
      */
     'Warning'?: string;
 }

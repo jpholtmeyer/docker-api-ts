@@ -22,20 +22,17 @@ import type { OCIPlatform } from './ociplatform.js';
 
 /**
  * Describes the result obtained from contacting the registry to retrieve image metadata. 
- * @export
  * @interface DistributionInspect
  */
 export interface DistributionInspect {
     /**
      * 
      * @type {OCIDescriptor}
-     * @memberof DistributionInspect
      */
     'Descriptor': OCIDescriptor;
     /**
      * An array containing all platforms supported by the image. 
      * @type {Array<OCIPlatform>}
-     * @memberof DistributionInspect
      */
     'Platforms': Array<OCIPlatform>;
 }

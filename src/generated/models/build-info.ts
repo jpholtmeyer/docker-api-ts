@@ -25,56 +25,47 @@ import type { ProgressDetail } from './progress-detail.js';
 
 /**
  * 
- * @export
  * @interface BuildInfo
  */
 export interface BuildInfo {
     /**
      * 
      * @type {string}
-     * @memberof BuildInfo
      */
     'id'?: string;
     /**
      * 
      * @type {string}
-     * @memberof BuildInfo
      */
     'stream'?: string;
     /**
      * 
      * @type {string}
-     * @memberof BuildInfo
      */
     'error'?: string;
     /**
      * 
      * @type {ErrorDetail}
-     * @memberof BuildInfo
      */
     'errorDetail'?: ErrorDetail;
     /**
      * 
      * @type {string}
-     * @memberof BuildInfo
      */
     'status'?: string;
     /**
      * 
      * @type {string}
-     * @memberof BuildInfo
      */
     'progress'?: string;
     /**
      * 
      * @type {ProgressDetail}
-     * @memberof BuildInfo
      */
     'progressDetail'?: ProgressDetail;
     /**
      * 
      * @type {ImageID}
-     * @memberof BuildInfo
      */
     'aux'?: ImageID;
 }

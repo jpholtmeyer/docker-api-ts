@@ -34,62 +34,52 @@ import type { ServiceUpdateStatus } from './service-update-status.js';
 
 /**
  * 
- * @export
  * @interface Service
  */
 export interface Service {
     /**
      * 
      * @type {string}
-     * @memberof Service
      */
     'ID'?: string;
     /**
      * 
      * @type {ObjectVersion}
-     * @memberof Service
      */
     'Version'?: ObjectVersion;
     /**
      * 
      * @type {string}
-     * @memberof Service
      */
     'CreatedAt'?: string;
     /**
      * 
      * @type {string}
-     * @memberof Service
      */
     'UpdatedAt'?: string;
     /**
      * 
      * @type {ServiceSpec}
-     * @memberof Service
      */
     'Spec'?: ServiceSpec;
     /**
      * 
      * @type {ServiceEndpoint}
-     * @memberof Service
      */
     'Endpoint'?: ServiceEndpoint;
     /**
      * 
      * @type {ServiceUpdateStatus}
-     * @memberof Service
      */
     'UpdateStatus'?: ServiceUpdateStatus;
     /**
      * 
      * @type {ServiceServiceStatus}
-     * @memberof Service
      */
     'ServiceStatus'?: ServiceServiceStatus;
     /**
      * 
      * @type {ServiceJobStatus}
-     * @memberof Service
      */
     'JobStatus'?: ServiceJobStatus;
 }

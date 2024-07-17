@@ -23,7 +23,6 @@ export const BASE_PATH = "http://localhost/v1.41".replace(/\/+$/, "");
 
 /**
  *
- * @export
  */
 export const COLLECTION_FORMATS = {
     csv: ",",
@@ -34,7 +33,6 @@ export const COLLECTION_FORMATS = {
 
 /**
  *
- * @export
  * @interface RequestArgs
  */
 export interface RequestArgs {
@@ -44,7 +42,6 @@ export interface RequestArgs {
 
 /**
  *
- * @export
  * @class BaseAPI
  */
 export class BaseAPI {
@@ -60,7 +57,6 @@ export class BaseAPI {
 
 /**
  *
- * @export
  * @class RequiredError
  * @extends {Error}
  */
@@ -80,7 +76,6 @@ interface ServerMap {
 
 /**
  *
- * @export
  */
 export const operationServerMap: ServerMap = {
 }

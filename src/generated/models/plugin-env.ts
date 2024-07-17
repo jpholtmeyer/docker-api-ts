@@ -16,32 +16,27 @@
 
 /**
  * 
- * @export
  * @interface PluginEnv
  */
 export interface PluginEnv {
     /**
      * 
      * @type {string}
-     * @memberof PluginEnv
      */
     'Name': string;
     /**
      * 
      * @type {string}
-     * @memberof PluginEnv
      */
     'Description': string;
     /**
      * 
      * @type {Array<string>}
-     * @memberof PluginEnv
      */
     'Settable': Array<string>;
     /**
      * 
      * @type {string}
-     * @memberof PluginEnv
      */
     'Value': string;
 }

@@ -16,50 +16,42 @@
 
 /**
  * Specification for the update strategy of the service.
- * @export
  * @interface ServiceSpecUpdateConfig
  */
 export interface ServiceSpecUpdateConfig {
     /**
      * Maximum number of tasks to be updated in one iteration (0 means unlimited parallelism). 
      * @type {number}
-     * @memberof ServiceSpecUpdateConfig
      */
     'Parallelism'?: number;
     /**
      * Amount of time between updates, in nanoseconds.
      * @type {number}
-     * @memberof ServiceSpecUpdateConfig
      */
     'Delay'?: number;
     /**
      * Action to take if an updated task fails to run, or stops running during the update. 
      * @type {string}
-     * @memberof ServiceSpecUpdateConfig
      */
     'FailureAction'?: ServiceSpecUpdateConfigFailureActionEnum;
     /**
      * Amount of time to monitor each updated task for failures, in nanoseconds. 
      * @type {number}
-     * @memberof ServiceSpecUpdateConfig
      */
     'Monitor'?: number;
     /**
      * The fraction of tasks that may fail during an update before the failure action is invoked, specified as a floating point number between 0 and 1. 
      * @type {number}
-     * @memberof ServiceSpecUpdateConfig
      */
     'MaxFailureRatio'?: number;
     /**
      * The order of operations when rolling out an updated task. Either the old task is shut down before the new task is started, or the new task is started before the old task is shut down. 
      * @type {string}
-     * @memberof ServiceSpecUpdateConfig
      */
     'Order'?: ServiceSpecUpdateConfigOrderEnum;
 }
 
 /**
-    * @export
     * @enum {string}
     */
 export enum ServiceSpecUpdateConfigFailureActionEnum {
@@ -68,7 +60,6 @@ export enum ServiceSpecUpdateConfigFailureActionEnum {
     Rollback = 'rollback'
 }
 /**
-    * @export
     * @enum {string}
     */
 export enum ServiceSpecUpdateConfigOrderEnum {

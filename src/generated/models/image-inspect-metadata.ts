@@ -16,14 +16,12 @@
 
 /**
  * Additional metadata of the image in the local cache. This information is local to the daemon, and not part of the image itself. 
- * @export
  * @interface ImageInspectMetadata
  */
 export interface ImageInspectMetadata {
     /**
      * Date and time at which the image was last tagged in [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds.  This information is only available if the image was tagged locally, and omitted otherwise. 
      * @type {string}
-     * @memberof ImageInspectMetadata
      */
     'LastTagTime'?: string | null;
 }

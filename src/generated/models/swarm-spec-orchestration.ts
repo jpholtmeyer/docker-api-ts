@@ -16,14 +16,12 @@
 
 /**
  * Orchestration configuration.
- * @export
  * @interface SwarmSpecOrchestration
  */
 export interface SwarmSpecOrchestration {
     /**
      * The number of historic tasks to keep per instance or node. If negative, never remove completed or failed tasks. 
      * @type {number}
-     * @memberof SwarmSpecOrchestration
      */
     'TaskHistoryRetentionLimit'?: number;
 }

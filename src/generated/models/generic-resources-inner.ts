@@ -22,20 +22,17 @@ import type { GenericResourcesInnerNamedResourceSpec } from './generic-resources
 
 /**
  * 
- * @export
  * @interface GenericResourcesInner
  */
 export interface GenericResourcesInner {
     /**
      * 
      * @type {GenericResourcesInnerNamedResourceSpec}
-     * @memberof GenericResourcesInner
      */
     'NamedResourceSpec'?: GenericResourcesInnerNamedResourceSpec;
     /**
      * 
      * @type {GenericResourcesInnerDiscreteResourceSpec}
-     * @memberof GenericResourcesInner
      */
     'DiscreteResourceSpec'?: GenericResourcesInnerDiscreteResourceSpec;
 }

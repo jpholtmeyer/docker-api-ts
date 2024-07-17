@@ -19,14 +19,12 @@ import type { EndpointSettings } from './endpoint-settings.js';
 
 /**
  * A summary of the container\'s network settings
- * @export
  * @interface ContainerSummaryNetworkSettings
  */
 export interface ContainerSummaryNetworkSettings {
     /**
      * 
      * @type {{ [key: string]: EndpointSettings; }}
-     * @memberof ContainerSummaryNetworkSettings
      */
     'Networks'?: { [key: string]: EndpointSettings; };
 }

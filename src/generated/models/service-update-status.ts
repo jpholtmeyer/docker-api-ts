@@ -16,38 +16,32 @@
 
 /**
  * The status of a service update.
- * @export
  * @interface ServiceUpdateStatus
  */
 export interface ServiceUpdateStatus {
     /**
      * 
      * @type {string}
-     * @memberof ServiceUpdateStatus
      */
     'State'?: ServiceUpdateStatusStateEnum;
     /**
      * 
      * @type {string}
-     * @memberof ServiceUpdateStatus
      */
     'StartedAt'?: string;
     /**
      * 
      * @type {string}
-     * @memberof ServiceUpdateStatus
      */
     'CompletedAt'?: string;
     /**
      * 
      * @type {string}
-     * @memberof ServiceUpdateStatus
      */
     'Message'?: string;
 }
 
 /**
-    * @export
     * @enum {string}
     */
 export enum ServiceUpdateStatusStateEnum {

@@ -19,26 +19,22 @@ import type { MountVolumeOptionsDriverConfig } from './mount-volume-options-driv
 
 /**
  * Optional configuration for the `volume` type.
- * @export
  * @interface MountVolumeOptions
  */
 export interface MountVolumeOptions {
     /**
      * Populate volume with data from the target.
      * @type {boolean}
-     * @memberof MountVolumeOptions
      */
     'NoCopy'?: boolean;
     /**
      * User-defined key/value metadata.
      * @type {{ [key: string]: string; }}
-     * @memberof MountVolumeOptions
      */
     'Labels'?: { [key: string]: string; };
     /**
      * 
      * @type {MountVolumeOptionsDriverConfig}
-     * @memberof MountVolumeOptions
      */
     'DriverConfig'?: MountVolumeOptionsDriverConfig;
 }

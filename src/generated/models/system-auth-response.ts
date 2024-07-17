@@ -16,20 +16,17 @@
 
 /**
  * 
- * @export
  * @interface SystemAuthResponse
  */
 export interface SystemAuthResponse {
     /**
      * The status of the authentication
      * @type {string}
-     * @memberof SystemAuthResponse
      */
     'Status': string;
     /**
      * An opaque token used to authenticate a user after a successful login
      * @type {string}
-     * @memberof SystemAuthResponse
      */
     'IdentityToken'?: string;
 }

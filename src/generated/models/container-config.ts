@@ -19,158 +19,132 @@ import type { HealthConfig } from './health-config.js';
 
 /**
  * Configuration for a container that is portable between hosts.  When used as `ContainerConfig` field in an image, `ContainerConfig` is an optional field containing the configuration of the container that was last committed when creating the image.  Previous versions of Docker builder used this field to store build cache, and it is not in active use anymore. 
- * @export
  * @interface ContainerConfig
  */
 export interface ContainerConfig {
     /**
      * The hostname to use for the container, as a valid RFC 1123 hostname. 
      * @type {string}
-     * @memberof ContainerConfig
      */
     'Hostname'?: string;
     /**
      * The domain name to use for the container. 
      * @type {string}
-     * @memberof ContainerConfig
      */
     'Domainname'?: string;
     /**
      * The user that commands are run as inside the container.
      * @type {string}
-     * @memberof ContainerConfig
      */
     'User'?: string;
     /**
      * Whether to attach to `stdin`.
      * @type {boolean}
-     * @memberof ContainerConfig
      */
     'AttachStdin'?: boolean;
     /**
      * Whether to attach to `stdout`.
      * @type {boolean}
-     * @memberof ContainerConfig
      */
     'AttachStdout'?: boolean;
     /**
      * Whether to attach to `stderr`.
      * @type {boolean}
-     * @memberof ContainerConfig
      */
     'AttachStderr'?: boolean;
     /**
      * An object mapping ports to an empty object in the form:  `{\"<port>/<tcp|udp|sctp>\": {}}` 
      * @type {{ [key: string]: object; }}
-     * @memberof ContainerConfig
      */
     'ExposedPorts'?: { [key: string]: object; } | null;
     /**
      * Attach standard streams to a TTY, including `stdin` if it is not closed. 
      * @type {boolean}
-     * @memberof ContainerConfig
      */
     'Tty'?: boolean;
     /**
      * Open `stdin`
      * @type {boolean}
-     * @memberof ContainerConfig
      */
     'OpenStdin'?: boolean;
     /**
      * Close `stdin` after one attached client disconnects
      * @type {boolean}
-     * @memberof ContainerConfig
      */
     'StdinOnce'?: boolean;
     /**
      * A list of environment variables to set inside the container in the form `[\"VAR=value\", ...]`. A variable without `=` is removed from the environment, rather than to have an empty value. 
      * @type {Array<string>}
-     * @memberof ContainerConfig
      */
     'Env'?: Array<string>;
     /**
      * Command to run specified as a string or an array of strings. 
      * @type {Array<string>}
-     * @memberof ContainerConfig
      */
     'Cmd'?: Array<string>;
     /**
      * 
      * @type {HealthConfig}
-     * @memberof ContainerConfig
      */
     'Healthcheck'?: HealthConfig;
     /**
      * Command is already escaped (Windows only)
      * @type {boolean}
-     * @memberof ContainerConfig
      */
     'ArgsEscaped'?: boolean | null;
     /**
      * The name (or reference) of the image to use when creating the container, or which was used when the container was created. 
      * @type {string}
-     * @memberof ContainerConfig
      */
     'Image'?: string;
     /**
      * An object mapping mount point paths inside the container to empty objects. 
      * @type {{ [key: string]: object; }}
-     * @memberof ContainerConfig
      */
     'Volumes'?: { [key: string]: object; };
     /**
      * The working directory for commands to run in.
      * @type {string}
-     * @memberof ContainerConfig
      */
     'WorkingDir'?: string;
     /**
      * The entry point for the container as a string or an array of strings.  If the array consists of exactly one empty string (`[\"\"]`) then the entry point is reset to system default (i.e., the entry point used by docker when there is no `ENTRYPOINT` instruction in the `Dockerfile`). 
      * @type {Array<string>}
-     * @memberof ContainerConfig
      */
     'Entrypoint'?: Array<string>;
     /**
      * Disable networking for the container.
      * @type {boolean}
-     * @memberof ContainerConfig
      */
     'NetworkDisabled'?: boolean | null;
     /**
      * MAC address of the container.
      * @type {string}
-     * @memberof ContainerConfig
      */
     'MacAddress'?: string | null;
     /**
      * `ONBUILD` metadata that were defined in the image\'s `Dockerfile`. 
      * @type {Array<string>}
-     * @memberof ContainerConfig
      */
     'OnBuild'?: Array<string> | null;
     /**
      * User-defined key/value metadata.
      * @type {{ [key: string]: string; }}
-     * @memberof ContainerConfig
      */
     'Labels'?: { [key: string]: string; };
     /**
      * Signal to stop a container as a string or unsigned integer. 
      * @type {string}
-     * @memberof ContainerConfig
      */
     'StopSignal'?: string | null;
     /**
      * Timeout to stop a container in seconds.
      * @type {number}
-     * @memberof ContainerConfig
      */
     'StopTimeout'?: number | null;
     /**
      * Shell for when `RUN`, `CMD`, and `ENTRYPOINT` uses a shell. 
      * @type {Array<string>}
-     * @memberof ContainerConfig
      */
     'Shell'?: Array<string> | null;
 }

@@ -22,20 +22,17 @@ import type { TaskSpecContainerSpecPrivilegesSELinuxContext } from './task-spec-
 
 /**
  * Security options for the container
- * @export
  * @interface TaskSpecContainerSpecPrivileges
  */
 export interface TaskSpecContainerSpecPrivileges {
     /**
      * 
      * @type {TaskSpecContainerSpecPrivilegesCredentialSpec}
-     * @memberof TaskSpecContainerSpecPrivileges
      */
     'CredentialSpec'?: TaskSpecContainerSpecPrivilegesCredentialSpec;
     /**
      * 
      * @type {TaskSpecContainerSpecPrivilegesSELinuxContext}
-     * @memberof TaskSpecContainerSpecPrivileges
      */
     'SELinuxContext'?: TaskSpecContainerSpecPrivilegesSELinuxContext;
 }

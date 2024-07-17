@@ -16,68 +16,57 @@
 
 /**
  * 
- * @export
  * @interface ExecConfig
  */
 export interface ExecConfig {
     /**
      * Attach to `stdin` of the exec command.
      * @type {boolean}
-     * @memberof ExecConfig
      */
     'AttachStdin'?: boolean;
     /**
      * Attach to `stdout` of the exec command.
      * @type {boolean}
-     * @memberof ExecConfig
      */
     'AttachStdout'?: boolean;
     /**
      * Attach to `stderr` of the exec command.
      * @type {boolean}
-     * @memberof ExecConfig
      */
     'AttachStderr'?: boolean;
     /**
      * Override the key sequence for detaching a container. Format is a single character `[a-Z]` or `ctrl-<value>` where `<value>` is one of: `a-z`, `@`, `^`, `[`, `,` or `_`. 
      * @type {string}
-     * @memberof ExecConfig
      */
     'DetachKeys'?: string;
     /**
      * Allocate a pseudo-TTY.
      * @type {boolean}
-     * @memberof ExecConfig
      */
     'Tty'?: boolean;
     /**
      * A list of environment variables in the form `[\"VAR=value\", ...]`. 
      * @type {Array<string>}
-     * @memberof ExecConfig
      */
     'Env'?: Array<string>;
     /**
      * Command to run, as a string or array of strings.
      * @type {Array<string>}
-     * @memberof ExecConfig
      */
     'Cmd'?: Array<string>;
     /**
      * Runs the exec process with extended privileges.
      * @type {boolean}
-     * @memberof ExecConfig
      */
     'Privileged'?: boolean;
     /**
      * The user, and optionally, group to run the exec process inside the container. Format is one of: `user`, `user:group`, `uid`, or `uid:gid`. 
      * @type {string}
-     * @memberof ExecConfig
      */
     'User'?: string;
     /**
      * The working directory for the exec process inside the container. 
      * @type {string}
-     * @memberof ExecConfig
      */
     'WorkingDir'?: string;
 }

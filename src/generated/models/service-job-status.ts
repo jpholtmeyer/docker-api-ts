@@ -19,20 +19,17 @@ import type { ObjectVersion } from './object-version.js';
 
 /**
  * The status of the service when it is in one of ReplicatedJob or GlobalJob modes. Absent on Replicated and Global mode services. The JobIteration is an ObjectVersion, but unlike the Service\'s version, does not need to be sent with an update request. 
- * @export
  * @interface ServiceJobStatus
  */
 export interface ServiceJobStatus {
     /**
      * 
      * @type {ObjectVersion}
-     * @memberof ServiceJobStatus
      */
     'JobIteration'?: ObjectVersion;
     /**
      * The last time, as observed by the server, that this job was started. 
      * @type {string}
-     * @memberof ServiceJobStatus
      */
     'LastExecution'?: string;
 }

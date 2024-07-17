@@ -29,7 +29,6 @@ import type { Plugin } from '../models';
 import type { PluginPrivilege } from '../models';
 /**
  * PluginApi - axios parameter creator
- * @export
  */
 export const PluginApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -475,7 +474,6 @@ export const PluginApiAxiosParamCreator = function (configuration?: Configuratio
 
 /**
  * PluginApi - functional programming interface
- * @export
  */
 export const PluginApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = PluginApiAxiosParamCreator(configuration)
@@ -639,7 +637,6 @@ export const PluginApiFp = function(configuration?: Configuration) {
 
 /**
  * PluginApi - factory interface
- * @export
  */
 export const PluginApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = PluginApiFp(configuration)
@@ -770,7 +767,6 @@ export const PluginApiFactory = function (configuration?: Configuration, basePat
 
 /**
  * PluginApi - object-oriented interface
- * @export
  * @class PluginApi
  * @extends {BaseAPI}
  */
@@ -781,7 +777,6 @@ export class PluginApi extends BaseAPI {
      * @param {string} remote The name of the plugin. The &#x60;:latest&#x60; tag is optional, and is the default if omitted. 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PluginApi
      */
     public getPluginPrivileges(remote: string, options?: RawAxiosRequestConfig) {
         return PluginApiFp(this.configuration).getPluginPrivileges(remote, options).then((request) => request(this.axios, this.basePath));
@@ -794,7 +789,6 @@ export class PluginApi extends BaseAPI {
      * @param {File} [tarContext] Path to tar containing plugin rootfs and manifest
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PluginApi
      */
     public pluginCreate(name: string, tarContext?: File, options?: RawAxiosRequestConfig) {
         return PluginApiFp(this.configuration).pluginCreate(name, tarContext, options).then((request) => request(this.axios, this.basePath));
@@ -807,7 +801,6 @@ export class PluginApi extends BaseAPI {
      * @param {boolean} [force] Disable the plugin before removing. This may result in issues if the plugin is in use by a container. 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PluginApi
      */
     public pluginDelete(name: string, force?: boolean, options?: RawAxiosRequestConfig) {
         return PluginApiFp(this.configuration).pluginDelete(name, force, options).then((request) => request(this.axios, this.basePath));
@@ -820,7 +813,6 @@ export class PluginApi extends BaseAPI {
      * @param {boolean} [force] Force disable a plugin even if still in use. 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PluginApi
      */
     public pluginDisable(name: string, force?: boolean, options?: RawAxiosRequestConfig) {
         return PluginApiFp(this.configuration).pluginDisable(name, force, options).then((request) => request(this.axios, this.basePath));
@@ -833,7 +825,6 @@ export class PluginApi extends BaseAPI {
      * @param {number} [timeout] Set the HTTP client timeout (in seconds)
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PluginApi
      */
     public pluginEnable(name: string, timeout?: number, options?: RawAxiosRequestConfig) {
         return PluginApiFp(this.configuration).pluginEnable(name, timeout, options).then((request) => request(this.axios, this.basePath));
@@ -845,7 +836,6 @@ export class PluginApi extends BaseAPI {
      * @param {string} name The name of the plugin. The &#x60;:latest&#x60; tag is optional, and is the default if omitted. 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PluginApi
      */
     public pluginInspect(name: string, options?: RawAxiosRequestConfig) {
         return PluginApiFp(this.configuration).pluginInspect(name, options).then((request) => request(this.axios, this.basePath));
@@ -857,7 +847,6 @@ export class PluginApi extends BaseAPI {
      * @param {string} [filters] A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the plugin list.  Available filters:  - &#x60;capability&#x3D;&lt;capability name&gt;&#x60; - &#x60;enable&#x3D;&lt;true&gt;|&lt;false&gt;&#x60; 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PluginApi
      */
     public pluginList(filters?: string, options?: RawAxiosRequestConfig) {
         return PluginApiFp(this.configuration).pluginList(filters, options).then((request) => request(this.axios, this.basePath));
@@ -872,7 +861,6 @@ export class PluginApi extends BaseAPI {
      * @param {Array<PluginPrivilege>} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PluginApi
      */
     public pluginPull(remote: string, name?: string, xRegistryAuth?: string, body?: Array<PluginPrivilege>, options?: RawAxiosRequestConfig) {
         return PluginApiFp(this.configuration).pluginPull(remote, name, xRegistryAuth, body, options).then((request) => request(this.axios, this.basePath));
@@ -884,7 +872,6 @@ export class PluginApi extends BaseAPI {
      * @param {string} name The name of the plugin. The &#x60;:latest&#x60; tag is optional, and is the default if omitted. 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PluginApi
      */
     public pluginPush(name: string, options?: RawAxiosRequestConfig) {
         return PluginApiFp(this.configuration).pluginPush(name, options).then((request) => request(this.axios, this.basePath));
@@ -897,7 +884,6 @@ export class PluginApi extends BaseAPI {
      * @param {Array<string>} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PluginApi
      */
     public pluginSet(name: string, body?: Array<string>, options?: RawAxiosRequestConfig) {
         return PluginApiFp(this.configuration).pluginSet(name, body, options).then((request) => request(this.axios, this.basePath));
@@ -912,7 +898,6 @@ export class PluginApi extends BaseAPI {
      * @param {Array<PluginPrivilege>} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PluginApi
      */
     public pluginUpgrade(name: string, remote: string, xRegistryAuth?: string, body?: Array<PluginPrivilege>, options?: RawAxiosRequestConfig) {
         return PluginApiFp(this.configuration).pluginUpgrade(name, remote, xRegistryAuth, body, options).then((request) => request(this.axios, this.basePath));

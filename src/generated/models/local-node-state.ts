@@ -16,7 +16,6 @@
 
 /**
  * Current local status of this node.
- * @export
  * @enum {string}
  */
 

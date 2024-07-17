@@ -16,14 +16,12 @@
 
 /**
  * 
- * @export
  * @interface PluginConfigNetwork
  */
 export interface PluginConfigNetwork {
     /**
      * 
      * @type {string}
-     * @memberof PluginConfigNetwork
      */
     'Type': string;
 }

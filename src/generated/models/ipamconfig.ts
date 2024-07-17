@@ -16,32 +16,27 @@
 
 /**
  * 
- * @export
  * @interface IPAMConfig
  */
 export interface IPAMConfig {
     /**
      * 
      * @type {string}
-     * @memberof IPAMConfig
      */
     'Subnet'?: string;
     /**
      * 
      * @type {string}
-     * @memberof IPAMConfig
      */
     'IPRange'?: string;
     /**
      * 
      * @type {string}
-     * @memberof IPAMConfig
      */
     'Gateway'?: string;
     /**
      * 
      * @type {{ [key: string]: string; }}
-     * @memberof IPAMConfig
      */
     'AuxiliaryAddresses'?: { [key: string]: string; };
 }

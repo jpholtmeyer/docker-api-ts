@@ -29,7 +29,6 @@ import type { Node } from '../models';
 import type { NodeSpec } from '../models';
 /**
  * NodeApi - axios parameter creator
- * @export
  */
 export const NodeApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -191,7 +190,6 @@ export const NodeApiAxiosParamCreator = function (configuration?: Configuration)
 
 /**
  * NodeApi - functional programming interface
- * @export
  */
 export const NodeApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = NodeApiAxiosParamCreator(configuration)
@@ -256,7 +254,6 @@ export const NodeApiFp = function(configuration?: Configuration) {
 
 /**
  * NodeApi - factory interface
- * @export
  */
 export const NodeApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = NodeApiFp(configuration)
@@ -309,7 +306,6 @@ export const NodeApiFactory = function (configuration?: Configuration, basePath?
 
 /**
  * NodeApi - object-oriented interface
- * @export
  * @class NodeApi
  * @extends {BaseAPI}
  */
@@ -321,7 +317,6 @@ export class NodeApi extends BaseAPI {
      * @param {boolean} [force] Force remove a node from the swarm
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof NodeApi
      */
     public nodeDelete(id: string, force?: boolean, options?: RawAxiosRequestConfig) {
         return NodeApiFp(this.configuration).nodeDelete(id, force, options).then((request) => request(this.axios, this.basePath));
@@ -333,7 +328,6 @@ export class NodeApi extends BaseAPI {
      * @param {string} id The ID or name of the node
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof NodeApi
      */
     public nodeInspect(id: string, options?: RawAxiosRequestConfig) {
         return NodeApiFp(this.configuration).nodeInspect(id, options).then((request) => request(this.axios, this.basePath));
@@ -345,7 +339,6 @@ export class NodeApi extends BaseAPI {
      * @param {string} [filters] Filters to process on the nodes list, encoded as JSON (a &#x60;map[string][]string&#x60;).  Available filters: - &#x60;id&#x3D;&lt;node id&gt;&#x60; - &#x60;label&#x3D;&lt;engine label&gt;&#x60; - &#x60;membership&#x3D;&#x60;(&#x60;accepted&#x60;|&#x60;pending&#x60;)&#x60; - &#x60;name&#x3D;&lt;node name&gt;&#x60; - &#x60;node.label&#x3D;&lt;node label&gt;&#x60; - &#x60;role&#x3D;&#x60;(&#x60;manager&#x60;|&#x60;worker&#x60;)&#x60; 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof NodeApi
      */
     public nodeList(filters?: string, options?: RawAxiosRequestConfig) {
         return NodeApiFp(this.configuration).nodeList(filters, options).then((request) => request(this.axios, this.basePath));
@@ -359,7 +352,6 @@ export class NodeApi extends BaseAPI {
      * @param {NodeSpec} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof NodeApi
      */
     public nodeUpdate(id: string, version: number, body?: NodeSpec, options?: RawAxiosRequestConfig) {
         return NodeApiFp(this.configuration).nodeUpdate(id, version, body, options).then((request) => request(this.axios, this.basePath));

@@ -19,32 +19,27 @@ import type { Driver } from './driver.js';
 
 /**
  * 
- * @export
  * @interface ConfigSpec
  */
 export interface ConfigSpec {
     /**
      * User-defined name of the config.
      * @type {string}
-     * @memberof ConfigSpec
      */
     'Name'?: string;
     /**
      * User-defined key/value metadata.
      * @type {{ [key: string]: string; }}
-     * @memberof ConfigSpec
      */
     'Labels'?: { [key: string]: string; };
     /**
      * Base64-url-safe-encoded ([RFC 4648](https://tools.ietf.org/html/rfc4648#section-5)) config data. 
      * @type {string}
-     * @memberof ConfigSpec
      */
     'Data'?: string;
     /**
      * 
      * @type {Driver}
-     * @memberof ConfigSpec
      */
     'Templating'?: Driver;
 }

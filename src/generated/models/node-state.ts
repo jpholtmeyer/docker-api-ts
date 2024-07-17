@@ -16,7 +16,6 @@
 
 /**
  * NodeState represents the state of a node.
- * @export
  * @enum {string}
  */
 

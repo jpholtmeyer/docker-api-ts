@@ -16,20 +16,17 @@
 
 /**
  * 
- * @export
  * @interface ExecStartConfig
  */
 export interface ExecStartConfig {
     /**
      * Detach from the command.
      * @type {boolean}
-     * @memberof ExecStartConfig
      */
     'Detach'?: boolean;
     /**
      * Allocate a pseudo-TTY.
      * @type {boolean}
-     * @memberof ExecStartConfig
      */
     'Tty'?: boolean;
 }

@@ -16,14 +16,12 @@
 
 /**
  * 
- * @export
  * @interface ServiceUpdateResponse
  */
 export interface ServiceUpdateResponse {
     /**
      * Optional warning messages
      * @type {Array<string>}
-     * @memberof ServiceUpdateResponse
      */
     'Warnings'?: Array<string>;
 }

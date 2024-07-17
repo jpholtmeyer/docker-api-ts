@@ -27,7 +27,6 @@ import type { DistributionInspect } from '../models';
 import type { ErrorResponse } from '../models';
 /**
  * DistributionApi - axios parameter creator
- * @export
  */
 export const DistributionApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -70,7 +69,6 @@ export const DistributionApiAxiosParamCreator = function (configuration?: Config
 
 /**
  * DistributionApi - functional programming interface
- * @export
  */
 export const DistributionApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = DistributionApiAxiosParamCreator(configuration)
@@ -93,7 +91,6 @@ export const DistributionApiFp = function(configuration?: Configuration) {
 
 /**
  * DistributionApi - factory interface
- * @export
  */
 export const DistributionApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = DistributionApiFp(configuration)
@@ -113,7 +110,6 @@ export const DistributionApiFactory = function (configuration?: Configuration, b
 
 /**
  * DistributionApi - object-oriented interface
- * @export
  * @class DistributionApi
  * @extends {BaseAPI}
  */
@@ -124,7 +120,6 @@ export class DistributionApi extends BaseAPI {
      * @param {string} name Image name or id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DistributionApi
      */
     public distributionInspect(name: string, options?: RawAxiosRequestConfig) {
         return DistributionApiFp(this.configuration).distributionInspect(name, options).then((request) => request(this.axios, this.basePath));

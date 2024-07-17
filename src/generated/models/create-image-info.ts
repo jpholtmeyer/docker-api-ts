@@ -22,44 +22,37 @@ import type { ProgressDetail } from './progress-detail.js';
 
 /**
  * 
- * @export
  * @interface CreateImageInfo
  */
 export interface CreateImageInfo {
     /**
      * 
      * @type {string}
-     * @memberof CreateImageInfo
      */
     'id'?: string;
     /**
      * 
      * @type {string}
-     * @memberof CreateImageInfo
      */
     'error'?: string;
     /**
      * 
      * @type {ErrorDetail}
-     * @memberof CreateImageInfo
      */
     'errorDetail'?: ErrorDetail;
     /**
      * 
      * @type {string}
-     * @memberof CreateImageInfo
      */
     'status'?: string;
     /**
      * 
      * @type {string}
-     * @memberof CreateImageInfo
      */
     'progress'?: string;
     /**
      * 
      * @type {ProgressDetail}
-     * @memberof CreateImageInfo
      */
     'progressDetail'?: ProgressDetail;
 }

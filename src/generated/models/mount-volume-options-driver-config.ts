@@ -16,20 +16,17 @@
 
 /**
  * Map of driver specific options
- * @export
  * @interface MountVolumeOptionsDriverConfig
  */
 export interface MountVolumeOptionsDriverConfig {
     /**
      * Name of the driver to use to create the volume.
      * @type {string}
-     * @memberof MountVolumeOptionsDriverConfig
      */
     'Name'?: string;
     /**
      * key/value map of driver specific options.
      * @type {{ [key: string]: string; }}
-     * @memberof MountVolumeOptionsDriverConfig
      */
     'Options'?: { [key: string]: string; };
 }

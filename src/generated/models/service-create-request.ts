@@ -37,7 +37,6 @@ import type { TaskSpec } from './task-spec.js';
 
 /**
  * @type ServiceCreateRequest
- * @export
  */
 export type ServiceCreateRequest = ServiceSpec;
 

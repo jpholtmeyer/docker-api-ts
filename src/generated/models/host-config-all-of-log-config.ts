@@ -16,26 +16,22 @@
 
 /**
  * The logging configuration for this container
- * @export
  * @interface HostConfigAllOfLogConfig
  */
 export interface HostConfigAllOfLogConfig {
     /**
      * 
      * @type {string}
-     * @memberof HostConfigAllOfLogConfig
      */
     'Type'?: HostConfigAllOfLogConfigTypeEnum;
     /**
      * 
      * @type {{ [key: string]: string; }}
-     * @memberof HostConfigAllOfLogConfig
      */
     'Config'?: { [key: string]: string; };
 }
 
 /**
-    * @export
     * @enum {string}
     */
 export enum HostConfigAllOfLogConfigTypeEnum {

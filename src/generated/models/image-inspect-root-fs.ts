@@ -16,20 +16,17 @@
 
 /**
  * Information about the image\'s RootFS, including the layer IDs. 
- * @export
  * @interface ImageInspectRootFS
  */
 export interface ImageInspectRootFS {
     /**
      * 
      * @type {string}
-     * @memberof ImageInspectRootFS
      */
     'Type': string;
     /**
      * 
      * @type {Array<string>}
-     * @memberof ImageInspectRootFS
      */
     'Layers'?: Array<string>;
 }

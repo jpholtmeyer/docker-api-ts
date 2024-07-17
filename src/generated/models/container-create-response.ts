@@ -16,20 +16,17 @@
 
 /**
  * OK response to ContainerCreate operation
- * @export
  * @interface ContainerCreateResponse
  */
 export interface ContainerCreateResponse {
     /**
      * The ID of the created container
      * @type {string}
-     * @memberof ContainerCreateResponse
      */
     'Id': string;
     /**
      * Warnings encountered when creating the container
      * @type {Array<string>}
-     * @memberof ContainerCreateResponse
      */
     'Warnings': Array<string>;
 }

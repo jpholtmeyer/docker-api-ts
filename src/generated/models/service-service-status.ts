@@ -16,26 +16,22 @@
 
 /**
  * The status of the service\'s tasks. Provided only when requested as part of a ServiceList operation. 
- * @export
  * @interface ServiceServiceStatus
  */
 export interface ServiceServiceStatus {
     /**
      * The number of tasks for the service currently in the Running state. 
      * @type {number}
-     * @memberof ServiceServiceStatus
      */
     'RunningTasks'?: number;
     /**
      * The number of tasks for the service desired to be running. For replicated services, this is the replica count from the service spec. For global services, this is computed by taking count of all tasks for the service with a Desired State other than Shutdown. 
      * @type {number}
-     * @memberof ServiceServiceStatus
      */
     'DesiredTasks'?: number;
     /**
      * The number of tasks for a job that are in the Completed state. This field must be cross-referenced with the service type, as the value of 0 may mean the service is not in a job mode, or it may mean the job-mode service has no tasks yet Completed. 
      * @type {number}
-     * @memberof ServiceServiceStatus
      */
     'CompletedTasks'?: number;
 }

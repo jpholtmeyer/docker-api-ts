@@ -16,38 +16,32 @@
 
 /**
  * A request for devices to be sent to device drivers
- * @export
  * @interface DeviceRequest
  */
 export interface DeviceRequest {
     /**
      * 
      * @type {string}
-     * @memberof DeviceRequest
      */
     'Driver'?: string;
     /**
      * 
      * @type {number}
-     * @memberof DeviceRequest
      */
     'Count'?: number;
     /**
      * 
      * @type {Array<string>}
-     * @memberof DeviceRequest
      */
     'DeviceIDs'?: Array<string>;
     /**
      * A list of capabilities; an OR list of AND lists of capabilities. 
      * @type {Array<Array<string>>}
-     * @memberof DeviceRequest
      */
     'Capabilities'?: Array<Array<string>>;
     /**
      * Driver-specific options, specified as a key/value pairs. These options are passed directly to the driver. 
      * @type {{ [key: string]: string; }}
-     * @memberof DeviceRequest
      */
     'Options'?: { [key: string]: string; };
 }

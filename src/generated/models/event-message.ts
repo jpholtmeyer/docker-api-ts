@@ -19,50 +19,42 @@ import type { EventActor } from './event-actor.js';
 
 /**
  * EventMessage represents the information an event contains. 
- * @export
  * @interface EventMessage
  */
 export interface EventMessage {
     /**
      * The type of object emitting the event
      * @type {string}
-     * @memberof EventMessage
      */
     'Type'?: EventMessageTypeEnum;
     /**
      * The type of event
      * @type {string}
-     * @memberof EventMessage
      */
     'Action'?: string;
     /**
      * 
      * @type {EventActor}
-     * @memberof EventMessage
      */
     'Actor'?: EventActor;
     /**
      * Scope of the event. Engine events are `local` scope. Cluster (Swarm) events are `swarm` scope. 
      * @type {string}
-     * @memberof EventMessage
      */
     'scope'?: EventMessageScopeEnum;
     /**
      * Timestamp of event
      * @type {number}
-     * @memberof EventMessage
      */
     'time'?: number;
     /**
      * Timestamp of event, with nanosecond accuracy
      * @type {number}
-     * @memberof EventMessage
      */
     'timeNano'?: number;
 }
 
 /**
-    * @export
     * @enum {string}
     */
 export enum EventMessageTypeEnum {
@@ -79,7 +71,6 @@ export enum EventMessageTypeEnum {
     Volume = 'volume'
 }
 /**
-    * @export
     * @enum {string}
     */
 export enum EventMessageScopeEnum {

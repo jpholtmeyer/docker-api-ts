@@ -16,50 +16,42 @@
 
 /**
  * Specification for the rollback strategy of the service.
- * @export
  * @interface ServiceSpecRollbackConfig
  */
 export interface ServiceSpecRollbackConfig {
     /**
      * Maximum number of tasks to be rolled back in one iteration (0 means unlimited parallelism). 
      * @type {number}
-     * @memberof ServiceSpecRollbackConfig
      */
     'Parallelism'?: number;
     /**
      * Amount of time between rollback iterations, in nanoseconds. 
      * @type {number}
-     * @memberof ServiceSpecRollbackConfig
      */
     'Delay'?: number;
     /**
      * Action to take if an rolled back task fails to run, or stops running during the rollback. 
      * @type {string}
-     * @memberof ServiceSpecRollbackConfig
      */
     'FailureAction'?: ServiceSpecRollbackConfigFailureActionEnum;
     /**
      * Amount of time to monitor each rolled back task for failures, in nanoseconds. 
      * @type {number}
-     * @memberof ServiceSpecRollbackConfig
      */
     'Monitor'?: number;
     /**
      * The fraction of tasks that may fail during a rollback before the failure action is invoked, specified as a floating point number between 0 and 1. 
      * @type {number}
-     * @memberof ServiceSpecRollbackConfig
      */
     'MaxFailureRatio'?: number;
     /**
      * The order of operations when rolling back a task. Either the old task is shut down before the new task is started, or the new task is started before the old task is shut down. 
      * @type {string}
-     * @memberof ServiceSpecRollbackConfig
      */
     'Order'?: ServiceSpecRollbackConfigOrderEnum;
 }
 
 /**
-    * @export
     * @enum {string}
     */
 export enum ServiceSpecRollbackConfigFailureActionEnum {
@@ -67,7 +59,6 @@ export enum ServiceSpecRollbackConfigFailureActionEnum {
     Pause = 'pause'
 }
 /**
-    * @export
     * @enum {string}
     */
 export enum ServiceSpecRollbackConfigOrderEnum {

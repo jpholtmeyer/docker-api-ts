@@ -16,20 +16,17 @@
 
 /**
  * PeerInfo represents one peer of an overlay network. 
- * @export
  * @interface PeerInfo
  */
 export interface PeerInfo {
     /**
      * ID of the peer-node in the Swarm cluster.
      * @type {string}
-     * @memberof PeerInfo
      */
     'Name'?: string;
     /**
      * IP-address of the peer-node in the Swarm cluster.
      * @type {string}
-     * @memberof PeerInfo
      */
     'IP'?: string;
 }

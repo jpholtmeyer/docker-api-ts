@@ -33,7 +33,6 @@ import type { ErrorResponse } from '../models';
 import type { IdResponse } from '../models';
 /**
  * ConfigApi - axios parameter creator
- * @export
  */
 export const ConfigApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -224,7 +223,6 @@ export const ConfigApiAxiosParamCreator = function (configuration?: Configuratio
 
 /**
  * ConfigApi - functional programming interface
- * @export
  */
 export const ConfigApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = ConfigApiAxiosParamCreator(configuration)
@@ -301,7 +299,6 @@ export const ConfigApiFp = function(configuration?: Configuration) {
 
 /**
  * ConfigApi - factory interface
- * @export
  */
 export const ConfigApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = ConfigApiFp(configuration)
@@ -363,7 +360,6 @@ export const ConfigApiFactory = function (configuration?: Configuration, basePat
 
 /**
  * ConfigApi - object-oriented interface
- * @export
  * @class ConfigApi
  * @extends {BaseAPI}
  */
@@ -374,7 +370,6 @@ export class ConfigApi extends BaseAPI {
      * @param {ConfigCreateRequest} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ConfigApi
      */
     public configCreate(body?: ConfigCreateRequest, options?: RawAxiosRequestConfig) {
         return ConfigApiFp(this.configuration).configCreate(body, options).then((request) => request(this.axios, this.basePath));
@@ -386,7 +381,6 @@ export class ConfigApi extends BaseAPI {
      * @param {string} id ID of the config
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ConfigApi
      */
     public configDelete(id: string, options?: RawAxiosRequestConfig) {
         return ConfigApiFp(this.configuration).configDelete(id, options).then((request) => request(this.axios, this.basePath));
@@ -398,7 +392,6 @@ export class ConfigApi extends BaseAPI {
      * @param {string} id ID of the config
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ConfigApi
      */
     public configInspect(id: string, options?: RawAxiosRequestConfig) {
         return ConfigApiFp(this.configuration).configInspect(id, options).then((request) => request(this.axios, this.basePath));
@@ -410,7 +403,6 @@ export class ConfigApi extends BaseAPI {
      * @param {string} [filters] A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the configs list.  Available filters:  - &#x60;id&#x3D;&lt;config id&gt;&#x60; - &#x60;label&#x3D;&lt;key&gt; or label&#x3D;&lt;key&gt;&#x3D;value&#x60; - &#x60;name&#x3D;&lt;config name&gt;&#x60; - &#x60;names&#x3D;&lt;config name&gt;&#x60; 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ConfigApi
      */
     public configList(filters?: string, options?: RawAxiosRequestConfig) {
         return ConfigApiFp(this.configuration).configList(filters, options).then((request) => request(this.axios, this.basePath));
@@ -424,7 +416,6 @@ export class ConfigApi extends BaseAPI {
      * @param {ConfigSpec} [body] The spec of the config to update. Currently, only the Labels field can be updated. All other fields must remain unchanged from the [ConfigInspect endpoint](#operation/ConfigInspect) response values. 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ConfigApi
      */
     public configUpdate(id: string, version: number, body?: ConfigSpec, options?: RawAxiosRequestConfig) {
         return ConfigApiFp(this.configuration).configUpdate(id, version, body, options).then((request) => request(this.axios, this.basePath));

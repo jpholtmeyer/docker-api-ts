@@ -30,7 +30,6 @@ import type { {{classname}} } from '{{apiRelativeToRoot}}{{tsModelPackage}}';
 /**
  * {{classname}} - axios parameter creator{{#description}}
  * {{&description}}{{/description}}
- * @export
  */
 export const {{classname}}AxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -246,7 +245,6 @@ export const {{classname}}AxiosParamCreator = function (configuration?: Configur
 /**
  * {{classname}} - functional programming interface{{#description}}
  * {{{.}}}{{/description}}
- * @export
  */
 export const {{classname}}Fp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = {{classname}}AxiosParamCreator(configuration)
@@ -277,7 +275,6 @@ export const {{classname}}Fp = function(configuration?: Configuration) {
 /**
  * {{classname}} - factory interface{{#description}}
  * {{&description}}{{/description}}
- * @export
  */
 export const {{classname}}Factory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = {{classname}}Fp(configuration)
@@ -320,7 +317,6 @@ export const {{classname}}Factory = function (configuration?: Configuration, bas
 /**
  * {{classname}} - interface{{#description}}
  * {{&description}}{{/description}}
- * @export
  * @interface {{classname}}
  */
 export interface {{classname}}Interface {
@@ -336,7 +332,6 @@ export interface {{classname}}Interface {
      * @param {*} [options] Override http request option.{{#isDeprecated}}
      * @deprecated{{/isDeprecated}}
      * @throws {RequiredError}
-     * @memberof {{classname}}Interface
      */
     {{nickname}}({{#allParams}}{{paramName}}{{^required}}?{{/required}}: {{#isEnum}}{{{datatypeWithEnum}}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{#isNullable}} | null{{/isNullable}}{{/isEnum}}, {{/allParams}}options?: RawAxiosRequestConfig): AxiosPromise<{{{returnType}}}{{^returnType}}void{{/returnType}}>;
 
@@ -349,7 +344,6 @@ export interface {{classname}}Interface {
 {{#allParams.0}}
 /**
  * Request parameters for {{nickname}} operation in {{classname}}.
- * @export
  * @interface {{classname}}{{operationIdCamelCase}}Request
  */
 export interface {{classname}}{{operationIdCamelCase}}Request {
@@ -357,7 +351,6 @@ export interface {{classname}}{{operationIdCamelCase}}Request {
     /**
      * {{description}}
      * @type {{=<% %>=}}{<%&dataType%>}<%={{ }}=%>
-     * @memberof {{classname}}{{operationIdCamelCase}}
      */
     readonly {{paramName}}{{^required}}?{{/required}}: {{#isEnum}}{{{datatypeWithEnum}}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{#isNullable}} | null{{/isNullable}}{{/isEnum}}
     {{^-last}}
@@ -372,7 +365,6 @@ export interface {{classname}}{{operationIdCamelCase}}Request {
 /**
  * {{classname}} - object-oriented interface{{#description}}
  * {{{.}}}{{/description}}
- * @export
  * @class {{classname}}
  * @extends {BaseAPI}
  */
@@ -401,7 +393,6 @@ export class {{classname}} extends BaseAPI {
      * @param {*} [options] Override http request option.{{#isDeprecated}}
      * @deprecated{{/isDeprecated}}
      * @throws {RequiredError}
-     * @memberof {{classname}}
      */
     {{#useSingleRequestParameter}}
     public {{nickname}}({{#allParams.0}}requestParameters: {{classname}}{{operationIdCamelCase}}Request{{^hasRequiredParams}} = {}{{/hasRequiredParams}}, {{/allParams.0}}options?: RawAxiosRequestConfig) {
@@ -426,7 +417,6 @@ export class {{classname}} extends BaseAPI {
 {{#isEnum}}
 {{#stringEnums}}
 /**
-  * @export
   * @enum {string}
   */
 export enum {{operationIdCamelCase}}{{enumName}} {
@@ -439,7 +429,6 @@ export enum {{operationIdCamelCase}}{{enumName}} {
 {{/stringEnums}}
 {{^stringEnums}}
 /**
- * @export
  */
 export const {{operationIdCamelCase}}{{enumName}} = {
 {{#allowableValues}}

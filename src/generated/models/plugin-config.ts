@@ -40,104 +40,87 @@ import type { PluginMount } from './plugin-mount.js';
 
 /**
  * The config of a plugin.
- * @export
  * @interface PluginConfig
  */
 export interface PluginConfig {
     /**
      * Docker Version used to create the plugin
      * @type {string}
-     * @memberof PluginConfig
      */
     'DockerVersion'?: string;
     /**
      * 
      * @type {string}
-     * @memberof PluginConfig
      */
     'Description': string;
     /**
      * 
      * @type {string}
-     * @memberof PluginConfig
      */
     'Documentation': string;
     /**
      * 
      * @type {PluginConfigInterface}
-     * @memberof PluginConfig
      */
     'Interface': PluginConfigInterface;
     /**
      * 
      * @type {Array<string>}
-     * @memberof PluginConfig
      */
     'Entrypoint': Array<string>;
     /**
      * 
      * @type {string}
-     * @memberof PluginConfig
      */
     'WorkDir': string;
     /**
      * 
      * @type {PluginConfigUser}
-     * @memberof PluginConfig
      */
     'User'?: PluginConfigUser;
     /**
      * 
      * @type {PluginConfigNetwork}
-     * @memberof PluginConfig
      */
     'Network': PluginConfigNetwork;
     /**
      * 
      * @type {PluginConfigLinux}
-     * @memberof PluginConfig
      */
     'Linux': PluginConfigLinux;
     /**
      * 
      * @type {string}
-     * @memberof PluginConfig
      */
     'PropagatedMount': string;
     /**
      * 
      * @type {boolean}
-     * @memberof PluginConfig
      */
     'IpcHost': boolean;
     /**
      * 
      * @type {boolean}
-     * @memberof PluginConfig
      */
     'PidHost': boolean;
     /**
      * 
      * @type {Array<PluginMount>}
-     * @memberof PluginConfig
      */
     'Mounts': Array<PluginMount>;
     /**
      * 
      * @type {Array<PluginEnv>}
-     * @memberof PluginConfig
      */
     'Env': Array<PluginEnv>;
     /**
      * 
      * @type {PluginConfigArgs}
-     * @memberof PluginConfig
      */
     'Args': PluginConfigArgs;
     /**
      * 
      * @type {PluginConfigRootfs}
-     * @memberof PluginConfig
      */
     'rootfs'?: PluginConfigRootfs;
 }

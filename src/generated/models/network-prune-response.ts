@@ -16,14 +16,12 @@
 
 /**
  * 
- * @export
  * @interface NetworkPruneResponse
  */
 export interface NetworkPruneResponse {
     /**
      * Networks that were deleted
      * @type {Array<string>}
-     * @memberof NetworkPruneResponse
      */
     'NetworksDeleted'?: Array<string>;
 }

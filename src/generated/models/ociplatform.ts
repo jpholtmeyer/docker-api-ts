@@ -16,38 +16,32 @@
 
 /**
  * Describes the platform which the image in the manifest runs on, as defined in the [OCI Image Index Specification](https://github.com/opencontainers/image-spec/blob/v1.0.1/image-index.md). 
- * @export
  * @interface OCIPlatform
  */
 export interface OCIPlatform {
     /**
      * The CPU architecture, for example `amd64` or `ppc64`. 
      * @type {string}
-     * @memberof OCIPlatform
      */
     'architecture'?: string;
     /**
      * The operating system, for example `linux` or `windows`. 
      * @type {string}
-     * @memberof OCIPlatform
      */
     'os'?: string;
     /**
      * Optional field specifying the operating system version, for example on Windows `10.0.19041.1165`. 
      * @type {string}
-     * @memberof OCIPlatform
      */
     'os.version'?: string;
     /**
      * Optional field specifying an array of strings, each listing a required OS feature (for example on Windows `win32k`). 
      * @type {Array<string>}
-     * @memberof OCIPlatform
      */
     'os.features'?: Array<string>;
     /**
      * Optional field specifying a variant of the CPU, for example `v7` to specify ARMv7 when architecture is `arm`. 
      * @type {string}
-     * @memberof OCIPlatform
      */
     'variant'?: string;
 }

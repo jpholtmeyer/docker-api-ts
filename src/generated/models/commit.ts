@@ -16,20 +16,17 @@
 
 /**
  * Commit holds the Git-commit (SHA1) that a binary was built from, as reported in the version-string of external tools, such as `containerd`, or `runC`. 
- * @export
  * @interface Commit
  */
 export interface Commit {
     /**
      * Actual commit ID of external tool.
      * @type {string}
-     * @memberof Commit
      */
     'ID'?: string;
     /**
      * Commit ID of external tool expected by dockerd as set at build time. 
      * @type {string}
-     * @memberof Commit
      */
     'Expected'?: string;
 }

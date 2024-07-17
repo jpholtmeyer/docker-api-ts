@@ -16,20 +16,17 @@
 
 /**
  * 
- * @export
  * @interface ServiceCreateResponse
  */
 export interface ServiceCreateResponse {
     /**
      * The ID of the created service.
      * @type {string}
-     * @memberof ServiceCreateResponse
      */
     'ID'?: string;
     /**
      * Optional warning message
      * @type {string}
-     * @memberof ServiceCreateResponse
      */
     'Warning'?: string;
 }

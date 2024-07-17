@@ -34,56 +34,47 @@ import type { TaskSpec } from './task-spec.js';
 
 /**
  * User modifiable configuration for a service.
- * @export
  * @interface ServiceSpec
  */
 export interface ServiceSpec {
     /**
      * Name of the service.
      * @type {string}
-     * @memberof ServiceSpec
      */
     'Name'?: string;
     /**
      * User-defined key/value metadata.
      * @type {{ [key: string]: string; }}
-     * @memberof ServiceSpec
      */
     'Labels'?: { [key: string]: string; };
     /**
      * 
      * @type {TaskSpec}
-     * @memberof ServiceSpec
      */
     'TaskTemplate'?: TaskSpec;
     /**
      * 
      * @type {ServiceSpecMode}
-     * @memberof ServiceSpec
      */
     'Mode'?: ServiceSpecMode;
     /**
      * 
      * @type {ServiceSpecUpdateConfig}
-     * @memberof ServiceSpec
      */
     'UpdateConfig'?: ServiceSpecUpdateConfig;
     /**
      * 
      * @type {ServiceSpecRollbackConfig}
-     * @memberof ServiceSpec
      */
     'RollbackConfig'?: ServiceSpecRollbackConfig;
     /**
      * Specifies which networks the service should attach to.
      * @type {Array<NetworkAttachmentConfig>}
-     * @memberof ServiceSpec
      */
     'Networks'?: Array<NetworkAttachmentConfig>;
     /**
      * 
      * @type {EndpointSpec}
-     * @memberof ServiceSpec
      */
     'EndpointSpec'?: EndpointSpec;
 }

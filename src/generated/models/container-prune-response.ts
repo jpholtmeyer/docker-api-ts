@@ -16,20 +16,17 @@
 
 /**
  * 
- * @export
  * @interface ContainerPruneResponse
  */
 export interface ContainerPruneResponse {
     /**
      * Container IDs that were deleted
      * @type {Array<string>}
-     * @memberof ContainerPruneResponse
      */
     'ContainersDeleted'?: Array<string>;
     /**
      * Disk space reclaimed in bytes
      * @type {number}
-     * @memberof ContainerPruneResponse
      */
     'SpaceReclaimed'?: number;
 }

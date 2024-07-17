@@ -16,20 +16,17 @@
 
 /**
  * 
- * @export
  * @interface BuildPruneResponse
  */
 export interface BuildPruneResponse {
     /**
      * 
      * @type {Array<string>}
-     * @memberof BuildPruneResponse
      */
     'CachesDeleted'?: Array<string>;
     /**
      * Disk space reclaimed in bytes
      * @type {number}
-     * @memberof BuildPruneResponse
      */
     'SpaceReclaimed'?: number;
 }

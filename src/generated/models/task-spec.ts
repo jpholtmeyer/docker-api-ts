@@ -40,68 +40,57 @@ import type { TaskSpecRestartPolicy } from './task-spec-restart-policy.js';
 
 /**
  * User modifiable task configuration.
- * @export
  * @interface TaskSpec
  */
 export interface TaskSpec {
     /**
      * 
      * @type {TaskSpecPluginSpec}
-     * @memberof TaskSpec
      */
     'PluginSpec'?: TaskSpecPluginSpec;
     /**
      * 
      * @type {TaskSpecContainerSpec}
-     * @memberof TaskSpec
      */
     'ContainerSpec'?: TaskSpecContainerSpec;
     /**
      * 
      * @type {TaskSpecNetworkAttachmentSpec}
-     * @memberof TaskSpec
      */
     'NetworkAttachmentSpec'?: TaskSpecNetworkAttachmentSpec;
     /**
      * 
      * @type {TaskSpecResources}
-     * @memberof TaskSpec
      */
     'Resources'?: TaskSpecResources;
     /**
      * 
      * @type {TaskSpecRestartPolicy}
-     * @memberof TaskSpec
      */
     'RestartPolicy'?: TaskSpecRestartPolicy;
     /**
      * 
      * @type {TaskSpecPlacement}
-     * @memberof TaskSpec
      */
     'Placement'?: TaskSpecPlacement;
     /**
      * A counter that triggers an update even if no relevant parameters have been changed. 
      * @type {number}
-     * @memberof TaskSpec
      */
     'ForceUpdate'?: number;
     /**
      * Runtime is the type of runtime specified for the task executor. 
      * @type {string}
-     * @memberof TaskSpec
      */
     'Runtime'?: string;
     /**
      * Specifies which networks the service should attach to.
      * @type {Array<NetworkAttachmentConfig>}
-     * @memberof TaskSpec
      */
     'Networks'?: Array<NetworkAttachmentConfig>;
     /**
      * 
      * @type {TaskSpecLogDriver}
-     * @memberof TaskSpec
      */
     'LogDriver'?: TaskSpecLogDriver;
 }

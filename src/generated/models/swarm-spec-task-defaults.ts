@@ -19,14 +19,12 @@ import type { SwarmSpecTaskDefaultsLogDriver } from './swarm-spec-task-defaults-
 
 /**
  * Defaults for creating tasks in this cluster.
- * @export
  * @interface SwarmSpecTaskDefaults
  */
 export interface SwarmSpecTaskDefaults {
     /**
      * 
      * @type {SwarmSpecTaskDefaultsLogDriver}
-     * @memberof SwarmSpecTaskDefaults
      */
     'LogDriver'?: SwarmSpecTaskDefaultsLogDriver;
 }

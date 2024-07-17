@@ -16,20 +16,17 @@
 
 /**
  * Address represents an IPv4 or IPv6 IP address.
- * @export
  * @interface Address
  */
 export interface Address {
     /**
      * IP address.
      * @type {string}
-     * @memberof Address
      */
     'Addr'?: string;
     /**
      * Mask length of the IP address.
      * @type {number}
-     * @memberof Address
      */
     'PrefixLen'?: number;
 }

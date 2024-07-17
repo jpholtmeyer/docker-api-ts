@@ -31,56 +31,47 @@ import type { ObjectVersion } from './object-version.js';
 
 /**
  * 
- * @export
  * @interface Node
  */
 export interface Node {
     /**
      * 
      * @type {string}
-     * @memberof Node
      */
     'ID'?: string;
     /**
      * 
      * @type {ObjectVersion}
-     * @memberof Node
      */
     'Version'?: ObjectVersion;
     /**
      * Date and time at which the node was added to the swarm in [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds. 
      * @type {string}
-     * @memberof Node
      */
     'CreatedAt'?: string;
     /**
      * Date and time at which the node was last updated in [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds. 
      * @type {string}
-     * @memberof Node
      */
     'UpdatedAt'?: string;
     /**
      * 
      * @type {NodeSpec}
-     * @memberof Node
      */
     'Spec'?: NodeSpec;
     /**
      * 
      * @type {NodeDescription}
-     * @memberof Node
      */
     'Description'?: NodeDescription;
     /**
      * 
      * @type {NodeStatus}
-     * @memberof Node
      */
     'Status'?: NodeStatus;
     /**
      * 
      * @type {ManagerStatus}
-     * @memberof Node
      */
     'ManagerStatus'?: ManagerStatus | null;
 }

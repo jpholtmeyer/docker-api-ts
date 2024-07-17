@@ -19,158 +19,132 @@ import type { HealthConfig } from './health-config.js';
 
 /**
  * Configuration of the image. These fields are used as defaults when starting a container from the image. 
- * @export
  * @interface ImageConfig
  */
 export interface ImageConfig {
     /**
      * The hostname to use for the container, as a valid RFC 1123 hostname.  <p><br /></p>  > **Note**: this field is always empty and must not be used. 
      * @type {string}
-     * @memberof ImageConfig
      */
     'Hostname'?: string;
     /**
      * The domain name to use for the container.  <p><br /></p>  > **Note**: this field is always empty and must not be used. 
      * @type {string}
-     * @memberof ImageConfig
      */
     'Domainname'?: string;
     /**
      * The user that commands are run as inside the container.
      * @type {string}
-     * @memberof ImageConfig
      */
     'User'?: string;
     /**
      * Whether to attach to `stdin`.  <p><br /></p>  > **Note**: this field is always false and must not be used. 
      * @type {boolean}
-     * @memberof ImageConfig
      */
     'AttachStdin'?: boolean;
     /**
      * Whether to attach to `stdout`.  <p><br /></p>  > **Note**: this field is always false and must not be used. 
      * @type {boolean}
-     * @memberof ImageConfig
      */
     'AttachStdout'?: boolean;
     /**
      * Whether to attach to `stderr`.  <p><br /></p>  > **Note**: this field is always false and must not be used. 
      * @type {boolean}
-     * @memberof ImageConfig
      */
     'AttachStderr'?: boolean;
     /**
      * An object mapping ports to an empty object in the form:  `{\"<port>/<tcp|udp|sctp>\": {}}` 
      * @type {{ [key: string]: object; }}
-     * @memberof ImageConfig
      */
     'ExposedPorts'?: { [key: string]: object; } | null;
     /**
      * Attach standard streams to a TTY, including `stdin` if it is not closed.  <p><br /></p>  > **Note**: this field is always false and must not be used. 
      * @type {boolean}
-     * @memberof ImageConfig
      */
     'Tty'?: boolean;
     /**
      * Open `stdin`  <p><br /></p>  > **Note**: this field is always false and must not be used. 
      * @type {boolean}
-     * @memberof ImageConfig
      */
     'OpenStdin'?: boolean;
     /**
      * Close `stdin` after one attached client disconnects.  <p><br /></p>  > **Note**: this field is always false and must not be used. 
      * @type {boolean}
-     * @memberof ImageConfig
      */
     'StdinOnce'?: boolean;
     /**
      * A list of environment variables to set inside the container in the form `[\"VAR=value\", ...]`. A variable without `=` is removed from the environment, rather than to have an empty value. 
      * @type {Array<string>}
-     * @memberof ImageConfig
      */
     'Env'?: Array<string>;
     /**
      * Command to run specified as a string or an array of strings. 
      * @type {Array<string>}
-     * @memberof ImageConfig
      */
     'Cmd'?: Array<string>;
     /**
      * 
      * @type {HealthConfig}
-     * @memberof ImageConfig
      */
     'Healthcheck'?: HealthConfig;
     /**
      * Command is already escaped (Windows only)
      * @type {boolean}
-     * @memberof ImageConfig
      */
     'ArgsEscaped'?: boolean | null;
     /**
      * The name (or reference) of the image to use when creating the container, or which was used when the container was created.  <p><br /></p>  > **Note**: this field is always empty and must not be used. 
      * @type {string}
-     * @memberof ImageConfig
      */
     'Image'?: string;
     /**
      * An object mapping mount point paths inside the container to empty objects. 
      * @type {{ [key: string]: object; }}
-     * @memberof ImageConfig
      */
     'Volumes'?: { [key: string]: object; };
     /**
      * The working directory for commands to run in.
      * @type {string}
-     * @memberof ImageConfig
      */
     'WorkingDir'?: string;
     /**
      * The entry point for the container as a string or an array of strings.  If the array consists of exactly one empty string (`[\"\"]`) then the entry point is reset to system default (i.e., the entry point used by docker when there is no `ENTRYPOINT` instruction in the `Dockerfile`). 
      * @type {Array<string>}
-     * @memberof ImageConfig
      */
     'Entrypoint'?: Array<string>;
     /**
      * Disable networking for the container.  <p><br /></p>  > **Note**: this field is always omitted and must not be used. 
      * @type {boolean}
-     * @memberof ImageConfig
      */
     'NetworkDisabled'?: boolean | null;
     /**
      * MAC address of the container.  <p><br /></p>  > **Note**: this field is always omitted and must not be used. 
      * @type {string}
-     * @memberof ImageConfig
      */
     'MacAddress'?: string | null;
     /**
      * `ONBUILD` metadata that were defined in the image\'s `Dockerfile`. 
      * @type {Array<string>}
-     * @memberof ImageConfig
      */
     'OnBuild'?: Array<string> | null;
     /**
      * User-defined key/value metadata.
      * @type {{ [key: string]: string; }}
-     * @memberof ImageConfig
      */
     'Labels'?: { [key: string]: string; };
     /**
      * Signal to stop a container as a string or unsigned integer. 
      * @type {string}
-     * @memberof ImageConfig
      */
     'StopSignal'?: string | null;
     /**
      * Timeout to stop a container in seconds.  <p><br /></p>  > **Note**: this field is always omitted and must not be used. 
      * @type {number}
-     * @memberof ImageConfig
      */
     'StopTimeout'?: number | null;
     /**
      * Shell for when `RUN`, `CMD`, and `ENTRYPOINT` uses a shell. 
      * @type {Array<string>}
-     * @memberof ImageConfig
      */
     'Shell'?: Array<string> | null;
 }

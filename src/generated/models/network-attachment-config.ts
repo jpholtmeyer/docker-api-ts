@@ -16,26 +16,22 @@
 
 /**
  * Specifies how a service should be attached to a particular network. 
- * @export
  * @interface NetworkAttachmentConfig
  */
 export interface NetworkAttachmentConfig {
     /**
      * The target network for attachment. Must be a network name or ID. 
      * @type {string}
-     * @memberof NetworkAttachmentConfig
      */
     'Target'?: string;
     /**
      * Discoverable alternate names for the service on this network. 
      * @type {Array<string>}
-     * @memberof NetworkAttachmentConfig
      */
     'Aliases'?: Array<string>;
     /**
      * Driver attachment options for the network target. 
      * @type {{ [key: string]: string; }}
-     * @memberof NetworkAttachmentConfig
      */
     'DriverOpts'?: { [key: string]: string; };
 }

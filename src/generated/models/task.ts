@@ -31,92 +31,77 @@ import type { TaskStatus } from './task-status.js';
 
 /**
  * 
- * @export
  * @interface Task
  */
 export interface Task {
     /**
      * The ID of the task.
      * @type {string}
-     * @memberof Task
      */
     'ID'?: string;
     /**
      * 
      * @type {ObjectVersion}
-     * @memberof Task
      */
     'Version'?: ObjectVersion;
     /**
      * 
      * @type {string}
-     * @memberof Task
      */
     'CreatedAt'?: string;
     /**
      * 
      * @type {string}
-     * @memberof Task
      */
     'UpdatedAt'?: string;
     /**
      * Name of the task.
      * @type {string}
-     * @memberof Task
      */
     'Name'?: string;
     /**
      * User-defined key/value metadata.
      * @type {{ [key: string]: string; }}
-     * @memberof Task
      */
     'Labels'?: { [key: string]: string; };
     /**
      * 
      * @type {TaskSpec}
-     * @memberof Task
      */
     'Spec'?: TaskSpec;
     /**
      * The ID of the service this task is part of.
      * @type {string}
-     * @memberof Task
      */
     'ServiceID'?: string;
     /**
      * 
      * @type {number}
-     * @memberof Task
      */
     'Slot'?: number;
     /**
      * The ID of the node that this task is on.
      * @type {string}
-     * @memberof Task
      */
     'NodeID'?: string;
     /**
      * User-defined resources can be either Integer resources (e.g, `SSD=3`) or String resources (e.g, `GPU=UUID1`). 
      * @type {Array<GenericResourcesInner>}
-     * @memberof Task
      */
     'AssignedGenericResources'?: Array<GenericResourcesInner>;
     /**
      * 
      * @type {TaskStatus}
-     * @memberof Task
      */
     'Status'?: TaskStatus;
     /**
      * 
      * @type {TaskState}
-     * @memberof Task
      */
     'DesiredState'?: TaskState;
     /**
      * 
      * @type {ObjectVersion}
-     * @memberof Task
      */
     'JobIteration'?: ObjectVersion;
 }

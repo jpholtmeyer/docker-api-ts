@@ -19,20 +19,17 @@ import type { Volume } from './volume.js';
 
 /**
  * Volume list response
- * @export
  * @interface VolumeListResponse
  */
 export interface VolumeListResponse {
     /**
      * List of volumes
      * @type {Array<Volume>}
-     * @memberof VolumeListResponse
      */
     'Volumes'?: Array<Volume>;
     /**
      * Warnings that occurred when fetching the list of volumes. 
      * @type {Array<string>}
-     * @memberof VolumeListResponse
      */
     'Warnings'?: Array<string>;
 }

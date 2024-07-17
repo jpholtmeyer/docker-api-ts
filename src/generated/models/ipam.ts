@@ -19,26 +19,22 @@ import type { IPAMConfig } from './ipamconfig.js';
 
 /**
  * 
- * @export
  * @interface IPAM
  */
 export interface IPAM {
     /**
      * Name of the IPAM driver to use.
      * @type {string}
-     * @memberof IPAM
      */
     'Driver'?: string;
     /**
      * List of IPAM configuration options, specified as a map:  ``` {\"Subnet\": <CIDR>, \"IPRange\": <CIDR>, \"Gateway\": <IP address>, \"AuxAddress\": <device_name:IP address>} ``` 
      * @type {Array<IPAMConfig>}
-     * @memberof IPAM
      */
     'Config'?: Array<IPAMConfig>;
     /**
      * Driver-specific options, specified as a map.
      * @type {{ [key: string]: string; }}
-     * @memberof IPAM
      */
     'Options'?: { [key: string]: string; };
 }

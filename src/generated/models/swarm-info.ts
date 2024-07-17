@@ -25,62 +25,52 @@ import type { PeerNode } from './peer-node.js';
 
 /**
  * Represents generic information about swarm. 
- * @export
  * @interface SwarmInfo
  */
 export interface SwarmInfo {
     /**
      * Unique identifier of for this node in the swarm.
      * @type {string}
-     * @memberof SwarmInfo
      */
     'NodeID'?: string;
     /**
      * IP address at which this node can be reached by other nodes in the swarm. 
      * @type {string}
-     * @memberof SwarmInfo
      */
     'NodeAddr'?: string;
     /**
      * 
      * @type {LocalNodeState}
-     * @memberof SwarmInfo
      */
     'LocalNodeState'?: LocalNodeState;
     /**
      * 
      * @type {boolean}
-     * @memberof SwarmInfo
      */
     'ControlAvailable'?: boolean;
     /**
      * 
      * @type {string}
-     * @memberof SwarmInfo
      */
     'Error'?: string;
     /**
      * List of ID\'s and addresses of other managers in the swarm. 
      * @type {Array<PeerNode>}
-     * @memberof SwarmInfo
      */
     'RemoteManagers'?: Array<PeerNode> | null;
     /**
      * Total number of nodes in the swarm.
      * @type {number}
-     * @memberof SwarmInfo
      */
     'Nodes'?: number | null;
     /**
      * Total number of managers in the swarm.
      * @type {number}
-     * @memberof SwarmInfo
      */
     'Managers'?: number | null;
     /**
      * 
      * @type {ClusterInfo}
-     * @memberof SwarmInfo
      */
     'Cluster'?: ClusterInfo | null;
 }

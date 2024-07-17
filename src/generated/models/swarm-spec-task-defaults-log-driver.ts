@@ -16,20 +16,17 @@
 
 /**
  * The log driver to use for tasks created in the orchestrator if unspecified by a service.  Updating this value only affects new tasks. Existing tasks continue to use their previously configured log driver until recreated. 
- * @export
  * @interface SwarmSpecTaskDefaultsLogDriver
  */
 export interface SwarmSpecTaskDefaultsLogDriver {
     /**
      * The log driver to use as a default for new tasks. 
      * @type {string}
-     * @memberof SwarmSpecTaskDefaultsLogDriver
      */
     'Name'?: string;
     /**
      * Driver-specific options for the selectd log driver, specified as key/value pairs. 
      * @type {{ [key: string]: string; }}
-     * @memberof SwarmSpecTaskDefaultsLogDriver
      */
     'Options'?: { [key: string]: string; };
 }

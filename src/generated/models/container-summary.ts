@@ -28,98 +28,82 @@ import type { Port } from './port.js';
 
 /**
  * 
- * @export
  * @interface ContainerSummary
  */
 export interface ContainerSummary {
     /**
      * The ID of this container
      * @type {string}
-     * @memberof ContainerSummary
      */
     'Id'?: string;
     /**
      * The names that this container has been given
      * @type {Array<string>}
-     * @memberof ContainerSummary
      */
     'Names'?: Array<string>;
     /**
      * The name of the image used when creating this container
      * @type {string}
-     * @memberof ContainerSummary
      */
     'Image'?: string;
     /**
      * The ID of the image that this container was created from
      * @type {string}
-     * @memberof ContainerSummary
      */
     'ImageID'?: string;
     /**
      * Command to run when starting the container
      * @type {string}
-     * @memberof ContainerSummary
      */
     'Command'?: string;
     /**
      * When the container was created
      * @type {number}
-     * @memberof ContainerSummary
      */
     'Created'?: number;
     /**
      * The ports exposed by this container
      * @type {Array<Port>}
-     * @memberof ContainerSummary
      */
     'Ports'?: Array<Port>;
     /**
      * The size of files that have been created or changed by this container
      * @type {number}
-     * @memberof ContainerSummary
      */
     'SizeRw'?: number;
     /**
      * The total size of all the files in this container
      * @type {number}
-     * @memberof ContainerSummary
      */
     'SizeRootFs'?: number;
     /**
      * User-defined key/value metadata.
      * @type {{ [key: string]: string; }}
-     * @memberof ContainerSummary
      */
     'Labels'?: { [key: string]: string; };
     /**
      * The state of this container (e.g. `Exited`)
      * @type {string}
-     * @memberof ContainerSummary
      */
     'State'?: string;
     /**
      * Additional human-readable status of this container (e.g. `Exit 0`)
      * @type {string}
-     * @memberof ContainerSummary
      */
     'Status'?: string;
     /**
      * 
      * @type {ContainerSummaryHostConfig}
-     * @memberof ContainerSummary
      */
     'HostConfig'?: ContainerSummaryHostConfig;
     /**
      * 
      * @type {ContainerSummaryNetworkSettings}
-     * @memberof ContainerSummary
      */
     'NetworkSettings'?: ContainerSummaryNetworkSettings;
     /**
      * 
      * @type {Array<MountPoint>}
-     * @memberof ContainerSummary
      */
     'Mounts'?: Array<MountPoint>;
 }

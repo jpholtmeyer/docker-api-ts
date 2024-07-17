@@ -16,14 +16,12 @@
 
 /**
  * Parameters related to encryption-at-rest.
- * @export
  * @interface SwarmSpecEncryptionConfig
  */
 export interface SwarmSpecEncryptionConfig {
     /**
      * If set, generate a key and use it to lock data stored on the managers. 
      * @type {boolean}
-     * @memberof SwarmSpecEncryptionConfig
      */
     'AutoLockManagers'?: boolean;
 }

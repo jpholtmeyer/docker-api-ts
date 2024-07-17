@@ -25,26 +25,22 @@ import type { ServiceEndpointVirtualIPsInner } from './service-endpoint-virtual-
 
 /**
  * 
- * @export
  * @interface ServiceEndpoint
  */
 export interface ServiceEndpoint {
     /**
      * 
      * @type {EndpointSpec}
-     * @memberof ServiceEndpoint
      */
     'Spec'?: EndpointSpec;
     /**
      * 
      * @type {Array<EndpointPortConfig>}
-     * @memberof ServiceEndpoint
      */
     'Ports'?: Array<EndpointPortConfig>;
     /**
      * 
      * @type {Array<ServiceEndpointVirtualIPsInner>}
-     * @memberof ServiceEndpoint
      */
     'VirtualIPs'?: Array<ServiceEndpointVirtualIPsInner>;
 }

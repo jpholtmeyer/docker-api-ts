@@ -16,20 +16,17 @@
 
 /**
  * OK response to ContainerTop operation
- * @export
  * @interface ContainerTopResponse
  */
 export interface ContainerTopResponse {
     /**
      * The ps column titles
      * @type {Array<string>}
-     * @memberof ContainerTopResponse
      */
     'Titles'?: Array<string>;
     /**
      * Each process running in the container, where each is process is an array of values corresponding to the titles. 
      * @type {Array<Array<string>>}
-     * @memberof ContainerTopResponse
      */
     'Processes'?: Array<Array<string>>;
 }

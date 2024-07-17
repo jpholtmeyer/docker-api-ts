@@ -16,20 +16,17 @@
 
 /**
  * The mode used for services with a finite number of tasks that run to a completed state. 
- * @export
  * @interface ServiceSpecModeReplicatedJob
  */
 export interface ServiceSpecModeReplicatedJob {
     /**
      * The maximum number of replicas to run simultaneously. 
      * @type {number}
-     * @memberof ServiceSpecModeReplicatedJob
      */
     'MaxConcurrent'?: number;
     /**
      * The total number of replicas desired to reach the Completed state. If unset, will default to the value of `MaxConcurrent` 
      * @type {number}
-     * @memberof ServiceSpecModeReplicatedJob
      */
     'TotalCompletions'?: number;
 }

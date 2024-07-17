@@ -16,32 +16,27 @@
 
 /**
  * 
- * @export
  * @interface PluginConfigArgs
  */
 export interface PluginConfigArgs {
     /**
      * 
      * @type {string}
-     * @memberof PluginConfigArgs
      */
     'Name': string;
     /**
      * 
      * @type {string}
-     * @memberof PluginConfigArgs
      */
     'Description': string;
     /**
      * 
      * @type {Array<string>}
-     * @memberof PluginConfigArgs
      */
     'Settable': Array<string>;
     /**
      * 
      * @type {Array<string>}
-     * @memberof PluginConfigArgs
      */
     'Value': Array<string>;
 }

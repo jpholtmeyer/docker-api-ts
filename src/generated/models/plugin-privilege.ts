@@ -16,26 +16,22 @@
 
 /**
  * Describes a permission the user has to accept upon installing the plugin. 
- * @export
  * @interface PluginPrivilege
  */
 export interface PluginPrivilege {
     /**
      * 
      * @type {string}
-     * @memberof PluginPrivilege
      */
     'Name'?: string;
     /**
      * 
      * @type {string}
-     * @memberof PluginPrivilege
      */
     'Description'?: string;
     /**
      * 
      * @type {Array<string>}
-     * @memberof PluginPrivilege
      */
     'Value'?: Array<string>;
 }

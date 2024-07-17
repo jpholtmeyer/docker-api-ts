@@ -16,26 +16,22 @@
 
 /**
  * Specification for DNS related configurations in resolver configuration file (`resolv.conf`). 
- * @export
  * @interface TaskSpecContainerSpecDNSConfig
  */
 export interface TaskSpecContainerSpecDNSConfig {
     /**
      * The IP addresses of the name servers.
      * @type {Array<string>}
-     * @memberof TaskSpecContainerSpecDNSConfig
      */
     'Nameservers'?: Array<string>;
     /**
      * A search list for host-name lookup.
      * @type {Array<string>}
-     * @memberof TaskSpecContainerSpecDNSConfig
      */
     'Search'?: Array<string>;
     /**
      * A list of internal resolver variables to be modified (e.g., `debug`, `ndots:3`, etc.). 
      * @type {Array<string>}
-     * @memberof TaskSpecContainerSpecDNSConfig
      */
     'Options'?: Array<string>;
 }

@@ -33,7 +33,6 @@ import type { SecretCreateRequest } from '../models';
 import type { SecretSpec } from '../models';
 /**
  * SecretApi - axios parameter creator
- * @export
  */
 export const SecretApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -224,7 +223,6 @@ export const SecretApiAxiosParamCreator = function (configuration?: Configuratio
 
 /**
  * SecretApi - functional programming interface
- * @export
  */
 export const SecretApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = SecretApiAxiosParamCreator(configuration)
@@ -301,7 +299,6 @@ export const SecretApiFp = function(configuration?: Configuration) {
 
 /**
  * SecretApi - factory interface
- * @export
  */
 export const SecretApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = SecretApiFp(configuration)
@@ -363,7 +360,6 @@ export const SecretApiFactory = function (configuration?: Configuration, basePat
 
 /**
  * SecretApi - object-oriented interface
- * @export
  * @class SecretApi
  * @extends {BaseAPI}
  */
@@ -374,7 +370,6 @@ export class SecretApi extends BaseAPI {
      * @param {SecretCreateRequest} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SecretApi
      */
     public secretCreate(body?: SecretCreateRequest, options?: RawAxiosRequestConfig) {
         return SecretApiFp(this.configuration).secretCreate(body, options).then((request) => request(this.axios, this.basePath));
@@ -386,7 +381,6 @@ export class SecretApi extends BaseAPI {
      * @param {string} id ID of the secret
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SecretApi
      */
     public secretDelete(id: string, options?: RawAxiosRequestConfig) {
         return SecretApiFp(this.configuration).secretDelete(id, options).then((request) => request(this.axios, this.basePath));
@@ -398,7 +392,6 @@ export class SecretApi extends BaseAPI {
      * @param {string} id ID of the secret
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SecretApi
      */
     public secretInspect(id: string, options?: RawAxiosRequestConfig) {
         return SecretApiFp(this.configuration).secretInspect(id, options).then((request) => request(this.axios, this.basePath));
@@ -410,7 +403,6 @@ export class SecretApi extends BaseAPI {
      * @param {string} [filters] A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the secrets list.  Available filters:  - &#x60;id&#x3D;&lt;secret id&gt;&#x60; - &#x60;label&#x3D;&lt;key&gt; or label&#x3D;&lt;key&gt;&#x3D;value&#x60; - &#x60;name&#x3D;&lt;secret name&gt;&#x60; - &#x60;names&#x3D;&lt;secret name&gt;&#x60; 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SecretApi
      */
     public secretList(filters?: string, options?: RawAxiosRequestConfig) {
         return SecretApiFp(this.configuration).secretList(filters, options).then((request) => request(this.axios, this.basePath));
@@ -424,7 +416,6 @@ export class SecretApi extends BaseAPI {
      * @param {SecretSpec} [body] The spec of the secret to update. Currently, only the Labels field can be updated. All other fields must remain unchanged from the [SecretInspect endpoint](#operation/SecretInspect) response values. 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SecretApi
      */
     public secretUpdate(id: string, version: number, body?: SecretSpec, options?: RawAxiosRequestConfig) {
         return SecretApiFp(this.configuration).secretUpdate(id, version, body, options).then((request) => request(this.axios, this.basePath));

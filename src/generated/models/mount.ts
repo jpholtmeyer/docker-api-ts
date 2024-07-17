@@ -25,62 +25,52 @@ import type { MountVolumeOptions } from './mount-volume-options.js';
 
 /**
  * 
- * @export
  * @interface Mount
  */
 export interface Mount {
     /**
      * Container path.
      * @type {string}
-     * @memberof Mount
      */
     'Target'?: string;
     /**
      * Mount source (e.g. a volume name, a host path).
      * @type {string}
-     * @memberof Mount
      */
     'Source'?: string;
     /**
      * The mount type. Available types:  - `bind` Mounts a file or directory from the host into the container. Must exist prior to creating the container. - `volume` Creates a volume with the given name and options (or uses a pre-existing volume with the same name and options). These are **not** removed when the container is removed. - `tmpfs` Create a tmpfs with the given options. The mount source cannot be specified for tmpfs. - `npipe` Mounts a named pipe from the host into the container. Must exist prior to creating the container. 
      * @type {string}
-     * @memberof Mount
      */
     'Type'?: MountTypeEnum;
     /**
      * Whether the mount should be read-only.
      * @type {boolean}
-     * @memberof Mount
      */
     'ReadOnly'?: boolean;
     /**
      * The consistency requirement for the mount: `default`, `consistent`, `cached`, or `delegated`.
      * @type {string}
-     * @memberof Mount
      */
     'Consistency'?: string;
     /**
      * 
      * @type {MountBindOptions}
-     * @memberof Mount
      */
     'BindOptions'?: MountBindOptions;
     /**
      * 
      * @type {MountVolumeOptions}
-     * @memberof Mount
      */
     'VolumeOptions'?: MountVolumeOptions;
     /**
      * 
      * @type {MountTmpfsOptions}
-     * @memberof Mount
      */
     'TmpfsOptions'?: MountTmpfsOptions;
 }
 
 /**
-    * @export
     * @enum {string}
     */
 export enum MountTypeEnum {

@@ -16,7 +16,6 @@
 
 /**
  * 
- * @export
  * @enum {string}
  */
 

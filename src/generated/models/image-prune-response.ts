@@ -19,20 +19,17 @@ import type { ImageDeleteResponseItem } from './image-delete-response-item.js';
 
 /**
  * 
- * @export
  * @interface ImagePruneResponse
  */
 export interface ImagePruneResponse {
     /**
      * Images that were deleted
      * @type {Array<ImageDeleteResponseItem>}
-     * @memberof ImagePruneResponse
      */
     'ImagesDeleted'?: Array<ImageDeleteResponseItem>;
     /**
      * Disk space reclaimed in bytes
      * @type {number}
-     * @memberof ImagePruneResponse
      */
     'SpaceReclaimed'?: number;
 }

@@ -16,20 +16,17 @@
 
 /**
  * Optional configuration for the `tmpfs` type.
- * @export
  * @interface MountTmpfsOptions
  */
 export interface MountTmpfsOptions {
     /**
      * The size for the tmpfs mount in bytes.
      * @type {number}
-     * @memberof MountTmpfsOptions
      */
     'SizeBytes'?: number;
     /**
      * The permission mode for the tmpfs mount in an integer.
      * @type {number}
-     * @memberof MountTmpfsOptions
      */
     'Mode'?: number;
 }

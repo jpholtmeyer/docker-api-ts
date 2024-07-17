@@ -16,20 +16,17 @@
 
 /**
  * 
- * @export
  * @interface ErrorDetail
  */
 export interface ErrorDetail {
     /**
      * 
      * @type {number}
-     * @memberof ErrorDetail
      */
     'code'?: number;
     /**
      * 
      * @type {string}
-     * @memberof ErrorDetail
      */
     'message'?: string;
 }

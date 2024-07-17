@@ -16,26 +16,22 @@
 
 /**
  * An object describing a limit on resources which can be requested by a task. 
- * @export
  * @interface Limit
  */
 export interface Limit {
     /**
      * 
      * @type {number}
-     * @memberof Limit
      */
     'NanoCPUs'?: number;
     /**
      * 
      * @type {number}
-     * @memberof Limit
      */
     'MemoryBytes'?: number;
     /**
      * Limits the maximum number of PIDs in the container. Set `0` for unlimited. 
      * @type {number}
-     * @memberof Limit
      */
     'Pids'?: number;
 }

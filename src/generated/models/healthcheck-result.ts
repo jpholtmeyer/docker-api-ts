@@ -16,32 +16,27 @@
 
 /**
  * HealthcheckResult stores information about a single run of a healthcheck probe 
- * @export
  * @interface HealthcheckResult
  */
 export interface HealthcheckResult {
     /**
      * Date and time at which this check started in [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds. 
      * @type {string}
-     * @memberof HealthcheckResult
      */
     'Start'?: string;
     /**
      * Date and time at which this check ended in [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds. 
      * @type {string}
-     * @memberof HealthcheckResult
      */
     'End'?: string;
     /**
      * ExitCode meanings:  - `0` healthy - `1` unhealthy - `2` reserved (considered unhealthy) - other values: error running probe 
      * @type {number}
-     * @memberof HealthcheckResult
      */
     'ExitCode'?: number;
     /**
      * Output from last check
      * @type {string}
-     * @memberof HealthcheckResult
      */
     'Output'?: string;
 }

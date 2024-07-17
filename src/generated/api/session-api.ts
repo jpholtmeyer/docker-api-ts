@@ -25,7 +25,6 @@ import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError
 import type { ErrorResponse } from '../models';
 /**
  * SessionApi - axios parameter creator
- * @export
  */
 export const SessionApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -64,7 +63,6 @@ export const SessionApiAxiosParamCreator = function (configuration?: Configurati
 
 /**
  * SessionApi - functional programming interface
- * @export
  */
 export const SessionApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = SessionApiAxiosParamCreator(configuration)
@@ -86,7 +84,6 @@ export const SessionApiFp = function(configuration?: Configuration) {
 
 /**
  * SessionApi - factory interface
- * @export
  */
 export const SessionApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = SessionApiFp(configuration)
@@ -105,7 +102,6 @@ export const SessionApiFactory = function (configuration?: Configuration, basePa
 
 /**
  * SessionApi - object-oriented interface
- * @export
  * @class SessionApi
  * @extends {BaseAPI}
  */
@@ -115,7 +111,6 @@ export class SessionApi extends BaseAPI {
      * @summary Initialize interactive session
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SessionApi
      */
     public session(options?: RawAxiosRequestConfig) {
         return SessionApiFp(this.configuration).session(options).then((request) => request(this.axios, this.basePath));

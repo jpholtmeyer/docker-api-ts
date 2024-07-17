@@ -34,56 +34,47 @@ import type { SwarmSpecTaskDefaults } from './swarm-spec-task-defaults.js';
 
 /**
  * User modifiable swarm configuration.
- * @export
  * @interface SwarmSpec
  */
 export interface SwarmSpec {
     /**
      * Name of the swarm.
      * @type {string}
-     * @memberof SwarmSpec
      */
     'Name'?: string;
     /**
      * User-defined key/value metadata.
      * @type {{ [key: string]: string; }}
-     * @memberof SwarmSpec
      */
     'Labels'?: { [key: string]: string; };
     /**
      * 
      * @type {SwarmSpecOrchestration}
-     * @memberof SwarmSpec
      */
     'Orchestration'?: SwarmSpecOrchestration | null;
     /**
      * 
      * @type {SwarmSpecRaft}
-     * @memberof SwarmSpec
      */
     'Raft'?: SwarmSpecRaft;
     /**
      * 
      * @type {SwarmSpecDispatcher}
-     * @memberof SwarmSpec
      */
     'Dispatcher'?: SwarmSpecDispatcher | null;
     /**
      * 
      * @type {SwarmSpecCAConfig}
-     * @memberof SwarmSpec
      */
     'CAConfig'?: SwarmSpecCAConfig | null;
     /**
      * 
      * @type {SwarmSpecEncryptionConfig}
-     * @memberof SwarmSpec
      */
     'EncryptionConfig'?: SwarmSpecEncryptionConfig;
     /**
      * 
      * @type {SwarmSpecTaskDefaults}
-     * @memberof SwarmSpec
      */
     'TaskDefaults'?: SwarmSpecTaskDefaults;
 }

@@ -31,7 +31,6 @@ import type { TLSInfo } from './tlsinfo.js';
 
 /**
  * @type Swarm
- * @export
  */
 export type Swarm = ClusterInfo;
 

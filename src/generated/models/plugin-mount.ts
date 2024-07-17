@@ -16,50 +16,42 @@
 
 /**
  * 
- * @export
  * @interface PluginMount
  */
 export interface PluginMount {
     /**
      * 
      * @type {string}
-     * @memberof PluginMount
      */
     'Name': string;
     /**
      * 
      * @type {string}
-     * @memberof PluginMount
      */
     'Description': string;
     /**
      * 
      * @type {Array<string>}
-     * @memberof PluginMount
      */
     'Settable': Array<string>;
     /**
      * 
      * @type {string}
-     * @memberof PluginMount
      */
     'Source': string;
     /**
      * 
      * @type {string}
-     * @memberof PluginMount
      */
     'Destination': string;
     /**
      * 
      * @type {string}
-     * @memberof PluginMount
      */
     'Type': string;
     /**
      * 
      * @type {Array<string>}
-     * @memberof PluginMount
      */
     'Options': Array<string>;
 }

@@ -19,86 +19,72 @@ import type { EndpointIPAMConfig } from './endpoint-ipamconfig.js';
 
 /**
  * Configuration for a network endpoint.
- * @export
  * @interface EndpointSettings
  */
 export interface EndpointSettings {
     /**
      * 
      * @type {EndpointIPAMConfig}
-     * @memberof EndpointSettings
      */
     'IPAMConfig'?: EndpointIPAMConfig | null;
     /**
      * 
      * @type {Array<string>}
-     * @memberof EndpointSettings
      */
     'Links'?: Array<string>;
     /**
      * 
      * @type {Array<string>}
-     * @memberof EndpointSettings
      */
     'Aliases'?: Array<string>;
     /**
      * Unique ID of the network. 
      * @type {string}
-     * @memberof EndpointSettings
      */
     'NetworkID'?: string;
     /**
      * Unique ID for the service endpoint in a Sandbox. 
      * @type {string}
-     * @memberof EndpointSettings
      */
     'EndpointID'?: string;
     /**
      * Gateway address for this network. 
      * @type {string}
-     * @memberof EndpointSettings
      */
     'Gateway'?: string;
     /**
      * IPv4 address. 
      * @type {string}
-     * @memberof EndpointSettings
      */
     'IPAddress'?: string;
     /**
      * Mask length of the IPv4 address. 
      * @type {number}
-     * @memberof EndpointSettings
      */
     'IPPrefixLen'?: number;
     /**
      * IPv6 gateway address. 
      * @type {string}
-     * @memberof EndpointSettings
      */
     'IPv6Gateway'?: string;
     /**
      * Global IPv6 address. 
      * @type {string}
-     * @memberof EndpointSettings
      */
     'GlobalIPv6Address'?: string;
     /**
      * Mask length of the global IPv6 address. 
      * @type {number}
-     * @memberof EndpointSettings
      */
     'GlobalIPv6PrefixLen'?: number;
     /**
      * MAC address for the endpoint on this network. 
      * @type {string}
-     * @memberof EndpointSettings
      */
     'MacAddress'?: string;
     /**
      * DriverOpts is a mapping of driver options and values. These options are passed directly to the driver and are driver specific. 
      * @type {{ [key: string]: string; }}
-     * @memberof EndpointSettings
      */
     'DriverOpts'?: { [key: string]: string; } | null;
 }

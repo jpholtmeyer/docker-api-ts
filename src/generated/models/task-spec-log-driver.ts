@@ -16,20 +16,17 @@
 
 /**
  * Specifies the log driver to use for tasks created from this spec. If not present, the default one for the swarm will be used, finally falling back to the engine default if not specified. 
- * @export
  * @interface TaskSpecLogDriver
  */
 export interface TaskSpecLogDriver {
     /**
      * 
      * @type {string}
-     * @memberof TaskSpecLogDriver
      */
     'Name'?: string;
     /**
      * 
      * @type {{ [key: string]: string; }}
-     * @memberof TaskSpecLogDriver
      */
     'Options'?: { [key: string]: string; };
 }

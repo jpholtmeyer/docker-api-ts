@@ -19,20 +19,17 @@ import type { ContainerWaitExitError } from './container-wait-exit-error.js';
 
 /**
  * OK response to ContainerWait operation
- * @export
  * @interface ContainerWaitResponse
  */
 export interface ContainerWaitResponse {
     /**
      * Exit code of the container
      * @type {number}
-     * @memberof ContainerWaitResponse
      */
     'StatusCode': number;
     /**
      * 
      * @type {ContainerWaitExitError}
-     * @memberof ContainerWaitResponse
      */
     'Error'?: ContainerWaitExitError;
 }

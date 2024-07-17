@@ -22,38 +22,32 @@ import type { TaskStatusContainerStatus } from './task-status-container-status.j
 
 /**
  * 
- * @export
  * @interface TaskStatus
  */
 export interface TaskStatus {
     /**
      * 
      * @type {string}
-     * @memberof TaskStatus
      */
     'Timestamp'?: string;
     /**
      * 
      * @type {TaskState}
-     * @memberof TaskStatus
      */
     'State'?: TaskState;
     /**
      * 
      * @type {string}
-     * @memberof TaskStatus
      */
     'Message'?: string;
     /**
      * 
      * @type {string}
-     * @memberof TaskStatus
      */
     'Err'?: string;
     /**
      * 
      * @type {TaskStatusContainerStatus}
-     * @memberof TaskStatus
      */
     'ContainerStatus'?: TaskStatusContainerStatus;
 }

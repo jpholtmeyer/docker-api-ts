@@ -16,20 +16,17 @@
 
 /**
  * 
- * @export
  * @interface ServiceEndpointVirtualIPsInner
  */
 export interface ServiceEndpointVirtualIPsInner {
     /**
      * 
      * @type {string}
-     * @memberof ServiceEndpointVirtualIPsInner
      */
     'NetworkID'?: string;
     /**
      * 
      * @type {string}
-     * @memberof ServiceEndpointVirtualIPsInner
      */
     'Addr'?: string;
 }

@@ -16,38 +16,32 @@
 
 /**
  * 
- * @export
  * @interface NetworkContainer
  */
 export interface NetworkContainer {
     /**
      * 
      * @type {string}
-     * @memberof NetworkContainer
      */
     'Name'?: string;
     /**
      * 
      * @type {string}
-     * @memberof NetworkContainer
      */
     'EndpointID'?: string;
     /**
      * 
      * @type {string}
-     * @memberof NetworkContainer
      */
     'MacAddress'?: string;
     /**
      * 
      * @type {string}
-     * @memberof NetworkContainer
      */
     'IPv4Address'?: string;
     /**
      * 
      * @type {string}
-     * @memberof NetworkContainer
      */
     'IPv6Address'?: string;
 }

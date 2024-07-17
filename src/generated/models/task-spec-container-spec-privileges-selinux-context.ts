@@ -16,38 +16,32 @@
 
 /**
  * SELinux labels of the container
- * @export
  * @interface TaskSpecContainerSpecPrivilegesSELinuxContext
  */
 export interface TaskSpecContainerSpecPrivilegesSELinuxContext {
     /**
      * Disable SELinux
      * @type {boolean}
-     * @memberof TaskSpecContainerSpecPrivilegesSELinuxContext
      */
     'Disable'?: boolean;
     /**
      * SELinux user label
      * @type {string}
-     * @memberof TaskSpecContainerSpecPrivilegesSELinuxContext
      */
     'User'?: string;
     /**
      * SELinux role label
      * @type {string}
-     * @memberof TaskSpecContainerSpecPrivilegesSELinuxContext
      */
     'Role'?: string;
     /**
      * SELinux type label
      * @type {string}
-     * @memberof TaskSpecContainerSpecPrivilegesSELinuxContext
      */
     'Type'?: string;
     /**
      * SELinux level label
      * @type {string}
-     * @memberof TaskSpecContainerSpecPrivilegesSELinuxContext
      */
     'Level'?: string;
 }

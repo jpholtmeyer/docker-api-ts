@@ -19,32 +19,27 @@ import type { PluginInterfaceType } from './plugin-interface-type.js';
 
 /**
  * The interface between Docker and the plugin
- * @export
  * @interface PluginConfigInterface
  */
 export interface PluginConfigInterface {
     /**
      * 
      * @type {Array<PluginInterfaceType>}
-     * @memberof PluginConfigInterface
      */
     'Types': Array<PluginInterfaceType>;
     /**
      * 
      * @type {string}
-     * @memberof PluginConfigInterface
      */
     'Socket': string;
     /**
      * Protocol to use for clients connecting to the plugin.
      * @type {string}
-     * @memberof PluginConfigInterface
      */
     'ProtocolScheme'?: PluginConfigInterfaceProtocolSchemeEnum;
 }
 
 /**
-    * @export
     * @enum {string}
     */
 export enum PluginConfigInterfaceProtocolSchemeEnum {

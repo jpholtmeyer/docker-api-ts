@@ -124,7 +124,6 @@ export class Docker {
    * @param {ConfigCreateRequest} [body]
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
-   * @memberof ConfigApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes: 201 (Created), 400 (Bad Request), 500 (Internal Server Error)
    */
   public configCreate(
@@ -140,7 +139,6 @@ export class Docker {
    * @param {string} id ID of the config
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
-   * @memberof ConfigApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes: 204 (No Content), 404 (Not Found), 500 (Internal Server Error)
    */
   public configDelete(id: string, options?: RawAxiosRequestConfig) {
@@ -154,7 +152,6 @@ export class Docker {
    * @param {string} id The ID of the config to inspect.
    * @param {*} [options] Optional parameters to override the HTTP request.
    * @throws {RequiredError}
-   * @memberof ConfigApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes: 200 (OK), 404 (Not Found), 500 (Internal Server Error)
    */
   public configInspect(id: string, options?: RawAxiosRequestConfig) {
@@ -172,7 +169,6 @@ export class Docker {
    * - `names=<config name>`
    * @param {*} [options] Override HTTP request option.
    * @throws {RequiredError}
-   * @memberof ConfigApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes: 200 (OK), 500 (Internal Server Error)
    */
   public configList(filters?: string, options?: RawAxiosRequestConfig) {
@@ -188,7 +184,6 @@ export class Docker {
    * @param {ConfigSpec} [body] The spec of the config to update. Currently, only the Labels field can be updated. All other fields must remain unchanged from the ConfigInspect endpoint response values.
    * @param {*} [options] Optional parameters to override the HTTP request.
    * @throws {RequiredError}
-   * @memberof ConfigApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 200 (OK): The request was successful, and the server responded with the requested data.
    * - 400 (Bad Request): The server could not understand the request due to invalid syntax.
@@ -216,7 +211,6 @@ export class Docker {
    * @param {boolean} [link] Remove the specified link associated with the container.
    * @param {*} [options] Override HTTP request option.
    * @throws {RequiredError}
-   * @memberof ContainerApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 204 (No Content): The container was successfully removed.
    * - 400 (Bad Request): The server could not understand the request due to invalid syntax.
@@ -239,7 +233,6 @@ export class Docker {
    * @param {string} path Resource in the container’s filesystem to archive.
    * @param {*} [options] Override HTTP request options.
    * @throws {RequiredError}
-   * @memberof ContainerApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 200 (OK): The request was successful, and the server responded with the requested data.
    * - 400 (Bad Request): The server could not understand the request due to invalid syntax.
@@ -258,7 +251,6 @@ export class Docker {
    * @param {string} path Resource in the container’s filesystem to archive.
    * @param {*} [options] Override HTTP request options.
    * @throws {RequiredError}
-   * @memberof ContainerApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 200 (OK)
    * - 400 (Bad Request)
@@ -335,7 +327,6 @@ export class Docker {
    * @param {boolean} [params.stderr] Attach to `stderr`
    * @param {*} [params.options] Override HTTP request options.
    * @throws {RequiredError}
-   * @memberof ContainerApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 101 (Switching Protocols): The server is switching protocols as requested by the client.
    * - 200 (OK): The request was successful, and the server responded with the requested data.
@@ -380,7 +371,6 @@ export class Docker {
    * @param {boolean} [params.stream] - Return stream
    * @param {*} [params.options] - Override HTTP request options.
    * @throws {RequiredError}
-   * @memberof ContainerApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 101 (Switching Protocols)
    * - 200 (OK): The request was successful, and the server responded with the requested data.
@@ -413,7 +403,6 @@ export class Docker {
    * @param {string} id - ID or name of the container
    * @param {*} [options] - Override HTTP request options.
    * @throws {RequiredError}
-   * @memberof ContainerApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 200 (OK): The request was successful, and the server responded with the requested data.
    * - 304 (Not Modified): There were no changes detected in the container's filesystem.
@@ -435,7 +424,6 @@ export class Docker {
    * @param {string} [params.platform] - Platform in the format `os[/arch[/variant]]` used for image lookup. When specified, the daemon checks if the requested image is present in the local image cache with the given OS and Architecture, and otherwise returns a `404` status. If the option is not set, the host's native OS and Architecture are used to look up the image in the image cache. However, if no platform is passed and the given image does exist in the local image cache, but its OS or architecture does not match, the container is created with the available image, and a warning is added to the `Warnings` field in the response, for example; WARNING: The requested image's platform (linux/arm64/v8) does not match the detected host platform (linux/amd64) and no specific platform was requested.
    * @param {*} [params.options] - Override HTTP request options.
    * @throws {RequiredError}
-   * @memberof ContainerApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 201 (Created): The container was successfully created.
    * - 400 (Bad Request): The server could not understand the request due to invalid syntax.
@@ -456,7 +444,6 @@ export class Docker {
    * @param {string} id - The ID or name of the container
    * @param {*} [options] - Override HTTP request options.
    * @throws {RequiredError}
-   * @memberof ContainerApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 200 (OK): The request was successful, and the server responded with the requested data.
    * - 400 (Bad Request): The server could not understand the request due to invalid syntax.
@@ -474,7 +461,6 @@ export class Docker {
    * @param {boolean} [size] - If true, includes the size of the container as fields `SizeRw` and `SizeRootFs`
    * @param {*} [options] - Optional parameters to override the HTTP request
    * @throws {RequiredError}
-   * @memberof ContainerApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 200 (OK): The request was successful, and the server responded with the requested data.
    * - 404 (Not Found): The server could not find the requested resource.
@@ -491,7 +477,6 @@ export class Docker {
    * @param {string} [signal] - The signal to send to the container as an integer or string (e.g. `SIGINT`).
    * @param {*} [options] - Override HTTP request options.
    * @throws {RequiredError}
-   * @memberof ContainerApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 204 (No Content): The request was successful, and the server responded with no content.
    * - 304 (Not Modified): The container was already in the desired state.
@@ -527,7 +512,6 @@ export class Docker {
    * - `volume`=(`<volume name>` or `<mount point destination>`)
    * @param {*} [options] Override HTTP request option.
    * @throws {RequiredError}
-   * @memberof ContainerApi
    * @returns {Promise<RequestArgs>} The request arguments to be sent to the API.
    * @response `200` - A list of containers.
    * @response `500` - Server error.
@@ -556,7 +540,6 @@ export class Docker {
    * @param {string} [params.tail] - Only return this number of log lines from the end of the logs. Specify as an integer or `all` to output all log lines.
    * @param {*} [params.options] - Override HTTP request options.
    * @throws {RequiredError}
-   * @memberof ContainerApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 101 (Switching Protocols): The server is switching protocols.
    * - 200 (OK): The request was successful.
@@ -596,7 +579,6 @@ export class Docker {
    * @param {string} id - The ID or name of the container
    * @param {*} [options] - Optional parameters to override the HTTP request
    * @throws {RequiredError}
-   * @memberof ContainerApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 204 (No Content): The request was successful, and the server has fulfilled the request but does not need to return an entity-body.
    * - 304 (Not Modified): The container is already paused.
@@ -616,7 +598,6 @@ export class Docker {
    * - `label` (`label=<key>`, `label=<key>=<value>`, `label!=<key>`, or `label!=<key>=<value>`): Prune containers with (or without, in case `label!=...` is used) the specified labels.
    * @param {*} [options] Optional parameters to override the HTTP request.
    * @throws {RequiredError}
-   * @memberof ContainerApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 200 (OK): The request was successful, and the server responded with the requested data.
    * - 400 (Bad Request): The server could not understand the request due to invalid syntax.
@@ -634,7 +615,6 @@ export class Docker {
    * @param {string} name - The new name for the container
    * @param {*} [options] - Optional parameters to override the HTTP request
    * @throws {RequiredError}
-   * @memberof ContainerApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 204 (No Content): The container was successfully renamed.
    * - 400 (Bad Request): The server could not understand the request due to invalid syntax.
@@ -655,7 +635,6 @@ export class Docker {
    * @param {number} [w] - The width of the TTY session in characters
    * @param {*} [options] - Optional parameters to override the HTTP request
    * @throws {RequiredError}
-   * @memberof ContainerApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 200 (OK): The request was successful, and the server responded with the requested data.
    * - 400 (Bad Request): The server could not understand the request due to invalid syntax.
@@ -674,7 +653,6 @@ export class Docker {
    * @param {number} [t] - Number of seconds to wait before killing the container
    * @param {*} [options] - Optional parameters to override the HTTP request
    * @throws {RequiredError}
-   * @memberof ContainerApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 204 (No Content): The container was successfully restarted.
    * - 304 (Not Modified): The container was already stopped, and no action was taken.
@@ -693,7 +671,6 @@ export class Docker {
    * @param {string} [detachKeys] - Override the key sequence for detaching a container. Format is a single character `[a-Z]` or `ctrl-<value>` where `<value>` is one of: `a-z`, `@`, `^`, `[`, `,` or `_`.
    * @param {*} [options] - Optional parameters to override the HTTP request
    * @throws {RequiredError}
-   * @memberof ContainerApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 204 (No Content): The container was successfully started.
    * - 304 (Not Modified): The container was already started, and no action was taken.
@@ -731,7 +708,6 @@ export class Docker {
    * @param {boolean} [oneShot] Only get a single stat instead of waiting for 2 cycles. Must be used with `stream=false`.
    * @param {*} [options] Override HTTP request options.
    * @throws {RequiredError}
-   * @memberof ContainerApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 200 (OK): The request was successful, and the server responded with the requested data.
    * - 400 (Bad Request): The server could not understand the request due to invalid syntax.
@@ -752,7 +728,6 @@ export class Docker {
    * @param {number} [t] Number of seconds to wait before killing the container
    * @param {*} [options] Override HTTP request options.
    * @throws {RequiredError}
-   * @memberof ContainerApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 204 (No Content): The container was successfully stopped.
    * - 304 (Not Modified): The container was already stopped, and no action was taken.
@@ -774,7 +749,6 @@ export class Docker {
    * @param {string} [psArgs] The arguments to pass to the `ps` command. For example, `aux`
    * @param {*} [options] Override HTTP request options.
    * @throws {RequiredError}
-   * @memberof ContainerApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 200 (OK): The request was successful, and the server responded with the requested data.
    * - 400 (Bad Request): The server could not understand the request due to invalid syntax.
@@ -792,7 +766,6 @@ export class Docker {
    * @param {string} id ID or name of the container
    * @param {*} [options] Override HTTP request options.
    * @throws {RequiredError}
-   * @memberof ContainerApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 204 (No Content): The container was successfully unpaused.
    * - 304 (Not Modified): The container was already unpaused, and no action was taken.
@@ -811,7 +784,6 @@ export class Docker {
    * @param {ContainerUpdateRequest} update The update request object containing the new configuration settings
    * @param {*} [options] Optional parameter to override HTTP request options
    * @throws {RequiredError} Throws an error if the required parameters are not provided
-   * @memberof ContainerApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 200 (OK): The container was successfully updated.
    * - 400 (Bad Request): The server could not understand the request due to invalid syntax.
@@ -830,7 +802,6 @@ export class Docker {
    * @param {ContainerWaitConditionEnum} [condition] The condition to wait for before returning. Defaults to `not-running` if omitted or empty.
    * @param {*} [options] Optional parameter to override HTTP request options.
    * @throws {RequiredError} Throws an error if the required parameters are not provided.
-   * @memberof ContainerApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 200 (OK): The request was successful, and the server responded with the requested data.
    * - 204 (No Content): The container was successfully unpaused.
@@ -855,7 +826,6 @@ export class Docker {
    * @param {string} [copyUIDGID] - If `1`, `true`, it will copy UID/GID maps to the destination file or directory
    * @param {*} [options] - Optional parameter to override HTTP request options
    * @throws {RequiredError} - Throws an error if the required parameters are not provided
-   * @memberof ContainerApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 200 (OK): The archive was successfully extracted.
    * - 400 (Bad Request): The server could not understand the request due to invalid syntax or the path is not a directory.
@@ -883,7 +853,6 @@ export class Docker {
    * @param {string} name - The name or ID of the image.
    * @param {*} [options] - Optional parameter to override HTTP request options.
    * @throws {RequiredError} - Throws an error if the required parameters are not provided.
-   * @memberof DistributionApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 200 (OK): The request was successful, and the server responded with the requested data.
    * - 400 (Bad Request): The server could not understand the request due to invalid syntax.
@@ -907,7 +876,6 @@ export class Docker {
    * @param {ExecConfig} execConfig - The configuration for the exec instance.
    * @param {*} [options] - Optional parameter to override HTTP request options.
    * @throws {RequiredError} - Throws an error if the required parameters are not provided.
-   * @memberof ExecApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 200 (OK): The request was successful, and the server responded with the requested data.
    * - 400 (Bad Request): The server could not understand the request due to invalid syntax.
@@ -925,7 +893,6 @@ export class Docker {
    * @param {string} id - The ID of the exec instance.
    * @param {*} [options] - Optional parameter to override HTTP request options.
    * @throws {RequiredError} - Throws an error if the required parameters are not provided.
-   * @memberof ExecApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 200 (OK): The request was successful, and the server responded with the requested data.
    * - 404 (Not Found): The server could not find the requested resource.
@@ -944,7 +911,6 @@ export class Docker {
    * @param {number} [w] - The width of the TTY session in characters.
    * @param {*} [options] - Optional parameter to override HTTP request options.
    * @throws {RequiredError} - Throws an error if the required parameters are not provided.
-   * @memberof ExecApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 200 (OK): The request was successful, and the server responded with the requested data.
    * - 400 (Bad Request): The server could not understand the request due to invalid syntax.
@@ -962,7 +928,6 @@ export class Docker {
    * @param {ExecStartConfig} [execStartConfig] - Configuration for starting the exec instance.
    * @param {*} [options] - Optional parameter to override HTTP request options.
    * @throws {RequiredError} - Throws an error if the required parameters are not provided.
-   * @memberof ExecApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 200 (OK): The request was successful, and the server responded with the requested data.
    * - 404 (Not Found): The server could not find the requested resource.
@@ -993,7 +958,6 @@ export class Docker {
    * - `private`
    * @param {*} [options] - Optional parameter to override HTTP request options.
    * @throws {RequiredError} - Throws an error if the required parameters are not provided.
-   * @memberof ImageApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 200 (OK): The request was successful, and the server responded with the requested data.
    * - 400 (Bad Request): The server could not understand the request due to invalid syntax.
@@ -1037,7 +1001,6 @@ export class Docker {
    * @param {File} [inputStream] A tar archive compressed with one of the following algorithms: identity (no compression), gzip, bzip2, xz.
    * @param {*} [options] Override HTTP request option.
    * @throws {RequiredError}
-   * @memberof ImageApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 200 (OK): The request was successful, and the server responded with the requested data.
    * - 400 (Bad Request): The server could not understand the request due to invalid syntax.
@@ -1162,7 +1125,6 @@ export class Docker {
    * - 500: Server error
    *
    * @throws {RequiredError}
-   * @memberof ImageApi
    */
   public imageCommit(
     container?: string,
@@ -1202,7 +1164,6 @@ export class Docker {
    * - 500: Server error
    *
    * @throws {RequiredError}
-   * @memberof ImageApi
    */
   public imageCreate(
     params: {
@@ -1250,7 +1211,6 @@ export class Docker {
    * - 500: Server error
    *
    * @throws {RequiredError}
-   * @memberof ImageApi
    */
   public imageDelete(name: string, force?: boolean, noprune?: boolean, options?: RawAxiosRequestConfig) {
     return this.imageApi.imageDelete(name, force, noprune, options)
@@ -1290,7 +1250,6 @@ export class Docker {
    * - 500: Server error
    *
    * @throws {RequiredError}
-   * @memberof ImageApi
    */
   public imageGet(name: string, options?: RawAxiosRequestConfig) {
     return this.imageApi.imageGet(name, options)
@@ -1315,7 +1274,6 @@ export class Docker {
    * - 500: Server error
    *
    * @throws {RequiredError}
-   * @memberof ImageApi
    */
   public imageGetAll(names?: Array<string>, options?: RawAxiosRequestConfig) {
     return this.imageApi.imageGetAll(names, options)
@@ -1335,7 +1293,6 @@ export class Docker {
    * - 500: Internal server error
    *
    * @throws {RequiredError}
-   * @memberof ImageApi
    */
   public imageHistory(name: string, options?: RawAxiosRequestConfig) {
     return this.imageApi.imageHistory(name, options)
@@ -1355,7 +1312,6 @@ export class Docker {
    * - 500: Internal server error
    *
    * @throws {RequiredError}
-   * @memberof ImageApi
    */
   public imageInspect(name: string, options?: RawAxiosRequestConfig) {
     return this.imageApi.imageInspect(name, options)
@@ -1381,7 +1337,6 @@ export class Docker {
    * - 500: Server error
    *
    * @throws {RequiredError}
-   * @memberof ImageApi
    */
   public imageList(all?: boolean, filters?: string, digests?: boolean, options?: RawAxiosRequestConfig) {
     return this.imageApi.imageList(all, filters, digests, options)
@@ -1402,7 +1357,6 @@ export class Docker {
    * - 500: Internal server error
    *
    * @throws {RequiredError}
-   * @memberof ImageApi
    */
   public imageLoad(quiet?: boolean, imagesTarball?: File, options?: RawAxiosRequestConfig) {
     return this.imageApi.imageLoad(quiet, imagesTarball, options)
@@ -1425,7 +1379,6 @@ export class Docker {
    * - 500: Server error
    *
    * @throws {RequiredError}
-   * @memberof ImageApi
    */
   public imagePrune(filters?: string, options?: RawAxiosRequestConfig) {
     return this.imageApi.imagePrune(filters, options)
@@ -1448,7 +1401,6 @@ export class Docker {
    * - 500: Internal server error
    *
    * @throws {RequiredError}
-   * @memberof ImageApi
    */
   public imagePush(name: string, xRegistryAuth: string, tag?: string, options?: RawAxiosRequestConfig) {
     return this.imageApi.imagePush(name, xRegistryAuth, tag, options)
@@ -1473,7 +1425,6 @@ export class Docker {
    * - 500: Server error
    *
    * @throws {RequiredError}
-   * @memberof ImageApi
    */
   public imageSearch(term: string, limit?: number, filters?: string, options?: RawAxiosRequestConfig) {
     return this.imageApi.imageSearch(term, limit, filters, options)
@@ -1496,7 +1447,6 @@ export class Docker {
    * - 500: Server error
    *
    * @throws {RequiredError}
-   * @memberof ImageApi
    */
   public imageTag(name: string, repo?: string, tag?: string, options?: RawAxiosRequestConfig) {
     return this.imageApi.imageTag(name, repo, tag, options)
@@ -1521,7 +1471,6 @@ export class Docker {
    * - 500: Server error
    *
    * @throws {RequiredError}
-   * @memberof NetworkApi
    */
   public networkConnect(id: string, container: NetworkDisconnectRequest, options?: RawAxiosRequestConfig) {
     return this.networkApi.networkConnect(id, container, options)
@@ -1534,7 +1483,6 @@ export class Docker {
    * @param {NetworkCreateRequest} networkConfig - The configuration for the new network
    * @param {*} [options] - Optional parameter to override HTTP request options
    * @throws {RequiredError}
-   * @memberof NetworkApi
    * @returns {Promise<AxiosResponse>} A promise that resolves to the response of the network creation operation.
    *
    * Response codes:
@@ -1556,7 +1504,6 @@ export class Docker {
    * @param {string} id - The ID or name of the network to be removed
    * @param {*} [options] - Optional parameter to override HTTP request options
    * @throws {RequiredError}
-   * @memberof NetworkApi
    * @returns {Promise<AxiosResponse>} A promise that resolves to the response of the network removal operation.
    *
    * Response codes:
@@ -1578,7 +1525,6 @@ export class Docker {
    * @param {NetworkConnectRequest} container - The container to disconnect from the network
    * @param {*} [options] - Optional parameter to override HTTP request options
    * @throws {RequiredError}
-   * @memberof NetworkApi
    * @returns {Promise<AxiosResponse>} A promise that resolves to the response of the network disconnection operation.
    *
    * Response codes:
@@ -1601,7 +1547,6 @@ export class Docker {
    * @param {string} [scope] - Filter the network by scope (swarm, global, or local)
    * @param {*} [options] - Optional parameter to override HTTP request options
    * @throws {RequiredError}
-   * @memberof NetworkApi
    * @returns {Promise<AxiosResponse>} A promise that resolves to the response of the network inspection operation.
    *
    * Response codes:
@@ -1629,7 +1574,6 @@ export class Docker {
    * - `type=["custom"|"builtin"]` Filters networks by type. The `custom` keyword returns all user-defined networks.
    * @param {*} [options] Optional parameter to override HTTP request options.
    * @throws {RequiredError}
-   * @memberof NetworkApi
    * @returns {Promise<AxiosResponse>} A promise that resolves to the response of the network listing operation.
    *
    * Response codes:
@@ -1651,7 +1595,6 @@ export class Docker {
    * - `label` (`label=<key>`, `label=<key>=<value>`, `label!=<key>`, or `label!=<key>=<value>`) Prune networks with (or without, in case `label!=...` is used) the specified labels.
    * @param {*} [options] Optional parameter to override HTTP request options.
    * @throws {RequiredError}
-   * @memberof NetworkApi
    * @returns {Promise<AxiosResponse>} A promise that resolves to the response of the network prune operation.
    *
    * Response codes:
@@ -1674,7 +1617,6 @@ export class Docker {
    * @param {boolean} [force] Force remove a node from the swarm
    * @param {*} [options] Optional parameter to override HTTP request options.
    * @throws {RequiredError}
-   * @memberof NodeApi
    * @returns {Promise<AxiosResponse>} A promise that resolves to the response of the node deletion operation.
    *
    * Response codes:
@@ -1695,7 +1637,6 @@ export class Docker {
    * @param {string} id The ID or name of the node
    * @param {*} [options] Optional parameter to override HTTP request options.
    * @throws {RequiredError}
-   * @memberof NodeApi
    * @returns {Promise<AxiosResponse>} A promise that resolves to the response of the node inspection operation.
    *
    * Response codes:
@@ -1722,7 +1663,6 @@ export class Docker {
    * - `role=`(`manager`|`worker`)
    * @param {*} [options] Optional parameter to override HTTP request options.
    * @throws {RequiredError}
-   * @memberof NodeApi
    * @returns {Promise<AxiosResponse>} A promise that resolves to the response of the node listing operation.
    *
    * Response codes:
@@ -1744,7 +1684,6 @@ export class Docker {
    * @param {NodeSpec} [body] The new specification for the node
    * @param {*} [options] Optional parameter to override HTTP request options.
    * @throws {RequiredError}
-   * @memberof NodeApi
    * @returns {Promise<AxiosResponse>} A promise that resolves to the response of the node update operation.
    *
    * Response codes:
@@ -1767,7 +1706,6 @@ export class Docker {
    * @param {string} remote The name of the plugin. The `:latest` tag is optional, and is the default if omitted.
    * @param {*} [options] Optional parameter to override HTTP request options.
    * @throws {RequiredError}
-   * @memberof PluginApi
    * @returns {Promise<AxiosResponse>} A promise that resolves to the response of the plugin privileges operation.
    *
    * Response codes:
@@ -1790,7 +1728,6 @@ export class Docker {
    * @param {File} [tarContext] Path to tar containing plugin rootfs and manifest.
    * @param {*} [options] Optional parameter to override HTTP request options.
    * @throws {RequiredError}
-   * @memberof PluginApi
    * @returns {Promise<AxiosResponse>} A promise that resolves to the response of the plugin creation operation.
    *
    * Response codes:
@@ -1813,7 +1750,6 @@ export class Docker {
    * @param {boolean} [force] Disable the plugin before removing. This may result in issues if the plugin is in use by a container.
    * @param {*} [options] Optional parameter to override HTTP request options.
    * @throws {RequiredError}
-   * @memberof PluginApi
    * @returns {Promise<AxiosResponse>} A promise that resolves to the response of the plugin removal operation.
    *
    * Response codes:
@@ -1837,7 +1773,6 @@ export class Docker {
    * @param {boolean} [force] Force disable a plugin even if still in use.
    * @param {*} [options] Optional parameter to override HTTP request options.
    * @throws {RequiredError}
-   * @memberof PluginApi
    * @returns {Promise<AxiosResponse>} A promise that resolves to the response of the plugin disable operation.
    *
    * Response codes:
@@ -1860,7 +1795,6 @@ export class Docker {
    * @param {number} [timeout] Set the HTTP client timeout (in seconds).
    * @param {*} [options] Optional parameter to override HTTP request options.
    * @throws {RequiredError}
-   * @memberof PluginApi
    * @returns {Promise<AxiosResponse>} A promise that resolves to the response of the plugin enable operation.
    *
    * Response codes:
@@ -1881,7 +1815,6 @@ export class Docker {
    * @param {string} name The name of the plugin. The `:latest` tag is optional, and is the default if omitted.
    * @param {*} [options] Optional parameter to override HTTP request options.
    * @throws {RequiredError}
-   * @memberof PluginApi
    * @returns {Promise<AxiosResponse>} A promise that resolves to the response of the plugin inspect operation.
    *
    * Response codes:
@@ -1902,7 +1835,6 @@ export class Docker {
    * - `enable=<true>|<false>`
    * @param {*} [options] Optional parameter to override HTTP request options.
    * @throws {RequiredError}
-   * @memberof PluginApi
    * @returns {Promise<AxiosResponse>} A promise that resolves to the response of the plugin list operation.
    *
    * Response codes:
@@ -1923,7 +1855,6 @@ export class Docker {
    * @param {Array<PluginPrivilege>} [body] The privileges to grant the plugin.
    * @param {*} [options] Optional parameter to override HTTP request options.
    * @throws {RequiredError}
-   * @memberof PluginApi
    * @returns {Promise<AxiosResponse>} A promise that resolves to the response of the plugin pull operation.
    *
    * Response codes:
@@ -1951,7 +1882,6 @@ export class Docker {
    * @param {string} name The name of the plugin. The `:latest` tag is optional and is the default if omitted.
    * @param {*} [options] Optional parameter to override HTTP request options.
    * @throws {RequiredError}
-   * @memberof PluginApi
    * @returns {Promise<AxiosResponse>} A promise that resolves to the response of the plugin push operation.
    *
    * Response codes:
@@ -1974,7 +1904,6 @@ export class Docker {
    * @param {Array<string>} [body] The configuration settings for the plugin.
    * @param {*} [options] Optional parameter to override HTTP request options.
    * @throws {RequiredError}
-   * @memberof PluginApi
    * @returns {Promise<AxiosResponse>} A promise that resolves to the response of the plugin configuration operation.
    *
    * Response codes:
@@ -1999,7 +1928,6 @@ export class Docker {
    * @param {Array<PluginPrivilege>} [body] The privileges required by the plugin.
    * @param {*} [options] Optional parameter to override HTTP request options.
    * @throws {RequiredError}
-   * @memberof PluginApi
    * @returns {Promise<AxiosResponse>} A promise that resolves to the response of the plugin upgrade operation.
    *
    * Response codes:
@@ -2029,7 +1957,6 @@ export class Docker {
    * @param {SecretCreateRequest} [body] The request body containing the secret details.
    * @param {*} [options] Optional parameter to override HTTP request options.
    * @throws {RequiredError}
-   * @memberof SecretApi
    * @returns {Promise<AxiosResponse>} A promise that resolves to the response of the secret creation operation.
    *
    * Response codes:
@@ -2050,7 +1977,6 @@ export class Docker {
    * @param {string} id - The ID of the secret to delete.
    * @param {*} [options] - Optional parameter to override HTTP request options.
    * @throws {RequiredError}
-   * @memberof SecretApi
    * @returns {Promise<AxiosResponse>} A promise that resolves to the response of the secret deletion operation.
    *
    * Response codes:
@@ -2071,7 +1997,6 @@ export class Docker {
    * @param {string} id - The ID of the secret to inspect.
    * @param {*} [options] - Optional parameter to override HTTP request options.
    * @throws {RequiredError}
-   * @memberof SecretApi
    * @returns {Promise<AxiosResponse>} A promise that resolves to the response of the secret inspection operation.
    *
    * Response codes:
@@ -2096,7 +2021,6 @@ export class Docker {
    * - `names=<secret name>`
    * @param {*} [options] Optional parameter to override HTTP request options.
    * @throws {RequiredError}
-   * @memberof SecretApi
    * @returns {Promise<AxiosResponse>} A promise that resolves to the response of the secrets list operation.
    *
    * Response codes:
@@ -2118,7 +2042,6 @@ export class Docker {
    * @param {SecretSpec} [body] - The spec of the secret to update. Currently, only the Labels field can be updated. All other fields must remain unchanged from the [SecretInspect endpoint](#operation/SecretInspect) response values.
    * @param {*} [options] - Optional parameter to override HTTP request options.
    * @throws {RequiredError}
-   * @memberof SecretApi
    * @returns {Promise<AxiosResponse>} A promise that resolves to the response of the secret update operation.
    *
    * Response codes:
@@ -2143,7 +2066,6 @@ export class Docker {
    * @param {string} [xRegistryAuth] - A base64url-encoded authentication configuration for pulling from private registries. Refer to the authentication section for details.
    * @param {*} [options] - Optional parameter to override HTTP request options.
    * @throws {RequiredError}
-   * @memberof ServiceApi
    * @returns {Promise<AxiosResponse>} A promise that resolves to the response of the service creation operation.
    *
    * Possible response codes:
@@ -2164,7 +2086,6 @@ export class Docker {
    * @param {string} id - The ID or name of the service to delete.
    * @param {*} [options] - Optional parameter to override HTTP request options.
    * @throws {RequiredError}
-   * @memberof ServiceApi
    * @returns {Promise<AxiosResponse>} A promise that resolves to the response of the service delete operation.
    *
    * Possible response codes:
@@ -2187,7 +2108,6 @@ export class Docker {
    * @param {boolean} [insertDefaults] - Fill empty fields with default values.
    * @param {*} [options] - Optional parameter to override HTTP request options.
    * @throws {RequiredError}
-   * @memberof ServiceApi
    * @returns {Promise<AxiosResponse>} A promise that resolves to the response of the service inspection operation.
    *
    * Possible response codes:
@@ -2213,7 +2133,6 @@ export class Docker {
    * @param {boolean} [status] Include service status, with count of running and desired tasks.
    * @param {*} [options] Optional parameter to override HTTP request options.
    * @throws {RequiredError}
-   * @memberof ServiceApi
    * @returns {Promise<AxiosResponse>} A promise that resolves to the response of the service list operation.
    *
    * Possible response codes:
@@ -2240,7 +2159,6 @@ export class Docker {
    * @param {string} [tail] - Only return this number of log lines from the end of the logs. Specify as an integer or `all` to output all log lines.
    * @param {*} [options] - Override HTTP request options.
    * @throws {RequiredError}
-   * @memberof ServiceApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 101 (Switching Protocols): The server is switching protocols.
    * - 200 (OK): The request was successful.
@@ -2274,7 +2192,6 @@ export class Docker {
    * @param {string} [xRegistryAuth] - A base64url-encoded auth configuration for pulling from private registries. Refer to the [authentication section](#section/Authentication) for details.
    * @param {*} [options] - Optional parameter to override HTTP request options.
    * @throws {RequiredError}
-   * @memberof ServiceApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 200 (OK): The service was updated successfully.
    * - 400 (Bad Request): The server could not understand the request due to invalid syntax.
@@ -2318,7 +2235,6 @@ export class Docker {
    * @summary Initialize interactive session
    * @param {*} [options] - Optional parameters to override the HTTP request
    * @throws {RequiredError}
-   * @memberof SessionApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 101 (Switching Protocols): The server is switching protocols as requested by the client.
    * - 200 (OK): The request was successful, and the server responded with the requested data.
@@ -2340,7 +2256,6 @@ export class Docker {
    * @param {SwarmInitRequest} body - The request body containing the swarm initialization parameters.
    * @param {*} [options] - Optional parameters to override the HTTP request.
    * @throws {RequiredError}
-   * @memberof SwarmApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 200 (OK): The request was successful, and the swarm was initialized.
    * - 400 (Bad Request): The server could not understand the request due to invalid syntax.
@@ -2358,7 +2273,6 @@ export class Docker {
    * @summary Inspect swarm
    * @param {*} [options] - Optional parameters to override the HTTP request.
    * @throws {RequiredError}
-   * @memberof SwarmApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 200 (OK): The request was successful, and the server responded with the requested data.
    * - 400 (Bad Request): The server could not understand the request due to invalid syntax.
@@ -2377,7 +2291,6 @@ export class Docker {
    * @param {SwarmJoinRequest} body - The request body containing the swarm join parameters.
    * @param {*} [options] - Optional parameters to override the HTTP request.
    * @throws {RequiredError}
-   * @memberof SwarmApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 200 (OK): The request was successful, and the node joined the swarm.
    * - 400 (Bad Request): The server could not understand the request due to invalid syntax.
@@ -2396,7 +2309,6 @@ export class Docker {
    * @param {boolean} [force] - Force leave swarm, even if this is the last manager or that it will break the cluster.
    * @param {*} [options] - Optional parameters to override the HTTP request.
    * @throws {RequiredError}
-   * @memberof SwarmApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 200 (OK): The request was successful, and the node left the swarm.
    * - 400 (Bad Request): The server could not understand the request due to invalid syntax.
@@ -2415,7 +2327,6 @@ export class Docker {
    * @param {SwarmUnlockRequest} body - The request body containing the unlock key.
    * @param {*} [options] - Optional parameters to override the HTTP request.
    * @throws {RequiredError}
-   * @memberof SwarmApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 200 (OK): The request was successful, and the manager was unlocked.
    * - 400 (Bad Request): The server could not understand the request due to invalid syntax.
@@ -2434,7 +2345,6 @@ export class Docker {
    * @summary Get the unlock key
    * @param {*} [options] Optional parameters to override the HTTP request.
    * @throws {RequiredError}
-   * @memberof SwarmApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 200 (OK): The request was successful, and the unlock key was retrieved.
    * - 400 (Bad Request): The server could not understand the request due to invalid syntax.
@@ -2458,7 +2368,6 @@ export class Docker {
    * @param {boolean} [rotateManagerUnlockKey] - Rotate the manager unlock key.
    * @param {*} [options] - Optional parameters to override the HTTP request.
    * @throws {RequiredError}
-   * @memberof SwarmApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 200 (OK): The request was successful, and the swarm was updated.
    * - 400 (Bad Request): The server could not understand the request due to invalid syntax.
@@ -2495,7 +2404,6 @@ export class Docker {
    * @param {AuthConfig} [authConfig] Authentication configuration to check.
    * @param {*} [options] Optional parameters to override the HTTP request.
    * @throws {RequiredError}
-   * @memberof SystemApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 200 (OK): The request was successful, and the credentials are valid.
    * - 400 (Bad Request): The server could not understand the request due to invalid syntax.
@@ -2515,7 +2423,6 @@ export class Docker {
    * @summary Get data usage information
    * @param {*} [options] Optional parameters to override the HTTP request.
    * @throws {RequiredError}
-   * @memberof SystemApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 200 (OK): The request was successful, and the data usage information is returned.
    * - 400 (Bad Request): The server could not understand the request due to invalid syntax.
@@ -2573,7 +2480,6 @@ export class Docker {
    * - `volume=<string>` volume name
    * @param {*} [options] Override HTTP request option.
    * @throws {RequiredError}
-   * @memberof SystemApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 200 (OK): The request was successful, and the events are being streamed.
    * - 400 (Bad Request): The server could not understand the request due to invalid syntax.
@@ -2595,7 +2501,6 @@ export class Docker {
    * @summary Get system information
    * @param {*} [options] Override HTTP request option.
    * @throws {RequiredError}
-   * @memberof SystemApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 200 (OK): The request was successful, and the system information is returned.
    * - 400 (Bad Request): The server could not understand the request due to invalid syntax.
@@ -2615,7 +2520,6 @@ export class Docker {
    * @summary Ping
    * @param {*} [options] Override HTTP request option.
    * @throws {RequiredError}
-   * @memberof SystemApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 200 (OK): The request was successful, and the server is accessible.
    * - 400 (Bad Request): The server could not understand the request due to invalid syntax.
@@ -2635,7 +2539,6 @@ export class Docker {
    * @summary Ping
    * @param {*} [options] Override HTTP request option.
    * @throws {RequiredError}
-   * @memberof SystemApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 200 (OK): The request was successful, and the server is accessible.
    * - 400 (Bad Request): The server could not understand the request due to invalid syntax.
@@ -2655,7 +2558,6 @@ export class Docker {
    * @summary Get version
    * @param {*} [options] Override HTTP request option.
    * @throws {RequiredError}
-   * @memberof SystemApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 200 (OK): The request was successful, and the server returned the Docker version and system information.
    * - 400 (Bad Request): The server could not understand the request due to invalid syntax.
@@ -2678,7 +2580,6 @@ export class Docker {
    * @param {string} id The ID of the task to inspect.
    * @param {*} [options] Optional HTTP request options to override the default settings.
    * @throws {RequiredError} Throws an error if the required parameters are not provided.
-   * @memberof TaskApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 200 (OK): The request was successful, and the task details are returned.
    * - 400 (Bad Request): The server could not understand the request due to invalid syntax.
@@ -2705,7 +2606,6 @@ export class Docker {
    * - `service=<service name>`
    * @param {*} [options] Optional HTTP request options to override the default settings.
    * @throws {RequiredError} Throws an error if the required parameters are not provided.
-   * @memberof TaskApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 200 (OK): The request was successful, and the list of tasks is returned.
    * - 400 (Bad Request): The server could not understand the request due to invalid syntax.
@@ -2736,7 +2636,6 @@ export class Docker {
    * @param {string} [tail] Only return this number of log lines from the end of the logs. Specify as an integer or `all` to output all log lines.
    * @param {*} [options] Optional HTTP request options to override the default settings.
    * @throws {RequiredError} Throws an error if the required parameters are not provided.
-   * @memberof TaskApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 200 (OK): The request was successful, and the logs are returned.
    * - 400 (Bad Request): The server could not understand the request due to invalid syntax.
@@ -2771,7 +2670,6 @@ export class Docker {
    * @param {VolumeCreateOptions} volumeConfig The configuration options for the volume to be created.
    * @param {*} [options] Optional HTTP request options to override the default settings.
    * @throws {RequiredError} Throws an error if the required parameters are not provided.
-   * @memberof VolumeApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 201 (Created): The volume was successfully created.
    * - 400 (Bad Request): The server could not understand the request due to invalid syntax.
@@ -2794,7 +2692,6 @@ export class Docker {
    * @param {boolean} [force] If true, forces the removal of the volume.
    * @param {*} [options] Optional HTTP request options to override the default settings.
    * @throws {RequiredError} Throws an error if the required parameters are not provided.
-   * @memberof VolumeApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 204 (No Content): The volume was successfully removed.
    * - 400 (Bad Request): The server could not understand the request due to invalid syntax.
@@ -2817,7 +2714,6 @@ export class Docker {
    * @param {string} name The name or ID of the volume to inspect.
    * @param {*} [options] Optional HTTP request options to override the default settings.
    * @throws {RequiredError} Throws an error if the required parameters are not provided.
-   * @memberof VolumeApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 200 (OK): The volume was successfully inspected.
    * - 400 (Bad Request): The server could not understand the request due to invalid syntax.
@@ -2843,7 +2739,6 @@ export class Docker {
    * - `name=<volume-name>`: Matches all or part of a volume name.
    * @param {*} [options] Optional HTTP request options to override the default settings.
    * @throws {RequiredError} Throws an error if the required parameters are not provided.
-   * @memberof VolumeApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 200 (OK): The volumes were successfully listed.
    * - 400 (Bad Request): The server could not understand the request due to invalid syntax.
@@ -2865,7 +2760,6 @@ export class Docker {
    * - `label` (`label=<key>`, `label=<key>=<value>`, `label!=<key>`, or `label!=<key>=<value>`): Prune volumes with (or without, in case `label!=...` is used) the specified labels.
    * @param {*} [options] Optional HTTP request options to override the default settings.
    * @throws {RequiredError} Throws an error if the required parameters are not provided.
-   * @memberof VolumeApi
    * @returns {Promise<{status: number, data: any}>} Possible response codes:
    * - 200 (OK): The volumes were successfully pruned.
    * - 400 (Bad Request): The server could not understand the request due to invalid syntax.

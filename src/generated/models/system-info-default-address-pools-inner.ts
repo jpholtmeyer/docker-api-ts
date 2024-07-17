@@ -16,20 +16,17 @@
 
 /**
  * 
- * @export
  * @interface SystemInfoDefaultAddressPoolsInner
  */
 export interface SystemInfoDefaultAddressPoolsInner {
     /**
      * The network address in CIDR format
      * @type {string}
-     * @memberof SystemInfoDefaultAddressPoolsInner
      */
     'Base'?: string;
     /**
      * The network pool size
      * @type {number}
-     * @memberof SystemInfoDefaultAddressPoolsInner
      */
     'Size'?: number;
 }

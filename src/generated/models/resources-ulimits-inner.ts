@@ -16,26 +16,22 @@
 
 /**
  * 
- * @export
  * @interface ResourcesUlimitsInner
  */
 export interface ResourcesUlimitsInner {
     /**
      * Name of ulimit
      * @type {string}
-     * @memberof ResourcesUlimitsInner
      */
     'Name'?: string;
     /**
      * Soft limit
      * @type {number}
-     * @memberof ResourcesUlimitsInner
      */
     'Soft'?: number;
     /**
      * Hard limit
      * @type {number}
-     * @memberof ResourcesUlimitsInner
      */
     'Hard'?: number;
 }

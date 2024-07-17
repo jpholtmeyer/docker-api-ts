@@ -22,7 +22,6 @@ import type { Driver } from './driver.js';
 
 /**
  * @type ConfigCreateRequest
- * @export
  */
 export type ConfigCreateRequest = ConfigSpec;
 

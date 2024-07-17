@@ -34,158 +34,132 @@ import type { NetworkSettings } from './network-settings.js';
 
 /**
  * 
- * @export
  * @interface ContainerInspectResponse
  */
 export interface ContainerInspectResponse {
     /**
      * The ID of the container
      * @type {string}
-     * @memberof ContainerInspectResponse
      */
     'Id'?: string;
     /**
      * The time the container was created
      * @type {string}
-     * @memberof ContainerInspectResponse
      */
     'Created'?: string;
     /**
      * The path to the command being run
      * @type {string}
-     * @memberof ContainerInspectResponse
      */
     'Path'?: string;
     /**
      * The arguments to the command being run
      * @type {Array<string>}
-     * @memberof ContainerInspectResponse
      */
     'Args'?: Array<string>;
     /**
      * 
      * @type {ContainerState}
-     * @memberof ContainerInspectResponse
      */
     'State'?: ContainerState | null;
     /**
      * The container\'s image ID
      * @type {string}
-     * @memberof ContainerInspectResponse
      */
     'Image'?: string;
     /**
      * 
      * @type {string}
-     * @memberof ContainerInspectResponse
      */
     'ResolvConfPath'?: string;
     /**
      * 
      * @type {string}
-     * @memberof ContainerInspectResponse
      */
     'HostnamePath'?: string;
     /**
      * 
      * @type {string}
-     * @memberof ContainerInspectResponse
      */
     'HostsPath'?: string;
     /**
      * 
      * @type {string}
-     * @memberof ContainerInspectResponse
      */
     'LogPath'?: string;
     /**
      * 
      * @type {string}
-     * @memberof ContainerInspectResponse
      */
     'Name'?: string;
     /**
      * 
      * @type {number}
-     * @memberof ContainerInspectResponse
      */
     'RestartCount'?: number;
     /**
      * 
      * @type {string}
-     * @memberof ContainerInspectResponse
      */
     'Driver'?: string;
     /**
      * 
      * @type {string}
-     * @memberof ContainerInspectResponse
      */
     'Platform'?: string;
     /**
      * 
      * @type {string}
-     * @memberof ContainerInspectResponse
      */
     'MountLabel'?: string;
     /**
      * 
      * @type {string}
-     * @memberof ContainerInspectResponse
      */
     'ProcessLabel'?: string;
     /**
      * 
      * @type {string}
-     * @memberof ContainerInspectResponse
      */
     'AppArmorProfile'?: string;
     /**
      * IDs of exec instances that are running in the container.
      * @type {Array<string>}
-     * @memberof ContainerInspectResponse
      */
     'ExecIDs'?: Array<string> | null;
     /**
      * 
      * @type {HostConfig}
-     * @memberof ContainerInspectResponse
      */
     'HostConfig'?: HostConfig;
     /**
      * 
      * @type {GraphDriverData}
-     * @memberof ContainerInspectResponse
      */
     'GraphDriver'?: GraphDriverData;
     /**
      * The size of files that have been created or changed by this container. 
      * @type {number}
-     * @memberof ContainerInspectResponse
      */
     'SizeRw'?: number;
     /**
      * The total size of all the files in this container.
      * @type {number}
-     * @memberof ContainerInspectResponse
      */
     'SizeRootFs'?: number;
     /**
      * 
      * @type {Array<MountPoint>}
-     * @memberof ContainerInspectResponse
      */
     'Mounts'?: Array<MountPoint>;
     /**
      * 
      * @type {ContainerConfig}
-     * @memberof ContainerInspectResponse
      */
     'Config'?: ContainerConfig;
     /**
      * 
      * @type {NetworkSettings}
-     * @memberof ContainerInspectResponse
      */
     'NetworkSettings'?: NetworkSettings;
 }

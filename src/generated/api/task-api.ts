@@ -27,7 +27,6 @@ import type { ErrorResponse } from '../models';
 import type { Task } from '../models';
 /**
  * TaskApi - axios parameter creator
- * @export
  */
 export const TaskApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -174,7 +173,6 @@ export const TaskApiAxiosParamCreator = function (configuration?: Configuration)
 
 /**
  * TaskApi - functional programming interface
- * @export
  */
 export const TaskApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = TaskApiAxiosParamCreator(configuration)
@@ -230,7 +228,6 @@ export const TaskApiFp = function(configuration?: Configuration) {
 
 /**
  * TaskApi - factory interface
- * @export
  */
 export const TaskApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = TaskApiFp(configuration)
@@ -277,7 +274,6 @@ export const TaskApiFactory = function (configuration?: Configuration, basePath?
 
 /**
  * TaskApi - object-oriented interface
- * @export
  * @class TaskApi
  * @extends {BaseAPI}
  */
@@ -288,7 +284,6 @@ export class TaskApi extends BaseAPI {
      * @param {string} id ID of the task
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof TaskApi
      */
     public taskInspect(id: string, options?: RawAxiosRequestConfig) {
         return TaskApiFp(this.configuration).taskInspect(id, options).then((request) => request(this.axios, this.basePath));
@@ -300,7 +295,6 @@ export class TaskApi extends BaseAPI {
      * @param {string} [filters] A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the tasks list.  Available filters:  - &#x60;desired-state&#x3D;(running | shutdown | accepted)&#x60; - &#x60;id&#x3D;&lt;task id&gt;&#x60; - &#x60;label&#x3D;key&#x60; or &#x60;label&#x3D;\&quot;key&#x3D;value\&quot;&#x60; - &#x60;name&#x3D;&lt;task name&gt;&#x60; - &#x60;node&#x3D;&lt;node id or name&gt;&#x60; - &#x60;service&#x3D;&lt;service name&gt;&#x60; 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof TaskApi
      */
     public taskList(filters?: string, options?: RawAxiosRequestConfig) {
         return TaskApiFp(this.configuration).taskList(filters, options).then((request) => request(this.axios, this.basePath));
@@ -319,7 +313,6 @@ export class TaskApi extends BaseAPI {
      * @param {string} [tail] Only return this number of log lines from the end of the logs. Specify as an integer or &#x60;all&#x60; to output all log lines. 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof TaskApi
      */
     public taskLogs(id: string, details?: boolean, follow?: boolean, stdout?: boolean, stderr?: boolean, since?: number, timestamps?: boolean, tail?: string, options?: RawAxiosRequestConfig) {
         return TaskApiFp(this.configuration).taskLogs(id, details, follow, stdout, stderr, since, timestamps, tail, options).then((request) => request(this.axios, this.basePath));

@@ -37,7 +37,6 @@ import type { SystemInfo } from '../models';
 import type { SystemVersion } from '../models';
 /**
  * SystemApi - axios parameter creator
- * @export
  */
 export const SystemApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -275,7 +274,6 @@ export const SystemApiAxiosParamCreator = function (configuration?: Configuratio
 
 /**
  * SystemApi - functional programming interface
- * @export
  */
 export const SystemApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = SystemApiAxiosParamCreator(configuration)
@@ -373,7 +371,6 @@ export const SystemApiFp = function(configuration?: Configuration) {
 
 /**
  * SystemApi - factory interface
- * @export
  */
 export const SystemApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = SystemApiFp(configuration)
@@ -450,7 +447,6 @@ export const SystemApiFactory = function (configuration?: Configuration, basePat
 
 /**
  * SystemApi - object-oriented interface
- * @export
  * @class SystemApi
  * @extends {BaseAPI}
  */
@@ -461,7 +457,6 @@ export class SystemApi extends BaseAPI {
      * @param {AuthConfig} [authConfig] Authentication to check
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SystemApi
      */
     public systemAuth(authConfig?: AuthConfig, options?: RawAxiosRequestConfig) {
         return SystemApiFp(this.configuration).systemAuth(authConfig, options).then((request) => request(this.axios, this.basePath));
@@ -472,7 +467,6 @@ export class SystemApi extends BaseAPI {
      * @summary Get data usage information
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SystemApi
      */
     public systemDataUsage(options?: RawAxiosRequestConfig) {
         return SystemApiFp(this.configuration).systemDataUsage(options).then((request) => request(this.axios, this.basePath));
@@ -486,7 +480,6 @@ export class SystemApi extends BaseAPI {
      * @param {string} [filters] A JSON encoded value of filters (a &#x60;map[string][]string&#x60;) to process on the event list. Available filters:  - &#x60;config&#x3D;&lt;string&gt;&#x60; config name or ID - &#x60;container&#x3D;&lt;string&gt;&#x60; container name or ID - &#x60;daemon&#x3D;&lt;string&gt;&#x60; daemon name or ID - &#x60;event&#x3D;&lt;string&gt;&#x60; event type - &#x60;image&#x3D;&lt;string&gt;&#x60; image name or ID - &#x60;label&#x3D;&lt;string&gt;&#x60; image or container label - &#x60;network&#x3D;&lt;string&gt;&#x60; network name or ID - &#x60;node&#x3D;&lt;string&gt;&#x60; node ID - &#x60;plugin&#x60;&#x3D;&lt;string&gt; plugin name or ID - &#x60;scope&#x60;&#x3D;&lt;string&gt; local or swarm - &#x60;secret&#x3D;&lt;string&gt;&#x60; secret name or ID - &#x60;service&#x3D;&lt;string&gt;&#x60; service name or ID - &#x60;type&#x3D;&lt;string&gt;&#x60; object to filter by, one of &#x60;container&#x60;, &#x60;image&#x60;, &#x60;volume&#x60;, &#x60;network&#x60;, &#x60;daemon&#x60;, &#x60;plugin&#x60;, &#x60;node&#x60;, &#x60;service&#x60;, &#x60;secret&#x60; or &#x60;config&#x60; - &#x60;volume&#x3D;&lt;string&gt;&#x60; volume name 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SystemApi
      */
     public systemEvents(since?: string, until?: string, filters?: string, options?: RawAxiosRequestConfig) {
         return SystemApiFp(this.configuration).systemEvents(since, until, filters, options).then((request) => request(this.axios, this.basePath));
@@ -497,7 +490,6 @@ export class SystemApi extends BaseAPI {
      * @summary Get system information
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SystemApi
      */
     public systemInfo(options?: RawAxiosRequestConfig) {
         return SystemApiFp(this.configuration).systemInfo(options).then((request) => request(this.axios, this.basePath));
@@ -508,7 +500,6 @@ export class SystemApi extends BaseAPI {
      * @summary Ping
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SystemApi
      */
     public systemPing(options?: RawAxiosRequestConfig) {
         return SystemApiFp(this.configuration).systemPing(options).then((request) => request(this.axios, this.basePath));
@@ -519,7 +510,6 @@ export class SystemApi extends BaseAPI {
      * @summary Ping
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SystemApi
      */
     public systemPingHead(options?: RawAxiosRequestConfig) {
         return SystemApiFp(this.configuration).systemPingHead(options).then((request) => request(this.axios, this.basePath));
@@ -530,7 +520,6 @@ export class SystemApi extends BaseAPI {
      * @summary Get version
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SystemApi
      */
     public systemVersion(options?: RawAxiosRequestConfig) {
         return SystemApiFp(this.configuration).systemVersion(options).then((request) => request(this.axios, this.basePath));

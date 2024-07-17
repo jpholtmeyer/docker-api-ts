@@ -16,38 +16,32 @@
 
 /**
  * 
- * @export
  * @interface ProcessConfig
  */
 export interface ProcessConfig {
     /**
      * 
      * @type {boolean}
-     * @memberof ProcessConfig
      */
     'privileged'?: boolean;
     /**
      * 
      * @type {string}
-     * @memberof ProcessConfig
      */
     'user'?: string;
     /**
      * 
      * @type {boolean}
-     * @memberof ProcessConfig
      */
     'tty'?: boolean;
     /**
      * 
      * @type {string}
-     * @memberof ProcessConfig
      */
     'entrypoint'?: string;
     /**
      * 
      * @type {Array<string>}
-     * @memberof ProcessConfig
      */
     'arguments'?: Array<string>;
 }

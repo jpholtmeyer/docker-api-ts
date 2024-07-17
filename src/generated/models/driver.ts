@@ -16,20 +16,17 @@
 
 /**
  * Driver represents a driver (network, logging, secrets).
- * @export
  * @interface Driver
  */
 export interface Driver {
     /**
      * Name of the driver.
      * @type {string}
-     * @memberof Driver
      */
     'Name': string;
     /**
      * Key/value map of driver-specific options.
      * @type {{ [key: string]: string; }}
-     * @memberof Driver
      */
     'Options'?: { [key: string]: string; };
 }

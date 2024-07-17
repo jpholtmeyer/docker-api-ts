@@ -16,7 +16,6 @@
 
 /**
  * Reachability represents the reachability of a node.
- * @export
  * @enum {string}
  */
 

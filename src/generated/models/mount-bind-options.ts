@@ -16,26 +16,22 @@
 
 /**
  * Optional configuration for the `bind` type.
- * @export
  * @interface MountBindOptions
  */
 export interface MountBindOptions {
     /**
      * A propagation mode with the value `[r]private`, `[r]shared`, or `[r]slave`.
      * @type {string}
-     * @memberof MountBindOptions
      */
     'Propagation'?: MountBindOptionsPropagationEnum;
     /**
      * Disable recursive bind mount.
      * @type {boolean}
-     * @memberof MountBindOptions
      */
     'NonRecursive'?: boolean;
 }
 
 /**
-    * @export
     * @enum {string}
     */
 export enum MountBindOptionsPropagationEnum {

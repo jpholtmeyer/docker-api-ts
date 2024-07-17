@@ -35,7 +35,6 @@ import type { ServiceUpdateRequest } from '../models';
 import type { ServiceUpdateResponse } from '../models';
 /**
  * ServiceApi - axios parameter creator
- * @export
  */
 export const ServiceApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -329,7 +328,6 @@ export const ServiceApiAxiosParamCreator = function (configuration?: Configurati
 
 /**
  * ServiceApi - functional programming interface
- * @export
  */
 export const ServiceApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = ServiceApiAxiosParamCreator(configuration)
@@ -432,7 +430,6 @@ export const ServiceApiFp = function(configuration?: Configuration) {
 
 /**
  * ServiceApi - factory interface
- * @export
  */
 export const ServiceApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = ServiceApiFp(configuration)
@@ -517,7 +514,6 @@ export const ServiceApiFactory = function (configuration?: Configuration, basePa
 
 /**
  * ServiceApi - object-oriented interface
- * @export
  * @class ServiceApi
  * @extends {BaseAPI}
  */
@@ -529,7 +525,6 @@ export class ServiceApi extends BaseAPI {
      * @param {string} [xRegistryAuth] A base64url-encoded auth configuration for pulling from private registries.  Refer to the [authentication section](#section/Authentication) for details. 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ServiceApi
      */
     public serviceCreate(body: ServiceCreateRequest, xRegistryAuth?: string, options?: RawAxiosRequestConfig) {
         return ServiceApiFp(this.configuration).serviceCreate(body, xRegistryAuth, options).then((request) => request(this.axios, this.basePath));
@@ -541,7 +536,6 @@ export class ServiceApi extends BaseAPI {
      * @param {string} id ID or name of service.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ServiceApi
      */
     public serviceDelete(id: string, options?: RawAxiosRequestConfig) {
         return ServiceApiFp(this.configuration).serviceDelete(id, options).then((request) => request(this.axios, this.basePath));
@@ -554,7 +548,6 @@ export class ServiceApi extends BaseAPI {
      * @param {boolean} [insertDefaults] Fill empty fields with default values.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ServiceApi
      */
     public serviceInspect(id: string, insertDefaults?: boolean, options?: RawAxiosRequestConfig) {
         return ServiceApiFp(this.configuration).serviceInspect(id, insertDefaults, options).then((request) => request(this.axios, this.basePath));
@@ -567,7 +560,6 @@ export class ServiceApi extends BaseAPI {
      * @param {boolean} [status] Include service status, with count of running and desired tasks. 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ServiceApi
      */
     public serviceList(filters?: string, status?: boolean, options?: RawAxiosRequestConfig) {
         return ServiceApiFp(this.configuration).serviceList(filters, status, options).then((request) => request(this.axios, this.basePath));
@@ -586,7 +578,6 @@ export class ServiceApi extends BaseAPI {
      * @param {string} [tail] Only return this number of log lines from the end of the logs. Specify as an integer or &#x60;all&#x60; to output all log lines. 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ServiceApi
      */
     public serviceLogs(id: string, details?: boolean, follow?: boolean, stdout?: boolean, stderr?: boolean, since?: number, timestamps?: boolean, tail?: string, options?: RawAxiosRequestConfig) {
         return ServiceApiFp(this.configuration).serviceLogs(id, details, follow, stdout, stderr, since, timestamps, tail, options).then((request) => request(this.axios, this.basePath));
@@ -603,7 +594,6 @@ export class ServiceApi extends BaseAPI {
      * @param {string} [xRegistryAuth] A base64url-encoded auth configuration for pulling from private registries.  Refer to the [authentication section](#section/Authentication) for details. 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ServiceApi
      */
     public serviceUpdate(id: string, version: number, body: ServiceUpdateRequest, registryAuthFrom?: ServiceUpdateRegistryAuthFromEnum, rollback?: string, xRegistryAuth?: string, options?: RawAxiosRequestConfig) {
         return ServiceApiFp(this.configuration).serviceUpdate(id, version, body, registryAuthFrom, rollback, xRegistryAuth, options).then((request) => request(this.axios, this.basePath));
@@ -611,7 +601,6 @@ export class ServiceApi extends BaseAPI {
 }
 
 /**
-  * @export
   * @enum {string}
   */
 export enum ServiceUpdateRegistryAuthFromEnum {

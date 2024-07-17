@@ -33,7 +33,6 @@ import type { VolumeListResponse } from '../models';
 import type { VolumePruneResponse } from '../models';
 /**
  * VolumeApi - axios parameter creator
- * @export
  */
 export const VolumeApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -221,7 +220,6 @@ export const VolumeApiAxiosParamCreator = function (configuration?: Configuratio
 
 /**
  * VolumeApi - functional programming interface
- * @export
  */
 export const VolumeApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = VolumeApiAxiosParamCreator(configuration)
@@ -297,7 +295,6 @@ export const VolumeApiFp = function(configuration?: Configuration) {
 
 /**
  * VolumeApi - factory interface
- * @export
  */
 export const VolumeApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = VolumeApiFp(configuration)
@@ -358,7 +355,6 @@ export const VolumeApiFactory = function (configuration?: Configuration, basePat
 
 /**
  * VolumeApi - object-oriented interface
- * @export
  * @class VolumeApi
  * @extends {BaseAPI}
  */
@@ -369,7 +365,6 @@ export class VolumeApi extends BaseAPI {
      * @param {VolumeCreateOptions} volumeConfig Volume configuration
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof VolumeApi
      */
     public volumeCreate(volumeConfig: VolumeCreateOptions, options?: RawAxiosRequestConfig) {
         return VolumeApiFp(this.configuration).volumeCreate(volumeConfig, options).then((request) => request(this.axios, this.basePath));
@@ -382,7 +377,6 @@ export class VolumeApi extends BaseAPI {
      * @param {boolean} [force] Force the removal of the volume
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof VolumeApi
      */
     public volumeDelete(name: string, force?: boolean, options?: RawAxiosRequestConfig) {
         return VolumeApiFp(this.configuration).volumeDelete(name, force, options).then((request) => request(this.axios, this.basePath));
@@ -394,7 +388,6 @@ export class VolumeApi extends BaseAPI {
      * @param {string} name Volume name or ID
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof VolumeApi
      */
     public volumeInspect(name: string, options?: RawAxiosRequestConfig) {
         return VolumeApiFp(this.configuration).volumeInspect(name, options).then((request) => request(this.axios, this.basePath));
@@ -406,7 +399,6 @@ export class VolumeApi extends BaseAPI {
      * @param {string} [filters] JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the volumes list. Available filters:  - &#x60;dangling&#x3D;&lt;boolean&gt;&#x60; When set to &#x60;true&#x60; (or &#x60;1&#x60;), returns all    volumes that are not in use by a container. When set to &#x60;false&#x60;    (or &#x60;0&#x60;), only volumes that are in use by one or more    containers are returned. - &#x60;driver&#x3D;&lt;volume-driver-name&gt;&#x60; Matches volumes based on their driver. - &#x60;label&#x3D;&lt;key&gt;&#x60; or &#x60;label&#x3D;&lt;key&gt;:&lt;value&gt;&#x60; Matches volumes based on    the presence of a &#x60;label&#x60; alone or a &#x60;label&#x60; and a value. - &#x60;name&#x3D;&lt;volume-name&gt;&#x60; Matches all or part of a volume name. 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof VolumeApi
      */
     public volumeList(filters?: string, options?: RawAxiosRequestConfig) {
         return VolumeApiFp(this.configuration).volumeList(filters, options).then((request) => request(this.axios, this.basePath));
@@ -418,7 +410,6 @@ export class VolumeApi extends BaseAPI {
      * @param {string} [filters] Filters to process on the prune list, encoded as JSON (a &#x60;map[string][]string&#x60;).  Available filters: - &#x60;label&#x60; (&#x60;label&#x3D;&lt;key&gt;&#x60;, &#x60;label&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60;, &#x60;label!&#x3D;&lt;key&gt;&#x60;, or &#x60;label!&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60;) Prune volumes with (or without, in case &#x60;label!&#x3D;...&#x60; is used) the specified labels. 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof VolumeApi
      */
     public volumePrune(filters?: string, options?: RawAxiosRequestConfig) {
         return VolumeApiFp(this.configuration).volumePrune(filters, options).then((request) => request(this.axios, this.basePath));

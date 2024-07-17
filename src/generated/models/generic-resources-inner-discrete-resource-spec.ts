@@ -16,20 +16,17 @@
 
 /**
  * 
- * @export
  * @interface GenericResourcesInnerDiscreteResourceSpec
  */
 export interface GenericResourcesInnerDiscreteResourceSpec {
     /**
      * 
      * @type {string}
-     * @memberof GenericResourcesInnerDiscreteResourceSpec
      */
     'Kind'?: string;
     /**
      * 
      * @type {number}
-     * @memberof GenericResourcesInnerDiscreteResourceSpec
      */
     'Value'?: number;
 }

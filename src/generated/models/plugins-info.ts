@@ -16,32 +16,27 @@
 
 /**
  * Available plugins per type.  <p><br /></p>  > **Note**: Only unmanaged (V1) plugins are included in this list. > V1 plugins are \"lazily\" loaded, and are not returned in this list > if there is no resource using the plugin. 
- * @export
  * @interface PluginsInfo
  */
 export interface PluginsInfo {
     /**
      * Names of available volume-drivers, and network-driver plugins.
      * @type {Array<string>}
-     * @memberof PluginsInfo
      */
     'Volume'?: Array<string>;
     /**
      * Names of available network-drivers, and network-driver plugins.
      * @type {Array<string>}
-     * @memberof PluginsInfo
      */
     'Network'?: Array<string>;
     /**
      * Names of available authorization plugins.
      * @type {Array<string>}
-     * @memberof PluginsInfo
      */
     'Authorization'?: Array<string>;
     /**
      * Names of available logging-drivers, and logging-driver plugins.
      * @type {Array<string>}
-     * @memberof PluginsInfo
      */
     'Log'?: Array<string>;
 }

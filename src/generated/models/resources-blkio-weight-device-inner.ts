@@ -16,20 +16,17 @@
 
 /**
  * 
- * @export
  * @interface ResourcesBlkioWeightDeviceInner
  */
 export interface ResourcesBlkioWeightDeviceInner {
     /**
      * 
      * @type {string}
-     * @memberof ResourcesBlkioWeightDeviceInner
      */
     'Path'?: string;
     /**
      * 
      * @type {number}
-     * @memberof ResourcesBlkioWeightDeviceInner
      */
     'Weight'?: number;
 }

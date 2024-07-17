@@ -37,7 +37,6 @@ import type { ThrottleDevice } from './throttle-device.js';
 
 /**
  * @type ContainerUpdateRequest
- * @export
  */
 export type ContainerUpdateRequest = Resources;
 

@@ -19,26 +19,22 @@ import type { EngineDescriptionPluginsInner } from './engine-description-plugins
 
 /**
  * EngineDescription provides information about an engine.
- * @export
  * @interface EngineDescription
  */
 export interface EngineDescription {
     /**
      * 
      * @type {string}
-     * @memberof EngineDescription
      */
     'EngineVersion'?: string;
     /**
      * 
      * @type {{ [key: string]: string; }}
-     * @memberof EngineDescription
      */
     'Labels'?: { [key: string]: string; };
     /**
      * 
      * @type {Array<EngineDescriptionPluginsInner>}
-     * @memberof EngineDescription
      */
     'Plugins'?: Array<EngineDescriptionPluginsInner>;
 }

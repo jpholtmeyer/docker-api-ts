@@ -19,26 +19,22 @@ import type { TaskSpecContainerSpecSecretsInnerFile } from './task-spec-containe
 
 /**
  * 
- * @export
  * @interface TaskSpecContainerSpecSecretsInner
  */
 export interface TaskSpecContainerSpecSecretsInner {
     /**
      * 
      * @type {TaskSpecContainerSpecSecretsInnerFile}
-     * @memberof TaskSpecContainerSpecSecretsInner
      */
     'File'?: TaskSpecContainerSpecSecretsInnerFile;
     /**
      * SecretID represents the ID of the specific secret that we\'re referencing. 
      * @type {string}
-     * @memberof TaskSpecContainerSpecSecretsInner
      */
     'SecretID'?: string;
     /**
      * SecretName is the name of the secret that this references, but this is just provided for lookup/display purposes. The secret in the reference will be identified by its ID. 
      * @type {string}
-     * @memberof TaskSpecContainerSpecSecretsInner
      */
     'SecretName'?: string;
 }

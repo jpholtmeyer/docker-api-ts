@@ -16,26 +16,22 @@
 
 /**
  * 
- * @export
  * @interface TaskStatusContainerStatus
  */
 export interface TaskStatusContainerStatus {
     /**
      * 
      * @type {string}
-     * @memberof TaskStatusContainerStatus
      */
     'ContainerID'?: string;
     /**
      * 
      * @type {number}
-     * @memberof TaskStatusContainerStatus
      */
     'PID'?: number;
     /**
      * 
      * @type {number}
-     * @memberof TaskStatusContainerStatus
      */
     'ExitCode'?: number;
 }

@@ -37,7 +37,6 @@ import type { NetworkDisconnectRequest } from '../models';
 import type { NetworkPruneResponse } from '../models';
 /**
  * NetworkApi - axios parameter creator
- * @export
  */
 export const NetworkApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -310,7 +309,6 @@ export const NetworkApiAxiosParamCreator = function (configuration?: Configurati
 
 /**
  * NetworkApi - functional programming interface
- * @export
  */
 export const NetworkApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = NetworkApiAxiosParamCreator(configuration)
@@ -415,7 +413,6 @@ export const NetworkApiFp = function(configuration?: Configuration) {
 
 /**
  * NetworkApi - factory interface
- * @export
  */
 export const NetworkApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = NetworkApiFp(configuration)
@@ -499,7 +496,6 @@ export const NetworkApiFactory = function (configuration?: Configuration, basePa
 
 /**
  * NetworkApi - object-oriented interface
- * @export
  * @class NetworkApi
  * @extends {BaseAPI}
  */
@@ -511,7 +507,6 @@ export class NetworkApi extends BaseAPI {
      * @param {NetworkDisconnectRequest} container 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof NetworkApi
      */
     public networkConnect(id: string, container: NetworkDisconnectRequest, options?: RawAxiosRequestConfig) {
         return NetworkApiFp(this.configuration).networkConnect(id, container, options).then((request) => request(this.axios, this.basePath));
@@ -523,7 +518,6 @@ export class NetworkApi extends BaseAPI {
      * @param {NetworkCreateRequest} networkConfig Network configuration
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof NetworkApi
      */
     public networkCreate(networkConfig: NetworkCreateRequest, options?: RawAxiosRequestConfig) {
         return NetworkApiFp(this.configuration).networkCreate(networkConfig, options).then((request) => request(this.axios, this.basePath));
@@ -535,7 +529,6 @@ export class NetworkApi extends BaseAPI {
      * @param {string} id Network ID or name
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof NetworkApi
      */
     public networkDelete(id: string, options?: RawAxiosRequestConfig) {
         return NetworkApiFp(this.configuration).networkDelete(id, options).then((request) => request(this.axios, this.basePath));
@@ -548,7 +541,6 @@ export class NetworkApi extends BaseAPI {
      * @param {NetworkConnectRequest} container 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof NetworkApi
      */
     public networkDisconnect(id: string, container: NetworkConnectRequest, options?: RawAxiosRequestConfig) {
         return NetworkApiFp(this.configuration).networkDisconnect(id, container, options).then((request) => request(this.axios, this.basePath));
@@ -562,7 +554,6 @@ export class NetworkApi extends BaseAPI {
      * @param {string} [scope] Filter the network by scope (swarm, global, or local)
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof NetworkApi
      */
     public networkInspect(id: string, verbose?: boolean, scope?: string, options?: RawAxiosRequestConfig) {
         return NetworkApiFp(this.configuration).networkInspect(id, verbose, scope, options).then((request) => request(this.axios, this.basePath));
@@ -574,7 +565,6 @@ export class NetworkApi extends BaseAPI {
      * @param {string} [filters] JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the networks list.  Available filters:  - &#x60;dangling&#x3D;&lt;boolean&gt;&#x60; When set to &#x60;true&#x60; (or &#x60;1&#x60;), returns all    networks that are not in use by a container. When set to &#x60;false&#x60;    (or &#x60;0&#x60;), only networks that are in use by one or more    containers are returned. - &#x60;driver&#x3D;&lt;driver-name&gt;&#x60; Matches a network\&#39;s driver. - &#x60;id&#x3D;&lt;network-id&gt;&#x60; Matches all or part of a network ID. - &#x60;label&#x3D;&lt;key&gt;&#x60; or &#x60;label&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60; of a network label. - &#x60;name&#x3D;&lt;network-name&gt;&#x60; Matches all or part of a network name. - &#x60;scope&#x3D;[\&quot;swarm\&quot;|\&quot;global\&quot;|\&quot;local\&quot;]&#x60; Filters networks by scope (&#x60;swarm&#x60;, &#x60;global&#x60;, or &#x60;local&#x60;). - &#x60;type&#x3D;[\&quot;custom\&quot;|\&quot;builtin\&quot;]&#x60; Filters networks by type. The &#x60;custom&#x60; keyword returns all user-defined networks. 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof NetworkApi
      */
     public networkList(filters?: string, options?: RawAxiosRequestConfig) {
         return NetworkApiFp(this.configuration).networkList(filters, options).then((request) => request(this.axios, this.basePath));
@@ -586,7 +576,6 @@ export class NetworkApi extends BaseAPI {
      * @param {string} [filters] Filters to process on the prune list, encoded as JSON (a &#x60;map[string][]string&#x60;).  Available filters: - &#x60;until&#x3D;&lt;timestamp&gt;&#x60; Prune networks created before this timestamp. The &#x60;&lt;timestamp&gt;&#x60; can be Unix timestamps, date formatted timestamps, or Go duration strings (e.g. &#x60;10m&#x60;, &#x60;1h30m&#x60;) computed relative to the daemon machine’s time. - &#x60;label&#x60; (&#x60;label&#x3D;&lt;key&gt;&#x60;, &#x60;label&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60;, &#x60;label!&#x3D;&lt;key&gt;&#x60;, or &#x60;label!&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60;) Prune networks with (or without, in case &#x60;label!&#x3D;...&#x60; is used) the specified labels. 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof NetworkApi
      */
     public networkPrune(filters?: string, options?: RawAxiosRequestConfig) {
         return NetworkApiFp(this.configuration).networkPrune(filters, options).then((request) => request(this.axios, this.basePath));

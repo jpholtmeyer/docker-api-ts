@@ -16,74 +16,62 @@
 
 /**
  * BuildCache contains information about a build cache record. 
- * @export
  * @interface BuildCache
  */
 export interface BuildCache {
     /**
      * Unique ID of the build cache record. 
      * @type {string}
-     * @memberof BuildCache
      */
     'ID'?: string;
     /**
      * ID of the parent build cache record. 
      * @type {string}
-     * @memberof BuildCache
      */
     'Parent'?: string;
     /**
      * Cache record type. 
      * @type {string}
-     * @memberof BuildCache
      */
     'Type'?: BuildCacheTypeEnum;
     /**
      * Description of the build-step that produced the build cache. 
      * @type {string}
-     * @memberof BuildCache
      */
     'Description'?: string;
     /**
      * Indicates if the build cache is in use. 
      * @type {boolean}
-     * @memberof BuildCache
      */
     'InUse'?: boolean;
     /**
      * Indicates if the build cache is shared. 
      * @type {boolean}
-     * @memberof BuildCache
      */
     'Shared'?: boolean;
     /**
      * Amount of disk space used by the build cache (in bytes). 
      * @type {number}
-     * @memberof BuildCache
      */
     'Size'?: number;
     /**
      * Date and time at which the build cache was created in [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds. 
      * @type {string}
-     * @memberof BuildCache
      */
     'CreatedAt'?: string;
     /**
      * Date and time at which the build cache was last used in [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds. 
      * @type {string}
-     * @memberof BuildCache
      */
     'LastUsedAt'?: string | null;
     /**
      * 
      * @type {number}
-     * @memberof BuildCache
      */
     'UsageCount'?: number;
 }
 
 /**
-    * @export
     * @enum {string}
     */
 export enum BuildCacheTypeEnum {

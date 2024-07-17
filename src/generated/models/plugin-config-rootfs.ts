@@ -16,20 +16,17 @@
 
 /**
  * 
- * @export
  * @interface PluginConfigRootfs
  */
 export interface PluginConfigRootfs {
     /**
      * 
      * @type {string}
-     * @memberof PluginConfigRootfs
      */
     'type'?: string;
     /**
      * 
      * @type {Array<string>}
-     * @memberof PluginConfigRootfs
      */
     'diff_ids'?: Array<string>;
 }

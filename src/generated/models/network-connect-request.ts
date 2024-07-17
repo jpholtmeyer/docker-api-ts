@@ -16,20 +16,17 @@
 
 /**
  * 
- * @export
  * @interface NetworkConnectRequest
  */
 export interface NetworkConnectRequest {
     /**
      * The ID or name of the container to disconnect from the network. 
      * @type {string}
-     * @memberof NetworkConnectRequest
      */
     'Container'?: string;
     /**
      * Force the container to disconnect from the network. 
      * @type {boolean}
-     * @memberof NetworkConnectRequest
      */
     'Force'?: boolean;
 }

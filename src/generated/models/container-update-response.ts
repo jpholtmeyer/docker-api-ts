@@ -16,14 +16,12 @@
 
 /**
  * OK response to ContainerUpdate operation
- * @export
  * @interface ContainerUpdateResponse
  */
 export interface ContainerUpdateResponse {
     /**
      * 
      * @type {Array<string>}
-     * @memberof ContainerUpdateResponse
      */
     'Warnings'?: Array<string>;
 }

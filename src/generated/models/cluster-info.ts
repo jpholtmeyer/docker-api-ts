@@ -25,68 +25,57 @@ import type { TLSInfo } from './tlsinfo.js';
 
 /**
  * ClusterInfo represents information about the swarm as is returned by the \"/info\" endpoint. Join-tokens are not included. 
- * @export
  * @interface ClusterInfo
  */
 export interface ClusterInfo {
     /**
      * The ID of the swarm.
      * @type {string}
-     * @memberof ClusterInfo
      */
     'ID'?: string;
     /**
      * 
      * @type {ObjectVersion}
-     * @memberof ClusterInfo
      */
     'Version'?: ObjectVersion;
     /**
      * Date and time at which the swarm was initialised in [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds. 
      * @type {string}
-     * @memberof ClusterInfo
      */
     'CreatedAt'?: string;
     /**
      * Date and time at which the swarm was last updated in [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds. 
      * @type {string}
-     * @memberof ClusterInfo
      */
     'UpdatedAt'?: string;
     /**
      * 
      * @type {SwarmSpec}
-     * @memberof ClusterInfo
      */
     'Spec'?: SwarmSpec;
     /**
      * 
      * @type {TLSInfo}
-     * @memberof ClusterInfo
      */
     'TLSInfo'?: TLSInfo;
     /**
      * Whether there is currently a root CA rotation in progress for the swarm 
      * @type {boolean}
-     * @memberof ClusterInfo
      */
     'RootRotationInProgress'?: boolean;
     /**
      * DataPathPort specifies the data path port number for data traffic. Acceptable port range is 1024 to 49151. If no port is set or is set to 0, the default port (4789) is used. 
      * @type {number}
-     * @memberof ClusterInfo
      */
     'DataPathPort'?: number;
     /**
      * Default Address Pool specifies default subnet pools for global scope networks. 
      * @type {Array<string>}
-     * @memberof ClusterInfo
      */
     'DefaultAddrPool'?: Array<string>;
     /**
      * SubnetSize specifies the subnet size of the networks created from the default subnet pool. 
      * @type {number}
-     * @memberof ClusterInfo
      */
     'SubnetSize'?: number;
 }

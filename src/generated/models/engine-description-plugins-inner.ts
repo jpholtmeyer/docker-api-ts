@@ -16,20 +16,17 @@
 
 /**
  * 
- * @export
  * @interface EngineDescriptionPluginsInner
  */
 export interface EngineDescriptionPluginsInner {
     /**
      * 
      * @type {string}
-     * @memberof EngineDescriptionPluginsInner
      */
     'Type'?: string;
     /**
      * 
      * @type {string}
-     * @memberof EngineDescriptionPluginsInner
      */
     'Name'?: string;
 }

@@ -16,26 +16,22 @@
 
 /**
  * A device mapping between the host and container
- * @export
  * @interface DeviceMapping
  */
 export interface DeviceMapping {
     /**
      * 
      * @type {string}
-     * @memberof DeviceMapping
      */
     'PathOnHost'?: string;
     /**
      * 
      * @type {string}
-     * @memberof DeviceMapping
      */
     'PathInContainer'?: string;
     /**
      * 
      * @type {string}
-     * @memberof DeviceMapping
      */
     'CgroupPermissions'?: string;
 }

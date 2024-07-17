@@ -16,20 +16,17 @@
 
 /**
  * 
- * @export
  * @interface VolumePruneResponse
  */
 export interface VolumePruneResponse {
     /**
      * Volumes that were deleted
      * @type {Array<string>}
-     * @memberof VolumePruneResponse
      */
     'VolumesDeleted'?: Array<string>;
     /**
      * Disk space reclaimed in bytes
      * @type {number}
-     * @memberof VolumePruneResponse
      */
     'SpaceReclaimed'?: number;
 }

@@ -19,14 +19,12 @@ import type { EndpointSettings } from './endpoint-settings.js';
 
 /**
  * NetworkingConfig represents the container\'s networking configuration for each of its interfaces. It is used for the networking configs specified in the `docker create` and `docker network connect` commands. 
- * @export
  * @interface NetworkingConfig
  */
 export interface NetworkingConfig {
     /**
      * A mapping of network name to endpoint configuration for that network. 
      * @type {{ [key: string]: EndpointSettings; }}
-     * @memberof NetworkingConfig
      */
     'EndpointsConfig'?: { [key: string]: EndpointSettings; };
 }

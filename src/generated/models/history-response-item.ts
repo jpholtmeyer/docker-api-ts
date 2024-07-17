@@ -16,44 +16,37 @@
 
 /**
  * individual image layer information in response to ImageHistory operation
- * @export
  * @interface HistoryResponseItem
  */
 export interface HistoryResponseItem {
     /**
      * 
      * @type {string}
-     * @memberof HistoryResponseItem
      */
     'Id': string;
     /**
      * 
      * @type {number}
-     * @memberof HistoryResponseItem
      */
     'Created': number;
     /**
      * 
      * @type {string}
-     * @memberof HistoryResponseItem
      */
     'CreatedBy': string;
     /**
      * 
      * @type {Array<string>}
-     * @memberof HistoryResponseItem
      */
     'Tags': Array<string>;
     /**
      * 
      * @type {number}
-     * @memberof HistoryResponseItem
      */
     'Size': number;
     /**
      * 
      * @type {string}
-     * @memberof HistoryResponseItem
      */
     'Comment': string;
 }

@@ -22,20 +22,17 @@ import type { ResourceObject } from './resource-object.js';
 
 /**
  * Resource requirements which apply to each individual container created as part of the service. 
- * @export
  * @interface TaskSpecResources
  */
 export interface TaskSpecResources {
     /**
      * 
      * @type {Limit}
-     * @memberof TaskSpecResources
      */
     'Limits'?: Limit;
     /**
      * 
      * @type {ResourceObject}
-     * @memberof TaskSpecResources
      */
     'Reservations'?: ResourceObject;
 }

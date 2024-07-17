@@ -22,38 +22,32 @@ import type { ObjectVersion } from './object-version.js';
 
 /**
  * 
- * @export
  * @interface Config
  */
 export interface Config {
     /**
      * 
      * @type {string}
-     * @memberof Config
      */
     'ID'?: string;
     /**
      * 
      * @type {ObjectVersion}
-     * @memberof Config
      */
     'Version'?: ObjectVersion;
     /**
      * 
      * @type {string}
-     * @memberof Config
      */
     'CreatedAt'?: string;
     /**
      * 
      * @type {string}
-     * @memberof Config
      */
     'UpdatedAt'?: string;
     /**
      * 
      * @type {ConfigSpec}
-     * @memberof Config
      */
     'Spec'?: ConfigSpec;
 }

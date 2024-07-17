@@ -22,86 +22,72 @@ import type { IPAM } from './ipam.js';
 
 /**
  * 
- * @export
  * @interface NetworkCreateRequest
  */
 export interface NetworkCreateRequest {
     /**
      * The network\'s name.
      * @type {string}
-     * @memberof NetworkCreateRequest
      */
     'Name': string;
     /**
      * Check for networks with duplicate names. Since Network is primarily keyed based on a random ID and not on the name, and network name is strictly a user-friendly alias to the network which is uniquely identified using ID, there is no guaranteed way to check for duplicates. CheckDuplicate is there to provide a best effort checking of any networks which has the same name but it is not guaranteed to catch all name collisions. 
      * @type {boolean}
-     * @memberof NetworkCreateRequest
      */
     'CheckDuplicate'?: boolean;
     /**
      * Name of the network driver plugin to use.
      * @type {string}
-     * @memberof NetworkCreateRequest
      */
     'Driver'?: string;
     /**
      * The level at which the network exists (e.g. `swarm` for cluster-wide or `local` for machine level). 
      * @type {string}
-     * @memberof NetworkCreateRequest
      */
     'Scope'?: string;
     /**
      * Restrict external access to the network.
      * @type {boolean}
-     * @memberof NetworkCreateRequest
      */
     'Internal'?: boolean;
     /**
      * Globally scoped network is manually attachable by regular containers from workers in swarm mode. 
      * @type {boolean}
-     * @memberof NetworkCreateRequest
      */
     'Attachable'?: boolean;
     /**
      * Ingress network is the network which provides the routing-mesh in swarm mode. 
      * @type {boolean}
-     * @memberof NetworkCreateRequest
      */
     'Ingress'?: boolean;
     /**
      * Creates a config-only network. Config-only networks are placeholder networks for network configurations to be used by other networks. Config-only networks cannot be used directly to run containers or services. 
      * @type {boolean}
-     * @memberof NetworkCreateRequest
      */
     'ConfigOnly'?: boolean;
     /**
      * 
      * @type {ConfigReference}
-     * @memberof NetworkCreateRequest
      */
     'ConfigFrom'?: ConfigReference;
     /**
      * 
      * @type {IPAM}
-     * @memberof NetworkCreateRequest
      */
     'IPAM'?: IPAM;
     /**
      * Enable IPv6 on the network.
      * @type {boolean}
-     * @memberof NetworkCreateRequest
      */
     'EnableIPv6'?: boolean;
     /**
      * Network specific options to be used by the drivers.
      * @type {{ [key: string]: string; }}
-     * @memberof NetworkCreateRequest
      */
     'Options'?: { [key: string]: string; };
     /**
      * User-defined key/value metadata.
      * @type {{ [key: string]: string; }}
-     * @memberof NetworkCreateRequest
      */
     'Labels'?: { [key: string]: string; };
 }

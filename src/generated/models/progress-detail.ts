@@ -16,20 +16,17 @@
 
 /**
  * 
- * @export
  * @interface ProgressDetail
  */
 export interface ProgressDetail {
     /**
      * 
      * @type {number}
-     * @memberof ProgressDetail
      */
     'current'?: number;
     /**
      * 
      * @type {number}
-     * @memberof ProgressDetail
      */
     'total'?: number;
 }

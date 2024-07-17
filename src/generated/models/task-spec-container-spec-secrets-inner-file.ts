@@ -16,32 +16,27 @@
 
 /**
  * File represents a specific target that is backed by a file. 
- * @export
  * @interface TaskSpecContainerSpecSecretsInnerFile
  */
 export interface TaskSpecContainerSpecSecretsInnerFile {
     /**
      * Name represents the final filename in the filesystem. 
      * @type {string}
-     * @memberof TaskSpecContainerSpecSecretsInnerFile
      */
     'Name'?: string;
     /**
      * UID represents the file UID.
      * @type {string}
-     * @memberof TaskSpecContainerSpecSecretsInnerFile
      */
     'UID'?: string;
     /**
      * GID represents the file GID.
      * @type {string}
-     * @memberof TaskSpecContainerSpecSecretsInnerFile
      */
     'GID'?: string;
     /**
      * Mode represents the FileMode of the file.
      * @type {number}
-     * @memberof TaskSpecContainerSpecSecretsInnerFile
      */
     'Mode'?: number;
 }

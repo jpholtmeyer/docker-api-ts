@@ -16,20 +16,17 @@
 
 /**
  * JoinTokens contains the tokens workers and managers need to join the swarm. 
- * @export
  * @interface JoinTokens
  */
 export interface JoinTokens {
     /**
      * The token workers can use to join the swarm. 
      * @type {string}
-     * @memberof JoinTokens
      */
     'Worker'?: string;
     /**
      * The token managers can use to join the swarm. 
      * @type {string}
-     * @memberof JoinTokens
      */
     'Manager'?: string;
 }

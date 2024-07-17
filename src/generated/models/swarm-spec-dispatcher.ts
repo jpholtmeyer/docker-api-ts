@@ -16,14 +16,12 @@
 
 /**
  * Dispatcher configuration.
- * @export
  * @interface SwarmSpecDispatcher
  */
 export interface SwarmSpecDispatcher {
     /**
      * The delay for an agent to send a heartbeat to the dispatcher. 
      * @type {number}
-     * @memberof SwarmSpecDispatcher
      */
     'HeartbeatPeriod'?: number;
 }

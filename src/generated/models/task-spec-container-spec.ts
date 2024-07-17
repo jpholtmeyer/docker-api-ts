@@ -37,176 +37,147 @@ import type { TaskSpecContainerSpecSecretsInner } from './task-spec-container-sp
 
 /**
  * Container spec for the service.  <p><br /></p>  > **Note**: ContainerSpec, NetworkAttachmentSpec, and PluginSpec are > mutually exclusive. PluginSpec is only used when the Runtime field > is set to `plugin`. NetworkAttachmentSpec is used when the Runtime > field is set to `attachment`. 
- * @export
  * @interface TaskSpecContainerSpec
  */
 export interface TaskSpecContainerSpec {
     /**
      * The image name to use for the container
      * @type {string}
-     * @memberof TaskSpecContainerSpec
      */
     'Image'?: string;
     /**
      * User-defined key/value data.
      * @type {{ [key: string]: string; }}
-     * @memberof TaskSpecContainerSpec
      */
     'Labels'?: { [key: string]: string; };
     /**
      * The command to be run in the image.
      * @type {Array<string>}
-     * @memberof TaskSpecContainerSpec
      */
     'Command'?: Array<string>;
     /**
      * Arguments to the command.
      * @type {Array<string>}
-     * @memberof TaskSpecContainerSpec
      */
     'Args'?: Array<string>;
     /**
      * The hostname to use for the container, as a valid [RFC 1123](https://tools.ietf.org/html/rfc1123) hostname. 
      * @type {string}
-     * @memberof TaskSpecContainerSpec
      */
     'Hostname'?: string;
     /**
      * A list of environment variables in the form `VAR=value`. 
      * @type {Array<string>}
-     * @memberof TaskSpecContainerSpec
      */
     'Env'?: Array<string>;
     /**
      * The working directory for commands to run in.
      * @type {string}
-     * @memberof TaskSpecContainerSpec
      */
     'Dir'?: string;
     /**
      * The user inside the container.
      * @type {string}
-     * @memberof TaskSpecContainerSpec
      */
     'User'?: string;
     /**
      * A list of additional groups that the container process will run as. 
      * @type {Array<string>}
-     * @memberof TaskSpecContainerSpec
      */
     'Groups'?: Array<string>;
     /**
      * 
      * @type {TaskSpecContainerSpecPrivileges}
-     * @memberof TaskSpecContainerSpec
      */
     'Privileges'?: TaskSpecContainerSpecPrivileges;
     /**
      * Whether a pseudo-TTY should be allocated.
      * @type {boolean}
-     * @memberof TaskSpecContainerSpec
      */
     'TTY'?: boolean;
     /**
      * Open `stdin`
      * @type {boolean}
-     * @memberof TaskSpecContainerSpec
      */
     'OpenStdin'?: boolean;
     /**
      * Mount the container\'s root filesystem as read only.
      * @type {boolean}
-     * @memberof TaskSpecContainerSpec
      */
     'ReadOnly'?: boolean;
     /**
      * Specification for mounts to be added to containers created as part of the service. 
      * @type {Array<Mount>}
-     * @memberof TaskSpecContainerSpec
      */
     'Mounts'?: Array<Mount>;
     /**
      * Signal to stop the container.
      * @type {string}
-     * @memberof TaskSpecContainerSpec
      */
     'StopSignal'?: string;
     /**
      * Amount of time to wait for the container to terminate before forcefully killing it. 
      * @type {number}
-     * @memberof TaskSpecContainerSpec
      */
     'StopGracePeriod'?: number;
     /**
      * 
      * @type {HealthConfig}
-     * @memberof TaskSpecContainerSpec
      */
     'HealthCheck'?: HealthConfig;
     /**
      * A list of hostname/IP mappings to add to the container\'s `hosts` file. The format of extra hosts is specified in the [hosts(5)](http://man7.org/linux/man-pages/man5/hosts.5.html) man page:      IP_address canonical_hostname [aliases...] 
      * @type {Array<string>}
-     * @memberof TaskSpecContainerSpec
      */
     'Hosts'?: Array<string>;
     /**
      * 
      * @type {TaskSpecContainerSpecDNSConfig}
-     * @memberof TaskSpecContainerSpec
      */
     'DNSConfig'?: TaskSpecContainerSpecDNSConfig;
     /**
      * Secrets contains references to zero or more secrets that will be exposed to the service. 
      * @type {Array<TaskSpecContainerSpecSecretsInner>}
-     * @memberof TaskSpecContainerSpec
      */
     'Secrets'?: Array<TaskSpecContainerSpecSecretsInner>;
     /**
      * Configs contains references to zero or more configs that will be exposed to the service. 
      * @type {Array<TaskSpecContainerSpecConfigsInner>}
-     * @memberof TaskSpecContainerSpec
      */
     'Configs'?: Array<TaskSpecContainerSpecConfigsInner>;
     /**
      * Isolation technology of the containers running the service. (Windows only) 
      * @type {string}
-     * @memberof TaskSpecContainerSpec
      */
     'Isolation'?: TaskSpecContainerSpecIsolationEnum;
     /**
      * Run an init inside the container that forwards signals and reaps processes. This field is omitted if empty, and the default (as configured on the daemon) is used. 
      * @type {boolean}
-     * @memberof TaskSpecContainerSpec
      */
     'Init'?: boolean | null;
     /**
      * Set kernel namedspaced parameters (sysctls) in the container. The Sysctls option on services accepts the same sysctls as the are supported on containers. Note that while the same sysctls are supported, no guarantees or checks are made about their suitability for a clustered environment, and it\'s up to the user to determine whether a given sysctl will work properly in a Service. 
      * @type {{ [key: string]: string; }}
-     * @memberof TaskSpecContainerSpec
      */
     'Sysctls'?: { [key: string]: string; };
     /**
      * A list of kernel capabilities to add to the default set for the container. 
      * @type {Array<string>}
-     * @memberof TaskSpecContainerSpec
      */
     'CapabilityAdd'?: Array<string>;
     /**
      * A list of kernel capabilities to drop from the default set for the container. 
      * @type {Array<string>}
-     * @memberof TaskSpecContainerSpec
      */
     'CapabilityDrop'?: Array<string>;
     /**
      * A list of resource limits to set in the container. For example: `{\"Name\": \"nofile\", \"Soft\": 1024, \"Hard\": 2048}`\" 
      * @type {Array<ResourcesUlimitsInner>}
-     * @memberof TaskSpecContainerSpec
      */
     'Ulimits'?: Array<ResourcesUlimitsInner>;
 }
 
 /**
-    * @export
     * @enum {string}
     */
 export enum TaskSpecContainerSpecIsolationEnum {

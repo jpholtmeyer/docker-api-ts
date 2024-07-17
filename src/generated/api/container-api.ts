@@ -45,7 +45,6 @@ import type { ContainerWaitResponse } from '../models';
 import type { ErrorResponse } from '../models';
 /**
  * ContainerApi - axios parameter creator
- * @export
  */
 export const ContainerApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -1133,7 +1132,6 @@ export const ContainerApiAxiosParamCreator = function (configuration?: Configura
 
 /**
  * ContainerApi - functional programming interface
- * @export
  */
 export const ContainerApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = ContainerApiAxiosParamCreator(configuration)
@@ -1511,7 +1509,6 @@ export const ContainerApiFp = function(configuration?: Configuration) {
 
 /**
  * ContainerApi - factory interface
- * @export
  */
 export const ContainerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = ContainerApiFp(configuration)
@@ -1814,7 +1811,6 @@ export const ContainerApiFactory = function (configuration?: Configuration, base
 
 /**
  * ContainerApi - object-oriented interface
- * @export
  * @class ContainerApi
  * @extends {BaseAPI}
  */
@@ -1826,7 +1822,6 @@ export class ContainerApi extends BaseAPI {
      * @param {string} path Resource in the container’s filesystem to archive.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ContainerApi
      */
     public containerArchive(id: string, path: string, options?: RawAxiosRequestConfig) {
         return ContainerApiFp(this.configuration).containerArchive(id, path, options).then((request) => request(this.axios, this.basePath));
@@ -1839,7 +1834,6 @@ export class ContainerApi extends BaseAPI {
      * @param {string} path Resource in the container’s filesystem to archive.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ContainerApi
      */
     public containerArchiveInfo(id: string, path: string, options?: RawAxiosRequestConfig) {
         return ContainerApiFp(this.configuration).containerArchiveInfo(id, path, options).then((request) => request(this.axios, this.basePath));
@@ -1857,7 +1851,6 @@ export class ContainerApi extends BaseAPI {
      * @param {boolean} [stderr] Attach to &#x60;stderr&#x60;
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ContainerApi
      */
     public containerAttach(id: string, detachKeys?: string, logs?: boolean, stream?: boolean, stdin?: boolean, stdout?: boolean, stderr?: boolean, options?: RawAxiosRequestConfig) {
         return ContainerApiFp(this.configuration).containerAttach(id, detachKeys, logs, stream, stdin, stdout, stderr, options).then((request) => request(this.axios, this.basePath));
@@ -1872,7 +1865,6 @@ export class ContainerApi extends BaseAPI {
      * @param {boolean} [stream] Return stream
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ContainerApi
      */
     public containerAttachWebsocket(id: string, detachKeys?: string, logs?: boolean, stream?: boolean, options?: RawAxiosRequestConfig) {
         return ContainerApiFp(this.configuration).containerAttachWebsocket(id, detachKeys, logs, stream, options).then((request) => request(this.axios, this.basePath));
@@ -1884,7 +1876,6 @@ export class ContainerApi extends BaseAPI {
      * @param {string} id ID or name of the container
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ContainerApi
      */
     public containerChanges(id: string, options?: RawAxiosRequestConfig) {
         return ContainerApiFp(this.configuration).containerChanges(id, options).then((request) => request(this.axios, this.basePath));
@@ -1898,7 +1889,6 @@ export class ContainerApi extends BaseAPI {
      * @param {string} [platform] Platform in the format &#x60;os[/arch[/variant]]&#x60; used for image lookup.  When specified, the daemon checks if the requested image is present in the local image cache with the given OS and Architecture, and otherwise returns a &#x60;404&#x60; status.  If the option is not set, the host\&#39;s native OS and Architecture are used to look up the image in the image cache. However, if no platform is passed and the given image does exist in the local image cache, but its OS or architecture does not match, the container is created with the available image, and a warning is added to the &#x60;Warnings&#x60; field in the response, for example;      WARNING: The requested image\&#39;s platform (linux/arm64/v8) does not              match the detected host platform (linux/amd64) and no              specific platform was requested 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ContainerApi
      */
     public containerCreate(body: ContainerCreateRequest, name?: string, platform?: string, options?: RawAxiosRequestConfig) {
         return ContainerApiFp(this.configuration).containerCreate(body, name, platform, options).then((request) => request(this.axios, this.basePath));
@@ -1913,7 +1903,6 @@ export class ContainerApi extends BaseAPI {
      * @param {boolean} [link] Remove the specified link associated with the container.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ContainerApi
      */
     public containerDelete(id: string, v?: boolean, force?: boolean, link?: boolean, options?: RawAxiosRequestConfig) {
         return ContainerApiFp(this.configuration).containerDelete(id, v, force, link, options).then((request) => request(this.axios, this.basePath));
@@ -1925,7 +1914,6 @@ export class ContainerApi extends BaseAPI {
      * @param {string} id ID or name of the container
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ContainerApi
      */
     public containerExport(id: string, options?: RawAxiosRequestConfig) {
         return ContainerApiFp(this.configuration).containerExport(id, options).then((request) => request(this.axios, this.basePath));
@@ -1938,7 +1926,6 @@ export class ContainerApi extends BaseAPI {
      * @param {boolean} [size] Return the size of container as fields &#x60;SizeRw&#x60; and &#x60;SizeRootFs&#x60;
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ContainerApi
      */
     public containerInspect(id: string, size?: boolean, options?: RawAxiosRequestConfig) {
         return ContainerApiFp(this.configuration).containerInspect(id, size, options).then((request) => request(this.axios, this.basePath));
@@ -1951,7 +1938,6 @@ export class ContainerApi extends BaseAPI {
      * @param {string} [signal] Signal to send to the container as an integer or string (e.g. &#x60;SIGINT&#x60;). 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ContainerApi
      */
     public containerKill(id: string, signal?: string, options?: RawAxiosRequestConfig) {
         return ContainerApiFp(this.configuration).containerKill(id, signal, options).then((request) => request(this.axios, this.basePath));
@@ -1966,7 +1952,6 @@ export class ContainerApi extends BaseAPI {
      * @param {string} [filters] Filters to process on the container list, encoded as JSON (a &#x60;map[string][]string&#x60;). For example, &#x60;{\&quot;status\&quot;: [\&quot;paused\&quot;]}&#x60; will only return paused containers.  Available filters:  - &#x60;ancestor&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;, &#x60;&lt;image id&gt;&#x60;, or &#x60;&lt;image@digest&gt;&#x60;) - &#x60;before&#x60;&#x3D;(&#x60;&lt;container id&gt;&#x60; or &#x60;&lt;container name&gt;&#x60;) - &#x60;expose&#x60;&#x3D;(&#x60;&lt;port&gt;[/&lt;proto&gt;]&#x60;|&#x60;&lt;startport-endport&gt;/[&lt;proto&gt;]&#x60;) - &#x60;exited&#x3D;&lt;int&gt;&#x60; containers with exit code of &#x60;&lt;int&gt;&#x60; - &#x60;health&#x60;&#x3D;(&#x60;starting&#x60;|&#x60;healthy&#x60;|&#x60;unhealthy&#x60;|&#x60;none&#x60;) - &#x60;id&#x3D;&lt;ID&gt;&#x60; a container\&#39;s ID - &#x60;isolation&#x3D;&#x60;(&#x60;default&#x60;|&#x60;process&#x60;|&#x60;hyperv&#x60;) (Windows daemon only) - &#x60;is-task&#x3D;&#x60;(&#x60;true&#x60;|&#x60;false&#x60;) - &#x60;label&#x3D;key&#x60; or &#x60;label&#x3D;\&quot;key&#x3D;value\&quot;&#x60; of a container label - &#x60;name&#x3D;&lt;name&gt;&#x60; a container\&#39;s name - &#x60;network&#x60;&#x3D;(&#x60;&lt;network id&gt;&#x60; or &#x60;&lt;network name&gt;&#x60;) - &#x60;publish&#x60;&#x3D;(&#x60;&lt;port&gt;[/&lt;proto&gt;]&#x60;|&#x60;&lt;startport-endport&gt;/[&lt;proto&gt;]&#x60;) - &#x60;since&#x60;&#x3D;(&#x60;&lt;container id&gt;&#x60; or &#x60;&lt;container name&gt;&#x60;) - &#x60;status&#x3D;&#x60;(&#x60;created&#x60;|&#x60;restarting&#x60;|&#x60;running&#x60;|&#x60;removing&#x60;|&#x60;paused&#x60;|&#x60;exited&#x60;|&#x60;dead&#x60;) - &#x60;volume&#x60;&#x3D;(&#x60;&lt;volume name&gt;&#x60; or &#x60;&lt;mount point destination&gt;&#x60;) 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ContainerApi
      */
     public containerList(all?: boolean, limit?: number, size?: boolean, filters?: string, options?: RawAxiosRequestConfig) {
         return ContainerApiFp(this.configuration).containerList(all, limit, size, filters, options).then((request) => request(this.axios, this.basePath));
@@ -1985,7 +1970,6 @@ export class ContainerApi extends BaseAPI {
      * @param {string} [tail] Only return this number of log lines from the end of the logs. Specify as an integer or &#x60;all&#x60; to output all log lines. 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ContainerApi
      */
     public containerLogs(id: string, follow?: boolean, stdout?: boolean, stderr?: boolean, since?: number, until?: number, timestamps?: boolean, tail?: string, options?: RawAxiosRequestConfig) {
         return ContainerApiFp(this.configuration).containerLogs(id, follow, stdout, stderr, since, until, timestamps, tail, options).then((request) => request(this.axios, this.basePath));
@@ -1997,7 +1981,6 @@ export class ContainerApi extends BaseAPI {
      * @param {string} id ID or name of the container
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ContainerApi
      */
     public containerPause(id: string, options?: RawAxiosRequestConfig) {
         return ContainerApiFp(this.configuration).containerPause(id, options).then((request) => request(this.axios, this.basePath));
@@ -2009,7 +1992,6 @@ export class ContainerApi extends BaseAPI {
      * @param {string} [filters] Filters to process on the prune list, encoded as JSON (a &#x60;map[string][]string&#x60;).  Available filters: - &#x60;until&#x3D;&lt;timestamp&gt;&#x60; Prune containers created before this timestamp. The &#x60;&lt;timestamp&gt;&#x60; can be Unix timestamps, date formatted timestamps, or Go duration strings (e.g. &#x60;10m&#x60;, &#x60;1h30m&#x60;) computed relative to the daemon machine’s time. - &#x60;label&#x60; (&#x60;label&#x3D;&lt;key&gt;&#x60;, &#x60;label&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60;, &#x60;label!&#x3D;&lt;key&gt;&#x60;, or &#x60;label!&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60;) Prune containers with (or without, in case &#x60;label!&#x3D;...&#x60; is used) the specified labels. 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ContainerApi
      */
     public containerPrune(filters?: string, options?: RawAxiosRequestConfig) {
         return ContainerApiFp(this.configuration).containerPrune(filters, options).then((request) => request(this.axios, this.basePath));
@@ -2022,7 +2004,6 @@ export class ContainerApi extends BaseAPI {
      * @param {string} name New name for the container
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ContainerApi
      */
     public containerRename(id: string, name: string, options?: RawAxiosRequestConfig) {
         return ContainerApiFp(this.configuration).containerRename(id, name, options).then((request) => request(this.axios, this.basePath));
@@ -2036,7 +2017,6 @@ export class ContainerApi extends BaseAPI {
      * @param {number} [w] Width of the TTY session in characters
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ContainerApi
      */
     public containerResize(id: string, h?: number, w?: number, options?: RawAxiosRequestConfig) {
         return ContainerApiFp(this.configuration).containerResize(id, h, w, options).then((request) => request(this.axios, this.basePath));
@@ -2049,7 +2029,6 @@ export class ContainerApi extends BaseAPI {
      * @param {number} [t] Number of seconds to wait before killing the container
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ContainerApi
      */
     public containerRestart(id: string, t?: number, options?: RawAxiosRequestConfig) {
         return ContainerApiFp(this.configuration).containerRestart(id, t, options).then((request) => request(this.axios, this.basePath));
@@ -2062,7 +2041,6 @@ export class ContainerApi extends BaseAPI {
      * @param {string} [detachKeys] Override the key sequence for detaching a container. Format is a single character &#x60;[a-Z]&#x60; or &#x60;ctrl-&lt;value&gt;&#x60; where &#x60;&lt;value&gt;&#x60; is one of: &#x60;a-z&#x60;, &#x60;@&#x60;, &#x60;^&#x60;, &#x60;[&#x60;, &#x60;,&#x60; or &#x60;_&#x60;. 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ContainerApi
      */
     public containerStart(id: string, detachKeys?: string, options?: RawAxiosRequestConfig) {
         return ContainerApiFp(this.configuration).containerStart(id, detachKeys, options).then((request) => request(this.axios, this.basePath));
@@ -2076,7 +2054,6 @@ export class ContainerApi extends BaseAPI {
      * @param {boolean} [oneShot] Only get a single stat instead of waiting for 2 cycles. Must be used with &#x60;stream&#x3D;false&#x60;. 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ContainerApi
      */
     public containerStats(id: string, stream?: boolean, oneShot?: boolean, options?: RawAxiosRequestConfig) {
         return ContainerApiFp(this.configuration).containerStats(id, stream, oneShot, options).then((request) => request(this.axios, this.basePath));
@@ -2089,7 +2066,6 @@ export class ContainerApi extends BaseAPI {
      * @param {number} [t] Number of seconds to wait before killing the container
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ContainerApi
      */
     public containerStop(id: string, t?: number, options?: RawAxiosRequestConfig) {
         return ContainerApiFp(this.configuration).containerStop(id, t, options).then((request) => request(this.axios, this.basePath));
@@ -2102,7 +2078,6 @@ export class ContainerApi extends BaseAPI {
      * @param {string} [psArgs] The arguments to pass to &#x60;ps&#x60;. For example, &#x60;aux&#x60;
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ContainerApi
      */
     public containerTop(id: string, psArgs?: string, options?: RawAxiosRequestConfig) {
         return ContainerApiFp(this.configuration).containerTop(id, psArgs, options).then((request) => request(this.axios, this.basePath));
@@ -2114,7 +2089,6 @@ export class ContainerApi extends BaseAPI {
      * @param {string} id ID or name of the container
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ContainerApi
      */
     public containerUnpause(id: string, options?: RawAxiosRequestConfig) {
         return ContainerApiFp(this.configuration).containerUnpause(id, options).then((request) => request(this.axios, this.basePath));
@@ -2127,7 +2101,6 @@ export class ContainerApi extends BaseAPI {
      * @param {ContainerUpdateRequest} update 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ContainerApi
      */
     public containerUpdate(id: string, update: ContainerUpdateRequest, options?: RawAxiosRequestConfig) {
         return ContainerApiFp(this.configuration).containerUpdate(id, update, options).then((request) => request(this.axios, this.basePath));
@@ -2140,7 +2113,6 @@ export class ContainerApi extends BaseAPI {
      * @param {ContainerWaitConditionEnum} [condition] Wait until a container state reaches the given condition.  Defaults to &#x60;not-running&#x60; if omitted or empty. 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ContainerApi
      */
     public containerWait(id: string, condition?: ContainerWaitConditionEnum, options?: RawAxiosRequestConfig) {
         return ContainerApiFp(this.configuration).containerWait(id, condition, options).then((request) => request(this.axios, this.basePath));
@@ -2156,7 +2128,6 @@ export class ContainerApi extends BaseAPI {
      * @param {string} [copyUIDGID] If &#x60;1&#x60;, &#x60;true&#x60;, then it will copy UID/GID maps to the dest file or dir 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ContainerApi
      */
     public putContainerArchive(id: string, path: string, inputStream: File, noOverwriteDirNonDir?: string, copyUIDGID?: string, options?: RawAxiosRequestConfig) {
         return ContainerApiFp(this.configuration).putContainerArchive(id, path, inputStream, noOverwriteDirNonDir, copyUIDGID, options).then((request) => request(this.axios, this.basePath));
@@ -2164,7 +2135,6 @@ export class ContainerApi extends BaseAPI {
 }
 
 /**
-  * @export
   * @enum {string}
   */
 export enum ContainerWaitConditionEnum {

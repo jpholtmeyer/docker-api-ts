@@ -16,14 +16,12 @@
 
 /**
  * 
- * @export
  * @interface ContainerSummaryHostConfig
  */
 export interface ContainerSummaryHostConfig {
     /**
      * 
      * @type {string}
-     * @memberof ContainerSummaryHostConfig
      */
     'NetworkMode'?: string;
 }

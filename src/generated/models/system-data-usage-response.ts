@@ -28,38 +28,32 @@ import type { Volume } from './volume.js';
 
 /**
  * 
- * @export
  * @interface SystemDataUsageResponse
  */
 export interface SystemDataUsageResponse {
     /**
      * 
      * @type {number}
-     * @memberof SystemDataUsageResponse
      */
     'LayersSize'?: number;
     /**
      * 
      * @type {Array<ImageSummary>}
-     * @memberof SystemDataUsageResponse
      */
     'Images'?: Array<ImageSummary>;
     /**
      * 
      * @type {Array<ContainerSummary>}
-     * @memberof SystemDataUsageResponse
      */
     'Containers'?: Array<ContainerSummary>;
     /**
      * 
      * @type {Array<Volume>}
-     * @memberof SystemDataUsageResponse
      */
     'Volumes'?: Array<Volume>;
     /**
      * 
      * @type {Array<BuildCache>}
-     * @memberof SystemDataUsageResponse
      */
     'BuildCache'?: Array<BuildCache>;
 }

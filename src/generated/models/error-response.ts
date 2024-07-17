@@ -16,14 +16,12 @@
 
 /**
  * Represents an error.
- * @export
  * @interface ErrorResponse
  */
 export interface ErrorResponse {
     /**
      * The error message.
      * @type {string}
-     * @memberof ErrorResponse
      */
     'message': string;
 }

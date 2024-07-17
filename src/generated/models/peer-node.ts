@@ -16,20 +16,17 @@
 
 /**
  * Represents a peer-node in the swarm
- * @export
  * @interface PeerNode
  */
 export interface PeerNode {
     /**
      * Unique identifier of for this node in the swarm.
      * @type {string}
-     * @memberof PeerNode
      */
     'NodeID'?: string;
     /**
      * IP address and ports at which this node can be reached. 
      * @type {string}
-     * @memberof PeerNode
      */
     'Addr'?: string;
 }

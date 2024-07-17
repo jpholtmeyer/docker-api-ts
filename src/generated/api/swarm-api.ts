@@ -37,7 +37,6 @@ import type { SwarmUnlockRequest } from '../models';
 import type { UnlockKeyResponse } from '../models';
 /**
  * SwarmApi - axios parameter creator
- * @export
  */
 export const SwarmApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -307,7 +306,6 @@ export const SwarmApiAxiosParamCreator = function (configuration?: Configuration
 
 /**
  * SwarmApi - functional programming interface
- * @export
  */
 export const SwarmApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = SwarmApiAxiosParamCreator(configuration)
@@ -410,7 +408,6 @@ export const SwarmApiFp = function(configuration?: Configuration) {
 
 /**
  * SwarmApi - factory interface
- * @export
  */
 export const SwarmApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = SwarmApiFp(configuration)
@@ -492,7 +489,6 @@ export const SwarmApiFactory = function (configuration?: Configuration, basePath
 
 /**
  * SwarmApi - object-oriented interface
- * @export
  * @class SwarmApi
  * @extends {BaseAPI}
  */
@@ -503,7 +499,6 @@ export class SwarmApi extends BaseAPI {
      * @param {SwarmInitRequest} body 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SwarmApi
      */
     public swarmInit(body: SwarmInitRequest, options?: RawAxiosRequestConfig) {
         return SwarmApiFp(this.configuration).swarmInit(body, options).then((request) => request(this.axios, this.basePath));
@@ -514,7 +509,6 @@ export class SwarmApi extends BaseAPI {
      * @summary Inspect swarm
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SwarmApi
      */
     public swarmInspect(options?: RawAxiosRequestConfig) {
         return SwarmApiFp(this.configuration).swarmInspect(options).then((request) => request(this.axios, this.basePath));
@@ -526,7 +520,6 @@ export class SwarmApi extends BaseAPI {
      * @param {SwarmJoinRequest} body 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SwarmApi
      */
     public swarmJoin(body: SwarmJoinRequest, options?: RawAxiosRequestConfig) {
         return SwarmApiFp(this.configuration).swarmJoin(body, options).then((request) => request(this.axios, this.basePath));
@@ -538,7 +531,6 @@ export class SwarmApi extends BaseAPI {
      * @param {boolean} [force] Force leave swarm, even if this is the last manager or that it will break the cluster. 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SwarmApi
      */
     public swarmLeave(force?: boolean, options?: RawAxiosRequestConfig) {
         return SwarmApiFp(this.configuration).swarmLeave(force, options).then((request) => request(this.axios, this.basePath));
@@ -550,7 +542,6 @@ export class SwarmApi extends BaseAPI {
      * @param {SwarmUnlockRequest} body 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SwarmApi
      */
     public swarmUnlock(body: SwarmUnlockRequest, options?: RawAxiosRequestConfig) {
         return SwarmApiFp(this.configuration).swarmUnlock(body, options).then((request) => request(this.axios, this.basePath));
@@ -561,7 +552,6 @@ export class SwarmApi extends BaseAPI {
      * @summary Get the unlock key
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SwarmApi
      */
     public swarmUnlockkey(options?: RawAxiosRequestConfig) {
         return SwarmApiFp(this.configuration).swarmUnlockkey(options).then((request) => request(this.axios, this.basePath));
@@ -577,7 +567,6 @@ export class SwarmApi extends BaseAPI {
      * @param {boolean} [rotateManagerUnlockKey] Rotate the manager unlock key.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SwarmApi
      */
     public swarmUpdate(version: number, body: SwarmSpec, rotateWorkerToken?: boolean, rotateManagerToken?: boolean, rotateManagerUnlockKey?: boolean, options?: RawAxiosRequestConfig) {
         return SwarmApiFp(this.configuration).swarmUpdate(version, body, rotateWorkerToken, rotateManagerToken, rotateManagerUnlockKey, options).then((request) => request(this.axios, this.basePath));

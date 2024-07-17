@@ -16,38 +16,32 @@
 
 /**
  * An open port on a container
- * @export
  * @interface Port
  */
 export interface Port {
     /**
      * Host IP address that the container\'s port is mapped to
      * @type {string}
-     * @memberof Port
      */
     'IP'?: string;
     /**
      * Port on the container
      * @type {number}
-     * @memberof Port
      */
     'PrivatePort': number;
     /**
      * Port exposed on the host
      * @type {number}
-     * @memberof Port
      */
     'PublicPort'?: number;
     /**
      * 
      * @type {string}
-     * @memberof Port
      */
     'Type': PortTypeEnum;
 }
 
 /**
-    * @export
     * @enum {string}
     */
 export enum PortTypeEnum {

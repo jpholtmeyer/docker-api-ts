@@ -16,32 +16,27 @@
 
 /**
  * 
- * @export
  * @interface AuthConfig
  */
 export interface AuthConfig {
     /**
      * 
      * @type {string}
-     * @memberof AuthConfig
      */
     'username'?: string;
     /**
      * 
      * @type {string}
-     * @memberof AuthConfig
      */
     'password'?: string;
     /**
      * 
      * @type {string}
-     * @memberof AuthConfig
      */
     'email'?: string;
     /**
      * 
      * @type {string}
-     * @memberof AuthConfig
      */
     'serveraddress'?: string;
 }

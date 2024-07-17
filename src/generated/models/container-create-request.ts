@@ -28,7 +28,6 @@ import type { NetworkingConfig } from './networking-config.js';
 
 /**
  * @type ContainerCreateRequest
- * @export
  */
 export type ContainerCreateRequest = ContainerConfig;
 

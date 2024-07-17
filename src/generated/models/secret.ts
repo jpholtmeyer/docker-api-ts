@@ -22,38 +22,32 @@ import type { SecretSpec } from './secret-spec.js';
 
 /**
  * 
- * @export
  * @interface Secret
  */
 export interface Secret {
     /**
      * 
      * @type {string}
-     * @memberof Secret
      */
     'ID'?: string;
     /**
      * 
      * @type {ObjectVersion}
-     * @memberof Secret
      */
     'Version'?: ObjectVersion;
     /**
      * 
      * @type {string}
-     * @memberof Secret
      */
     'CreatedAt'?: string;
     /**
      * 
      * @type {string}
-     * @memberof Secret
      */
     'UpdatedAt'?: string;
     /**
      * 
      * @type {SecretSpec}
-     * @memberof Secret
      */
     'Spec'?: SecretSpec;
 }

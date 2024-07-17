@@ -16,32 +16,27 @@
 
 /**
  * File represents a specific target that is backed by a file.  <p><br /><p>  > **Note**: `Configs.File` and `Configs.Runtime` are mutually exclusive 
- * @export
  * @interface TaskSpecContainerSpecConfigsInnerFile
  */
 export interface TaskSpecContainerSpecConfigsInnerFile {
     /**
      * Name represents the final filename in the filesystem. 
      * @type {string}
-     * @memberof TaskSpecContainerSpecConfigsInnerFile
      */
     'Name'?: string;
     /**
      * UID represents the file UID.
      * @type {string}
-     * @memberof TaskSpecContainerSpecConfigsInnerFile
      */
     'UID'?: string;
     /**
      * GID represents the file GID.
      * @type {string}
-     * @memberof TaskSpecContainerSpecConfigsInnerFile
      */
     'GID'?: string;
     /**
      * Mode represents the FileMode of the file.
      * @type {number}
-     * @memberof TaskSpecContainerSpecConfigsInnerFile
      */
     'Mode'?: number;
 }

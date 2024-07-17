@@ -16,20 +16,17 @@
 
 /**
  * PortBinding represents a binding between a host IP address and a host port. 
- * @export
  * @interface PortBinding
  */
 export interface PortBinding {
     /**
      * Host IP address that the container\'s port is mapped to.
      * @type {string}
-     * @memberof PortBinding
      */
     'HostIp'?: string;
     /**
      * Host port number that the container\'s port is mapped to.
      * @type {string}
-     * @memberof PortBinding
      */
     'HostPort'?: string;
 }

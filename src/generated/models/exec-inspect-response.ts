@@ -19,74 +19,62 @@ import type { ProcessConfig } from './process-config.js';
 
 /**
  * 
- * @export
  * @interface ExecInspectResponse
  */
 export interface ExecInspectResponse {
     /**
      * 
      * @type {boolean}
-     * @memberof ExecInspectResponse
      */
     'CanRemove'?: boolean;
     /**
      * 
      * @type {string}
-     * @memberof ExecInspectResponse
      */
     'DetachKeys'?: string;
     /**
      * 
      * @type {string}
-     * @memberof ExecInspectResponse
      */
     'ID'?: string;
     /**
      * 
      * @type {boolean}
-     * @memberof ExecInspectResponse
      */
     'Running'?: boolean;
     /**
      * 
      * @type {number}
-     * @memberof ExecInspectResponse
      */
     'ExitCode'?: number;
     /**
      * 
      * @type {ProcessConfig}
-     * @memberof ExecInspectResponse
      */
     'ProcessConfig'?: ProcessConfig;
     /**
      * 
      * @type {boolean}
-     * @memberof ExecInspectResponse
      */
     'OpenStdin'?: boolean;
     /**
      * 
      * @type {boolean}
-     * @memberof ExecInspectResponse
      */
     'OpenStderr'?: boolean;
     /**
      * 
      * @type {boolean}
-     * @memberof ExecInspectResponse
      */
     'OpenStdout'?: boolean;
     /**
      * 
      * @type {string}
-     * @memberof ExecInspectResponse
      */
     'ContainerID'?: string;
     /**
      * The system process ID for the exec process.
      * @type {number}
-     * @memberof ExecInspectResponse
      */
     'Pid'?: number;
 }

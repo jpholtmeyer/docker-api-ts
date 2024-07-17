@@ -22,44 +22,37 @@ import type { PluginSettings } from './plugin-settings.js';
 
 /**
  * A plugin for the Engine API
- * @export
  * @interface Plugin
  */
 export interface Plugin {
     /**
      * 
      * @type {string}
-     * @memberof Plugin
      */
     'Id'?: string;
     /**
      * 
      * @type {string}
-     * @memberof Plugin
      */
     'Name': string;
     /**
      * True if the plugin is running. False if the plugin is not running, only installed.
      * @type {boolean}
-     * @memberof Plugin
      */
     'Enabled': boolean;
     /**
      * 
      * @type {PluginSettings}
-     * @memberof Plugin
      */
     'Settings': PluginSettings;
     /**
      * plugin remote reference used to push/pull the plugin
      * @type {string}
-     * @memberof Plugin
      */
     'PluginReference'?: string;
     /**
      * 
      * @type {PluginConfig}
-     * @memberof Plugin
      */
     'Config': PluginConfig;
 }

@@ -16,14 +16,12 @@
 
 /**
  * 
- * @export
  * @interface ServiceSpecModeReplicated
  */
 export interface ServiceSpecModeReplicated {
     /**
      * 
      * @type {number}
-     * @memberof ServiceSpecModeReplicated
      */
     'Replicas'?: number;
 }

@@ -16,14 +16,12 @@
 
 /**
  * container waiting error, if any
- * @export
  * @interface ContainerWaitExitError
  */
 export interface ContainerWaitExitError {
     /**
      * Details of an error
      * @type {string}
-     * @memberof ContainerWaitExitError
      */
     'Message'?: string;
 }

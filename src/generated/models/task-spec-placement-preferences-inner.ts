@@ -19,14 +19,12 @@ import type { TaskSpecPlacementPreferencesInnerSpread } from './task-spec-placem
 
 /**
  * 
- * @export
  * @interface TaskSpecPlacementPreferencesInner
  */
 export interface TaskSpecPlacementPreferencesInner {
     /**
      * 
      * @type {TaskSpecPlacementPreferencesInnerSpread}
-     * @memberof TaskSpecPlacementPreferencesInner
      */
     'Spread'?: TaskSpecPlacementPreferencesInnerSpread;
 }

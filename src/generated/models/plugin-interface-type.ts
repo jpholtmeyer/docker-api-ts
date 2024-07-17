@@ -16,26 +16,22 @@
 
 /**
  * 
- * @export
  * @interface PluginInterfaceType
  */
 export interface PluginInterfaceType {
     /**
      * 
      * @type {string}
-     * @memberof PluginInterfaceType
      */
     'Prefix': string;
     /**
      * 
      * @type {string}
-     * @memberof PluginInterfaceType
      */
     'Capability': string;
     /**
      * 
      * @type {string}
-     * @memberof PluginInterfaceType
      */
     'Version': string;
 }

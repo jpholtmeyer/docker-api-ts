@@ -33,7 +33,6 @@ import type { ExecStartConfig } from '../models';
 import type { IdResponse } from '../models';
 /**
  * ExecApi - axios parameter creator
- * @export
  */
 export const ExecApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -198,7 +197,6 @@ export const ExecApiAxiosParamCreator = function (configuration?: Configuration)
 
 /**
  * ExecApi - functional programming interface
- * @export
  */
 export const ExecApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = ExecApiAxiosParamCreator(configuration)
@@ -264,7 +262,6 @@ export const ExecApiFp = function(configuration?: Configuration) {
 
 /**
  * ExecApi - factory interface
- * @export
  */
 export const ExecApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = ExecApiFp(configuration)
@@ -318,7 +315,6 @@ export const ExecApiFactory = function (configuration?: Configuration, basePath?
 
 /**
  * ExecApi - object-oriented interface
- * @export
  * @class ExecApi
  * @extends {BaseAPI}
  */
@@ -330,7 +326,6 @@ export class ExecApi extends BaseAPI {
      * @param {ExecConfig} execConfig Exec configuration
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ExecApi
      */
     public containerExec(id: string, execConfig: ExecConfig, options?: RawAxiosRequestConfig) {
         return ExecApiFp(this.configuration).containerExec(id, execConfig, options).then((request) => request(this.axios, this.basePath));
@@ -342,7 +337,6 @@ export class ExecApi extends BaseAPI {
      * @param {string} id Exec instance ID
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ExecApi
      */
     public execInspect(id: string, options?: RawAxiosRequestConfig) {
         return ExecApiFp(this.configuration).execInspect(id, options).then((request) => request(this.axios, this.basePath));
@@ -356,7 +350,6 @@ export class ExecApi extends BaseAPI {
      * @param {number} [w] Width of the TTY session in characters
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ExecApi
      */
     public execResize(id: string, h?: number, w?: number, options?: RawAxiosRequestConfig) {
         return ExecApiFp(this.configuration).execResize(id, h, w, options).then((request) => request(this.axios, this.basePath));
@@ -369,7 +362,6 @@ export class ExecApi extends BaseAPI {
      * @param {ExecStartConfig} [execStartConfig] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ExecApi
      */
     public execStart(id: string, execStartConfig?: ExecStartConfig, options?: RawAxiosRequestConfig) {
         return ExecApiFp(this.configuration).execStart(id, execStartConfig, options).then((request) => request(this.axios, this.basePath));

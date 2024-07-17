@@ -19,26 +19,22 @@ import type { GenericResourcesInner } from './generic-resources-inner.js';
 
 /**
  * An object describing the resources which can be advertised by a node and requested by a task. 
- * @export
  * @interface ResourceObject
  */
 export interface ResourceObject {
     /**
      * 
      * @type {number}
-     * @memberof ResourceObject
      */
     'NanoCPUs'?: number;
     /**
      * 
      * @type {number}
-     * @memberof ResourceObject
      */
     'MemoryBytes'?: number;
     /**
      * User-defined resources can be either Integer resources (e.g, `SSD=3`) or String resources (e.g, `GPU=UUID1`). 
      * @type {Array<GenericResourcesInner>}
-     * @memberof ResourceObject
      */
     'GenericResources'?: Array<GenericResourcesInner>;
 }

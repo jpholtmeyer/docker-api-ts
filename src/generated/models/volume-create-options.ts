@@ -16,32 +16,27 @@
 
 /**
  * Volume configuration
- * @export
  * @interface VolumeCreateOptions
  */
 export interface VolumeCreateOptions {
     /**
      * The new volume\'s name. If not specified, Docker generates a name. 
      * @type {string}
-     * @memberof VolumeCreateOptions
      */
     'Name'?: string;
     /**
      * Name of the volume driver to use.
      * @type {string}
-     * @memberof VolumeCreateOptions
      */
     'Driver'?: string;
     /**
      * A mapping of driver options and values. These options are passed directly to the driver and are driver specific. 
      * @type {{ [key: string]: string; }}
-     * @memberof VolumeCreateOptions
      */
     'DriverOpts'?: { [key: string]: string; };
     /**
      * User-defined key/value metadata.
      * @type {{ [key: string]: string; }}
-     * @memberof VolumeCreateOptions
      */
     'Labels'?: { [key: string]: string; };
 }

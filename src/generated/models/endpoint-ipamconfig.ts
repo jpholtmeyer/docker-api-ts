@@ -16,26 +16,22 @@
 
 /**
  * EndpointIPAMConfig represents an endpoint\'s IPAM configuration. 
- * @export
  * @interface EndpointIPAMConfig
  */
 export interface EndpointIPAMConfig {
     /**
      * 
      * @type {string}
-     * @memberof EndpointIPAMConfig
      */
     'IPv4Address'?: string;
     /**
      * 
      * @type {string}
-     * @memberof EndpointIPAMConfig
      */
     'IPv6Address'?: string;
     /**
      * 
      * @type {Array<string>}
-     * @memberof EndpointIPAMConfig
      */
     'LinkLocalIPs'?: Array<string>;
 }

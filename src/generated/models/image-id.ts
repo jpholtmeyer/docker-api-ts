@@ -16,14 +16,12 @@
 
 /**
  * Image ID or Digest
- * @export
  * @interface ImageID
  */
 export interface ImageID {
     /**
      * 
      * @type {string}
-     * @memberof ImageID
      */
     'ID'?: string;
 }

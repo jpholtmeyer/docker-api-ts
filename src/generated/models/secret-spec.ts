@@ -19,38 +19,32 @@ import type { Driver } from './driver.js';
 
 /**
  * 
- * @export
  * @interface SecretSpec
  */
 export interface SecretSpec {
     /**
      * User-defined name of the secret.
      * @type {string}
-     * @memberof SecretSpec
      */
     'Name'?: string;
     /**
      * User-defined key/value metadata.
      * @type {{ [key: string]: string; }}
-     * @memberof SecretSpec
      */
     'Labels'?: { [key: string]: string; };
     /**
      * Base64-url-safe-encoded ([RFC 4648](https://tools.ietf.org/html/rfc4648#section-5)) data to store as secret.  This field is only used to _create_ a secret, and is not returned by other endpoints. 
      * @type {string}
-     * @memberof SecretSpec
      */
     'Data'?: string;
     /**
      * 
      * @type {Driver}
-     * @memberof SecretSpec
      */
     'Driver'?: Driver;
     /**
      * 
      * @type {Driver}
-     * @memberof SecretSpec
      */
     'Templating'?: Driver;
 }

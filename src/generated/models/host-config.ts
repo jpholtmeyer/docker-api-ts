@@ -47,7 +47,6 @@ import type { ThrottleDevice } from './throttle-device.js';
 /**
  * @type HostConfig
  * Container configuration that depends on the host we are running on
- * @export
  */
 export type HostConfig = Resources;
 

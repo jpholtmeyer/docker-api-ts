@@ -16,14 +16,12 @@
 
 /**
  * 
- * @export
  * @interface SystemVersionPlatform
  */
 export interface SystemVersionPlatform {
     /**
      * 
      * @type {string}
-     * @memberof SystemVersionPlatform
      */
     'Name': string;
 }

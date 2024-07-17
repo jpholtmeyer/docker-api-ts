@@ -19,32 +19,27 @@ import type { ProgressDetail } from './progress-detail.js';
 
 /**
  * 
- * @export
  * @interface PushImageInfo
  */
 export interface PushImageInfo {
     /**
      * 
      * @type {string}
-     * @memberof PushImageInfo
      */
     'error'?: string;
     /**
      * 
      * @type {string}
-     * @memberof PushImageInfo
      */
     'status'?: string;
     /**
      * 
      * @type {string}
-     * @memberof PushImageInfo
      */
     'progress'?: string;
     /**
      * 
      * @type {ProgressDetail}
-     * @memberof PushImageInfo
      */
     'progressDetail'?: ProgressDetail;
 }

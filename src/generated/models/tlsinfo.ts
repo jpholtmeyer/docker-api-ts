@@ -16,26 +16,22 @@
 
 /**
  * Information about the issuer of leaf TLS certificates and the trusted root CA certificate. 
- * @export
  * @interface TLSInfo
  */
 export interface TLSInfo {
     /**
      * The root CA certificate(s) that are used to validate leaf TLS certificates. 
      * @type {string}
-     * @memberof TLSInfo
      */
     'TrustRoot'?: string;
     /**
      * The base64-url-safe-encoded raw subject bytes of the issuer.
      * @type {string}
-     * @memberof TLSInfo
      */
     'CertIssuerSubject'?: string;
     /**
      * The base64-url-safe-encoded raw public key bytes of the issuer. 
      * @type {string}
-     * @memberof TLSInfo
      */
     'CertIssuerPublicKey'?: string;
 }

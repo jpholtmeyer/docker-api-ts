@@ -16,32 +16,27 @@
 
 /**
  * 
- * @export
  * @interface PluginDevice
  */
 export interface PluginDevice {
     /**
      * 
      * @type {string}
-     * @memberof PluginDevice
      */
     'Name': string;
     /**
      * 
      * @type {string}
-     * @memberof PluginDevice
      */
     'Description': string;
     /**
      * 
      * @type {Array<string>}
-     * @memberof PluginDevice
      */
     'Settable': Array<string>;
     /**
      * 
      * @type {string}
-     * @memberof PluginDevice
      */
     'Path': string;
 }

@@ -19,68 +19,57 @@ import type { VolumeUsageData } from './volume-usage-data.js';
 
 /**
  * 
- * @export
  * @interface Volume
  */
 export interface Volume {
     /**
      * Name of the volume.
      * @type {string}
-     * @memberof Volume
      */
     'Name': string;
     /**
      * Name of the volume driver used by the volume.
      * @type {string}
-     * @memberof Volume
      */
     'Driver': string;
     /**
      * Mount path of the volume on the host.
      * @type {string}
-     * @memberof Volume
      */
     'Mountpoint': string;
     /**
      * Date/Time the volume was created.
      * @type {string}
-     * @memberof Volume
      */
     'CreatedAt'?: string;
     /**
      * Low-level details about the volume, provided by the volume driver. Details are returned as a map with key/value pairs: `{\"key\":\"value\",\"key2\":\"value2\"}`.  The `Status` field is optional, and is omitted if the volume driver does not support this feature. 
      * @type {{ [key: string]: object; }}
-     * @memberof Volume
      */
     'Status'?: { [key: string]: object; };
     /**
      * User-defined key/value metadata.
      * @type {{ [key: string]: string; }}
-     * @memberof Volume
      */
     'Labels': { [key: string]: string; };
     /**
      * The level at which the volume exists. Either `global` for cluster-wide, or `local` for machine level. 
      * @type {string}
-     * @memberof Volume
      */
     'Scope': VolumeScopeEnum;
     /**
      * The driver specific options used when creating the volume. 
      * @type {{ [key: string]: string; }}
-     * @memberof Volume
      */
     'Options': { [key: string]: string; };
     /**
      * 
      * @type {VolumeUsageData}
-     * @memberof Volume
      */
     'UsageData'?: VolumeUsageData | null;
 }
 
 /**
-    * @export
     * @enum {string}
     */
 export enum VolumeScopeEnum {

@@ -16,26 +16,22 @@
 
 /**
  * A descriptor struct containing digest, media type, and size, as defined in the [OCI Content Descriptors Specification](https://github.com/opencontainers/image-spec/blob/v1.0.1/descriptor.md). 
- * @export
  * @interface OCIDescriptor
  */
 export interface OCIDescriptor {
     /**
      * The media type of the object this schema refers to. 
      * @type {string}
-     * @memberof OCIDescriptor
      */
     'mediaType'?: string;
     /**
      * The digest of the targeted content. 
      * @type {string}
-     * @memberof OCIDescriptor
      */
     'digest'?: string;
     /**
      * The size in bytes of the blob. 
      * @type {number}
-     * @memberof OCIDescriptor
      */
     'size'?: number;
 }

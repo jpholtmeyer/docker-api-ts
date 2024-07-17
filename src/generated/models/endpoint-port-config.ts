@@ -16,44 +16,37 @@
 
 /**
  * 
- * @export
  * @interface EndpointPortConfig
  */
 export interface EndpointPortConfig {
     /**
      * 
      * @type {string}
-     * @memberof EndpointPortConfig
      */
     'Name'?: string;
     /**
      * 
      * @type {string}
-     * @memberof EndpointPortConfig
      */
     'Protocol'?: EndpointPortConfigProtocolEnum;
     /**
      * The port inside the container.
      * @type {number}
-     * @memberof EndpointPortConfig
      */
     'TargetPort'?: number;
     /**
      * The port on the swarm hosts.
      * @type {number}
-     * @memberof EndpointPortConfig
      */
     'PublishedPort'?: number;
     /**
      * The mode in which port is published.  <p><br /></p>  - \"ingress\" makes the target port accessible on every node,   regardless of whether there is a task for the service running on   that node or not. - \"host\" bypasses the routing mesh and publish the port directly on   the swarm node where that service is running. 
      * @type {string}
-     * @memberof EndpointPortConfig
      */
     'PublishMode'?: EndpointPortConfigPublishModeEnum;
 }
 
 /**
-    * @export
     * @enum {string}
     */
 export enum EndpointPortConfigProtocolEnum {
@@ -62,7 +55,6 @@ export enum EndpointPortConfigProtocolEnum {
     Sctp = 'sctp'
 }
 /**
-    * @export
     * @enum {string}
     */
 export enum EndpointPortConfigPublishModeEnum {

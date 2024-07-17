@@ -43,7 +43,6 @@ import type { ImageSearchResponseItem } from '../models';
 import type { ImageSummary } from '../models';
 /**
  * ImageApi - axios parameter creator
- * @export
  */
 export const ImageApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -846,7 +845,6 @@ export const ImageApiAxiosParamCreator = function (configuration?: Configuration
 
 /**
  * ImageApi - functional programming interface
- * @export
  */
 export const ImageApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = ImageApiAxiosParamCreator(configuration)
@@ -1106,7 +1104,6 @@ export const ImageApiFp = function(configuration?: Configuration) {
 
 /**
  * ImageApi - factory interface
- * @export
  */
 export const ImageApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = ImageApiFp(configuration)
@@ -1321,7 +1318,6 @@ export const ImageApiFactory = function (configuration?: Configuration, basePath
 
 /**
  * ImageApi - object-oriented interface
- * @export
  * @class ImageApi
  * @extends {BaseAPI}
  */
@@ -1334,7 +1330,6 @@ export class ImageApi extends BaseAPI {
      * @param {string} [filters] A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the list of build cache objects.  Available filters:  - &#x60;until&#x3D;&lt;duration&gt;&#x60;: duration relative to daemon\&#39;s time, during which build cache was not used, in Go\&#39;s duration format (e.g., \&#39;24h\&#39;) - &#x60;id&#x3D;&lt;id&gt;&#x60; - &#x60;parent&#x3D;&lt;id&gt;&#x60; - &#x60;type&#x3D;&lt;string&gt;&#x60; - &#x60;description&#x3D;&lt;string&gt;&#x60; - &#x60;inuse&#x60; - &#x60;shared&#x60; - &#x60;private&#x60; 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ImageApi
      */
     public buildPrune(keepStorage?: number, all?: boolean, filters?: string, options?: RawAxiosRequestConfig) {
         return ImageApiFp(this.configuration).buildPrune(keepStorage, all, filters, options).then((request) => request(this.axios, this.basePath));
@@ -1373,7 +1368,6 @@ export class ImageApi extends BaseAPI {
      * @param {File} [inputStream] A tar archive compressed with one of the following algorithms: identity (no compression), gzip, bzip2, xz.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ImageApi
      */
     public imageBuild(dockerfile?: string, t?: string, extrahosts?: string, remote?: string, q?: boolean, nocache?: boolean, cachefrom?: string, pull?: string, rm?: boolean, forcerm?: boolean, memory?: number, memswap?: number, cpushares?: number, cpusetcpus?: string, cpuperiod?: number, cpuquota?: number, buildargs?: string, shmsize?: number, squash?: boolean, labels?: string, networkmode?: string, contentType?: ImageBuildContentTypeEnum, xRegistryConfig?: string, platform?: string, target?: string, outputs?: string, version?: ImageBuildVersionEnum, inputStream?: File, options?: RawAxiosRequestConfig) {
         return ImageApiFp(this.configuration).imageBuild(dockerfile, t, extrahosts, remote, q, nocache, cachefrom, pull, rm, forcerm, memory, memswap, cpushares, cpusetcpus, cpuperiod, cpuquota, buildargs, shmsize, squash, labels, networkmode, contentType, xRegistryConfig, platform, target, outputs, version, inputStream, options).then((request) => request(this.axios, this.basePath));
@@ -1392,7 +1386,6 @@ export class ImageApi extends BaseAPI {
      * @param {ContainerConfig} [containerConfig] The container configuration
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ImageApi
      */
     public imageCommit(container?: string, repo?: string, tag?: string, comment?: string, author?: string, pause?: boolean, changes?: string, containerConfig?: ContainerConfig, options?: RawAxiosRequestConfig) {
         return ImageApiFp(this.configuration).imageCommit(container, repo, tag, comment, author, pause, changes, containerConfig, options).then((request) => request(this.axios, this.basePath));
@@ -1412,7 +1405,6 @@ export class ImageApi extends BaseAPI {
      * @param {string} [inputImage] Image content if the value &#x60;-&#x60; has been specified in fromSrc query parameter
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ImageApi
      */
     public imageCreate(fromImage?: string, fromSrc?: string, repo?: string, tag?: string, message?: string, xRegistryAuth?: string, changes?: Array<string>, platform?: string, inputImage?: string, options?: RawAxiosRequestConfig) {
         return ImageApiFp(this.configuration).imageCreate(fromImage, fromSrc, repo, tag, message, xRegistryAuth, changes, platform, inputImage, options).then((request) => request(this.axios, this.basePath));
@@ -1426,7 +1418,6 @@ export class ImageApi extends BaseAPI {
      * @param {boolean} [noprune] Do not delete untagged parent images
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ImageApi
      */
     public imageDelete(name: string, force?: boolean, noprune?: boolean, options?: RawAxiosRequestConfig) {
         return ImageApiFp(this.configuration).imageDelete(name, force, noprune, options).then((request) => request(this.axios, this.basePath));
@@ -1438,7 +1429,6 @@ export class ImageApi extends BaseAPI {
      * @param {string} name Image name or ID
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ImageApi
      */
     public imageGet(name: string, options?: RawAxiosRequestConfig) {
         return ImageApiFp(this.configuration).imageGet(name, options).then((request) => request(this.axios, this.basePath));
@@ -1450,7 +1440,6 @@ export class ImageApi extends BaseAPI {
      * @param {Array<string>} [names] Image names to filter by
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ImageApi
      */
     public imageGetAll(names?: Array<string>, options?: RawAxiosRequestConfig) {
         return ImageApiFp(this.configuration).imageGetAll(names, options).then((request) => request(this.axios, this.basePath));
@@ -1462,7 +1451,6 @@ export class ImageApi extends BaseAPI {
      * @param {string} name Image name or ID
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ImageApi
      */
     public imageHistory(name: string, options?: RawAxiosRequestConfig) {
         return ImageApiFp(this.configuration).imageHistory(name, options).then((request) => request(this.axios, this.basePath));
@@ -1474,7 +1462,6 @@ export class ImageApi extends BaseAPI {
      * @param {string} name Image name or id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ImageApi
      */
     public imageInspect(name: string, options?: RawAxiosRequestConfig) {
         return ImageApiFp(this.configuration).imageInspect(name, options).then((request) => request(this.axios, this.basePath));
@@ -1488,7 +1475,6 @@ export class ImageApi extends BaseAPI {
      * @param {boolean} [digests] Show digest information as a &#x60;RepoDigests&#x60; field on each image.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ImageApi
      */
     public imageList(all?: boolean, filters?: string, digests?: boolean, options?: RawAxiosRequestConfig) {
         return ImageApiFp(this.configuration).imageList(all, filters, digests, options).then((request) => request(this.axios, this.basePath));
@@ -1501,7 +1487,6 @@ export class ImageApi extends BaseAPI {
      * @param {File} [imagesTarball] Tar archive containing images
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ImageApi
      */
     public imageLoad(quiet?: boolean, imagesTarball?: File, options?: RawAxiosRequestConfig) {
         return ImageApiFp(this.configuration).imageLoad(quiet, imagesTarball, options).then((request) => request(this.axios, this.basePath));
@@ -1513,7 +1498,6 @@ export class ImageApi extends BaseAPI {
      * @param {string} [filters] Filters to process on the prune list, encoded as JSON (a &#x60;map[string][]string&#x60;). Available filters:  - &#x60;dangling&#x3D;&lt;boolean&gt;&#x60; When set to &#x60;true&#x60; (or &#x60;1&#x60;), prune only    unused *and* untagged images. When set to &#x60;false&#x60;    (or &#x60;0&#x60;), all unused images are pruned. - &#x60;until&#x3D;&lt;string&gt;&#x60; Prune images created before this timestamp. The &#x60;&lt;timestamp&gt;&#x60; can be Unix timestamps, date formatted timestamps, or Go duration strings (e.g. &#x60;10m&#x60;, &#x60;1h30m&#x60;) computed relative to the daemon machine’s time. - &#x60;label&#x60; (&#x60;label&#x3D;&lt;key&gt;&#x60;, &#x60;label&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60;, &#x60;label!&#x3D;&lt;key&gt;&#x60;, or &#x60;label!&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60;) Prune images with (or without, in case &#x60;label!&#x3D;...&#x60; is used) the specified labels. 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ImageApi
      */
     public imagePrune(filters?: string, options?: RawAxiosRequestConfig) {
         return ImageApiFp(this.configuration).imagePrune(filters, options).then((request) => request(this.axios, this.basePath));
@@ -1527,7 +1511,6 @@ export class ImageApi extends BaseAPI {
      * @param {string} [tag] The tag to associate with the image on the registry.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ImageApi
      */
     public imagePush(name: string, xRegistryAuth: string, tag?: string, options?: RawAxiosRequestConfig) {
         return ImageApiFp(this.configuration).imagePush(name, xRegistryAuth, tag, options).then((request) => request(this.axios, this.basePath));
@@ -1541,7 +1524,6 @@ export class ImageApi extends BaseAPI {
      * @param {string} [filters] A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the images list. Available filters:  - &#x60;is-automated&#x3D;(true|false)&#x60; - &#x60;is-official&#x3D;(true|false)&#x60; - &#x60;stars&#x3D;&lt;number&gt;&#x60; Matches images that has at least \&#39;number\&#39; stars. 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ImageApi
      */
     public imageSearch(term: string, limit?: number, filters?: string, options?: RawAxiosRequestConfig) {
         return ImageApiFp(this.configuration).imageSearch(term, limit, filters, options).then((request) => request(this.axios, this.basePath));
@@ -1555,7 +1537,6 @@ export class ImageApi extends BaseAPI {
      * @param {string} [tag] The name of the new tag.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ImageApi
      */
     public imageTag(name: string, repo?: string, tag?: string, options?: RawAxiosRequestConfig) {
         return ImageApiFp(this.configuration).imageTag(name, repo, tag, options).then((request) => request(this.axios, this.basePath));
@@ -1563,14 +1544,12 @@ export class ImageApi extends BaseAPI {
 }
 
 /**
-  * @export
   * @enum {string}
   */
 export enum ImageBuildContentTypeEnum {
     ApplicationXTar = 'application/x-tar'
 }
 /**
-  * @export
   * @enum {string}
   */
 export enum ImageBuildVersionEnum {

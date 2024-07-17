@@ -16,38 +16,32 @@
 
 /**
  * Specification for the restart policy which applies to containers created as part of this service. 
- * @export
  * @interface TaskSpecRestartPolicy
  */
 export interface TaskSpecRestartPolicy {
     /**
      * Condition for restart.
      * @type {string}
-     * @memberof TaskSpecRestartPolicy
      */
     'Condition'?: TaskSpecRestartPolicyConditionEnum;
     /**
      * Delay between restart attempts.
      * @type {number}
-     * @memberof TaskSpecRestartPolicy
      */
     'Delay'?: number;
     /**
      * Maximum attempts to restart a given container before giving up (default value is 0, which is ignored). 
      * @type {number}
-     * @memberof TaskSpecRestartPolicy
      */
     'MaxAttempts'?: number;
     /**
      * Windows is the time window used to evaluate the restart policy (default value is 0, which is unbounded). 
      * @type {number}
-     * @memberof TaskSpecRestartPolicy
      */
     'Window'?: number;
 }
 
 /**
-    * @export
     * @enum {string}
     */
 export enum TaskSpecRestartPolicyConditionEnum {

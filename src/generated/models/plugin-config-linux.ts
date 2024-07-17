@@ -19,26 +19,22 @@ import type { PluginDevice } from './plugin-device.js';
 
 /**
  * 
- * @export
  * @interface PluginConfigLinux
  */
 export interface PluginConfigLinux {
     /**
      * 
      * @type {Array<string>}
-     * @memberof PluginConfigLinux
      */
     'Capabilities': Array<string>;
     /**
      * 
      * @type {boolean}
-     * @memberof PluginConfigLinux
      */
     'AllowAllDevices': boolean;
     /**
      * 
      * @type {Array<PluginDevice>}
-     * @memberof PluginConfigLinux
      */
     'Devices': Array<PluginDevice>;
 }

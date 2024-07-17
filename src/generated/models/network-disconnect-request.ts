@@ -19,20 +19,17 @@ import type { EndpointSettings } from './endpoint-settings.js';
 
 /**
  * 
- * @export
  * @interface NetworkDisconnectRequest
  */
 export interface NetworkDisconnectRequest {
     /**
      * The ID or name of the container to connect to the network.
      * @type {string}
-     * @memberof NetworkDisconnectRequest
      */
     'Container'?: string;
     /**
      * 
      * @type {EndpointSettings}
-     * @memberof NetworkDisconnectRequest
      */
     'EndpointConfig'?: EndpointSettings;
 }

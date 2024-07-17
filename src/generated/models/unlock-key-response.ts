@@ -16,14 +16,12 @@
 
 /**
  * 
- * @export
  * @interface UnlockKeyResponse
  */
 export interface UnlockKeyResponse {
     /**
      * The swarm\'s unlock key.
      * @type {string}
-     * @memberof UnlockKeyResponse
      */
     'UnlockKey'?: string;
 }

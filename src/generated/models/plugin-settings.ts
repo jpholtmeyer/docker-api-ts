@@ -22,32 +22,27 @@ import type { PluginMount } from './plugin-mount.js';
 
 /**
  * Settings that can be modified by users.
- * @export
  * @interface PluginSettings
  */
 export interface PluginSettings {
     /**
      * 
      * @type {Array<PluginMount>}
-     * @memberof PluginSettings
      */
     'Mounts': Array<PluginMount>;
     /**
      * 
      * @type {Array<string>}
-     * @memberof PluginSettings
      */
     'Env': Array<string>;
     /**
      * 
      * @type {Array<string>}
-     * @memberof PluginSettings
      */
     'Args': Array<string>;
     /**
      * 
      * @type {Array<PluginDevice>}
-     * @memberof PluginSettings
      */
     'Devices': Array<PluginDevice>;
 }
