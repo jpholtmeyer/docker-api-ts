@@ -1,14 +1,9 @@
 additionalProperties:
   supportsES6: true
   npmName: docker-api-ts
-  npmVersion: 0.0.1
-  apiPackage: api
-  modelPackage: models
-  withSeparateModelsAndApi: true
+  npmVersion: 1.0.0
+  # apiPackage: api
+  # modelPackage: models
+  # withSeparateModelsAndApi: true
   stringEnums: true
   withNodeImports: false
-# templateDir: ./src/custom_templates
-# files:
-#   docker.mustache:
-#     templateType: API
-#     destinationFilename: docker.ts

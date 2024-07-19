@@ -2,878 +2,918 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/modules.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/index.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/enums/BuildCacheTypeEnum.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/enums/ContainerStateStatusEnum.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/enums/ContainerWaitConditionEnum.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/enums/EndpointPortConfigProtocolEnum.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/enums/EndpointPortConfigPublishModeEnum.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/enums/EndpointSpecModeEnum.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/enums/EventMessageScopeEnum.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/enums/EventMessageTypeEnum.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/enums/HealthStatusEnum.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
+	</url>
+	<url>
+		<loc>https://jholtmeyer.github.io/docker-api-ts/enums/HostConfigAllOfLogConfigTypeEnum.html</loc>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
+	</url>
+	<url>
+		<loc>https://jholtmeyer.github.io/docker-api-ts/enums/HostConfigCgroupnsModeEnum.html</loc>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
+	</url>
+	<url>
+		<loc>https://jholtmeyer.github.io/docker-api-ts/enums/HostConfigIsolationEnum.html</loc>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/enums/ImageBuildContentTypeEnum.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/enums/ImageBuildVersionEnum.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/enums/LocalNodeState.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/enums/MountBindOptionsPropagationEnum.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/enums/MountPointTypeEnum.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/enums/MountTypeEnum.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/enums/NodeSpecAvailabilityEnum.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/enums/NodeSpecRoleEnum.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/enums/NodeState.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/enums/PluginConfigInterfaceProtocolSchemeEnum.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/enums/PortTypeEnum.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/enums/Reachability.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
+	</url>
+	<url>
+		<loc>https://jholtmeyer.github.io/docker-api-ts/enums/RestartPolicyNameEnum.html</loc>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/enums/ServiceSpecRollbackConfigFailureActionEnum.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/enums/ServiceSpecRollbackConfigOrderEnum.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/enums/ServiceSpecUpdateConfigFailureActionEnum.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/enums/ServiceSpecUpdateConfigOrderEnum.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/enums/ServiceUpdateRegistryAuthFromEnum.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/enums/ServiceUpdateStatusStateEnum.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/enums/SwarmSpecCAConfigExternalCAsInnerProtocolEnum.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/enums/SystemInfoCgroupDriverEnum.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/enums/SystemInfoCgroupVersionEnum.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/enums/SystemInfoIsolationEnum.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/enums/TaskSpecContainerSpecIsolationEnum.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/enums/TaskSpecRestartPolicyConditionEnum.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/enums/TaskState.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/enums/VolumeScopeEnum.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/classes/Configuration.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/classes/Docker.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/Address.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/AuthConfig.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/BuildCache.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/BuildPruneResponse.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ClusterInfo.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/Commit.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/Config.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
+	</url>
+	<url>
+		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ConfigCreateRequest.html</loc>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ConfigReference.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ConfigSpec.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ConfigurationParameters.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ContainerChangeResponseItem.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ContainerConfig.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
+	</url>
+	<url>
+		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ContainerCreateRequest.html</loc>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ContainerCreateResponse.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ContainerInspectResponse.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ContainerPruneResponse.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ContainerState.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ContainerSummary.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ContainerSummaryHostConfig.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ContainerSummaryNetworkSettings.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ContainerTopResponse.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
+	</url>
+	<url>
+		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ContainerUpdateRequest.html</loc>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ContainerUpdateResponse.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ContainerWaitExitError.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ContainerWaitResponse.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/DeviceMapping.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/DeviceRequest.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/DistributionInspect.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/Driver.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/EndpointIPAMConfig.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/EndpointPortConfig.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/EndpointSettings.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/EndpointSpec.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/EngineDescription.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/EngineDescriptionPluginsInner.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/EventActor.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/EventMessage.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ExecConfig.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ExecInspectResponse.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ExecStartConfig.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/GenericResourcesInner.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/GenericResourcesInnerDiscreteResourceSpec.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/GenericResourcesInnerNamedResourceSpec.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/GraphDriverData.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/Health.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/HealthConfig.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/HealthcheckResult.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/HistoryResponseItem.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
+	</url>
+	<url>
+		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/HostConfig.html</loc>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
+	</url>
+	<url>
+		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/HostConfigAllOfLogConfig.html</loc>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/IPAM.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/IPAMConfig.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/IdResponse.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ImageConfig.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ImageDeleteResponseItem.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ImageInspect.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ImageInspectMetadata.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ImageInspectRootFS.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ImagePruneResponse.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ImageSearchResponseItem.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ImageSummary.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/IndexInfo.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
+	</url>
+	<url>
+		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/JoinTokens.html</loc>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/Limit.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ManagerStatus.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/Mount.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/MountBindOptions.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/MountPoint.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/MountTmpfsOptions.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/MountVolumeOptions.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/MountVolumeOptionsDriverConfig.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/Network.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/NetworkAttachmentConfig.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/NetworkConnectRequest.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/NetworkContainer.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/NetworkCreateRequest.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/NetworkCreateResponse.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/NetworkDisconnectRequest.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/NetworkPruneResponse.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/NetworkSettings.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
+	</url>
+	<url>
+		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/NetworkingConfig.html</loc>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/Node.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/NodeDescription.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/NodeSpec.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/NodeStatus.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/OCIDescriptor.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/OCIPlatform.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ObjectVersion.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/PeerInfo.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/PeerNode.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/Platform.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/Plugin.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/PluginConfig.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/PluginConfigArgs.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/PluginConfigInterface.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/PluginConfigLinux.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/PluginConfigNetwork.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/PluginConfigRootfs.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/PluginConfigUser.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/PluginDevice.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/PluginEnv.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/PluginInterfaceType.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/PluginMount.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/PluginPrivilege.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/PluginSettings.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/PluginsInfo.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/Port.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/PortBinding.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ProcessConfig.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/RegistryServiceConfig.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ResourceObject.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/Resources.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ResourcesBlkioWeightDeviceInner.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ResourcesUlimitsInner.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
+	</url>
+	<url>
+		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/RestartPolicy.html</loc>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/Runtime.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/Secret.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
+	</url>
+	<url>
+		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/SecretCreateRequest.html</loc>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/SecretSpec.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/Service.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
+	</url>
+	<url>
+		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ServiceCreateRequest.html</loc>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ServiceCreateResponse.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ServiceEndpoint.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ServiceEndpointVirtualIPsInner.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ServiceJobStatus.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ServiceServiceStatus.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ServiceSpec.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ServiceSpecMode.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ServiceSpecModeReplicated.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ServiceSpecModeReplicatedJob.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ServiceSpecRollbackConfig.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ServiceSpecUpdateConfig.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
+	</url>
+	<url>
+		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ServiceUpdateRequest.html</loc>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ServiceUpdateResponse.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ServiceUpdateStatus.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
+	</url>
+	<url>
+		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/Swarm.html</loc>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/SwarmInfo.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/SwarmInitRequest.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/SwarmJoinRequest.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/SwarmSpec.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/SwarmSpecCAConfig.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/SwarmSpecCAConfigExternalCAsInner.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/SwarmSpecDispatcher.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/SwarmSpecEncryptionConfig.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/SwarmSpecOrchestration.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/SwarmSpecRaft.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/SwarmSpecTaskDefaults.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/SwarmSpecTaskDefaultsLogDriver.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/SwarmUnlockRequest.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/SystemAuthResponse.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/SystemDataUsageResponse.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/SystemInfo.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/SystemInfoDefaultAddressPoolsInner.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/SystemVersion.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/SystemVersionComponentsInner.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/SystemVersionPlatform.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/TLSInfo.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/Task.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/TaskSpec.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/TaskSpecContainerSpec.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/TaskSpecContainerSpecConfigsInner.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/TaskSpecContainerSpecConfigsInnerFile.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/TaskSpecContainerSpecDNSConfig.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/TaskSpecContainerSpecPrivileges.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/TaskSpecContainerSpecPrivilegesCredentialSpec.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/TaskSpecContainerSpecPrivilegesSELinuxContext.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/TaskSpecContainerSpecSecretsInner.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/TaskSpecContainerSpecSecretsInnerFile.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/TaskSpecLogDriver.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/TaskSpecNetworkAttachmentSpec.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/TaskSpecPlacement.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/TaskSpecPlacementPreferencesInner.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/TaskSpecPlacementPreferencesInnerSpread.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/TaskSpecPluginSpec.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/TaskSpecResources.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/TaskSpecRestartPolicy.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/TaskStatus.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/TaskStatusContainerStatus.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/ThrottleDevice.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/UnlockKeyResponse.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/Volume.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/VolumeCreateOptions.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/VolumeListResponse.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/VolumePruneResponse.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 	<url>
 		<loc>https://jholtmeyer.github.io/docker-api-ts/interfaces/VolumeUsageData.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
-	</url>
-	<url>
-		<loc>https://jholtmeyer.github.io/docker-api-ts/types/ConfigCreateRequest.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
-	</url>
-	<url>
-		<loc>https://jholtmeyer.github.io/docker-api-ts/types/ContainerCreateRequest.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
-	</url>
-	<url>
-		<loc>https://jholtmeyer.github.io/docker-api-ts/types/ContainerUpdateRequest.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
-	</url>
-	<url>
-		<loc>https://jholtmeyer.github.io/docker-api-ts/types/SecretCreateRequest.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
-	</url>
-	<url>
-		<loc>https://jholtmeyer.github.io/docker-api-ts/types/ServiceCreateRequest.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
-	</url>
-	<url>
-		<loc>https://jholtmeyer.github.io/docker-api-ts/types/ServiceUpdateRequest.html</loc>
-		<lastmod>2024-07-18T02:33:42.943Z</lastmod>
+		<lastmod>2024-07-19T22:27:44.688Z</lastmod>
 	</url>
 </urlset>

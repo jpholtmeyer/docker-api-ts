@@ -13,20 +13,15990 @@
  */
 
 
+import type { Configuration } from './configuration.js';
+import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
+import globalAxios from 'axios';
+// Some imports not used depending on template conditions
+// @ts-ignore
+import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from './common';
+import type { RequestArgs } from './base.js';
+// @ts-ignore
+import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError, operationServerMap } from './base.js';
 
-export * from './api/config-api';
-export * from './api/container-api';
-export * from './api/distribution-api';
-export * from './api/exec-api';
-export * from './api/image-api';
-export * from './api/network-api';
-export * from './api/node-api';
-export * from './api/plugin-api';
-export * from './api/secret-api';
-export * from './api/service-api';
-export * from './api/session-api';
-export * from './api/swarm-api';
-export * from './api/system-api';
-export * from './api/task-api';
-export * from './api/volume-api';
+/**
+ * Address represents an IPv4 or IPv6 IP address.
+ * @interface Address
+ */
+export interface Address {
+    /**
+     * IP address.
+     * @type {string}
+     */
+    'Addr'?: string;
+    /**
+     * Mask length of the IP address.
+     * @type {number}
+     */
+    'PrefixLen'?: number;
+}
+/**
+ * 
+ * @interface AuthConfig
+ */
+export interface AuthConfig {
+    /**
+     * 
+     * @type {string}
+     */
+    'username'?: string;
+    /**
+     * 
+     * @type {string}
+     */
+    'password'?: string;
+    /**
+     * 
+     * @type {string}
+     */
+    'email'?: string;
+    /**
+     * 
+     * @type {string}
+     */
+    'serveraddress'?: string;
+}
+/**
+ * BuildCache contains information about a build cache record. 
+ * @interface BuildCache
+ */
+export interface BuildCache {
+    /**
+     * Unique ID of the build cache record. 
+     * @type {string}
+     */
+    'ID'?: string;
+    /**
+     * ID of the parent build cache record. 
+     * @type {string}
+     */
+    'Parent'?: string;
+    /**
+     * Cache record type. 
+     * @type {string}
+     */
+    'Type'?: BuildCacheTypeEnum;
+    /**
+     * Description of the build-step that produced the build cache. 
+     * @type {string}
+     */
+    'Description'?: string;
+    /**
+     * Indicates if the build cache is in use. 
+     * @type {boolean}
+     */
+    'InUse'?: boolean;
+    /**
+     * Indicates if the build cache is shared. 
+     * @type {boolean}
+     */
+    'Shared'?: boolean;
+    /**
+     * Amount of disk space used by the build cache (in bytes). 
+     * @type {number}
+     */
+    'Size'?: number;
+    /**
+     * Date and time at which the build cache was created in [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds. 
+     * @type {string}
+     */
+    'CreatedAt'?: string;
+    /**
+     * Date and time at which the build cache was last used in [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds. 
+     * @type {string}
+     */
+    'LastUsedAt'?: string | null;
+    /**
+     * 
+     * @type {number}
+     */
+    'UsageCount'?: number;
+}
+
+/**
+    * @enum {string}
+    */
+export enum BuildCacheTypeEnum {
+    Internal = 'internal',
+    Frontend = 'frontend',
+    SourceLocal = 'source.local',
+    SourceGitCheckout = 'source.git.checkout',
+    ExecCachemount = 'exec.cachemount',
+    Regular = 'regular'
+}
+
+/**
+ * 
+ * @interface BuildInfo
+ */
+export interface BuildInfo {
+    /**
+     * 
+     * @type {string}
+     */
+    'id'?: string;
+    /**
+     * 
+     * @type {string}
+     */
+    'stream'?: string;
+    /**
+     * 
+     * @type {string}
+     */
+    'error'?: string;
+    /**
+     * 
+     * @type {ErrorDetail}
+     */
+    'errorDetail'?: ErrorDetail;
+    /**
+     * 
+     * @type {string}
+     */
+    'status'?: string;
+    /**
+     * 
+     * @type {string}
+     */
+    'progress'?: string;
+    /**
+     * 
+     * @type {ProgressDetail}
+     */
+    'progressDetail'?: ProgressDetail;
+    /**
+     * 
+     * @type {ImageID}
+     */
+    'aux'?: ImageID;
+}
+/**
+ * 
+ * @interface BuildPruneResponse
+ */
+export interface BuildPruneResponse {
+    /**
+     * 
+     * @type {Array<string>}
+     */
+    'CachesDeleted'?: Array<string>;
+    /**
+     * Disk space reclaimed in bytes
+     * @type {number}
+     */
+    'SpaceReclaimed'?: number;
+}
+/**
+ * ClusterInfo represents information about the swarm as is returned by the \"/info\" endpoint. Join-tokens are not included. 
+ * @interface ClusterInfo
+ */
+export interface ClusterInfo {
+    /**
+     * The ID of the swarm.
+     * @type {string}
+     */
+    'ID'?: string;
+    /**
+     * 
+     * @type {ObjectVersion}
+     */
+    'Version'?: ObjectVersion;
+    /**
+     * Date and time at which the swarm was initialised in [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds. 
+     * @type {string}
+     */
+    'CreatedAt'?: string;
+    /**
+     * Date and time at which the swarm was last updated in [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds. 
+     * @type {string}
+     */
+    'UpdatedAt'?: string;
+    /**
+     * 
+     * @type {SwarmSpec}
+     */
+    'Spec'?: SwarmSpec;
+    /**
+     * 
+     * @type {TLSInfo}
+     */
+    'TLSInfo'?: TLSInfo;
+    /**
+     * Whether there is currently a root CA rotation in progress for the swarm 
+     * @type {boolean}
+     */
+    'RootRotationInProgress'?: boolean;
+    /**
+     * DataPathPort specifies the data path port number for data traffic. Acceptable port range is 1024 to 49151. If no port is set or is set to 0, the default port (4789) is used. 
+     * @type {number}
+     */
+    'DataPathPort'?: number;
+    /**
+     * Default Address Pool specifies default subnet pools for global scope networks. 
+     * @type {Array<string>}
+     */
+    'DefaultAddrPool'?: Array<string>;
+    /**
+     * SubnetSize specifies the subnet size of the networks created from the default subnet pool. 
+     * @type {number}
+     */
+    'SubnetSize'?: number;
+}
+/**
+ * Commit holds the Git-commit (SHA1) that a binary was built from, as reported in the version-string of external tools, such as `containerd`, or `runC`. 
+ * @interface Commit
+ */
+export interface Commit {
+    /**
+     * Actual commit ID of external tool.
+     * @type {string}
+     */
+    'ID'?: string;
+    /**
+     * Commit ID of external tool expected by dockerd as set at build time. 
+     * @type {string}
+     */
+    'Expected'?: string;
+}
+/**
+ * 
+ * @interface Config
+ */
+export interface Config {
+    /**
+     * 
+     * @type {string}
+     */
+    'ID'?: string;
+    /**
+     * 
+     * @type {ObjectVersion}
+     */
+    'Version'?: ObjectVersion;
+    /**
+     * 
+     * @type {string}
+     */
+    'CreatedAt'?: string;
+    /**
+     * 
+     * @type {string}
+     */
+    'UpdatedAt'?: string;
+    /**
+     * 
+     * @type {ConfigSpec}
+     */
+    'Spec'?: ConfigSpec;
+}
+/**
+ * 
+ * @interface ConfigCreateRequest
+ */
+export interface ConfigCreateRequest {
+    /**
+     * User-defined name of the config.
+     * @type {string}
+     */
+    'Name'?: string;
+    /**
+     * User-defined key/value metadata.
+     * @type {{ [key: string]: string; }}
+     */
+    'Labels'?: { [key: string]: string; };
+    /**
+     * Base64-url-safe-encoded ([RFC 4648](https://tools.ietf.org/html/rfc4648#section-5)) config data. 
+     * @type {string}
+     */
+    'Data'?: string;
+    /**
+     * 
+     * @type {Driver}
+     */
+    'Templating'?: Driver;
+}
+/**
+ * The config-only network source to provide the configuration for this network. 
+ * @interface ConfigReference
+ */
+export interface ConfigReference {
+    /**
+     * The name of the config-only network that provides the network\'s configuration. The specified network must be an existing config-only network. Only network names are allowed, not network IDs. 
+     * @type {string}
+     */
+    'Network'?: string;
+}
+/**
+ * 
+ * @interface ConfigSpec
+ */
+export interface ConfigSpec {
+    /**
+     * User-defined name of the config.
+     * @type {string}
+     */
+    'Name'?: string;
+    /**
+     * User-defined key/value metadata.
+     * @type {{ [key: string]: string; }}
+     */
+    'Labels'?: { [key: string]: string; };
+    /**
+     * Base64-url-safe-encoded ([RFC 4648](https://tools.ietf.org/html/rfc4648#section-5)) config data. 
+     * @type {string}
+     */
+    'Data'?: string;
+    /**
+     * 
+     * @type {Driver}
+     */
+    'Templating'?: Driver;
+}
+/**
+ * change item in response to ContainerChanges operation
+ * @interface ContainerChangeResponseItem
+ */
+export interface ContainerChangeResponseItem {
+    /**
+     * Path to file that has changed
+     * @type {string}
+     */
+    'Path': string;
+    /**
+     * Kind of change
+     * @type {number}
+     */
+    'Kind': number;
+}
+/**
+ * Configuration for a container that is portable between hosts.  When used as `ContainerConfig` field in an image, `ContainerConfig` is an optional field containing the configuration of the container that was last committed when creating the image.  Previous versions of Docker builder used this field to store build cache, and it is not in active use anymore. 
+ * @interface ContainerConfig
+ */
+export interface ContainerConfig {
+    /**
+     * The hostname to use for the container, as a valid RFC 1123 hostname. 
+     * @type {string}
+     */
+    'Hostname'?: string;
+    /**
+     * The domain name to use for the container. 
+     * @type {string}
+     */
+    'Domainname'?: string;
+    /**
+     * The user that commands are run as inside the container.
+     * @type {string}
+     */
+    'User'?: string;
+    /**
+     * Whether to attach to `stdin`.
+     * @type {boolean}
+     */
+    'AttachStdin'?: boolean;
+    /**
+     * Whether to attach to `stdout`.
+     * @type {boolean}
+     */
+    'AttachStdout'?: boolean;
+    /**
+     * Whether to attach to `stderr`.
+     * @type {boolean}
+     */
+    'AttachStderr'?: boolean;
+    /**
+     * An object mapping ports to an empty object in the form:  `{\"<port>/<tcp|udp|sctp>\": {}}` 
+     * @type {{ [key: string]: object; }}
+     */
+    'ExposedPorts'?: { [key: string]: object; } | null;
+    /**
+     * Attach standard streams to a TTY, including `stdin` if it is not closed. 
+     * @type {boolean}
+     */
+    'Tty'?: boolean;
+    /**
+     * Open `stdin`
+     * @type {boolean}
+     */
+    'OpenStdin'?: boolean;
+    /**
+     * Close `stdin` after one attached client disconnects
+     * @type {boolean}
+     */
+    'StdinOnce'?: boolean;
+    /**
+     * A list of environment variables to set inside the container in the form `[\"VAR=value\", ...]`. A variable without `=` is removed from the environment, rather than to have an empty value. 
+     * @type {Array<string>}
+     */
+    'Env'?: Array<string>;
+    /**
+     * Command to run specified as a string or an array of strings. 
+     * @type {Array<string>}
+     */
+    'Cmd'?: Array<string>;
+    /**
+     * 
+     * @type {HealthConfig}
+     */
+    'Healthcheck'?: HealthConfig;
+    /**
+     * Command is already escaped (Windows only)
+     * @type {boolean}
+     */
+    'ArgsEscaped'?: boolean | null;
+    /**
+     * The name (or reference) of the image to use when creating the container, or which was used when the container was created. 
+     * @type {string}
+     */
+    'Image'?: string;
+    /**
+     * An object mapping mount point paths inside the container to empty objects. 
+     * @type {{ [key: string]: object; }}
+     */
+    'Volumes'?: { [key: string]: object; };
+    /**
+     * The working directory for commands to run in.
+     * @type {string}
+     */
+    'WorkingDir'?: string;
+    /**
+     * The entry point for the container as a string or an array of strings.  If the array consists of exactly one empty string (`[\"\"]`) then the entry point is reset to system default (i.e., the entry point used by docker when there is no `ENTRYPOINT` instruction in the `Dockerfile`). 
+     * @type {Array<string>}
+     */
+    'Entrypoint'?: Array<string>;
+    /**
+     * Disable networking for the container.
+     * @type {boolean}
+     */
+    'NetworkDisabled'?: boolean | null;
+    /**
+     * MAC address of the container.
+     * @type {string}
+     */
+    'MacAddress'?: string | null;
+    /**
+     * `ONBUILD` metadata that were defined in the image\'s `Dockerfile`. 
+     * @type {Array<string>}
+     */
+    'OnBuild'?: Array<string> | null;
+    /**
+     * User-defined key/value metadata.
+     * @type {{ [key: string]: string; }}
+     */
+    'Labels'?: { [key: string]: string; };
+    /**
+     * Signal to stop a container as a string or unsigned integer. 
+     * @type {string}
+     */
+    'StopSignal'?: string | null;
+    /**
+     * Timeout to stop a container in seconds.
+     * @type {number}
+     */
+    'StopTimeout'?: number | null;
+    /**
+     * Shell for when `RUN`, `CMD`, and `ENTRYPOINT` uses a shell. 
+     * @type {Array<string>}
+     */
+    'Shell'?: Array<string> | null;
+}
+/**
+ * 
+ * @interface ContainerCreateRequest
+ */
+export interface ContainerCreateRequest {
+    /**
+     * The hostname to use for the container, as a valid RFC 1123 hostname. 
+     * @type {string}
+     */
+    'Hostname'?: string;
+    /**
+     * The domain name to use for the container. 
+     * @type {string}
+     */
+    'Domainname'?: string;
+    /**
+     * The user that commands are run as inside the container.
+     * @type {string}
+     */
+    'User'?: string;
+    /**
+     * Whether to attach to `stdin`.
+     * @type {boolean}
+     */
+    'AttachStdin'?: boolean;
+    /**
+     * Whether to attach to `stdout`.
+     * @type {boolean}
+     */
+    'AttachStdout'?: boolean;
+    /**
+     * Whether to attach to `stderr`.
+     * @type {boolean}
+     */
+    'AttachStderr'?: boolean;
+    /**
+     * An object mapping ports to an empty object in the form:  `{\"<port>/<tcp|udp|sctp>\": {}}` 
+     * @type {{ [key: string]: object; }}
+     */
+    'ExposedPorts'?: { [key: string]: object; } | null;
+    /**
+     * Attach standard streams to a TTY, including `stdin` if it is not closed. 
+     * @type {boolean}
+     */
+    'Tty'?: boolean;
+    /**
+     * Open `stdin`
+     * @type {boolean}
+     */
+    'OpenStdin'?: boolean;
+    /**
+     * Close `stdin` after one attached client disconnects
+     * @type {boolean}
+     */
+    'StdinOnce'?: boolean;
+    /**
+     * A list of environment variables to set inside the container in the form `[\"VAR=value\", ...]`. A variable without `=` is removed from the environment, rather than to have an empty value. 
+     * @type {Array<string>}
+     */
+    'Env'?: Array<string>;
+    /**
+     * Command to run specified as a string or an array of strings. 
+     * @type {Array<string>}
+     */
+    'Cmd'?: Array<string>;
+    /**
+     * 
+     * @type {HealthConfig}
+     */
+    'Healthcheck'?: HealthConfig;
+    /**
+     * Command is already escaped (Windows only)
+     * @type {boolean}
+     */
+    'ArgsEscaped'?: boolean | null;
+    /**
+     * The name (or reference) of the image to use when creating the container, or which was used when the container was created. 
+     * @type {string}
+     */
+    'Image'?: string;
+    /**
+     * An object mapping mount point paths inside the container to empty objects. 
+     * @type {{ [key: string]: object; }}
+     */
+    'Volumes'?: { [key: string]: object; };
+    /**
+     * The working directory for commands to run in.
+     * @type {string}
+     */
+    'WorkingDir'?: string;
+    /**
+     * The entry point for the container as a string or an array of strings.  If the array consists of exactly one empty string (`[\"\"]`) then the entry point is reset to system default (i.e., the entry point used by docker when there is no `ENTRYPOINT` instruction in the `Dockerfile`). 
+     * @type {Array<string>}
+     */
+    'Entrypoint'?: Array<string>;
+    /**
+     * Disable networking for the container.
+     * @type {boolean}
+     */
+    'NetworkDisabled'?: boolean | null;
+    /**
+     * MAC address of the container.
+     * @type {string}
+     */
+    'MacAddress'?: string | null;
+    /**
+     * `ONBUILD` metadata that were defined in the image\'s `Dockerfile`. 
+     * @type {Array<string>}
+     */
+    'OnBuild'?: Array<string> | null;
+    /**
+     * User-defined key/value metadata.
+     * @type {{ [key: string]: string; }}
+     */
+    'Labels'?: { [key: string]: string; };
+    /**
+     * Signal to stop a container as a string or unsigned integer. 
+     * @type {string}
+     */
+    'StopSignal'?: string | null;
+    /**
+     * Timeout to stop a container in seconds.
+     * @type {number}
+     */
+    'StopTimeout'?: number | null;
+    /**
+     * Shell for when `RUN`, `CMD`, and `ENTRYPOINT` uses a shell. 
+     * @type {Array<string>}
+     */
+    'Shell'?: Array<string> | null;
+    /**
+     * 
+     * @type {HostConfig}
+     */
+    'HostConfig'?: HostConfig;
+    /**
+     * 
+     * @type {NetworkingConfig}
+     */
+    'NetworkingConfig'?: NetworkingConfig;
+}
+/**
+ * OK response to ContainerCreate operation
+ * @interface ContainerCreateResponse
+ */
+export interface ContainerCreateResponse {
+    /**
+     * The ID of the created container
+     * @type {string}
+     */
+    'Id': string;
+    /**
+     * Warnings encountered when creating the container
+     * @type {Array<string>}
+     */
+    'Warnings': Array<string>;
+}
+/**
+ * 
+ * @interface ContainerInspectResponse
+ */
+export interface ContainerInspectResponse {
+    /**
+     * The ID of the container
+     * @type {string}
+     */
+    'Id'?: string;
+    /**
+     * The time the container was created
+     * @type {string}
+     */
+    'Created'?: string;
+    /**
+     * The path to the command being run
+     * @type {string}
+     */
+    'Path'?: string;
+    /**
+     * The arguments to the command being run
+     * @type {Array<string>}
+     */
+    'Args'?: Array<string>;
+    /**
+     * 
+     * @type {ContainerState}
+     */
+    'State'?: ContainerState | null;
+    /**
+     * The container\'s image ID
+     * @type {string}
+     */
+    'Image'?: string;
+    /**
+     * 
+     * @type {string}
+     */
+    'ResolvConfPath'?: string;
+    /**
+     * 
+     * @type {string}
+     */
+    'HostnamePath'?: string;
+    /**
+     * 
+     * @type {string}
+     */
+    'HostsPath'?: string;
+    /**
+     * 
+     * @type {string}
+     */
+    'LogPath'?: string;
+    /**
+     * 
+     * @type {string}
+     */
+    'Name'?: string;
+    /**
+     * 
+     * @type {number}
+     */
+    'RestartCount'?: number;
+    /**
+     * 
+     * @type {string}
+     */
+    'Driver'?: string;
+    /**
+     * 
+     * @type {string}
+     */
+    'Platform'?: string;
+    /**
+     * 
+     * @type {string}
+     */
+    'MountLabel'?: string;
+    /**
+     * 
+     * @type {string}
+     */
+    'ProcessLabel'?: string;
+    /**
+     * 
+     * @type {string}
+     */
+    'AppArmorProfile'?: string;
+    /**
+     * IDs of exec instances that are running in the container.
+     * @type {Array<string>}
+     */
+    'ExecIDs'?: Array<string> | null;
+    /**
+     * 
+     * @type {HostConfig}
+     */
+    'HostConfig'?: HostConfig;
+    /**
+     * 
+     * @type {GraphDriverData}
+     */
+    'GraphDriver'?: GraphDriverData;
+    /**
+     * The size of files that have been created or changed by this container. 
+     * @type {number}
+     */
+    'SizeRw'?: number;
+    /**
+     * The total size of all the files in this container.
+     * @type {number}
+     */
+    'SizeRootFs'?: number;
+    /**
+     * 
+     * @type {Array<MountPoint>}
+     */
+    'Mounts'?: Array<MountPoint>;
+    /**
+     * 
+     * @type {ContainerConfig}
+     */
+    'Config'?: ContainerConfig;
+    /**
+     * 
+     * @type {NetworkSettings}
+     */
+    'NetworkSettings'?: NetworkSettings;
+}
+/**
+ * 
+ * @interface ContainerPruneResponse
+ */
+export interface ContainerPruneResponse {
+    /**
+     * Container IDs that were deleted
+     * @type {Array<string>}
+     */
+    'ContainersDeleted'?: Array<string>;
+    /**
+     * Disk space reclaimed in bytes
+     * @type {number}
+     */
+    'SpaceReclaimed'?: number;
+}
+/**
+ * ContainerState stores container\'s running state. It\'s part of ContainerJSONBase and will be returned by the \"inspect\" command. 
+ * @interface ContainerState
+ */
+export interface ContainerState {
+    /**
+     * String representation of the container state. Can be one of \"created\", \"running\", \"paused\", \"restarting\", \"removing\", \"exited\", or \"dead\". 
+     * @type {string}
+     */
+    'Status'?: ContainerStateStatusEnum;
+    /**
+     * Whether this container is running.  Note that a running container can be _paused_. The `Running` and `Paused` booleans are not mutually exclusive:  When pausing a container (on Linux), the freezer cgroup is used to suspend all processes in the container. Freezing the process requires the process to be running. As a result, paused containers are both `Running` _and_ `Paused`.  Use the `Status` field instead to determine if a container\'s state is \"running\". 
+     * @type {boolean}
+     */
+    'Running'?: boolean;
+    /**
+     * Whether this container is paused.
+     * @type {boolean}
+     */
+    'Paused'?: boolean;
+    /**
+     * Whether this container is restarting.
+     * @type {boolean}
+     */
+    'Restarting'?: boolean;
+    /**
+     * Whether this container has been killed because it ran out of memory. 
+     * @type {boolean}
+     */
+    'OOMKilled'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     */
+    'Dead'?: boolean;
+    /**
+     * The process ID of this container
+     * @type {number}
+     */
+    'Pid'?: number;
+    /**
+     * The last exit code of this container
+     * @type {number}
+     */
+    'ExitCode'?: number;
+    /**
+     * 
+     * @type {string}
+     */
+    'Error'?: string;
+    /**
+     * The time when this container was last started.
+     * @type {string}
+     */
+    'StartedAt'?: string;
+    /**
+     * The time when this container last exited.
+     * @type {string}
+     */
+    'FinishedAt'?: string;
+    /**
+     * 
+     * @type {Health}
+     */
+    'Health'?: Health | null;
+}
+
+/**
+    * @enum {string}
+    */
+export enum ContainerStateStatusEnum {
+    Created = 'created',
+    Running = 'running',
+    Paused = 'paused',
+    Restarting = 'restarting',
+    Removing = 'removing',
+    Exited = 'exited',
+    Dead = 'dead'
+}
+
+/**
+ * 
+ * @interface ContainerSummary
+ */
+export interface ContainerSummary {
+    /**
+     * The ID of this container
+     * @type {string}
+     */
+    'Id'?: string;
+    /**
+     * The names that this container has been given
+     * @type {Array<string>}
+     */
+    'Names'?: Array<string>;
+    /**
+     * The name of the image used when creating this container
+     * @type {string}
+     */
+    'Image'?: string;
+    /**
+     * The ID of the image that this container was created from
+     * @type {string}
+     */
+    'ImageID'?: string;
+    /**
+     * Command to run when starting the container
+     * @type {string}
+     */
+    'Command'?: string;
+    /**
+     * When the container was created
+     * @type {number}
+     */
+    'Created'?: number;
+    /**
+     * The ports exposed by this container
+     * @type {Array<Port>}
+     */
+    'Ports'?: Array<Port>;
+    /**
+     * The size of files that have been created or changed by this container
+     * @type {number}
+     */
+    'SizeRw'?: number;
+    /**
+     * The total size of all the files in this container
+     * @type {number}
+     */
+    'SizeRootFs'?: number;
+    /**
+     * User-defined key/value metadata.
+     * @type {{ [key: string]: string; }}
+     */
+    'Labels'?: { [key: string]: string; };
+    /**
+     * The state of this container (e.g. `Exited`)
+     * @type {string}
+     */
+    'State'?: string;
+    /**
+     * Additional human-readable status of this container (e.g. `Exit 0`)
+     * @type {string}
+     */
+    'Status'?: string;
+    /**
+     * 
+     * @type {ContainerSummaryHostConfig}
+     */
+    'HostConfig'?: ContainerSummaryHostConfig;
+    /**
+     * 
+     * @type {ContainerSummaryNetworkSettings}
+     */
+    'NetworkSettings'?: ContainerSummaryNetworkSettings;
+    /**
+     * 
+     * @type {Array<MountPoint>}
+     */
+    'Mounts'?: Array<MountPoint>;
+}
+/**
+ * 
+ * @interface ContainerSummaryHostConfig
+ */
+export interface ContainerSummaryHostConfig {
+    /**
+     * 
+     * @type {string}
+     */
+    'NetworkMode'?: string;
+}
+/**
+ * A summary of the container\'s network settings
+ * @interface ContainerSummaryNetworkSettings
+ */
+export interface ContainerSummaryNetworkSettings {
+    /**
+     * 
+     * @type {{ [key: string]: EndpointSettings; }}
+     */
+    'Networks'?: { [key: string]: EndpointSettings; };
+}
+/**
+ * OK response to ContainerTop operation
+ * @interface ContainerTopResponse
+ */
+export interface ContainerTopResponse {
+    /**
+     * The ps column titles
+     * @type {Array<string>}
+     */
+    'Titles'?: Array<string>;
+    /**
+     * Each process running in the container, where each is process is an array of values corresponding to the titles. 
+     * @type {Array<Array<string>>}
+     */
+    'Processes'?: Array<Array<string>>;
+}
+/**
+ * 
+ * @interface ContainerUpdateRequest
+ */
+export interface ContainerUpdateRequest {
+    /**
+     * An integer value representing this container\'s relative CPU weight versus other containers. 
+     * @type {number}
+     */
+    'CpuShares'?: number;
+    /**
+     * Memory limit in bytes.
+     * @type {number}
+     */
+    'Memory'?: number;
+    /**
+     * Path to `cgroups` under which the container\'s `cgroup` is created. If the path is not absolute, the path is considered to be relative to the `cgroups` path of the init process. Cgroups are created if they do not already exist. 
+     * @type {string}
+     */
+    'CgroupParent'?: string;
+    /**
+     * Block IO weight (relative weight).
+     * @type {number}
+     */
+    'BlkioWeight'?: number;
+    /**
+     * Block IO weight (relative device weight) in the form:  ``` [{\"Path\": \"device_path\", \"Weight\": weight}] ``` 
+     * @type {Array<ResourcesBlkioWeightDeviceInner>}
+     */
+    'BlkioWeightDevice'?: Array<ResourcesBlkioWeightDeviceInner>;
+    /**
+     * Limit read rate (bytes per second) from a device, in the form:  ``` [{\"Path\": \"device_path\", \"Rate\": rate}] ``` 
+     * @type {Array<ThrottleDevice>}
+     */
+    'BlkioDeviceReadBps'?: Array<ThrottleDevice>;
+    /**
+     * Limit write rate (bytes per second) to a device, in the form:  ``` [{\"Path\": \"device_path\", \"Rate\": rate}] ``` 
+     * @type {Array<ThrottleDevice>}
+     */
+    'BlkioDeviceWriteBps'?: Array<ThrottleDevice>;
+    /**
+     * Limit read rate (IO per second) from a device, in the form:  ``` [{\"Path\": \"device_path\", \"Rate\": rate}] ``` 
+     * @type {Array<ThrottleDevice>}
+     */
+    'BlkioDeviceReadIOps'?: Array<ThrottleDevice>;
+    /**
+     * Limit write rate (IO per second) to a device, in the form:  ``` [{\"Path\": \"device_path\", \"Rate\": rate}] ``` 
+     * @type {Array<ThrottleDevice>}
+     */
+    'BlkioDeviceWriteIOps'?: Array<ThrottleDevice>;
+    /**
+     * The length of a CPU period in microseconds.
+     * @type {number}
+     */
+    'CpuPeriod'?: number;
+    /**
+     * Microseconds of CPU time that the container can get in a CPU period. 
+     * @type {number}
+     */
+    'CpuQuota'?: number;
+    /**
+     * The length of a CPU real-time period in microseconds. Set to 0 to allocate no time allocated to real-time tasks. 
+     * @type {number}
+     */
+    'CpuRealtimePeriod'?: number;
+    /**
+     * The length of a CPU real-time runtime in microseconds. Set to 0 to allocate no time allocated to real-time tasks. 
+     * @type {number}
+     */
+    'CpuRealtimeRuntime'?: number;
+    /**
+     * CPUs in which to allow execution (e.g., `0-3`, `0,1`). 
+     * @type {string}
+     */
+    'CpusetCpus'?: string;
+    /**
+     * Memory nodes (MEMs) in which to allow execution (0-3, 0,1). Only effective on NUMA systems. 
+     * @type {string}
+     */
+    'CpusetMems'?: string;
+    /**
+     * A list of devices to add to the container.
+     * @type {Array<DeviceMapping>}
+     */
+    'Devices'?: Array<DeviceMapping>;
+    /**
+     * a list of cgroup rules to apply to the container
+     * @type {Array<string>}
+     */
+    'DeviceCgroupRules'?: Array<string>;
+    /**
+     * A list of requests for devices to be sent to device drivers. 
+     * @type {Array<DeviceRequest>}
+     */
+    'DeviceRequests'?: Array<DeviceRequest>;
+    /**
+     * Kernel memory limit in bytes.  <p><br /></p>  > **Deprecated**: This field is deprecated as the kernel 5.4 deprecated > `kmem.limit_in_bytes`. 
+     * @type {number}
+     */
+    'KernelMemory'?: number;
+    /**
+     * Hard limit for kernel TCP buffer memory (in bytes).
+     * @type {number}
+     */
+    'KernelMemoryTCP'?: number;
+    /**
+     * Memory soft limit in bytes.
+     * @type {number}
+     */
+    'MemoryReservation'?: number;
+    /**
+     * Total memory limit (memory + swap). Set as `-1` to enable unlimited swap. 
+     * @type {number}
+     */
+    'MemorySwap'?: number;
+    /**
+     * Tune a container\'s memory swappiness behavior. Accepts an integer between 0 and 100. 
+     * @type {number}
+     */
+    'MemorySwappiness'?: number;
+    /**
+     * CPU quota in units of 10<sup>-9</sup> CPUs.
+     * @type {number}
+     */
+    'NanoCpus'?: number;
+    /**
+     * Disable OOM Killer for the container.
+     * @type {boolean}
+     */
+    'OomKillDisable'?: boolean;
+    /**
+     * Run an init inside the container that forwards signals and reaps processes. This field is omitted if empty, and the default (as configured on the daemon) is used. 
+     * @type {boolean}
+     */
+    'Init'?: boolean | null;
+    /**
+     * Tune a container\'s PIDs limit. Set `0` or `-1` for unlimited, or `null` to not change. 
+     * @type {number}
+     */
+    'PidsLimit'?: number | null;
+    /**
+     * A list of resource limits to set in the container. For example:  ``` {\"Name\": \"nofile\", \"Soft\": 1024, \"Hard\": 2048} ``` 
+     * @type {Array<ResourcesUlimitsInner>}
+     */
+    'Ulimits'?: Array<ResourcesUlimitsInner>;
+    /**
+     * The number of usable CPUs (Windows only).  On Windows Server containers, the processor resource controls are mutually exclusive. The order of precedence is `CPUCount` first, then `CPUShares`, and `CPUPercent` last. 
+     * @type {number}
+     */
+    'CpuCount'?: number;
+    /**
+     * The usable percentage of the available CPUs (Windows only).  On Windows Server containers, the processor resource controls are mutually exclusive. The order of precedence is `CPUCount` first, then `CPUShares`, and `CPUPercent` last. 
+     * @type {number}
+     */
+    'CpuPercent'?: number;
+    /**
+     * Maximum IOps for the container system drive (Windows only)
+     * @type {number}
+     */
+    'IOMaximumIOps'?: number;
+    /**
+     * Maximum IO in bytes per second for the container system drive (Windows only). 
+     * @type {number}
+     */
+    'IOMaximumBandwidth'?: number;
+    /**
+     * 
+     * @type {RestartPolicy}
+     */
+    'RestartPolicy'?: RestartPolicy;
+}
+/**
+ * OK response to ContainerUpdate operation
+ * @interface ContainerUpdateResponse
+ */
+export interface ContainerUpdateResponse {
+    /**
+     * 
+     * @type {Array<string>}
+     */
+    'Warnings'?: Array<string>;
+}
+/**
+ * container waiting error, if any
+ * @interface ContainerWaitExitError
+ */
+export interface ContainerWaitExitError {
+    /**
+     * Details of an error
+     * @type {string}
+     */
+    'Message'?: string;
+}
+/**
+ * OK response to ContainerWait operation
+ * @interface ContainerWaitResponse
+ */
+export interface ContainerWaitResponse {
+    /**
+     * Exit code of the container
+     * @type {number}
+     */
+    'StatusCode': number;
+    /**
+     * 
+     * @type {ContainerWaitExitError}
+     */
+    'Error'?: ContainerWaitExitError;
+}
+/**
+ * 
+ * @interface CreateImageInfo
+ */
+export interface CreateImageInfo {
+    /**
+     * 
+     * @type {string}
+     */
+    'id'?: string;
+    /**
+     * 
+     * @type {string}
+     */
+    'error'?: string;
+    /**
+     * 
+     * @type {ErrorDetail}
+     */
+    'errorDetail'?: ErrorDetail;
+    /**
+     * 
+     * @type {string}
+     */
+    'status'?: string;
+    /**
+     * 
+     * @type {string}
+     */
+    'progress'?: string;
+    /**
+     * 
+     * @type {ProgressDetail}
+     */
+    'progressDetail'?: ProgressDetail;
+}
+/**
+ * A device mapping between the host and container
+ * @interface DeviceMapping
+ */
+export interface DeviceMapping {
+    /**
+     * 
+     * @type {string}
+     */
+    'PathOnHost'?: string;
+    /**
+     * 
+     * @type {string}
+     */
+    'PathInContainer'?: string;
+    /**
+     * 
+     * @type {string}
+     */
+    'CgroupPermissions'?: string;
+}
+/**
+ * A request for devices to be sent to device drivers
+ * @interface DeviceRequest
+ */
+export interface DeviceRequest {
+    /**
+     * 
+     * @type {string}
+     */
+    'Driver'?: string;
+    /**
+     * 
+     * @type {number}
+     */
+    'Count'?: number;
+    /**
+     * 
+     * @type {Array<string>}
+     */
+    'DeviceIDs'?: Array<string>;
+    /**
+     * A list of capabilities; an OR list of AND lists of capabilities. 
+     * @type {Array<Array<string>>}
+     */
+    'Capabilities'?: Array<Array<string>>;
+    /**
+     * Driver-specific options, specified as a key/value pairs. These options are passed directly to the driver. 
+     * @type {{ [key: string]: string; }}
+     */
+    'Options'?: { [key: string]: string; };
+}
+/**
+ * Describes the result obtained from contacting the registry to retrieve image metadata. 
+ * @interface DistributionInspect
+ */
+export interface DistributionInspect {
+    /**
+     * 
+     * @type {OCIDescriptor}
+     */
+    'Descriptor': OCIDescriptor;
+    /**
+     * An array containing all platforms supported by the image. 
+     * @type {Array<OCIPlatform>}
+     */
+    'Platforms': Array<OCIPlatform>;
+}
+/**
+ * Driver represents a driver (network, logging, secrets).
+ * @interface Driver
+ */
+export interface Driver {
+    /**
+     * Name of the driver.
+     * @type {string}
+     */
+    'Name': string;
+    /**
+     * Key/value map of driver-specific options.
+     * @type {{ [key: string]: string; }}
+     */
+    'Options'?: { [key: string]: string; };
+}
+/**
+ * EndpointIPAMConfig represents an endpoint\'s IPAM configuration. 
+ * @interface EndpointIPAMConfig
+ */
+export interface EndpointIPAMConfig {
+    /**
+     * 
+     * @type {string}
+     */
+    'IPv4Address'?: string;
+    /**
+     * 
+     * @type {string}
+     */
+    'IPv6Address'?: string;
+    /**
+     * 
+     * @type {Array<string>}
+     */
+    'LinkLocalIPs'?: Array<string>;
+}
+/**
+ * 
+ * @interface EndpointPortConfig
+ */
+export interface EndpointPortConfig {
+    /**
+     * 
+     * @type {string}
+     */
+    'Name'?: string;
+    /**
+     * 
+     * @type {string}
+     */
+    'Protocol'?: EndpointPortConfigProtocolEnum;
+    /**
+     * The port inside the container.
+     * @type {number}
+     */
+    'TargetPort'?: number;
+    /**
+     * The port on the swarm hosts.
+     * @type {number}
+     */
+    'PublishedPort'?: number;
+    /**
+     * The mode in which port is published.  <p><br /></p>  - \"ingress\" makes the target port accessible on every node,   regardless of whether there is a task for the service running on   that node or not. - \"host\" bypasses the routing mesh and publish the port directly on   the swarm node where that service is running. 
+     * @type {string}
+     */
+    'PublishMode'?: EndpointPortConfigPublishModeEnum;
+}
+
+/**
+    * @enum {string}
+    */
+export enum EndpointPortConfigProtocolEnum {
+    Tcp = 'tcp',
+    Udp = 'udp',
+    Sctp = 'sctp'
+}
+/**
+    * @enum {string}
+    */
+export enum EndpointPortConfigPublishModeEnum {
+    Ingress = 'ingress',
+    Host = 'host'
+}
+
+/**
+ * Configuration for a network endpoint.
+ * @interface EndpointSettings
+ */
+export interface EndpointSettings {
+    /**
+     * 
+     * @type {EndpointIPAMConfig}
+     */
+    'IPAMConfig'?: EndpointIPAMConfig | null;
+    /**
+     * 
+     * @type {Array<string>}
+     */
+    'Links'?: Array<string>;
+    /**
+     * 
+     * @type {Array<string>}
+     */
+    'Aliases'?: Array<string>;
+    /**
+     * Unique ID of the network. 
+     * @type {string}
+     */
+    'NetworkID'?: string;
+    /**
+     * Unique ID for the service endpoint in a Sandbox. 
+     * @type {string}
+     */
+    'EndpointID'?: string;
+    /**
+     * Gateway address for this network. 
+     * @type {string}
+     */
+    'Gateway'?: string;
+    /**
+     * IPv4 address. 
+     * @type {string}
+     */
+    'IPAddress'?: string;
+    /**
+     * Mask length of the IPv4 address. 
+     * @type {number}
+     */
+    'IPPrefixLen'?: number;
+    /**
+     * IPv6 gateway address. 
+     * @type {string}
+     */
+    'IPv6Gateway'?: string;
+    /**
+     * Global IPv6 address. 
+     * @type {string}
+     */
+    'GlobalIPv6Address'?: string;
+    /**
+     * Mask length of the global IPv6 address. 
+     * @type {number}
+     */
+    'GlobalIPv6PrefixLen'?: number;
+    /**
+     * MAC address for the endpoint on this network. 
+     * @type {string}
+     */
+    'MacAddress'?: string;
+    /**
+     * DriverOpts is a mapping of driver options and values. These options are passed directly to the driver and are driver specific. 
+     * @type {{ [key: string]: string; }}
+     */
+    'DriverOpts'?: { [key: string]: string; } | null;
+}
+/**
+ * Properties that can be configured to access and load balance a service.
+ * @interface EndpointSpec
+ */
+export interface EndpointSpec {
+    /**
+     * The mode of resolution to use for internal load balancing between tasks. 
+     * @type {string}
+     */
+    'Mode'?: EndpointSpecModeEnum;
+    /**
+     * List of exposed ports that this service is accessible on from the outside. Ports can only be provided if `vip` resolution mode is used. 
+     * @type {Array<EndpointPortConfig>}
+     */
+    'Ports'?: Array<EndpointPortConfig>;
+}
+
+/**
+    * @enum {string}
+    */
+export enum EndpointSpecModeEnum {
+    Vip = 'vip',
+    Dnsrr = 'dnsrr'
+}
+
+/**
+ * EngineDescription provides information about an engine.
+ * @interface EngineDescription
+ */
+export interface EngineDescription {
+    /**
+     * 
+     * @type {string}
+     */
+    'EngineVersion'?: string;
+    /**
+     * 
+     * @type {{ [key: string]: string; }}
+     */
+    'Labels'?: { [key: string]: string; };
+    /**
+     * 
+     * @type {Array<EngineDescriptionPluginsInner>}
+     */
+    'Plugins'?: Array<EngineDescriptionPluginsInner>;
+}
+/**
+ * 
+ * @interface EngineDescriptionPluginsInner
+ */
+export interface EngineDescriptionPluginsInner {
+    /**
+     * 
+     * @type {string}
+     */
+    'Type'?: string;
+    /**
+     * 
+     * @type {string}
+     */
+    'Name'?: string;
+}
+/**
+ * 
+ * @interface ErrorDetail
+ */
+export interface ErrorDetail {
+    /**
+     * 
+     * @type {number}
+     */
+    'code'?: number;
+    /**
+     * 
+     * @type {string}
+     */
+    'message'?: string;
+}
+/**
+ * Represents an error.
+ * @interface ErrorResponse
+ */
+export interface ErrorResponse {
+    /**
+     * The error message.
+     * @type {string}
+     */
+    'message': string;
+}
+/**
+ * Actor describes something that generates events, like a container, network, or a volume. 
+ * @interface EventActor
+ */
+export interface EventActor {
+    /**
+     * The ID of the object emitting the event
+     * @type {string}
+     */
+    'ID'?: string;
+    /**
+     * Various key/value attributes of the object, depending on its type. 
+     * @type {{ [key: string]: string; }}
+     */
+    'Attributes'?: { [key: string]: string; };
+}
+/**
+ * EventMessage represents the information an event contains. 
+ * @interface EventMessage
+ */
+export interface EventMessage {
+    /**
+     * The type of object emitting the event
+     * @type {string}
+     */
+    'Type'?: EventMessageTypeEnum;
+    /**
+     * The type of event
+     * @type {string}
+     */
+    'Action'?: string;
+    /**
+     * 
+     * @type {EventActor}
+     */
+    'Actor'?: EventActor;
+    /**
+     * Scope of the event. Engine events are `local` scope. Cluster (Swarm) events are `swarm` scope. 
+     * @type {string}
+     */
+    'scope'?: EventMessageScopeEnum;
+    /**
+     * Timestamp of event
+     * @type {number}
+     */
+    'time'?: number;
+    /**
+     * Timestamp of event, with nanosecond accuracy
+     * @type {number}
+     */
+    'timeNano'?: number;
+}
+
+/**
+    * @enum {string}
+    */
+export enum EventMessageTypeEnum {
+    Builder = 'builder',
+    Config = 'config',
+    Container = 'container',
+    Daemon = 'daemon',
+    Image = 'image',
+    Network = 'network',
+    Node = 'node',
+    Plugin = 'plugin',
+    Secret = 'secret',
+    Service = 'service',
+    Volume = 'volume'
+}
+/**
+    * @enum {string}
+    */
+export enum EventMessageScopeEnum {
+    Local = 'local',
+    Swarm = 'swarm'
+}
+
+/**
+ * 
+ * @interface ExecConfig
+ */
+export interface ExecConfig {
+    /**
+     * Attach to `stdin` of the exec command.
+     * @type {boolean}
+     */
+    'AttachStdin'?: boolean;
+    /**
+     * Attach to `stdout` of the exec command.
+     * @type {boolean}
+     */
+    'AttachStdout'?: boolean;
+    /**
+     * Attach to `stderr` of the exec command.
+     * @type {boolean}
+     */
+    'AttachStderr'?: boolean;
+    /**
+     * Override the key sequence for detaching a container. Format is a single character `[a-Z]` or `ctrl-<value>` where `<value>` is one of: `a-z`, `@`, `^`, `[`, `,` or `_`. 
+     * @type {string}
+     */
+    'DetachKeys'?: string;
+    /**
+     * Allocate a pseudo-TTY.
+     * @type {boolean}
+     */
+    'Tty'?: boolean;
+    /**
+     * A list of environment variables in the form `[\"VAR=value\", ...]`. 
+     * @type {Array<string>}
+     */
+    'Env'?: Array<string>;
+    /**
+     * Command to run, as a string or array of strings.
+     * @type {Array<string>}
+     */
+    'Cmd'?: Array<string>;
+    /**
+     * Runs the exec process with extended privileges.
+     * @type {boolean}
+     */
+    'Privileged'?: boolean;
+    /**
+     * The user, and optionally, group to run the exec process inside the container. Format is one of: `user`, `user:group`, `uid`, or `uid:gid`. 
+     * @type {string}
+     */
+    'User'?: string;
+    /**
+     * The working directory for the exec process inside the container. 
+     * @type {string}
+     */
+    'WorkingDir'?: string;
+}
+/**
+ * 
+ * @interface ExecInspectResponse
+ */
+export interface ExecInspectResponse {
+    /**
+     * 
+     * @type {boolean}
+     */
+    'CanRemove'?: boolean;
+    /**
+     * 
+     * @type {string}
+     */
+    'DetachKeys'?: string;
+    /**
+     * 
+     * @type {string}
+     */
+    'ID'?: string;
+    /**
+     * 
+     * @type {boolean}
+     */
+    'Running'?: boolean;
+    /**
+     * 
+     * @type {number}
+     */
+    'ExitCode'?: number;
+    /**
+     * 
+     * @type {ProcessConfig}
+     */
+    'ProcessConfig'?: ProcessConfig;
+    /**
+     * 
+     * @type {boolean}
+     */
+    'OpenStdin'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     */
+    'OpenStderr'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     */
+    'OpenStdout'?: boolean;
+    /**
+     * 
+     * @type {string}
+     */
+    'ContainerID'?: string;
+    /**
+     * The system process ID for the exec process.
+     * @type {number}
+     */
+    'Pid'?: number;
+}
+/**
+ * 
+ * @interface ExecStartConfig
+ */
+export interface ExecStartConfig {
+    /**
+     * Detach from the command.
+     * @type {boolean}
+     */
+    'Detach'?: boolean;
+    /**
+     * Allocate a pseudo-TTY.
+     * @type {boolean}
+     */
+    'Tty'?: boolean;
+}
+/**
+ * 
+ * @interface GenericResourcesInner
+ */
+export interface GenericResourcesInner {
+    /**
+     * 
+     * @type {GenericResourcesInnerNamedResourceSpec}
+     */
+    'NamedResourceSpec'?: GenericResourcesInnerNamedResourceSpec;
+    /**
+     * 
+     * @type {GenericResourcesInnerDiscreteResourceSpec}
+     */
+    'DiscreteResourceSpec'?: GenericResourcesInnerDiscreteResourceSpec;
+}
+/**
+ * 
+ * @interface GenericResourcesInnerDiscreteResourceSpec
+ */
+export interface GenericResourcesInnerDiscreteResourceSpec {
+    /**
+     * 
+     * @type {string}
+     */
+    'Kind'?: string;
+    /**
+     * 
+     * @type {number}
+     */
+    'Value'?: number;
+}
+/**
+ * 
+ * @interface GenericResourcesInnerNamedResourceSpec
+ */
+export interface GenericResourcesInnerNamedResourceSpec {
+    /**
+     * 
+     * @type {string}
+     */
+    'Kind'?: string;
+    /**
+     * 
+     * @type {string}
+     */
+    'Value'?: string;
+}
+/**
+ * Information about the storage driver used to store the container\'s and image\'s filesystem. 
+ * @interface GraphDriverData
+ */
+export interface GraphDriverData {
+    /**
+     * Name of the storage driver.
+     * @type {string}
+     */
+    'Name': string;
+    /**
+     * Low-level storage metadata, provided as key/value pairs.  This information is driver-specific, and depends on the storage-driver in use, and should be used for informational purposes only. 
+     * @type {{ [key: string]: string; }}
+     */
+    'Data': { [key: string]: string; };
+}
+/**
+ * Health stores information about the container\'s healthcheck results. 
+ * @interface Health
+ */
+export interface Health {
+    /**
+     * Status is one of `none`, `starting`, `healthy` or `unhealthy`  - \"none\"      Indicates there is no healthcheck - \"starting\"  Starting indicates that the container is not yet ready - \"healthy\"   Healthy indicates that the container is running correctly - \"unhealthy\" Unhealthy indicates that the container has a problem 
+     * @type {string}
+     */
+    'Status'?: HealthStatusEnum;
+    /**
+     * FailingStreak is the number of consecutive failures
+     * @type {number}
+     */
+    'FailingStreak'?: number;
+    /**
+     * Log contains the last few results (oldest first) 
+     * @type {Array<HealthcheckResult>}
+     */
+    'Log'?: Array<HealthcheckResult>;
+}
+
+/**
+    * @enum {string}
+    */
+export enum HealthStatusEnum {
+    None = 'none',
+    Starting = 'starting',
+    Healthy = 'healthy',
+    Unhealthy = 'unhealthy'
+}
+
+/**
+ * A test to perform to check that the container is healthy.
+ * @interface HealthConfig
+ */
+export interface HealthConfig {
+    /**
+     * The test to perform. Possible values are:  - `[]` inherit healthcheck from image or parent image - `[\"NONE\"]` disable healthcheck - `[\"CMD\", args...]` exec arguments directly - `[\"CMD-SHELL\", command]` run command with system\'s default shell 
+     * @type {Array<string>}
+     */
+    'Test'?: Array<string>;
+    /**
+     * The time to wait between checks in nanoseconds. It should be 0 or at least 1000000 (1 ms). 0 means inherit. 
+     * @type {number}
+     */
+    'Interval'?: number;
+    /**
+     * The time to wait before considering the check to have hung. It should be 0 or at least 1000000 (1 ms). 0 means inherit. 
+     * @type {number}
+     */
+    'Timeout'?: number;
+    /**
+     * The number of consecutive failures needed to consider a container as unhealthy. 0 means inherit. 
+     * @type {number}
+     */
+    'Retries'?: number;
+    /**
+     * Start period for the container to initialize before starting health-retries countdown in nanoseconds. It should be 0 or at least 1000000 (1 ms). 0 means inherit. 
+     * @type {number}
+     */
+    'StartPeriod'?: number;
+}
+/**
+ * HealthcheckResult stores information about a single run of a healthcheck probe 
+ * @interface HealthcheckResult
+ */
+export interface HealthcheckResult {
+    /**
+     * Date and time at which this check started in [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds. 
+     * @type {string}
+     */
+    'Start'?: string;
+    /**
+     * Date and time at which this check ended in [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds. 
+     * @type {string}
+     */
+    'End'?: string;
+    /**
+     * ExitCode meanings:  - `0` healthy - `1` unhealthy - `2` reserved (considered unhealthy) - other values: error running probe 
+     * @type {number}
+     */
+    'ExitCode'?: number;
+    /**
+     * Output from last check
+     * @type {string}
+     */
+    'Output'?: string;
+}
+/**
+ * individual image layer information in response to ImageHistory operation
+ * @interface HistoryResponseItem
+ */
+export interface HistoryResponseItem {
+    /**
+     * 
+     * @type {string}
+     */
+    'Id': string;
+    /**
+     * 
+     * @type {number}
+     */
+    'Created': number;
+    /**
+     * 
+     * @type {string}
+     */
+    'CreatedBy': string;
+    /**
+     * 
+     * @type {Array<string>}
+     */
+    'Tags': Array<string>;
+    /**
+     * 
+     * @type {number}
+     */
+    'Size': number;
+    /**
+     * 
+     * @type {string}
+     */
+    'Comment': string;
+}
+/**
+ * Container configuration that depends on the host we are running on
+ * @interface HostConfig
+ */
+export interface HostConfig {
+    /**
+     * An integer value representing this container\'s relative CPU weight versus other containers. 
+     * @type {number}
+     */
+    'CpuShares'?: number;
+    /**
+     * Memory limit in bytes.
+     * @type {number}
+     */
+    'Memory'?: number;
+    /**
+     * Path to `cgroups` under which the container\'s `cgroup` is created. If the path is not absolute, the path is considered to be relative to the `cgroups` path of the init process. Cgroups are created if they do not already exist. 
+     * @type {string}
+     */
+    'CgroupParent'?: string;
+    /**
+     * Block IO weight (relative weight).
+     * @type {number}
+     */
+    'BlkioWeight'?: number;
+    /**
+     * Block IO weight (relative device weight) in the form:  ``` [{\"Path\": \"device_path\", \"Weight\": weight}] ``` 
+     * @type {Array<ResourcesBlkioWeightDeviceInner>}
+     */
+    'BlkioWeightDevice'?: Array<ResourcesBlkioWeightDeviceInner>;
+    /**
+     * Limit read rate (bytes per second) from a device, in the form:  ``` [{\"Path\": \"device_path\", \"Rate\": rate}] ``` 
+     * @type {Array<ThrottleDevice>}
+     */
+    'BlkioDeviceReadBps'?: Array<ThrottleDevice>;
+    /**
+     * Limit write rate (bytes per second) to a device, in the form:  ``` [{\"Path\": \"device_path\", \"Rate\": rate}] ``` 
+     * @type {Array<ThrottleDevice>}
+     */
+    'BlkioDeviceWriteBps'?: Array<ThrottleDevice>;
+    /**
+     * Limit read rate (IO per second) from a device, in the form:  ``` [{\"Path\": \"device_path\", \"Rate\": rate}] ``` 
+     * @type {Array<ThrottleDevice>}
+     */
+    'BlkioDeviceReadIOps'?: Array<ThrottleDevice>;
+    /**
+     * Limit write rate (IO per second) to a device, in the form:  ``` [{\"Path\": \"device_path\", \"Rate\": rate}] ``` 
+     * @type {Array<ThrottleDevice>}
+     */
+    'BlkioDeviceWriteIOps'?: Array<ThrottleDevice>;
+    /**
+     * The length of a CPU period in microseconds.
+     * @type {number}
+     */
+    'CpuPeriod'?: number;
+    /**
+     * Microseconds of CPU time that the container can get in a CPU period. 
+     * @type {number}
+     */
+    'CpuQuota'?: number;
+    /**
+     * The length of a CPU real-time period in microseconds. Set to 0 to allocate no time allocated to real-time tasks. 
+     * @type {number}
+     */
+    'CpuRealtimePeriod'?: number;
+    /**
+     * The length of a CPU real-time runtime in microseconds. Set to 0 to allocate no time allocated to real-time tasks. 
+     * @type {number}
+     */
+    'CpuRealtimeRuntime'?: number;
+    /**
+     * CPUs in which to allow execution (e.g., `0-3`, `0,1`). 
+     * @type {string}
+     */
+    'CpusetCpus'?: string;
+    /**
+     * Memory nodes (MEMs) in which to allow execution (0-3, 0,1). Only effective on NUMA systems. 
+     * @type {string}
+     */
+    'CpusetMems'?: string;
+    /**
+     * A list of devices to add to the container.
+     * @type {Array<DeviceMapping>}
+     */
+    'Devices'?: Array<DeviceMapping>;
+    /**
+     * a list of cgroup rules to apply to the container
+     * @type {Array<string>}
+     */
+    'DeviceCgroupRules'?: Array<string>;
+    /**
+     * A list of requests for devices to be sent to device drivers. 
+     * @type {Array<DeviceRequest>}
+     */
+    'DeviceRequests'?: Array<DeviceRequest>;
+    /**
+     * Kernel memory limit in bytes.  <p><br /></p>  > **Deprecated**: This field is deprecated as the kernel 5.4 deprecated > `kmem.limit_in_bytes`. 
+     * @type {number}
+     */
+    'KernelMemory'?: number;
+    /**
+     * Hard limit for kernel TCP buffer memory (in bytes).
+     * @type {number}
+     */
+    'KernelMemoryTCP'?: number;
+    /**
+     * Memory soft limit in bytes.
+     * @type {number}
+     */
+    'MemoryReservation'?: number;
+    /**
+     * Total memory limit (memory + swap). Set as `-1` to enable unlimited swap. 
+     * @type {number}
+     */
+    'MemorySwap'?: number;
+    /**
+     * Tune a container\'s memory swappiness behavior. Accepts an integer between 0 and 100. 
+     * @type {number}
+     */
+    'MemorySwappiness'?: number;
+    /**
+     * CPU quota in units of 10<sup>-9</sup> CPUs.
+     * @type {number}
+     */
+    'NanoCpus'?: number;
+    /**
+     * Disable OOM Killer for the container.
+     * @type {boolean}
+     */
+    'OomKillDisable'?: boolean;
+    /**
+     * Run an init inside the container that forwards signals and reaps processes. This field is omitted if empty, and the default (as configured on the daemon) is used. 
+     * @type {boolean}
+     */
+    'Init'?: boolean | null;
+    /**
+     * Tune a container\'s PIDs limit. Set `0` or `-1` for unlimited, or `null` to not change. 
+     * @type {number}
+     */
+    'PidsLimit'?: number | null;
+    /**
+     * A list of resource limits to set in the container. For example:  ``` {\"Name\": \"nofile\", \"Soft\": 1024, \"Hard\": 2048} ``` 
+     * @type {Array<ResourcesUlimitsInner>}
+     */
+    'Ulimits'?: Array<ResourcesUlimitsInner>;
+    /**
+     * The number of usable CPUs (Windows only).  On Windows Server containers, the processor resource controls are mutually exclusive. The order of precedence is `CPUCount` first, then `CPUShares`, and `CPUPercent` last. 
+     * @type {number}
+     */
+    'CpuCount'?: number;
+    /**
+     * The usable percentage of the available CPUs (Windows only).  On Windows Server containers, the processor resource controls are mutually exclusive. The order of precedence is `CPUCount` first, then `CPUShares`, and `CPUPercent` last. 
+     * @type {number}
+     */
+    'CpuPercent'?: number;
+    /**
+     * Maximum IOps for the container system drive (Windows only)
+     * @type {number}
+     */
+    'IOMaximumIOps'?: number;
+    /**
+     * Maximum IO in bytes per second for the container system drive (Windows only). 
+     * @type {number}
+     */
+    'IOMaximumBandwidth'?: number;
+    /**
+     * A list of volume bindings for this container. Each volume binding is a string in one of these forms:  - `host-src:container-dest[:options]` to bind-mount a host path   into the container. Both `host-src`, and `container-dest` must   be an _absolute_ path. - `volume-name:container-dest[:options]` to bind-mount a volume   managed by a volume driver into the container. `container-dest`   must be an _absolute_ path.  `options` is an optional, comma-delimited list of:  - `nocopy` disables automatic copying of data from the container   path to the volume. The `nocopy` flag only applies to named volumes. - `[ro|rw]` mounts a volume read-only or read-write, respectively.   If omitted or set to `rw`, volumes are mounted read-write. - `[z|Z]` applies SELinux labels to allow or deny multiple containers   to read and write to the same volume.     - `z`: a _shared_ content label is applied to the content. This       label indicates that multiple containers can share the volume       content, for both reading and writing.     - `Z`: a _private unshared_ label is applied to the content.       This label indicates that only the current container can use       a private volume. Labeling systems such as SELinux require       proper labels to be placed on volume content that is mounted       into a container. Without a label, the security system can       prevent a container\'s processes from using the content. By       default, the labels set by the host operating system are not       modified. - `[[r]shared|[r]slave|[r]private]` specifies mount   [propagation behavior](https://www.kernel.org/doc/Documentation/filesystems/sharedsubtree.txt).   This only applies to bind-mounted volumes, not internal volumes   or named volumes. Mount propagation requires the source mount   point (the location where the source directory is mounted in the   host operating system) to have the correct propagation properties.   For shared volumes, the source mount point must be set to `shared`.   For slave volumes, the mount must be set to either `shared` or   `slave`. 
+     * @type {Array<string>}
+     */
+    'Binds'?: Array<string>;
+    /**
+     * Path to a file where the container ID is written
+     * @type {string}
+     */
+    'ContainerIDFile'?: string;
+    /**
+     * 
+     * @type {HostConfigAllOfLogConfig}
+     */
+    'LogConfig'?: HostConfigAllOfLogConfig;
+    /**
+     * Network mode to use for this container. Supported standard values are: `bridge`, `host`, `none`, and `container:<name|id>`. Any other value is taken as a custom network\'s name to which this container should connect to. 
+     * @type {string}
+     */
+    'NetworkMode'?: string;
+    /**
+     * PortMap describes the mapping of container ports to host ports, using the container\'s port-number and protocol as key in the format `<port>/<protocol>`, for example, `80/udp`.  If a container\'s port is mapped for multiple protocols, separate entries are added to the mapping table. 
+     * @type {{ [key: string]: Array<PortBinding> | null; }}
+     */
+    'PortBindings'?: { [key: string]: Array<PortBinding> | null; };
+    /**
+     * 
+     * @type {RestartPolicy}
+     */
+    'RestartPolicy'?: RestartPolicy;
+    /**
+     * Automatically remove the container when the container\'s process exits. This has no effect if `RestartPolicy` is set. 
+     * @type {boolean}
+     */
+    'AutoRemove'?: boolean;
+    /**
+     * Driver that this container uses to mount volumes.
+     * @type {string}
+     */
+    'VolumeDriver'?: string;
+    /**
+     * A list of volumes to inherit from another container, specified in the form `<container name>[:<ro|rw>]`. 
+     * @type {Array<string>}
+     */
+    'VolumesFrom'?: Array<string>;
+    /**
+     * Specification for mounts to be added to the container. 
+     * @type {Array<Mount>}
+     */
+    'Mounts'?: Array<Mount>;
+    /**
+     * A list of kernel capabilities to add to the container. Conflicts with option \'Capabilities\'. 
+     * @type {Array<string>}
+     */
+    'CapAdd'?: Array<string>;
+    /**
+     * A list of kernel capabilities to drop from the container. Conflicts with option \'Capabilities\'. 
+     * @type {Array<string>}
+     */
+    'CapDrop'?: Array<string>;
+    /**
+     * cgroup namespace mode for the container. Possible values are:  - `\"private\"`: the container runs in its own private cgroup namespace - `\"host\"`: use the host system\'s cgroup namespace  If not specified, the daemon default is used, which can either be `\"private\"` or `\"host\"`, depending on daemon version, kernel support and configuration. 
+     * @type {string}
+     */
+    'CgroupnsMode'?: HostConfigCgroupnsModeEnum;
+    /**
+     * A list of DNS servers for the container to use.
+     * @type {Array<string>}
+     */
+    'Dns'?: Array<string>;
+    /**
+     * A list of DNS options.
+     * @type {Array<string>}
+     */
+    'DnsOptions'?: Array<string>;
+    /**
+     * A list of DNS search domains.
+     * @type {Array<string>}
+     */
+    'DnsSearch'?: Array<string>;
+    /**
+     * A list of hostnames/IP mappings to add to the container\'s `/etc/hosts` file. Specified in the form `[\"hostname:IP\"]`. 
+     * @type {Array<string>}
+     */
+    'ExtraHosts'?: Array<string>;
+    /**
+     * A list of additional groups that the container process will run as. 
+     * @type {Array<string>}
+     */
+    'GroupAdd'?: Array<string>;
+    /**
+     * IPC sharing mode for the container. Possible values are:  - `\"none\"`: own private IPC namespace, with /dev/shm not mounted - `\"private\"`: own private IPC namespace - `\"shareable\"`: own private IPC namespace, with a possibility to share it with other containers - `\"container:<name|id>\"`: join another (shareable) container\'s IPC namespace - `\"host\"`: use the host system\'s IPC namespace  If not specified, daemon default is used, which can either be `\"private\"` or `\"shareable\"`, depending on daemon version and configuration. 
+     * @type {string}
+     */
+    'IpcMode'?: string;
+    /**
+     * Cgroup to use for the container.
+     * @type {string}
+     */
+    'Cgroup'?: string;
+    /**
+     * A list of links for the container in the form `container_name:alias`. 
+     * @type {Array<string>}
+     */
+    'Links'?: Array<string>;
+    /**
+     * An integer value containing the score given to the container in order to tune OOM killer preferences. 
+     * @type {number}
+     */
+    'OomScoreAdj'?: number;
+    /**
+     * Set the PID (Process) Namespace mode for the container. It can be either:  - `\"container:<name|id>\"`: joins another container\'s PID namespace - `\"host\"`: use the host\'s PID namespace inside the container 
+     * @type {string}
+     */
+    'PidMode'?: string;
+    /**
+     * Gives the container full access to the host.
+     * @type {boolean}
+     */
+    'Privileged'?: boolean;
+    /**
+     * Allocates an ephemeral host port for all of a container\'s exposed ports.  Ports are de-allocated when the container stops and allocated when the container starts. The allocated port might be changed when restarting the container.  The port is selected from the ephemeral port range that depends on the kernel. For example, on Linux the range is defined by `/proc/sys/net/ipv4/ip_local_port_range`. 
+     * @type {boolean}
+     */
+    'PublishAllPorts'?: boolean;
+    /**
+     * Mount the container\'s root filesystem as read only.
+     * @type {boolean}
+     */
+    'ReadonlyRootfs'?: boolean;
+    /**
+     * A list of string values to customize labels for MLS systems, such as SELinux. 
+     * @type {Array<string>}
+     */
+    'SecurityOpt'?: Array<string>;
+    /**
+     * Storage driver options for this container, in the form `{\"size\": \"120G\"}`. 
+     * @type {{ [key: string]: string; }}
+     */
+    'StorageOpt'?: { [key: string]: string; };
+    /**
+     * A map of container directories which should be replaced by tmpfs mounts, and their corresponding mount options. For example:  ``` { \"/run\": \"rw,noexec,nosuid,size=65536k\" } ``` 
+     * @type {{ [key: string]: string; }}
+     */
+    'Tmpfs'?: { [key: string]: string; };
+    /**
+     * UTS namespace to use for the container.
+     * @type {string}
+     */
+    'UTSMode'?: string;
+    /**
+     * Sets the usernamespace mode for the container when usernamespace remapping option is enabled. 
+     * @type {string}
+     */
+    'UsernsMode'?: string;
+    /**
+     * Size of `/dev/shm` in bytes. If omitted, the system uses 64MB. 
+     * @type {number}
+     */
+    'ShmSize'?: number;
+    /**
+     * A list of kernel parameters (sysctls) to set in the container. For example:  ``` {\"net.ipv4.ip_forward\": \"1\"} ``` 
+     * @type {{ [key: string]: string; }}
+     */
+    'Sysctls'?: { [key: string]: string; };
+    /**
+     * Runtime to use with this container.
+     * @type {string}
+     */
+    'Runtime'?: string;
+    /**
+     * Initial console size, as an `[height, width]` array. (Windows only) 
+     * @type {Array<number>}
+     */
+    'ConsoleSize'?: Array<number>;
+    /**
+     * Isolation technology of the container. (Windows only) 
+     * @type {string}
+     */
+    'Isolation'?: HostConfigIsolationEnum;
+    /**
+     * The list of paths to be masked inside the container (this overrides the default set of paths). 
+     * @type {Array<string>}
+     */
+    'MaskedPaths'?: Array<string>;
+    /**
+     * The list of paths to be set as read-only inside the container (this overrides the default set of paths). 
+     * @type {Array<string>}
+     */
+    'ReadonlyPaths'?: Array<string>;
+}
+
+/**
+    * @enum {string}
+    */
+export enum HostConfigCgroupnsModeEnum {
+    Private = 'private',
+    Host = 'host'
+}
+/**
+    * @enum {string}
+    */
+export enum HostConfigIsolationEnum {
+    Default = 'default',
+    Process = 'process',
+    Hyperv = 'hyperv'
+}
+
+/**
+ * The logging configuration for this container
+ * @interface HostConfigAllOfLogConfig
+ */
+export interface HostConfigAllOfLogConfig {
+    /**
+     * 
+     * @type {string}
+     */
+    'Type'?: HostConfigAllOfLogConfigTypeEnum;
+    /**
+     * 
+     * @type {{ [key: string]: string; }}
+     */
+    'Config'?: { [key: string]: string; };
+}
+
+/**
+    * @enum {string}
+    */
+export enum HostConfigAllOfLogConfigTypeEnum {
+    JsonFile = 'json-file',
+    Syslog = 'syslog',
+    Journald = 'journald',
+    Gelf = 'gelf',
+    Fluentd = 'fluentd',
+    Awslogs = 'awslogs',
+    Splunk = 'splunk',
+    Etwlogs = 'etwlogs',
+    None = 'none'
+}
+
+/**
+ * 
+ * @interface IPAM
+ */
+export interface IPAM {
+    /**
+     * Name of the IPAM driver to use.
+     * @type {string}
+     */
+    'Driver'?: string;
+    /**
+     * List of IPAM configuration options, specified as a map:  ``` {\"Subnet\": <CIDR>, \"IPRange\": <CIDR>, \"Gateway\": <IP address>, \"AuxAddress\": <device_name:IP address>} ``` 
+     * @type {Array<IPAMConfig>}
+     */
+    'Config'?: Array<IPAMConfig>;
+    /**
+     * Driver-specific options, specified as a map.
+     * @type {{ [key: string]: string; }}
+     */
+    'Options'?: { [key: string]: string; };
+}
+/**
+ * 
+ * @interface IPAMConfig
+ */
+export interface IPAMConfig {
+    /**
+     * 
+     * @type {string}
+     */
+    'Subnet'?: string;
+    /**
+     * 
+     * @type {string}
+     */
+    'IPRange'?: string;
+    /**
+     * 
+     * @type {string}
+     */
+    'Gateway'?: string;
+    /**
+     * 
+     * @type {{ [key: string]: string; }}
+     */
+    'AuxiliaryAddresses'?: { [key: string]: string; };
+}
+/**
+ * Response to an API call that returns just an Id
+ * @interface IdResponse
+ */
+export interface IdResponse {
+    /**
+     * The id of the newly created object.
+     * @type {string}
+     */
+    'Id': string;
+}
+/**
+ * Configuration of the image. These fields are used as defaults when starting a container from the image. 
+ * @interface ImageConfig
+ */
+export interface ImageConfig {
+    /**
+     * The hostname to use for the container, as a valid RFC 1123 hostname.  <p><br /></p>  > **Note**: this field is always empty and must not be used. 
+     * @type {string}
+     */
+    'Hostname'?: string;
+    /**
+     * The domain name to use for the container.  <p><br /></p>  > **Note**: this field is always empty and must not be used. 
+     * @type {string}
+     */
+    'Domainname'?: string;
+    /**
+     * The user that commands are run as inside the container.
+     * @type {string}
+     */
+    'User'?: string;
+    /**
+     * Whether to attach to `stdin`.  <p><br /></p>  > **Note**: this field is always false and must not be used. 
+     * @type {boolean}
+     */
+    'AttachStdin'?: boolean;
+    /**
+     * Whether to attach to `stdout`.  <p><br /></p>  > **Note**: this field is always false and must not be used. 
+     * @type {boolean}
+     */
+    'AttachStdout'?: boolean;
+    /**
+     * Whether to attach to `stderr`.  <p><br /></p>  > **Note**: this field is always false and must not be used. 
+     * @type {boolean}
+     */
+    'AttachStderr'?: boolean;
+    /**
+     * An object mapping ports to an empty object in the form:  `{\"<port>/<tcp|udp|sctp>\": {}}` 
+     * @type {{ [key: string]: object; }}
+     */
+    'ExposedPorts'?: { [key: string]: object; } | null;
+    /**
+     * Attach standard streams to a TTY, including `stdin` if it is not closed.  <p><br /></p>  > **Note**: this field is always false and must not be used. 
+     * @type {boolean}
+     */
+    'Tty'?: boolean;
+    /**
+     * Open `stdin`  <p><br /></p>  > **Note**: this field is always false and must not be used. 
+     * @type {boolean}
+     */
+    'OpenStdin'?: boolean;
+    /**
+     * Close `stdin` after one attached client disconnects.  <p><br /></p>  > **Note**: this field is always false and must not be used. 
+     * @type {boolean}
+     */
+    'StdinOnce'?: boolean;
+    /**
+     * A list of environment variables to set inside the container in the form `[\"VAR=value\", ...]`. A variable without `=` is removed from the environment, rather than to have an empty value. 
+     * @type {Array<string>}
+     */
+    'Env'?: Array<string>;
+    /**
+     * Command to run specified as a string or an array of strings. 
+     * @type {Array<string>}
+     */
+    'Cmd'?: Array<string>;
+    /**
+     * 
+     * @type {HealthConfig}
+     */
+    'Healthcheck'?: HealthConfig;
+    /**
+     * Command is already escaped (Windows only)
+     * @type {boolean}
+     */
+    'ArgsEscaped'?: boolean | null;
+    /**
+     * The name (or reference) of the image to use when creating the container, or which was used when the container was created.  <p><br /></p>  > **Note**: this field is always empty and must not be used. 
+     * @type {string}
+     */
+    'Image'?: string;
+    /**
+     * An object mapping mount point paths inside the container to empty objects. 
+     * @type {{ [key: string]: object; }}
+     */
+    'Volumes'?: { [key: string]: object; };
+    /**
+     * The working directory for commands to run in.
+     * @type {string}
+     */
+    'WorkingDir'?: string;
+    /**
+     * The entry point for the container as a string or an array of strings.  If the array consists of exactly one empty string (`[\"\"]`) then the entry point is reset to system default (i.e., the entry point used by docker when there is no `ENTRYPOINT` instruction in the `Dockerfile`). 
+     * @type {Array<string>}
+     */
+    'Entrypoint'?: Array<string>;
+    /**
+     * Disable networking for the container.  <p><br /></p>  > **Note**: this field is always omitted and must not be used. 
+     * @type {boolean}
+     */
+    'NetworkDisabled'?: boolean | null;
+    /**
+     * MAC address of the container.  <p><br /></p>  > **Note**: this field is always omitted and must not be used. 
+     * @type {string}
+     */
+    'MacAddress'?: string | null;
+    /**
+     * `ONBUILD` metadata that were defined in the image\'s `Dockerfile`. 
+     * @type {Array<string>}
+     */
+    'OnBuild'?: Array<string> | null;
+    /**
+     * User-defined key/value metadata.
+     * @type {{ [key: string]: string; }}
+     */
+    'Labels'?: { [key: string]: string; };
+    /**
+     * Signal to stop a container as a string or unsigned integer. 
+     * @type {string}
+     */
+    'StopSignal'?: string | null;
+    /**
+     * Timeout to stop a container in seconds.  <p><br /></p>  > **Note**: this field is always omitted and must not be used. 
+     * @type {number}
+     */
+    'StopTimeout'?: number | null;
+    /**
+     * Shell for when `RUN`, `CMD`, and `ENTRYPOINT` uses a shell. 
+     * @type {Array<string>}
+     */
+    'Shell'?: Array<string> | null;
+}
+/**
+ * 
+ * @interface ImageDeleteResponseItem
+ */
+export interface ImageDeleteResponseItem {
+    /**
+     * The image ID of an image that was untagged
+     * @type {string}
+     */
+    'Untagged'?: string;
+    /**
+     * The image ID of an image that was deleted
+     * @type {string}
+     */
+    'Deleted'?: string;
+}
+/**
+ * Image ID or Digest
+ * @interface ImageID
+ */
+export interface ImageID {
+    /**
+     * 
+     * @type {string}
+     */
+    'ID'?: string;
+}
+/**
+ * Information about an image in the local image cache. 
+ * @interface ImageInspect
+ */
+export interface ImageInspect {
+    /**
+     * ID is the content-addressable ID of an image.  This identifier is a content-addressable digest calculated from the image\'s configuration (which includes the digests of layers used by the image).  Note that this digest differs from the `RepoDigests` below, which holds digests of image manifests that reference the image. 
+     * @type {string}
+     */
+    'Id'?: string;
+    /**
+     * List of image names/tags in the local image cache that reference this image.  Multiple image tags can refer to the same image, and this list may be empty if no tags reference the image, in which case the image is \"untagged\", in which case it can still be referenced by its ID. 
+     * @type {Array<string>}
+     */
+    'RepoTags'?: Array<string>;
+    /**
+     * List of content-addressable digests of locally available image manifests that the image is referenced from. Multiple manifests can refer to the same image.  These digests are usually only available if the image was either pulled from a registry, or if the image was pushed to a registry, which is when the manifest is generated and its digest calculated. 
+     * @type {Array<string>}
+     */
+    'RepoDigests'?: Array<string>;
+    /**
+     * ID of the parent image.  Depending on how the image was created, this field may be empty and is only set for images that were built/created locally. This field is empty if the image was pulled from an image registry. 
+     * @type {string}
+     */
+    'Parent'?: string;
+    /**
+     * Optional message that was set when committing or importing the image. 
+     * @type {string}
+     */
+    'Comment'?: string;
+    /**
+     * Date and time at which the image was created, formatted in [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds. 
+     * @type {string}
+     */
+    'Created'?: string;
+    /**
+     * The ID of the container that was used to create the image.  Depending on how the image was created, this field may be empty. 
+     * @type {string}
+     */
+    'Container'?: string;
+    /**
+     * 
+     * @type {ContainerConfig}
+     */
+    'ContainerConfig'?: ContainerConfig;
+    /**
+     * The version of Docker that was used to build the image.  Depending on how the image was created, this field may be empty. 
+     * @type {string}
+     */
+    'DockerVersion'?: string;
+    /**
+     * Name of the author that was specified when committing the image, or as specified through MAINTAINER (deprecated) in the Dockerfile. 
+     * @type {string}
+     */
+    'Author'?: string;
+    /**
+     * 
+     * @type {ImageConfig}
+     */
+    'Config'?: ImageConfig;
+    /**
+     * Hardware CPU architecture that the image runs on. 
+     * @type {string}
+     */
+    'Architecture'?: string;
+    /**
+     * CPU architecture variant (presently ARM-only). 
+     * @type {string}
+     */
+    'Variant'?: string | null;
+    /**
+     * Operating System the image is built to run on. 
+     * @type {string}
+     */
+    'Os'?: string;
+    /**
+     * Operating System version the image is built to run on (especially for Windows). 
+     * @type {string}
+     */
+    'OsVersion'?: string | null;
+    /**
+     * Total size of the image including all layers it is composed of. 
+     * @type {number}
+     */
+    'Size'?: number;
+    /**
+     * Total size of the image including all layers it is composed of.  In versions of Docker before v1.10, this field was calculated from the image itself and all of its parent images. Docker v1.10 and up store images self-contained, and no longer use a parent-chain, making this field an equivalent of the Size field.  This field is kept for backward compatibility, but may be removed in a future version of the API. 
+     * @type {number}
+     */
+    'VirtualSize'?: number;
+    /**
+     * 
+     * @type {GraphDriverData}
+     */
+    'GraphDriver'?: GraphDriverData;
+    /**
+     * 
+     * @type {ImageInspectRootFS}
+     */
+    'RootFS'?: ImageInspectRootFS;
+    /**
+     * 
+     * @type {ImageInspectMetadata}
+     */
+    'Metadata'?: ImageInspectMetadata;
+}
+/**
+ * Additional metadata of the image in the local cache. This information is local to the daemon, and not part of the image itself. 
+ * @interface ImageInspectMetadata
+ */
+export interface ImageInspectMetadata {
+    /**
+     * Date and time at which the image was last tagged in [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds.  This information is only available if the image was tagged locally, and omitted otherwise. 
+     * @type {string}
+     */
+    'LastTagTime'?: string | null;
+}
+/**
+ * Information about the image\'s RootFS, including the layer IDs. 
+ * @interface ImageInspectRootFS
+ */
+export interface ImageInspectRootFS {
+    /**
+     * 
+     * @type {string}
+     */
+    'Type': string;
+    /**
+     * 
+     * @type {Array<string>}
+     */
+    'Layers'?: Array<string>;
+}
+/**
+ * 
+ * @interface ImagePruneResponse
+ */
+export interface ImagePruneResponse {
+    /**
+     * Images that were deleted
+     * @type {Array<ImageDeleteResponseItem>}
+     */
+    'ImagesDeleted'?: Array<ImageDeleteResponseItem>;
+    /**
+     * Disk space reclaimed in bytes
+     * @type {number}
+     */
+    'SpaceReclaimed'?: number;
+}
+/**
+ * 
+ * @interface ImageSearchResponseItem
+ */
+export interface ImageSearchResponseItem {
+    /**
+     * 
+     * @type {string}
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {boolean}
+     */
+    'is_official'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     */
+    'is_automated'?: boolean;
+    /**
+     * 
+     * @type {string}
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {number}
+     */
+    'star_count'?: number;
+}
+/**
+ * 
+ * @interface ImageSummary
+ */
+export interface ImageSummary {
+    /**
+     * ID is the content-addressable ID of an image.  This identifier is a content-addressable digest calculated from the image\'s configuration (which includes the digests of layers used by the image).  Note that this digest differs from the `RepoDigests` below, which holds digests of image manifests that reference the image. 
+     * @type {string}
+     */
+    'Id': string;
+    /**
+     * ID of the parent image.  Depending on how the image was created, this field may be empty and is only set for images that were built/created locally. This field is empty if the image was pulled from an image registry. 
+     * @type {string}
+     */
+    'ParentId': string;
+    /**
+     * List of image names/tags in the local image cache that reference this image.  Multiple image tags can refer to the same image, and this list may be empty if no tags reference the image, in which case the image is \"untagged\", in which case it can still be referenced by its ID. 
+     * @type {Array<string>}
+     */
+    'RepoTags': Array<string>;
+    /**
+     * List of content-addressable digests of locally available image manifests that the image is referenced from. Multiple manifests can refer to the same image.  These digests are usually only available if the image was either pulled from a registry, or if the image was pushed to a registry, which is when the manifest is generated and its digest calculated. 
+     * @type {Array<string>}
+     */
+    'RepoDigests': Array<string>;
+    /**
+     * Date and time at which the image was created as a Unix timestamp (number of seconds sinds EPOCH). 
+     * @type {number}
+     */
+    'Created': number;
+    /**
+     * Total size of the image including all layers it is composed of. 
+     * @type {number}
+     */
+    'Size': number;
+    /**
+     * Total size of image layers that are shared between this image and other images.  This size is not calculated by default. `-1` indicates that the value has not been set / calculated. 
+     * @type {number}
+     */
+    'SharedSize': number;
+    /**
+     * Total size of the image including all layers it is composed of.  In versions of Docker before v1.10, this field was calculated from the image itself and all of its parent images. Docker v1.10 and up store images self-contained, and no longer use a parent-chain, making this field an equivalent of the Size field.  This field is kept for backward compatibility, but may be removed in a future version of the API. 
+     * @type {number}
+     */
+    'VirtualSize': number;
+    /**
+     * User-defined key/value metadata.
+     * @type {{ [key: string]: string; }}
+     */
+    'Labels': { [key: string]: string; };
+    /**
+     * Number of containers using this image. Includes both stopped and running containers.  This size is not calculated by default, and depends on which API endpoint is used. `-1` indicates that the value has not been set / calculated. 
+     * @type {number}
+     */
+    'Containers': number;
+}
+/**
+ * IndexInfo contains information about a registry.
+ * @interface IndexInfo
+ */
+export interface IndexInfo {
+    /**
+     * Name of the registry, such as \"docker.io\". 
+     * @type {string}
+     */
+    'Name'?: string;
+    /**
+     * List of mirrors, expressed as URIs. 
+     * @type {Array<string>}
+     */
+    'Mirrors'?: Array<string>;
+    /**
+     * Indicates if the registry is part of the list of insecure registries.  If `false`, the registry is insecure. Insecure registries accept un-encrypted (HTTP) and/or untrusted (HTTPS with certificates from unknown CAs) communication.  > **Warning**: Insecure registries can be useful when running a local > registry. However, because its use creates security vulnerabilities > it should ONLY be enabled for testing purposes. For increased > security, users should add their CA to their system\'s list of > trusted CAs instead of enabling this option. 
+     * @type {boolean}
+     */
+    'Secure'?: boolean;
+    /**
+     * Indicates whether this is an official registry (i.e., Docker Hub / docker.io) 
+     * @type {boolean}
+     */
+    'Official'?: boolean;
+}
+/**
+ * JoinTokens contains the tokens workers and managers need to join the swarm. 
+ * @interface JoinTokens
+ */
+export interface JoinTokens {
+    /**
+     * The token workers can use to join the swarm. 
+     * @type {string}
+     */
+    'Worker'?: string;
+    /**
+     * The token managers can use to join the swarm. 
+     * @type {string}
+     */
+    'Manager'?: string;
+}
+/**
+ * An object describing a limit on resources which can be requested by a task. 
+ * @interface Limit
+ */
+export interface Limit {
+    /**
+     * 
+     * @type {number}
+     */
+    'NanoCPUs'?: number;
+    /**
+     * 
+     * @type {number}
+     */
+    'MemoryBytes'?: number;
+    /**
+     * Limits the maximum number of PIDs in the container. Set `0` for unlimited. 
+     * @type {number}
+     */
+    'Pids'?: number;
+}
+/**
+ * Current local status of this node.
+ * @enum {string}
+ */
+
+export enum LocalNodeState {
+    Empty = '',
+    Inactive = 'inactive',
+    Pending = 'pending',
+    Active = 'active',
+    Error = 'error',
+    Locked = 'locked'
+}
+
+
+/**
+ * ManagerStatus represents the status of a manager.  It provides the current status of a node\'s manager component, if the node is a manager. 
+ * @interface ManagerStatus
+ */
+export interface ManagerStatus {
+    /**
+     * 
+     * @type {boolean}
+     */
+    'Leader'?: boolean;
+    /**
+     * 
+     * @type {Reachability}
+     */
+    'Reachability'?: Reachability;
+    /**
+     * The IP address and port at which the manager is reachable. 
+     * @type {string}
+     */
+    'Addr'?: string;
+}
+
+
+/**
+ * 
+ * @interface Mount
+ */
+export interface Mount {
+    /**
+     * Container path.
+     * @type {string}
+     */
+    'Target'?: string;
+    /**
+     * Mount source (e.g. a volume name, a host path).
+     * @type {string}
+     */
+    'Source'?: string;
+    /**
+     * The mount type. Available types:  - `bind` Mounts a file or directory from the host into the container. Must exist prior to creating the container. - `volume` Creates a volume with the given name and options (or uses a pre-existing volume with the same name and options). These are **not** removed when the container is removed. - `tmpfs` Create a tmpfs with the given options. The mount source cannot be specified for tmpfs. - `npipe` Mounts a named pipe from the host into the container. Must exist prior to creating the container. 
+     * @type {string}
+     */
+    'Type'?: MountTypeEnum;
+    /**
+     * Whether the mount should be read-only.
+     * @type {boolean}
+     */
+    'ReadOnly'?: boolean;
+    /**
+     * The consistency requirement for the mount: `default`, `consistent`, `cached`, or `delegated`.
+     * @type {string}
+     */
+    'Consistency'?: string;
+    /**
+     * 
+     * @type {MountBindOptions}
+     */
+    'BindOptions'?: MountBindOptions;
+    /**
+     * 
+     * @type {MountVolumeOptions}
+     */
+    'VolumeOptions'?: MountVolumeOptions;
+    /**
+     * 
+     * @type {MountTmpfsOptions}
+     */
+    'TmpfsOptions'?: MountTmpfsOptions;
+}
+
+/**
+    * @enum {string}
+    */
+export enum MountTypeEnum {
+    Bind = 'bind',
+    Volume = 'volume',
+    Tmpfs = 'tmpfs',
+    Npipe = 'npipe'
+}
+
+/**
+ * Optional configuration for the `bind` type.
+ * @interface MountBindOptions
+ */
+export interface MountBindOptions {
+    /**
+     * A propagation mode with the value `[r]private`, `[r]shared`, or `[r]slave`.
+     * @type {string}
+     */
+    'Propagation'?: MountBindOptionsPropagationEnum;
+    /**
+     * Disable recursive bind mount.
+     * @type {boolean}
+     */
+    'NonRecursive'?: boolean;
+}
+
+/**
+    * @enum {string}
+    */
+export enum MountBindOptionsPropagationEnum {
+    Private = 'private',
+    Rprivate = 'rprivate',
+    Shared = 'shared',
+    Rshared = 'rshared',
+    Slave = 'slave',
+    Rslave = 'rslave'
+}
+
+/**
+ * MountPoint represents a mount point configuration inside the container. This is used for reporting the mountpoints in use by a container. 
+ * @interface MountPoint
+ */
+export interface MountPoint {
+    /**
+     * The mount type:  - `bind` a mount of a file or directory from the host into the container. - `volume` a docker volume with the given `Name`. - `tmpfs` a `tmpfs`. - `npipe` a named pipe from the host into the container. 
+     * @type {string}
+     */
+    'Type'?: MountPointTypeEnum;
+    /**
+     * Name is the name reference to the underlying data defined by `Source` e.g., the volume name. 
+     * @type {string}
+     */
+    'Name'?: string;
+    /**
+     * Source location of the mount.  For volumes, this contains the storage location of the volume (within `/var/lib/docker/volumes/`). For bind-mounts, and `npipe`, this contains the source (host) part of the bind-mount. For `tmpfs` mount points, this field is empty. 
+     * @type {string}
+     */
+    'Source'?: string;
+    /**
+     * Destination is the path relative to the container root (`/`) where the `Source` is mounted inside the container. 
+     * @type {string}
+     */
+    'Destination'?: string;
+    /**
+     * Driver is the volume driver used to create the volume (if it is a volume). 
+     * @type {string}
+     */
+    'Driver'?: string;
+    /**
+     * Mode is a comma separated list of options supplied by the user when creating the bind/volume mount.  The default is platform-specific (`\"z\"` on Linux, empty on Windows). 
+     * @type {string}
+     */
+    'Mode'?: string;
+    /**
+     * Whether the mount is mounted writable (read-write). 
+     * @type {boolean}
+     */
+    'RW'?: boolean;
+    /**
+     * Propagation describes how mounts are propagated from the host into the mount point, and vice-versa. Refer to the [Linux kernel documentation](https://www.kernel.org/doc/Documentation/filesystems/sharedsubtree.txt) for details. This field is not used on Windows. 
+     * @type {string}
+     */
+    'Propagation'?: string;
+}
+
+/**
+    * @enum {string}
+    */
+export enum MountPointTypeEnum {
+    Bind = 'bind',
+    Volume = 'volume',
+    Tmpfs = 'tmpfs',
+    Npipe = 'npipe'
+}
+
+/**
+ * Optional configuration for the `tmpfs` type.
+ * @interface MountTmpfsOptions
+ */
+export interface MountTmpfsOptions {
+    /**
+     * The size for the tmpfs mount in bytes.
+     * @type {number}
+     */
+    'SizeBytes'?: number;
+    /**
+     * The permission mode for the tmpfs mount in an integer.
+     * @type {number}
+     */
+    'Mode'?: number;
+}
+/**
+ * Optional configuration for the `volume` type.
+ * @interface MountVolumeOptions
+ */
+export interface MountVolumeOptions {
+    /**
+     * Populate volume with data from the target.
+     * @type {boolean}
+     */
+    'NoCopy'?: boolean;
+    /**
+     * User-defined key/value metadata.
+     * @type {{ [key: string]: string; }}
+     */
+    'Labels'?: { [key: string]: string; };
+    /**
+     * 
+     * @type {MountVolumeOptionsDriverConfig}
+     */
+    'DriverConfig'?: MountVolumeOptionsDriverConfig;
+}
+/**
+ * Map of driver specific options
+ * @interface MountVolumeOptionsDriverConfig
+ */
+export interface MountVolumeOptionsDriverConfig {
+    /**
+     * Name of the driver to use to create the volume.
+     * @type {string}
+     */
+    'Name'?: string;
+    /**
+     * key/value map of driver specific options.
+     * @type {{ [key: string]: string; }}
+     */
+    'Options'?: { [key: string]: string; };
+}
+/**
+ * 
+ * @interface Network
+ */
+export interface Network {
+    /**
+     * Name of the network. 
+     * @type {string}
+     */
+    'Name'?: string;
+    /**
+     * ID that uniquely identifies a network on a single machine. 
+     * @type {string}
+     */
+    'Id'?: string;
+    /**
+     * Date and time at which the network was created in [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds. 
+     * @type {string}
+     */
+    'Created'?: string;
+    /**
+     * The level at which the network exists (e.g. `swarm` for cluster-wide or `local` for machine level) 
+     * @type {string}
+     */
+    'Scope'?: string;
+    /**
+     * The name of the driver used to create the network (e.g. `bridge`, `overlay`). 
+     * @type {string}
+     */
+    'Driver'?: string;
+    /**
+     * Whether the network was created with IPv6 enabled. 
+     * @type {boolean}
+     */
+    'EnableIPv6'?: boolean;
+    /**
+     * 
+     * @type {IPAM}
+     */
+    'IPAM'?: IPAM;
+    /**
+     * Whether the network is created to only allow internal networking connectivity. 
+     * @type {boolean}
+     */
+    'Internal'?: boolean;
+    /**
+     * Wheter a global / swarm scope network is manually attachable by regular containers from workers in swarm mode. 
+     * @type {boolean}
+     */
+    'Attachable'?: boolean;
+    /**
+     * Whether the network is providing the routing-mesh for the swarm cluster. 
+     * @type {boolean}
+     */
+    'Ingress'?: boolean;
+    /**
+     * 
+     * @type {ConfigReference}
+     */
+    'ConfigFrom'?: ConfigReference;
+    /**
+     * Whether the network is a config-only network. Config-only networks are placeholder networks for network configurations to be used by other networks. Config-only networks cannot be used directly to run containers or services. 
+     * @type {boolean}
+     */
+    'ConfigOnly'?: boolean;
+    /**
+     * Contains endpoints attached to the network. 
+     * @type {{ [key: string]: NetworkContainer; }}
+     */
+    'Containers'?: { [key: string]: NetworkContainer; };
+    /**
+     * Network-specific options uses when creating the network. 
+     * @type {{ [key: string]: string; }}
+     */
+    'Options'?: { [key: string]: string; };
+    /**
+     * User-defined key/value metadata.
+     * @type {{ [key: string]: string; }}
+     */
+    'Labels'?: { [key: string]: string; };
+    /**
+     * List of peer nodes for an overlay network. This field is only present for overlay networks, and omitted for other network types. 
+     * @type {Array<PeerInfo>}
+     */
+    'Peers'?: Array<PeerInfo> | null;
+}
+/**
+ * Specifies how a service should be attached to a particular network. 
+ * @interface NetworkAttachmentConfig
+ */
+export interface NetworkAttachmentConfig {
+    /**
+     * The target network for attachment. Must be a network name or ID. 
+     * @type {string}
+     */
+    'Target'?: string;
+    /**
+     * Discoverable alternate names for the service on this network. 
+     * @type {Array<string>}
+     */
+    'Aliases'?: Array<string>;
+    /**
+     * Driver attachment options for the network target. 
+     * @type {{ [key: string]: string; }}
+     */
+    'DriverOpts'?: { [key: string]: string; };
+}
+/**
+ * 
+ * @interface NetworkConnectRequest
+ */
+export interface NetworkConnectRequest {
+    /**
+     * The ID or name of the container to disconnect from the network. 
+     * @type {string}
+     */
+    'Container'?: string;
+    /**
+     * Force the container to disconnect from the network. 
+     * @type {boolean}
+     */
+    'Force'?: boolean;
+}
+/**
+ * 
+ * @interface NetworkContainer
+ */
+export interface NetworkContainer {
+    /**
+     * 
+     * @type {string}
+     */
+    'Name'?: string;
+    /**
+     * 
+     * @type {string}
+     */
+    'EndpointID'?: string;
+    /**
+     * 
+     * @type {string}
+     */
+    'MacAddress'?: string;
+    /**
+     * 
+     * @type {string}
+     */
+    'IPv4Address'?: string;
+    /**
+     * 
+     * @type {string}
+     */
+    'IPv6Address'?: string;
+}
+/**
+ * 
+ * @interface NetworkCreateRequest
+ */
+export interface NetworkCreateRequest {
+    /**
+     * The network\'s name.
+     * @type {string}
+     */
+    'Name': string;
+    /**
+     * Check for networks with duplicate names. Since Network is primarily keyed based on a random ID and not on the name, and network name is strictly a user-friendly alias to the network which is uniquely identified using ID, there is no guaranteed way to check for duplicates. CheckDuplicate is there to provide a best effort checking of any networks which has the same name but it is not guaranteed to catch all name collisions. 
+     * @type {boolean}
+     */
+    'CheckDuplicate'?: boolean;
+    /**
+     * Name of the network driver plugin to use.
+     * @type {string}
+     */
+    'Driver'?: string;
+    /**
+     * The level at which the network exists (e.g. `swarm` for cluster-wide or `local` for machine level). 
+     * @type {string}
+     */
+    'Scope'?: string;
+    /**
+     * Restrict external access to the network.
+     * @type {boolean}
+     */
+    'Internal'?: boolean;
+    /**
+     * Globally scoped network is manually attachable by regular containers from workers in swarm mode. 
+     * @type {boolean}
+     */
+    'Attachable'?: boolean;
+    /**
+     * Ingress network is the network which provides the routing-mesh in swarm mode. 
+     * @type {boolean}
+     */
+    'Ingress'?: boolean;
+    /**
+     * Creates a config-only network. Config-only networks are placeholder networks for network configurations to be used by other networks. Config-only networks cannot be used directly to run containers or services. 
+     * @type {boolean}
+     */
+    'ConfigOnly'?: boolean;
+    /**
+     * 
+     * @type {ConfigReference}
+     */
+    'ConfigFrom'?: ConfigReference;
+    /**
+     * 
+     * @type {IPAM}
+     */
+    'IPAM'?: IPAM;
+    /**
+     * Enable IPv6 on the network.
+     * @type {boolean}
+     */
+    'EnableIPv6'?: boolean;
+    /**
+     * Network specific options to be used by the drivers.
+     * @type {{ [key: string]: string; }}
+     */
+    'Options'?: { [key: string]: string; };
+    /**
+     * User-defined key/value metadata.
+     * @type {{ [key: string]: string; }}
+     */
+    'Labels'?: { [key: string]: string; };
+}
+/**
+ * 
+ * @interface NetworkCreateResponse
+ */
+export interface NetworkCreateResponse {
+    /**
+     * The ID of the created network.
+     * @type {string}
+     */
+    'Id'?: string;
+    /**
+     * 
+     * @type {string}
+     */
+    'Warning'?: string;
+}
+/**
+ * 
+ * @interface NetworkDisconnectRequest
+ */
+export interface NetworkDisconnectRequest {
+    /**
+     * The ID or name of the container to connect to the network.
+     * @type {string}
+     */
+    'Container'?: string;
+    /**
+     * 
+     * @type {EndpointSettings}
+     */
+    'EndpointConfig'?: EndpointSettings;
+}
+/**
+ * 
+ * @interface NetworkPruneResponse
+ */
+export interface NetworkPruneResponse {
+    /**
+     * Networks that were deleted
+     * @type {Array<string>}
+     */
+    'NetworksDeleted'?: Array<string>;
+}
+/**
+ * NetworkSettings exposes the network settings in the API
+ * @interface NetworkSettings
+ */
+export interface NetworkSettings {
+    /**
+     * Name of the network\'s bridge (for example, `docker0`).
+     * @type {string}
+     */
+    'Bridge'?: string;
+    /**
+     * SandboxID uniquely represents a container\'s network stack.
+     * @type {string}
+     */
+    'SandboxID'?: string;
+    /**
+     * Indicates if hairpin NAT should be enabled on the virtual interface. 
+     * @type {boolean}
+     */
+    'HairpinMode'?: boolean;
+    /**
+     * IPv6 unicast address using the link-local prefix.
+     * @type {string}
+     */
+    'LinkLocalIPv6Address'?: string;
+    /**
+     * Prefix length of the IPv6 unicast address.
+     * @type {number}
+     */
+    'LinkLocalIPv6PrefixLen'?: number;
+    /**
+     * PortMap describes the mapping of container ports to host ports, using the container\'s port-number and protocol as key in the format `<port>/<protocol>`, for example, `80/udp`.  If a container\'s port is mapped for multiple protocols, separate entries are added to the mapping table. 
+     * @type {{ [key: string]: Array<PortBinding> | null; }}
+     */
+    'Ports'?: { [key: string]: Array<PortBinding> | null; };
+    /**
+     * SandboxKey identifies the sandbox
+     * @type {string}
+     */
+    'SandboxKey'?: string;
+    /**
+     * 
+     * @type {Array<Address>}
+     */
+    'SecondaryIPAddresses'?: Array<Address> | null;
+    /**
+     * 
+     * @type {Array<Address>}
+     */
+    'SecondaryIPv6Addresses'?: Array<Address> | null;
+    /**
+     * EndpointID uniquely represents a service endpoint in a Sandbox.  <p><br /></p>  > **Deprecated**: This field is only propagated when attached to the > default \"bridge\" network. Use the information from the \"bridge\" > network inside the `Networks` map instead, which contains the same > information. This field was deprecated in Docker 1.9 and is scheduled > to be removed in Docker 17.12.0 
+     * @type {string}
+     */
+    'EndpointID'?: string;
+    /**
+     * Gateway address for the default \"bridge\" network.  <p><br /></p>  > **Deprecated**: This field is only propagated when attached to the > default \"bridge\" network. Use the information from the \"bridge\" > network inside the `Networks` map instead, which contains the same > information. This field was deprecated in Docker 1.9 and is scheduled > to be removed in Docker 17.12.0 
+     * @type {string}
+     */
+    'Gateway'?: string;
+    /**
+     * Global IPv6 address for the default \"bridge\" network.  <p><br /></p>  > **Deprecated**: This field is only propagated when attached to the > default \"bridge\" network. Use the information from the \"bridge\" > network inside the `Networks` map instead, which contains the same > information. This field was deprecated in Docker 1.9 and is scheduled > to be removed in Docker 17.12.0 
+     * @type {string}
+     */
+    'GlobalIPv6Address'?: string;
+    /**
+     * Mask length of the global IPv6 address.  <p><br /></p>  > **Deprecated**: This field is only propagated when attached to the > default \"bridge\" network. Use the information from the \"bridge\" > network inside the `Networks` map instead, which contains the same > information. This field was deprecated in Docker 1.9 and is scheduled > to be removed in Docker 17.12.0 
+     * @type {number}
+     */
+    'GlobalIPv6PrefixLen'?: number;
+    /**
+     * IPv4 address for the default \"bridge\" network.  <p><br /></p>  > **Deprecated**: This field is only propagated when attached to the > default \"bridge\" network. Use the information from the \"bridge\" > network inside the `Networks` map instead, which contains the same > information. This field was deprecated in Docker 1.9 and is scheduled > to be removed in Docker 17.12.0 
+     * @type {string}
+     */
+    'IPAddress'?: string;
+    /**
+     * Mask length of the IPv4 address.  <p><br /></p>  > **Deprecated**: This field is only propagated when attached to the > default \"bridge\" network. Use the information from the \"bridge\" > network inside the `Networks` map instead, which contains the same > information. This field was deprecated in Docker 1.9 and is scheduled > to be removed in Docker 17.12.0 
+     * @type {number}
+     */
+    'IPPrefixLen'?: number;
+    /**
+     * IPv6 gateway address for this network.  <p><br /></p>  > **Deprecated**: This field is only propagated when attached to the > default \"bridge\" network. Use the information from the \"bridge\" > network inside the `Networks` map instead, which contains the same > information. This field was deprecated in Docker 1.9 and is scheduled > to be removed in Docker 17.12.0 
+     * @type {string}
+     */
+    'IPv6Gateway'?: string;
+    /**
+     * MAC address for the container on the default \"bridge\" network.  <p><br /></p>  > **Deprecated**: This field is only propagated when attached to the > default \"bridge\" network. Use the information from the \"bridge\" > network inside the `Networks` map instead, which contains the same > information. This field was deprecated in Docker 1.9 and is scheduled > to be removed in Docker 17.12.0 
+     * @type {string}
+     */
+    'MacAddress'?: string;
+    /**
+     * Information about all networks that the container is connected to. 
+     * @type {{ [key: string]: EndpointSettings; }}
+     */
+    'Networks'?: { [key: string]: EndpointSettings; };
+}
+/**
+ * NetworkingConfig represents the container\'s networking configuration for each of its interfaces. It is used for the networking configs specified in the `docker create` and `docker network connect` commands. 
+ * @interface NetworkingConfig
+ */
+export interface NetworkingConfig {
+    /**
+     * A mapping of network name to endpoint configuration for that network. 
+     * @type {{ [key: string]: EndpointSettings; }}
+     */
+    'EndpointsConfig'?: { [key: string]: EndpointSettings; };
+}
+/**
+ * 
+ * @interface Node
+ */
+export interface Node {
+    /**
+     * 
+     * @type {string}
+     */
+    'ID'?: string;
+    /**
+     * 
+     * @type {ObjectVersion}
+     */
+    'Version'?: ObjectVersion;
+    /**
+     * Date and time at which the node was added to the swarm in [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds. 
+     * @type {string}
+     */
+    'CreatedAt'?: string;
+    /**
+     * Date and time at which the node was last updated in [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds. 
+     * @type {string}
+     */
+    'UpdatedAt'?: string;
+    /**
+     * 
+     * @type {NodeSpec}
+     */
+    'Spec'?: NodeSpec;
+    /**
+     * 
+     * @type {NodeDescription}
+     */
+    'Description'?: NodeDescription;
+    /**
+     * 
+     * @type {NodeStatus}
+     */
+    'Status'?: NodeStatus;
+    /**
+     * 
+     * @type {ManagerStatus}
+     */
+    'ManagerStatus'?: ManagerStatus | null;
+}
+/**
+ * NodeDescription encapsulates the properties of the Node as reported by the agent. 
+ * @interface NodeDescription
+ */
+export interface NodeDescription {
+    /**
+     * 
+     * @type {string}
+     */
+    'Hostname'?: string;
+    /**
+     * 
+     * @type {Platform}
+     */
+    'Platform'?: Platform;
+    /**
+     * 
+     * @type {ResourceObject}
+     */
+    'Resources'?: ResourceObject;
+    /**
+     * 
+     * @type {EngineDescription}
+     */
+    'Engine'?: EngineDescription;
+    /**
+     * 
+     * @type {TLSInfo}
+     */
+    'TLSInfo'?: TLSInfo;
+}
+/**
+ * 
+ * @interface NodeSpec
+ */
+export interface NodeSpec {
+    /**
+     * Name for the node.
+     * @type {string}
+     */
+    'Name'?: string;
+    /**
+     * User-defined key/value metadata.
+     * @type {{ [key: string]: string; }}
+     */
+    'Labels'?: { [key: string]: string; };
+    /**
+     * Role of the node.
+     * @type {string}
+     */
+    'Role'?: NodeSpecRoleEnum;
+    /**
+     * Availability of the node.
+     * @type {string}
+     */
+    'Availability'?: NodeSpecAvailabilityEnum;
+}
+
+/**
+    * @enum {string}
+    */
+export enum NodeSpecRoleEnum {
+    Worker = 'worker',
+    Manager = 'manager'
+}
+/**
+    * @enum {string}
+    */
+export enum NodeSpecAvailabilityEnum {
+    Active = 'active',
+    Pause = 'pause',
+    Drain = 'drain'
+}
+
+/**
+ * NodeState represents the state of a node.
+ * @enum {string}
+ */
+
+export enum NodeState {
+    Unknown = 'unknown',
+    Down = 'down',
+    Ready = 'ready',
+    Disconnected = 'disconnected'
+}
+
+
+/**
+ * NodeStatus represents the status of a node.  It provides the current status of the node, as seen by the manager. 
+ * @interface NodeStatus
+ */
+export interface NodeStatus {
+    /**
+     * 
+     * @type {NodeState}
+     */
+    'State'?: NodeState;
+    /**
+     * 
+     * @type {string}
+     */
+    'Message'?: string;
+    /**
+     * IP address of the node.
+     * @type {string}
+     */
+    'Addr'?: string;
+}
+
+
+/**
+ * A descriptor struct containing digest, media type, and size, as defined in the [OCI Content Descriptors Specification](https://github.com/opencontainers/image-spec/blob/v1.0.1/descriptor.md). 
+ * @interface OCIDescriptor
+ */
+export interface OCIDescriptor {
+    /**
+     * The media type of the object this schema refers to. 
+     * @type {string}
+     */
+    'mediaType'?: string;
+    /**
+     * The digest of the targeted content. 
+     * @type {string}
+     */
+    'digest'?: string;
+    /**
+     * The size in bytes of the blob. 
+     * @type {number}
+     */
+    'size'?: number;
+}
+/**
+ * Describes the platform which the image in the manifest runs on, as defined in the [OCI Image Index Specification](https://github.com/opencontainers/image-spec/blob/v1.0.1/image-index.md). 
+ * @interface OCIPlatform
+ */
+export interface OCIPlatform {
+    /**
+     * The CPU architecture, for example `amd64` or `ppc64`. 
+     * @type {string}
+     */
+    'architecture'?: string;
+    /**
+     * The operating system, for example `linux` or `windows`. 
+     * @type {string}
+     */
+    'os'?: string;
+    /**
+     * Optional field specifying the operating system version, for example on Windows `10.0.19041.1165`. 
+     * @type {string}
+     */
+    'os.version'?: string;
+    /**
+     * Optional field specifying an array of strings, each listing a required OS feature (for example on Windows `win32k`). 
+     * @type {Array<string>}
+     */
+    'os.features'?: Array<string>;
+    /**
+     * Optional field specifying a variant of the CPU, for example `v7` to specify ARMv7 when architecture is `arm`. 
+     * @type {string}
+     */
+    'variant'?: string;
+}
+/**
+ * The version number of the object such as node, service, etc. This is needed to avoid conflicting writes. The client must send the version number along with the modified specification when updating these objects.  This approach ensures safe concurrency and determinism in that the change on the object may not be applied if the version number has changed from the last read. In other words, if two update requests specify the same base version, only one of the requests can succeed. As a result, two separate update requests that happen at the same time will not unintentionally overwrite each other. 
+ * @interface ObjectVersion
+ */
+export interface ObjectVersion {
+    /**
+     * 
+     * @type {number}
+     */
+    'Index'?: number;
+}
+/**
+ * PeerInfo represents one peer of an overlay network. 
+ * @interface PeerInfo
+ */
+export interface PeerInfo {
+    /**
+     * ID of the peer-node in the Swarm cluster.
+     * @type {string}
+     */
+    'Name'?: string;
+    /**
+     * IP-address of the peer-node in the Swarm cluster.
+     * @type {string}
+     */
+    'IP'?: string;
+}
+/**
+ * Represents a peer-node in the swarm
+ * @interface PeerNode
+ */
+export interface PeerNode {
+    /**
+     * Unique identifier of for this node in the swarm.
+     * @type {string}
+     */
+    'NodeID'?: string;
+    /**
+     * IP address and ports at which this node can be reached. 
+     * @type {string}
+     */
+    'Addr'?: string;
+}
+/**
+ * Platform represents the platform (Arch/OS). 
+ * @interface Platform
+ */
+export interface Platform {
+    /**
+     * Architecture represents the hardware architecture (for example, `x86_64`). 
+     * @type {string}
+     */
+    'Architecture'?: string;
+    /**
+     * OS represents the Operating System (for example, `linux` or `windows`). 
+     * @type {string}
+     */
+    'OS'?: string;
+}
+/**
+ * A plugin for the Engine API
+ * @interface Plugin
+ */
+export interface Plugin {
+    /**
+     * 
+     * @type {string}
+     */
+    'Id'?: string;
+    /**
+     * 
+     * @type {string}
+     */
+    'Name': string;
+    /**
+     * True if the plugin is running. False if the plugin is not running, only installed.
+     * @type {boolean}
+     */
+    'Enabled': boolean;
+    /**
+     * 
+     * @type {PluginSettings}
+     */
+    'Settings': PluginSettings;
+    /**
+     * plugin remote reference used to push/pull the plugin
+     * @type {string}
+     */
+    'PluginReference'?: string;
+    /**
+     * 
+     * @type {PluginConfig}
+     */
+    'Config': PluginConfig;
+}
+/**
+ * The config of a plugin.
+ * @interface PluginConfig
+ */
+export interface PluginConfig {
+    /**
+     * Docker Version used to create the plugin
+     * @type {string}
+     */
+    'DockerVersion'?: string;
+    /**
+     * 
+     * @type {string}
+     */
+    'Description': string;
+    /**
+     * 
+     * @type {string}
+     */
+    'Documentation': string;
+    /**
+     * 
+     * @type {PluginConfigInterface}
+     */
+    'Interface': PluginConfigInterface;
+    /**
+     * 
+     * @type {Array<string>}
+     */
+    'Entrypoint': Array<string>;
+    /**
+     * 
+     * @type {string}
+     */
+    'WorkDir': string;
+    /**
+     * 
+     * @type {PluginConfigUser}
+     */
+    'User'?: PluginConfigUser;
+    /**
+     * 
+     * @type {PluginConfigNetwork}
+     */
+    'Network': PluginConfigNetwork;
+    /**
+     * 
+     * @type {PluginConfigLinux}
+     */
+    'Linux': PluginConfigLinux;
+    /**
+     * 
+     * @type {string}
+     */
+    'PropagatedMount': string;
+    /**
+     * 
+     * @type {boolean}
+     */
+    'IpcHost': boolean;
+    /**
+     * 
+     * @type {boolean}
+     */
+    'PidHost': boolean;
+    /**
+     * 
+     * @type {Array<PluginMount>}
+     */
+    'Mounts': Array<PluginMount>;
+    /**
+     * 
+     * @type {Array<PluginEnv>}
+     */
+    'Env': Array<PluginEnv>;
+    /**
+     * 
+     * @type {PluginConfigArgs}
+     */
+    'Args': PluginConfigArgs;
+    /**
+     * 
+     * @type {PluginConfigRootfs}
+     */
+    'rootfs'?: PluginConfigRootfs;
+}
+/**
+ * 
+ * @interface PluginConfigArgs
+ */
+export interface PluginConfigArgs {
+    /**
+     * 
+     * @type {string}
+     */
+    'Name': string;
+    /**
+     * 
+     * @type {string}
+     */
+    'Description': string;
+    /**
+     * 
+     * @type {Array<string>}
+     */
+    'Settable': Array<string>;
+    /**
+     * 
+     * @type {Array<string>}
+     */
+    'Value': Array<string>;
+}
+/**
+ * The interface between Docker and the plugin
+ * @interface PluginConfigInterface
+ */
+export interface PluginConfigInterface {
+    /**
+     * 
+     * @type {Array<PluginInterfaceType>}
+     */
+    'Types': Array<PluginInterfaceType>;
+    /**
+     * 
+     * @type {string}
+     */
+    'Socket': string;
+    /**
+     * Protocol to use for clients connecting to the plugin.
+     * @type {string}
+     */
+    'ProtocolScheme'?: PluginConfigInterfaceProtocolSchemeEnum;
+}
+
+/**
+    * @enum {string}
+    */
+export enum PluginConfigInterfaceProtocolSchemeEnum {
+    Empty = '',
+    MobyPluginsHttpV1 = 'moby.plugins.http/v1'
+}
+
+/**
+ * 
+ * @interface PluginConfigLinux
+ */
+export interface PluginConfigLinux {
+    /**
+     * 
+     * @type {Array<string>}
+     */
+    'Capabilities': Array<string>;
+    /**
+     * 
+     * @type {boolean}
+     */
+    'AllowAllDevices': boolean;
+    /**
+     * 
+     * @type {Array<PluginDevice>}
+     */
+    'Devices': Array<PluginDevice>;
+}
+/**
+ * 
+ * @interface PluginConfigNetwork
+ */
+export interface PluginConfigNetwork {
+    /**
+     * 
+     * @type {string}
+     */
+    'Type': string;
+}
+/**
+ * 
+ * @interface PluginConfigRootfs
+ */
+export interface PluginConfigRootfs {
+    /**
+     * 
+     * @type {string}
+     */
+    'type'?: string;
+    /**
+     * 
+     * @type {Array<string>}
+     */
+    'diff_ids'?: Array<string>;
+}
+/**
+ * 
+ * @interface PluginConfigUser
+ */
+export interface PluginConfigUser {
+    /**
+     * 
+     * @type {number}
+     */
+    'UID'?: number;
+    /**
+     * 
+     * @type {number}
+     */
+    'GID'?: number;
+}
+/**
+ * 
+ * @interface PluginDevice
+ */
+export interface PluginDevice {
+    /**
+     * 
+     * @type {string}
+     */
+    'Name': string;
+    /**
+     * 
+     * @type {string}
+     */
+    'Description': string;
+    /**
+     * 
+     * @type {Array<string>}
+     */
+    'Settable': Array<string>;
+    /**
+     * 
+     * @type {string}
+     */
+    'Path': string;
+}
+/**
+ * 
+ * @interface PluginEnv
+ */
+export interface PluginEnv {
+    /**
+     * 
+     * @type {string}
+     */
+    'Name': string;
+    /**
+     * 
+     * @type {string}
+     */
+    'Description': string;
+    /**
+     * 
+     * @type {Array<string>}
+     */
+    'Settable': Array<string>;
+    /**
+     * 
+     * @type {string}
+     */
+    'Value': string;
+}
+/**
+ * 
+ * @interface PluginInterfaceType
+ */
+export interface PluginInterfaceType {
+    /**
+     * 
+     * @type {string}
+     */
+    'Prefix': string;
+    /**
+     * 
+     * @type {string}
+     */
+    'Capability': string;
+    /**
+     * 
+     * @type {string}
+     */
+    'Version': string;
+}
+/**
+ * 
+ * @interface PluginMount
+ */
+export interface PluginMount {
+    /**
+     * 
+     * @type {string}
+     */
+    'Name': string;
+    /**
+     * 
+     * @type {string}
+     */
+    'Description': string;
+    /**
+     * 
+     * @type {Array<string>}
+     */
+    'Settable': Array<string>;
+    /**
+     * 
+     * @type {string}
+     */
+    'Source': string;
+    /**
+     * 
+     * @type {string}
+     */
+    'Destination': string;
+    /**
+     * 
+     * @type {string}
+     */
+    'Type': string;
+    /**
+     * 
+     * @type {Array<string>}
+     */
+    'Options': Array<string>;
+}
+/**
+ * Describes a permission the user has to accept upon installing the plugin. 
+ * @interface PluginPrivilege
+ */
+export interface PluginPrivilege {
+    /**
+     * 
+     * @type {string}
+     */
+    'Name'?: string;
+    /**
+     * 
+     * @type {string}
+     */
+    'Description'?: string;
+    /**
+     * 
+     * @type {Array<string>}
+     */
+    'Value'?: Array<string>;
+}
+/**
+ * Settings that can be modified by users.
+ * @interface PluginSettings
+ */
+export interface PluginSettings {
+    /**
+     * 
+     * @type {Array<PluginMount>}
+     */
+    'Mounts': Array<PluginMount>;
+    /**
+     * 
+     * @type {Array<string>}
+     */
+    'Env': Array<string>;
+    /**
+     * 
+     * @type {Array<string>}
+     */
+    'Args': Array<string>;
+    /**
+     * 
+     * @type {Array<PluginDevice>}
+     */
+    'Devices': Array<PluginDevice>;
+}
+/**
+ * Available plugins per type.  <p><br /></p>  > **Note**: Only unmanaged (V1) plugins are included in this list. > V1 plugins are \"lazily\" loaded, and are not returned in this list > if there is no resource using the plugin. 
+ * @interface PluginsInfo
+ */
+export interface PluginsInfo {
+    /**
+     * Names of available volume-drivers, and network-driver plugins.
+     * @type {Array<string>}
+     */
+    'Volume'?: Array<string>;
+    /**
+     * Names of available network-drivers, and network-driver plugins.
+     * @type {Array<string>}
+     */
+    'Network'?: Array<string>;
+    /**
+     * Names of available authorization plugins.
+     * @type {Array<string>}
+     */
+    'Authorization'?: Array<string>;
+    /**
+     * Names of available logging-drivers, and logging-driver plugins.
+     * @type {Array<string>}
+     */
+    'Log'?: Array<string>;
+}
+/**
+ * An open port on a container
+ * @interface Port
+ */
+export interface Port {
+    /**
+     * Host IP address that the container\'s port is mapped to
+     * @type {string}
+     */
+    'IP'?: string;
+    /**
+     * Port on the container
+     * @type {number}
+     */
+    'PrivatePort': number;
+    /**
+     * Port exposed on the host
+     * @type {number}
+     */
+    'PublicPort'?: number;
+    /**
+     * 
+     * @type {string}
+     */
+    'Type': PortTypeEnum;
+}
+
+/**
+    * @enum {string}
+    */
+export enum PortTypeEnum {
+    Tcp = 'tcp',
+    Udp = 'udp',
+    Sctp = 'sctp'
+}
+
+/**
+ * PortBinding represents a binding between a host IP address and a host port. 
+ * @interface PortBinding
+ */
+export interface PortBinding {
+    /**
+     * Host IP address that the container\'s port is mapped to.
+     * @type {string}
+     */
+    'HostIp'?: string;
+    /**
+     * Host port number that the container\'s port is mapped to.
+     * @type {string}
+     */
+    'HostPort'?: string;
+}
+/**
+ * 
+ * @interface ProcessConfig
+ */
+export interface ProcessConfig {
+    /**
+     * 
+     * @type {boolean}
+     */
+    'privileged'?: boolean;
+    /**
+     * 
+     * @type {string}
+     */
+    'user'?: string;
+    /**
+     * 
+     * @type {boolean}
+     */
+    'tty'?: boolean;
+    /**
+     * 
+     * @type {string}
+     */
+    'entrypoint'?: string;
+    /**
+     * 
+     * @type {Array<string>}
+     */
+    'arguments'?: Array<string>;
+}
+/**
+ * 
+ * @interface ProgressDetail
+ */
+export interface ProgressDetail {
+    /**
+     * 
+     * @type {number}
+     */
+    'current'?: number;
+    /**
+     * 
+     * @type {number}
+     */
+    'total'?: number;
+}
+/**
+ * 
+ * @interface PushImageInfo
+ */
+export interface PushImageInfo {
+    /**
+     * 
+     * @type {string}
+     */
+    'error'?: string;
+    /**
+     * 
+     * @type {string}
+     */
+    'status'?: string;
+    /**
+     * 
+     * @type {string}
+     */
+    'progress'?: string;
+    /**
+     * 
+     * @type {ProgressDetail}
+     */
+    'progressDetail'?: ProgressDetail;
+}
+/**
+ * Reachability represents the reachability of a node.
+ * @enum {string}
+ */
+
+export enum Reachability {
+    Unknown = 'unknown',
+    Unreachable = 'unreachable',
+    Reachable = 'reachable'
+}
+
+
+/**
+ * RegistryServiceConfig stores daemon registry services configuration. 
+ * @interface RegistryServiceConfig
+ */
+export interface RegistryServiceConfig {
+    /**
+     * List of IP ranges to which nondistributable artifacts can be pushed, using the CIDR syntax [RFC 4632](https://tools.ietf.org/html/4632).  Some images (for example, Windows base images) contain artifacts whose distribution is restricted by license. When these images are pushed to a registry, restricted artifacts are not included.  This configuration override this behavior, and enables the daemon to push nondistributable artifacts to all registries whose resolved IP address is within the subnet described by the CIDR syntax.  This option is useful when pushing images containing nondistributable artifacts to a registry on an air-gapped network so hosts on that network can pull the images without connecting to another server.  > **Warning**: Nondistributable artifacts typically have restrictions > on how and where they can be distributed and shared. Only use this > feature to push artifacts to private registries and ensure that you > are in compliance with any terms that cover redistributing > nondistributable artifacts. 
+     * @type {Array<string>}
+     */
+    'AllowNondistributableArtifactsCIDRs'?: Array<string>;
+    /**
+     * List of registry hostnames to which nondistributable artifacts can be pushed, using the format `<hostname>[:<port>]` or `<IP address>[:<port>]`.  Some images (for example, Windows base images) contain artifacts whose distribution is restricted by license. When these images are pushed to a registry, restricted artifacts are not included.  This configuration override this behavior for the specified registries.  This option is useful when pushing images containing nondistributable artifacts to a registry on an air-gapped network so hosts on that network can pull the images without connecting to another server.  > **Warning**: Nondistributable artifacts typically have restrictions > on how and where they can be distributed and shared. Only use this > feature to push artifacts to private registries and ensure that you > are in compliance with any terms that cover redistributing > nondistributable artifacts. 
+     * @type {Array<string>}
+     */
+    'AllowNondistributableArtifactsHostnames'?: Array<string>;
+    /**
+     * List of IP ranges of insecure registries, using the CIDR syntax ([RFC 4632](https://tools.ietf.org/html/4632)). Insecure registries accept un-encrypted (HTTP) and/or untrusted (HTTPS with certificates from unknown CAs) communication.  By default, local registries (`127.0.0.0/8`) are configured as insecure. All other registries are secure. Communicating with an insecure registry is not possible if the daemon assumes that registry is secure.  This configuration override this behavior, insecure communication with registries whose resolved IP address is within the subnet described by the CIDR syntax.  Registries can also be marked insecure by hostname. Those registries are listed under `IndexConfigs` and have their `Secure` field set to `false`.  > **Warning**: Using this option can be useful when running a local > registry, but introduces security vulnerabilities. This option > should therefore ONLY be used for testing purposes. For increased > security, users should add their CA to their system\'s list of trusted > CAs instead of enabling this option. 
+     * @type {Array<string>}
+     */
+    'InsecureRegistryCIDRs'?: Array<string>;
+    /**
+     * 
+     * @type {{ [key: string]: IndexInfo; }}
+     */
+    'IndexConfigs'?: { [key: string]: IndexInfo; };
+    /**
+     * List of registry URLs that act as a mirror for the official (`docker.io`) registry. 
+     * @type {Array<string>}
+     */
+    'Mirrors'?: Array<string>;
+}
+/**
+ * An object describing the resources which can be advertised by a node and requested by a task. 
+ * @interface ResourceObject
+ */
+export interface ResourceObject {
+    /**
+     * 
+     * @type {number}
+     */
+    'NanoCPUs'?: number;
+    /**
+     * 
+     * @type {number}
+     */
+    'MemoryBytes'?: number;
+    /**
+     * User-defined resources can be either Integer resources (e.g, `SSD=3`) or String resources (e.g, `GPU=UUID1`). 
+     * @type {Array<GenericResourcesInner>}
+     */
+    'GenericResources'?: Array<GenericResourcesInner>;
+}
+/**
+ * A container\'s resources (cgroups config, ulimits, etc)
+ * @interface Resources
+ */
+export interface Resources {
+    /**
+     * An integer value representing this container\'s relative CPU weight versus other containers. 
+     * @type {number}
+     */
+    'CpuShares'?: number;
+    /**
+     * Memory limit in bytes.
+     * @type {number}
+     */
+    'Memory'?: number;
+    /**
+     * Path to `cgroups` under which the container\'s `cgroup` is created. If the path is not absolute, the path is considered to be relative to the `cgroups` path of the init process. Cgroups are created if they do not already exist. 
+     * @type {string}
+     */
+    'CgroupParent'?: string;
+    /**
+     * Block IO weight (relative weight).
+     * @type {number}
+     */
+    'BlkioWeight'?: number;
+    /**
+     * Block IO weight (relative device weight) in the form:  ``` [{\"Path\": \"device_path\", \"Weight\": weight}] ``` 
+     * @type {Array<ResourcesBlkioWeightDeviceInner>}
+     */
+    'BlkioWeightDevice'?: Array<ResourcesBlkioWeightDeviceInner>;
+    /**
+     * Limit read rate (bytes per second) from a device, in the form:  ``` [{\"Path\": \"device_path\", \"Rate\": rate}] ``` 
+     * @type {Array<ThrottleDevice>}
+     */
+    'BlkioDeviceReadBps'?: Array<ThrottleDevice>;
+    /**
+     * Limit write rate (bytes per second) to a device, in the form:  ``` [{\"Path\": \"device_path\", \"Rate\": rate}] ``` 
+     * @type {Array<ThrottleDevice>}
+     */
+    'BlkioDeviceWriteBps'?: Array<ThrottleDevice>;
+    /**
+     * Limit read rate (IO per second) from a device, in the form:  ``` [{\"Path\": \"device_path\", \"Rate\": rate}] ``` 
+     * @type {Array<ThrottleDevice>}
+     */
+    'BlkioDeviceReadIOps'?: Array<ThrottleDevice>;
+    /**
+     * Limit write rate (IO per second) to a device, in the form:  ``` [{\"Path\": \"device_path\", \"Rate\": rate}] ``` 
+     * @type {Array<ThrottleDevice>}
+     */
+    'BlkioDeviceWriteIOps'?: Array<ThrottleDevice>;
+    /**
+     * The length of a CPU period in microseconds.
+     * @type {number}
+     */
+    'CpuPeriod'?: number;
+    /**
+     * Microseconds of CPU time that the container can get in a CPU period. 
+     * @type {number}
+     */
+    'CpuQuota'?: number;
+    /**
+     * The length of a CPU real-time period in microseconds. Set to 0 to allocate no time allocated to real-time tasks. 
+     * @type {number}
+     */
+    'CpuRealtimePeriod'?: number;
+    /**
+     * The length of a CPU real-time runtime in microseconds. Set to 0 to allocate no time allocated to real-time tasks. 
+     * @type {number}
+     */
+    'CpuRealtimeRuntime'?: number;
+    /**
+     * CPUs in which to allow execution (e.g., `0-3`, `0,1`). 
+     * @type {string}
+     */
+    'CpusetCpus'?: string;
+    /**
+     * Memory nodes (MEMs) in which to allow execution (0-3, 0,1). Only effective on NUMA systems. 
+     * @type {string}
+     */
+    'CpusetMems'?: string;
+    /**
+     * A list of devices to add to the container.
+     * @type {Array<DeviceMapping>}
+     */
+    'Devices'?: Array<DeviceMapping>;
+    /**
+     * a list of cgroup rules to apply to the container
+     * @type {Array<string>}
+     */
+    'DeviceCgroupRules'?: Array<string>;
+    /**
+     * A list of requests for devices to be sent to device drivers. 
+     * @type {Array<DeviceRequest>}
+     */
+    'DeviceRequests'?: Array<DeviceRequest>;
+    /**
+     * Kernel memory limit in bytes.  <p><br /></p>  > **Deprecated**: This field is deprecated as the kernel 5.4 deprecated > `kmem.limit_in_bytes`. 
+     * @type {number}
+     */
+    'KernelMemory'?: number;
+    /**
+     * Hard limit for kernel TCP buffer memory (in bytes).
+     * @type {number}
+     */
+    'KernelMemoryTCP'?: number;
+    /**
+     * Memory soft limit in bytes.
+     * @type {number}
+     */
+    'MemoryReservation'?: number;
+    /**
+     * Total memory limit (memory + swap). Set as `-1` to enable unlimited swap. 
+     * @type {number}
+     */
+    'MemorySwap'?: number;
+    /**
+     * Tune a container\'s memory swappiness behavior. Accepts an integer between 0 and 100. 
+     * @type {number}
+     */
+    'MemorySwappiness'?: number;
+    /**
+     * CPU quota in units of 10<sup>-9</sup> CPUs.
+     * @type {number}
+     */
+    'NanoCpus'?: number;
+    /**
+     * Disable OOM Killer for the container.
+     * @type {boolean}
+     */
+    'OomKillDisable'?: boolean;
+    /**
+     * Run an init inside the container that forwards signals and reaps processes. This field is omitted if empty, and the default (as configured on the daemon) is used. 
+     * @type {boolean}
+     */
+    'Init'?: boolean | null;
+    /**
+     * Tune a container\'s PIDs limit. Set `0` or `-1` for unlimited, or `null` to not change. 
+     * @type {number}
+     */
+    'PidsLimit'?: number | null;
+    /**
+     * A list of resource limits to set in the container. For example:  ``` {\"Name\": \"nofile\", \"Soft\": 1024, \"Hard\": 2048} ``` 
+     * @type {Array<ResourcesUlimitsInner>}
+     */
+    'Ulimits'?: Array<ResourcesUlimitsInner>;
+    /**
+     * The number of usable CPUs (Windows only).  On Windows Server containers, the processor resource controls are mutually exclusive. The order of precedence is `CPUCount` first, then `CPUShares`, and `CPUPercent` last. 
+     * @type {number}
+     */
+    'CpuCount'?: number;
+    /**
+     * The usable percentage of the available CPUs (Windows only).  On Windows Server containers, the processor resource controls are mutually exclusive. The order of precedence is `CPUCount` first, then `CPUShares`, and `CPUPercent` last. 
+     * @type {number}
+     */
+    'CpuPercent'?: number;
+    /**
+     * Maximum IOps for the container system drive (Windows only)
+     * @type {number}
+     */
+    'IOMaximumIOps'?: number;
+    /**
+     * Maximum IO in bytes per second for the container system drive (Windows only). 
+     * @type {number}
+     */
+    'IOMaximumBandwidth'?: number;
+}
+/**
+ * 
+ * @interface ResourcesBlkioWeightDeviceInner
+ */
+export interface ResourcesBlkioWeightDeviceInner {
+    /**
+     * 
+     * @type {string}
+     */
+    'Path'?: string;
+    /**
+     * 
+     * @type {number}
+     */
+    'Weight'?: number;
+}
+/**
+ * 
+ * @interface ResourcesUlimitsInner
+ */
+export interface ResourcesUlimitsInner {
+    /**
+     * Name of ulimit
+     * @type {string}
+     */
+    'Name'?: string;
+    /**
+     * Soft limit
+     * @type {number}
+     */
+    'Soft'?: number;
+    /**
+     * Hard limit
+     * @type {number}
+     */
+    'Hard'?: number;
+}
+/**
+ * The behavior to apply when the container exits. The default is not to restart.  An ever increasing delay (double the previous delay, starting at 100ms) is added before each restart to prevent flooding the server. 
+ * @interface RestartPolicy
+ */
+export interface RestartPolicy {
+    /**
+     * - Empty string means not to restart - `no` Do not automatically restart - `always` Always restart - `unless-stopped` Restart always except when the user has manually stopped the container - `on-failure` Restart only when the container exit code is non-zero 
+     * @type {string}
+     */
+    'Name'?: RestartPolicyNameEnum;
+    /**
+     * If `on-failure` is used, the number of times to retry before giving up. 
+     * @type {number}
+     */
+    'MaximumRetryCount'?: number;
+}
+
+/**
+    * @enum {string}
+    */
+export enum RestartPolicyNameEnum {
+    Empty = '',
+    No = 'no',
+    Always = 'always',
+    UnlessStopped = 'unless-stopped',
+    OnFailure = 'on-failure'
+}
+
+/**
+ * Runtime describes an [OCI compliant](https://github.com/opencontainers/runtime-spec) runtime.  The runtime is invoked by the daemon via the `containerd` daemon. OCI runtimes act as an interface to the Linux kernel namespaces, cgroups, and SELinux. 
+ * @interface Runtime
+ */
+export interface Runtime {
+    /**
+     * Name and, optional, path, of the OCI executable binary.  If the path is omitted, the daemon searches the host\'s `$PATH` for the binary and uses the first result. 
+     * @type {string}
+     */
+    'path'?: string;
+    /**
+     * List of command-line arguments to pass to the runtime when invoked. 
+     * @type {Array<string>}
+     */
+    'runtimeArgs'?: Array<string> | null;
+}
+/**
+ * 
+ * @interface Secret
+ */
+export interface Secret {
+    /**
+     * 
+     * @type {string}
+     */
+    'ID'?: string;
+    /**
+     * 
+     * @type {ObjectVersion}
+     */
+    'Version'?: ObjectVersion;
+    /**
+     * 
+     * @type {string}
+     */
+    'CreatedAt'?: string;
+    /**
+     * 
+     * @type {string}
+     */
+    'UpdatedAt'?: string;
+    /**
+     * 
+     * @type {SecretSpec}
+     */
+    'Spec'?: SecretSpec;
+}
+/**
+ * 
+ * @interface SecretCreateRequest
+ */
+export interface SecretCreateRequest {
+    /**
+     * User-defined name of the secret.
+     * @type {string}
+     */
+    'Name'?: string;
+    /**
+     * User-defined key/value metadata.
+     * @type {{ [key: string]: string; }}
+     */
+    'Labels'?: { [key: string]: string; };
+    /**
+     * Base64-url-safe-encoded ([RFC 4648](https://tools.ietf.org/html/rfc4648#section-5)) data to store as secret.  This field is only used to _create_ a secret, and is not returned by other endpoints. 
+     * @type {string}
+     */
+    'Data'?: string;
+    /**
+     * 
+     * @type {Driver}
+     */
+    'Driver'?: Driver;
+    /**
+     * 
+     * @type {Driver}
+     */
+    'Templating'?: Driver;
+}
+/**
+ * 
+ * @interface SecretSpec
+ */
+export interface SecretSpec {
+    /**
+     * User-defined name of the secret.
+     * @type {string}
+     */
+    'Name'?: string;
+    /**
+     * User-defined key/value metadata.
+     * @type {{ [key: string]: string; }}
+     */
+    'Labels'?: { [key: string]: string; };
+    /**
+     * Base64-url-safe-encoded ([RFC 4648](https://tools.ietf.org/html/rfc4648#section-5)) data to store as secret.  This field is only used to _create_ a secret, and is not returned by other endpoints. 
+     * @type {string}
+     */
+    'Data'?: string;
+    /**
+     * 
+     * @type {Driver}
+     */
+    'Driver'?: Driver;
+    /**
+     * 
+     * @type {Driver}
+     */
+    'Templating'?: Driver;
+}
+/**
+ * 
+ * @interface Service
+ */
+export interface Service {
+    /**
+     * 
+     * @type {string}
+     */
+    'ID'?: string;
+    /**
+     * 
+     * @type {ObjectVersion}
+     */
+    'Version'?: ObjectVersion;
+    /**
+     * 
+     * @type {string}
+     */
+    'CreatedAt'?: string;
+    /**
+     * 
+     * @type {string}
+     */
+    'UpdatedAt'?: string;
+    /**
+     * 
+     * @type {ServiceSpec}
+     */
+    'Spec'?: ServiceSpec;
+    /**
+     * 
+     * @type {ServiceEndpoint}
+     */
+    'Endpoint'?: ServiceEndpoint;
+    /**
+     * 
+     * @type {ServiceUpdateStatus}
+     */
+    'UpdateStatus'?: ServiceUpdateStatus;
+    /**
+     * 
+     * @type {ServiceServiceStatus}
+     */
+    'ServiceStatus'?: ServiceServiceStatus;
+    /**
+     * 
+     * @type {ServiceJobStatus}
+     */
+    'JobStatus'?: ServiceJobStatus;
+}
+/**
+ * 
+ * @interface ServiceCreateRequest
+ */
+export interface ServiceCreateRequest {
+    /**
+     * Name of the service.
+     * @type {string}
+     */
+    'Name'?: string;
+    /**
+     * User-defined key/value metadata.
+     * @type {{ [key: string]: string; }}
+     */
+    'Labels'?: { [key: string]: string; };
+    /**
+     * 
+     * @type {TaskSpec}
+     */
+    'TaskTemplate'?: TaskSpec;
+    /**
+     * 
+     * @type {ServiceSpecMode}
+     */
+    'Mode'?: ServiceSpecMode;
+    /**
+     * 
+     * @type {ServiceSpecUpdateConfig}
+     */
+    'UpdateConfig'?: ServiceSpecUpdateConfig;
+    /**
+     * 
+     * @type {ServiceSpecRollbackConfig}
+     */
+    'RollbackConfig'?: ServiceSpecRollbackConfig;
+    /**
+     * Specifies which networks the service should attach to.
+     * @type {Array<NetworkAttachmentConfig>}
+     */
+    'Networks'?: Array<NetworkAttachmentConfig>;
+    /**
+     * 
+     * @type {EndpointSpec}
+     */
+    'EndpointSpec'?: EndpointSpec;
+}
+/**
+ * 
+ * @interface ServiceCreateResponse
+ */
+export interface ServiceCreateResponse {
+    /**
+     * The ID of the created service.
+     * @type {string}
+     */
+    'ID'?: string;
+    /**
+     * Optional warning message
+     * @type {string}
+     */
+    'Warning'?: string;
+}
+/**
+ * 
+ * @interface ServiceEndpoint
+ */
+export interface ServiceEndpoint {
+    /**
+     * 
+     * @type {EndpointSpec}
+     */
+    'Spec'?: EndpointSpec;
+    /**
+     * 
+     * @type {Array<EndpointPortConfig>}
+     */
+    'Ports'?: Array<EndpointPortConfig>;
+    /**
+     * 
+     * @type {Array<ServiceEndpointVirtualIPsInner>}
+     */
+    'VirtualIPs'?: Array<ServiceEndpointVirtualIPsInner>;
+}
+/**
+ * 
+ * @interface ServiceEndpointVirtualIPsInner
+ */
+export interface ServiceEndpointVirtualIPsInner {
+    /**
+     * 
+     * @type {string}
+     */
+    'NetworkID'?: string;
+    /**
+     * 
+     * @type {string}
+     */
+    'Addr'?: string;
+}
+/**
+ * The status of the service when it is in one of ReplicatedJob or GlobalJob modes. Absent on Replicated and Global mode services. The JobIteration is an ObjectVersion, but unlike the Service\'s version, does not need to be sent with an update request. 
+ * @interface ServiceJobStatus
+ */
+export interface ServiceJobStatus {
+    /**
+     * 
+     * @type {ObjectVersion}
+     */
+    'JobIteration'?: ObjectVersion;
+    /**
+     * The last time, as observed by the server, that this job was started. 
+     * @type {string}
+     */
+    'LastExecution'?: string;
+}
+/**
+ * The status of the service\'s tasks. Provided only when requested as part of a ServiceList operation. 
+ * @interface ServiceServiceStatus
+ */
+export interface ServiceServiceStatus {
+    /**
+     * The number of tasks for the service currently in the Running state. 
+     * @type {number}
+     */
+    'RunningTasks'?: number;
+    /**
+     * The number of tasks for the service desired to be running. For replicated services, this is the replica count from the service spec. For global services, this is computed by taking count of all tasks for the service with a Desired State other than Shutdown. 
+     * @type {number}
+     */
+    'DesiredTasks'?: number;
+    /**
+     * The number of tasks for a job that are in the Completed state. This field must be cross-referenced with the service type, as the value of 0 may mean the service is not in a job mode, or it may mean the job-mode service has no tasks yet Completed. 
+     * @type {number}
+     */
+    'CompletedTasks'?: number;
+}
+/**
+ * User modifiable configuration for a service.
+ * @interface ServiceSpec
+ */
+export interface ServiceSpec {
+    /**
+     * Name of the service.
+     * @type {string}
+     */
+    'Name'?: string;
+    /**
+     * User-defined key/value metadata.
+     * @type {{ [key: string]: string; }}
+     */
+    'Labels'?: { [key: string]: string; };
+    /**
+     * 
+     * @type {TaskSpec}
+     */
+    'TaskTemplate'?: TaskSpec;
+    /**
+     * 
+     * @type {ServiceSpecMode}
+     */
+    'Mode'?: ServiceSpecMode;
+    /**
+     * 
+     * @type {ServiceSpecUpdateConfig}
+     */
+    'UpdateConfig'?: ServiceSpecUpdateConfig;
+    /**
+     * 
+     * @type {ServiceSpecRollbackConfig}
+     */
+    'RollbackConfig'?: ServiceSpecRollbackConfig;
+    /**
+     * Specifies which networks the service should attach to.
+     * @type {Array<NetworkAttachmentConfig>}
+     */
+    'Networks'?: Array<NetworkAttachmentConfig>;
+    /**
+     * 
+     * @type {EndpointSpec}
+     */
+    'EndpointSpec'?: EndpointSpec;
+}
+/**
+ * Scheduling mode for the service.
+ * @interface ServiceSpecMode
+ */
+export interface ServiceSpecMode {
+    /**
+     * 
+     * @type {ServiceSpecModeReplicated}
+     */
+    'Replicated'?: ServiceSpecModeReplicated;
+    /**
+     * 
+     * @type {object}
+     */
+    'Global'?: object;
+    /**
+     * 
+     * @type {ServiceSpecModeReplicatedJob}
+     */
+    'ReplicatedJob'?: ServiceSpecModeReplicatedJob;
+    /**
+     * The mode used for services which run a task to the completed state on each valid node. 
+     * @type {object}
+     */
+    'GlobalJob'?: object;
+}
+/**
+ * 
+ * @interface ServiceSpecModeReplicated
+ */
+export interface ServiceSpecModeReplicated {
+    /**
+     * 
+     * @type {number}
+     */
+    'Replicas'?: number;
+}
+/**
+ * The mode used for services with a finite number of tasks that run to a completed state. 
+ * @interface ServiceSpecModeReplicatedJob
+ */
+export interface ServiceSpecModeReplicatedJob {
+    /**
+     * The maximum number of replicas to run simultaneously. 
+     * @type {number}
+     */
+    'MaxConcurrent'?: number;
+    /**
+     * The total number of replicas desired to reach the Completed state. If unset, will default to the value of `MaxConcurrent` 
+     * @type {number}
+     */
+    'TotalCompletions'?: number;
+}
+/**
+ * Specification for the rollback strategy of the service.
+ * @interface ServiceSpecRollbackConfig
+ */
+export interface ServiceSpecRollbackConfig {
+    /**
+     * Maximum number of tasks to be rolled back in one iteration (0 means unlimited parallelism). 
+     * @type {number}
+     */
+    'Parallelism'?: number;
+    /**
+     * Amount of time between rollback iterations, in nanoseconds. 
+     * @type {number}
+     */
+    'Delay'?: number;
+    /**
+     * Action to take if an rolled back task fails to run, or stops running during the rollback. 
+     * @type {string}
+     */
+    'FailureAction'?: ServiceSpecRollbackConfigFailureActionEnum;
+    /**
+     * Amount of time to monitor each rolled back task for failures, in nanoseconds. 
+     * @type {number}
+     */
+    'Monitor'?: number;
+    /**
+     * The fraction of tasks that may fail during a rollback before the failure action is invoked, specified as a floating point number between 0 and 1. 
+     * @type {number}
+     */
+    'MaxFailureRatio'?: number;
+    /**
+     * The order of operations when rolling back a task. Either the old task is shut down before the new task is started, or the new task is started before the old task is shut down. 
+     * @type {string}
+     */
+    'Order'?: ServiceSpecRollbackConfigOrderEnum;
+}
+
+/**
+    * @enum {string}
+    */
+export enum ServiceSpecRollbackConfigFailureActionEnum {
+    Continue = 'continue',
+    Pause = 'pause'
+}
+/**
+    * @enum {string}
+    */
+export enum ServiceSpecRollbackConfigOrderEnum {
+    StopFirst = 'stop-first',
+    StartFirst = 'start-first'
+}
+
+/**
+ * Specification for the update strategy of the service.
+ * @interface ServiceSpecUpdateConfig
+ */
+export interface ServiceSpecUpdateConfig {
+    /**
+     * Maximum number of tasks to be updated in one iteration (0 means unlimited parallelism). 
+     * @type {number}
+     */
+    'Parallelism'?: number;
+    /**
+     * Amount of time between updates, in nanoseconds.
+     * @type {number}
+     */
+    'Delay'?: number;
+    /**
+     * Action to take if an updated task fails to run, or stops running during the update. 
+     * @type {string}
+     */
+    'FailureAction'?: ServiceSpecUpdateConfigFailureActionEnum;
+    /**
+     * Amount of time to monitor each updated task for failures, in nanoseconds. 
+     * @type {number}
+     */
+    'Monitor'?: number;
+    /**
+     * The fraction of tasks that may fail during an update before the failure action is invoked, specified as a floating point number between 0 and 1. 
+     * @type {number}
+     */
+    'MaxFailureRatio'?: number;
+    /**
+     * The order of operations when rolling out an updated task. Either the old task is shut down before the new task is started, or the new task is started before the old task is shut down. 
+     * @type {string}
+     */
+    'Order'?: ServiceSpecUpdateConfigOrderEnum;
+}
+
+/**
+    * @enum {string}
+    */
+export enum ServiceSpecUpdateConfigFailureActionEnum {
+    Continue = 'continue',
+    Pause = 'pause',
+    Rollback = 'rollback'
+}
+/**
+    * @enum {string}
+    */
+export enum ServiceSpecUpdateConfigOrderEnum {
+    StopFirst = 'stop-first',
+    StartFirst = 'start-first'
+}
+
+/**
+ * 
+ * @interface ServiceUpdateRequest
+ */
+export interface ServiceUpdateRequest {
+    /**
+     * Name of the service.
+     * @type {string}
+     */
+    'Name'?: string;
+    /**
+     * User-defined key/value metadata.
+     * @type {{ [key: string]: string; }}
+     */
+    'Labels'?: { [key: string]: string; };
+    /**
+     * 
+     * @type {TaskSpec}
+     */
+    'TaskTemplate'?: TaskSpec;
+    /**
+     * 
+     * @type {ServiceSpecMode}
+     */
+    'Mode'?: ServiceSpecMode;
+    /**
+     * 
+     * @type {ServiceSpecUpdateConfig}
+     */
+    'UpdateConfig'?: ServiceSpecUpdateConfig;
+    /**
+     * 
+     * @type {ServiceSpecRollbackConfig}
+     */
+    'RollbackConfig'?: ServiceSpecRollbackConfig;
+    /**
+     * Specifies which networks the service should attach to.
+     * @type {Array<NetworkAttachmentConfig>}
+     */
+    'Networks'?: Array<NetworkAttachmentConfig>;
+    /**
+     * 
+     * @type {EndpointSpec}
+     */
+    'EndpointSpec'?: EndpointSpec;
+}
+/**
+ * 
+ * @interface ServiceUpdateResponse
+ */
+export interface ServiceUpdateResponse {
+    /**
+     * Optional warning messages
+     * @type {Array<string>}
+     */
+    'Warnings'?: Array<string>;
+}
+/**
+ * The status of a service update.
+ * @interface ServiceUpdateStatus
+ */
+export interface ServiceUpdateStatus {
+    /**
+     * 
+     * @type {string}
+     */
+    'State'?: ServiceUpdateStatusStateEnum;
+    /**
+     * 
+     * @type {string}
+     */
+    'StartedAt'?: string;
+    /**
+     * 
+     * @type {string}
+     */
+    'CompletedAt'?: string;
+    /**
+     * 
+     * @type {string}
+     */
+    'Message'?: string;
+}
+
+/**
+    * @enum {string}
+    */
+export enum ServiceUpdateStatusStateEnum {
+    Updating = 'updating',
+    Paused = 'paused',
+    Completed = 'completed'
+}
+
+/**
+ * 
+ * @interface Swarm
+ */
+export interface Swarm {
+    /**
+     * The ID of the swarm.
+     * @type {string}
+     */
+    'ID'?: string;
+    /**
+     * 
+     * @type {ObjectVersion}
+     */
+    'Version'?: ObjectVersion;
+    /**
+     * Date and time at which the swarm was initialised in [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds. 
+     * @type {string}
+     */
+    'CreatedAt'?: string;
+    /**
+     * Date and time at which the swarm was last updated in [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds. 
+     * @type {string}
+     */
+    'UpdatedAt'?: string;
+    /**
+     * 
+     * @type {SwarmSpec}
+     */
+    'Spec'?: SwarmSpec;
+    /**
+     * 
+     * @type {TLSInfo}
+     */
+    'TLSInfo'?: TLSInfo;
+    /**
+     * Whether there is currently a root CA rotation in progress for the swarm 
+     * @type {boolean}
+     */
+    'RootRotationInProgress'?: boolean;
+    /**
+     * DataPathPort specifies the data path port number for data traffic. Acceptable port range is 1024 to 49151. If no port is set or is set to 0, the default port (4789) is used. 
+     * @type {number}
+     */
+    'DataPathPort'?: number;
+    /**
+     * Default Address Pool specifies default subnet pools for global scope networks. 
+     * @type {Array<string>}
+     */
+    'DefaultAddrPool'?: Array<string>;
+    /**
+     * SubnetSize specifies the subnet size of the networks created from the default subnet pool. 
+     * @type {number}
+     */
+    'SubnetSize'?: number;
+    /**
+     * 
+     * @type {JoinTokens}
+     */
+    'JoinTokens'?: JoinTokens;
+}
+/**
+ * Represents generic information about swarm. 
+ * @interface SwarmInfo
+ */
+export interface SwarmInfo {
+    /**
+     * Unique identifier of for this node in the swarm.
+     * @type {string}
+     */
+    'NodeID'?: string;
+    /**
+     * IP address at which this node can be reached by other nodes in the swarm. 
+     * @type {string}
+     */
+    'NodeAddr'?: string;
+    /**
+     * 
+     * @type {LocalNodeState}
+     */
+    'LocalNodeState'?: LocalNodeState;
+    /**
+     * 
+     * @type {boolean}
+     */
+    'ControlAvailable'?: boolean;
+    /**
+     * 
+     * @type {string}
+     */
+    'Error'?: string;
+    /**
+     * List of ID\'s and addresses of other managers in the swarm. 
+     * @type {Array<PeerNode>}
+     */
+    'RemoteManagers'?: Array<PeerNode> | null;
+    /**
+     * Total number of nodes in the swarm.
+     * @type {number}
+     */
+    'Nodes'?: number | null;
+    /**
+     * Total number of managers in the swarm.
+     * @type {number}
+     */
+    'Managers'?: number | null;
+    /**
+     * 
+     * @type {ClusterInfo}
+     */
+    'Cluster'?: ClusterInfo | null;
+}
+
+
+/**
+ * 
+ * @interface SwarmInitRequest
+ */
+export interface SwarmInitRequest {
+    /**
+     * Listen address used for inter-manager communication, as well as determining the networking interface used for the VXLAN Tunnel Endpoint (VTEP). This can either be an address/port combination in the form `192.168.1.1:4567`, or an interface followed by a port number, like `eth0:4567`. If the port number is omitted, the default swarm listening port is used. 
+     * @type {string}
+     */
+    'ListenAddr'?: string;
+    /**
+     * Externally reachable address advertised to other nodes. This can either be an address/port combination in the form `192.168.1.1:4567`, or an interface followed by a port number, like `eth0:4567`. If the port number is omitted, the port number from the listen address is used. If `AdvertiseAddr` is not specified, it will be automatically detected when possible. 
+     * @type {string}
+     */
+    'AdvertiseAddr'?: string;
+    /**
+     * Address or interface to use for data path traffic (format: `<ip|interface>`), for example,  `192.168.1.1`, or an interface, like `eth0`. If `DataPathAddr` is unspecified, the same address as `AdvertiseAddr` is used.  The `DataPathAddr` specifies the address that global scope network drivers will publish towards other  nodes in order to reach the containers running on this node. Using this parameter it is possible to separate the container data traffic from the management traffic of the cluster. 
+     * @type {string}
+     */
+    'DataPathAddr'?: string;
+    /**
+     * DataPathPort specifies the data path port number for data traffic. Acceptable port range is 1024 to 49151. if no port is set or is set to 0, default port 4789 will be used. 
+     * @type {number}
+     */
+    'DataPathPort'?: number;
+    /**
+     * Default Address Pool specifies default subnet pools for global scope networks. 
+     * @type {Array<string>}
+     */
+    'DefaultAddrPool'?: Array<string>;
+    /**
+     * Force creation of a new swarm.
+     * @type {boolean}
+     */
+    'ForceNewCluster'?: boolean;
+    /**
+     * SubnetSize specifies the subnet size of the networks created from the default subnet pool. 
+     * @type {number}
+     */
+    'SubnetSize'?: number;
+    /**
+     * 
+     * @type {SwarmSpec}
+     */
+    'Spec'?: SwarmSpec;
+}
+/**
+ * 
+ * @interface SwarmJoinRequest
+ */
+export interface SwarmJoinRequest {
+    /**
+     * Listen address used for inter-manager communication if the node gets promoted to manager, as well as determining the networking interface used for the VXLAN Tunnel Endpoint (VTEP). 
+     * @type {string}
+     */
+    'ListenAddr'?: string;
+    /**
+     * Externally reachable address advertised to other nodes. This can either be an address/port combination in the form `192.168.1.1:4567`, or an interface followed by a port number, like `eth0:4567`. If the port number is omitted, the port number from the listen address is used. If `AdvertiseAddr` is not specified, it will be automatically detected when possible. 
+     * @type {string}
+     */
+    'AdvertiseAddr'?: string;
+    /**
+     * Address or interface to use for data path traffic (format: `<ip|interface>`), for example,  `192.168.1.1`, or an interface, like `eth0`. If `DataPathAddr` is unspecified, the same address as `AdvertiseAddr` is used.  The `DataPathAddr` specifies the address that global scope network drivers will publish towards other nodes in order to reach the containers running on this node. Using this parameter it is possible to separate the container data traffic from the management traffic of the cluster. 
+     * @type {string}
+     */
+    'DataPathAddr'?: string;
+    /**
+     * Addresses of manager nodes already participating in the swarm. 
+     * @type {Array<string>}
+     */
+    'RemoteAddrs'?: Array<string>;
+    /**
+     * Secret token for joining this swarm.
+     * @type {string}
+     */
+    'JoinToken'?: string;
+}
+/**
+ * User modifiable swarm configuration.
+ * @interface SwarmSpec
+ */
+export interface SwarmSpec {
+    /**
+     * Name of the swarm.
+     * @type {string}
+     */
+    'Name'?: string;
+    /**
+     * User-defined key/value metadata.
+     * @type {{ [key: string]: string; }}
+     */
+    'Labels'?: { [key: string]: string; };
+    /**
+     * 
+     * @type {SwarmSpecOrchestration}
+     */
+    'Orchestration'?: SwarmSpecOrchestration | null;
+    /**
+     * 
+     * @type {SwarmSpecRaft}
+     */
+    'Raft'?: SwarmSpecRaft;
+    /**
+     * 
+     * @type {SwarmSpecDispatcher}
+     */
+    'Dispatcher'?: SwarmSpecDispatcher | null;
+    /**
+     * 
+     * @type {SwarmSpecCAConfig}
+     */
+    'CAConfig'?: SwarmSpecCAConfig | null;
+    /**
+     * 
+     * @type {SwarmSpecEncryptionConfig}
+     */
+    'EncryptionConfig'?: SwarmSpecEncryptionConfig;
+    /**
+     * 
+     * @type {SwarmSpecTaskDefaults}
+     */
+    'TaskDefaults'?: SwarmSpecTaskDefaults;
+}
+/**
+ * CA configuration.
+ * @interface SwarmSpecCAConfig
+ */
+export interface SwarmSpecCAConfig {
+    /**
+     * The duration node certificates are issued for.
+     * @type {number}
+     */
+    'NodeCertExpiry'?: number;
+    /**
+     * Configuration for forwarding signing requests to an external certificate authority. 
+     * @type {Array<SwarmSpecCAConfigExternalCAsInner>}
+     */
+    'ExternalCAs'?: Array<SwarmSpecCAConfigExternalCAsInner>;
+    /**
+     * The desired signing CA certificate for all swarm node TLS leaf certificates, in PEM format. 
+     * @type {string}
+     */
+    'SigningCACert'?: string;
+    /**
+     * The desired signing CA key for all swarm node TLS leaf certificates, in PEM format. 
+     * @type {string}
+     */
+    'SigningCAKey'?: string;
+    /**
+     * An integer whose purpose is to force swarm to generate a new signing CA certificate and key, if none have been specified in `SigningCACert` and `SigningCAKey` 
+     * @type {number}
+     */
+    'ForceRotate'?: number;
+}
+/**
+ * 
+ * @interface SwarmSpecCAConfigExternalCAsInner
+ */
+export interface SwarmSpecCAConfigExternalCAsInner {
+    /**
+     * Protocol for communication with the external CA (currently only `cfssl` is supported). 
+     * @type {string}
+     */
+    'Protocol'?: SwarmSpecCAConfigExternalCAsInnerProtocolEnum;
+    /**
+     * URL where certificate signing requests should be sent. 
+     * @type {string}
+     */
+    'URL'?: string;
+    /**
+     * An object with key/value pairs that are interpreted as protocol-specific options for the external CA driver. 
+     * @type {{ [key: string]: string; }}
+     */
+    'Options'?: { [key: string]: string; };
+    /**
+     * The root CA certificate (in PEM format) this external CA uses to issue TLS certificates (assumed to be to the current swarm root CA certificate if not provided). 
+     * @type {string}
+     */
+    'CACert'?: string;
+}
+
+/**
+    * @enum {string}
+    */
+export enum SwarmSpecCAConfigExternalCAsInnerProtocolEnum {
+    Cfssl = 'cfssl'
+}
+
+/**
+ * Dispatcher configuration.
+ * @interface SwarmSpecDispatcher
+ */
+export interface SwarmSpecDispatcher {
+    /**
+     * The delay for an agent to send a heartbeat to the dispatcher. 
+     * @type {number}
+     */
+    'HeartbeatPeriod'?: number;
+}
+/**
+ * Parameters related to encryption-at-rest.
+ * @interface SwarmSpecEncryptionConfig
+ */
+export interface SwarmSpecEncryptionConfig {
+    /**
+     * If set, generate a key and use it to lock data stored on the managers. 
+     * @type {boolean}
+     */
+    'AutoLockManagers'?: boolean;
+}
+/**
+ * Orchestration configuration.
+ * @interface SwarmSpecOrchestration
+ */
+export interface SwarmSpecOrchestration {
+    /**
+     * The number of historic tasks to keep per instance or node. If negative, never remove completed or failed tasks. 
+     * @type {number}
+     */
+    'TaskHistoryRetentionLimit'?: number;
+}
+/**
+ * Raft configuration.
+ * @interface SwarmSpecRaft
+ */
+export interface SwarmSpecRaft {
+    /**
+     * The number of log entries between snapshots.
+     * @type {number}
+     */
+    'SnapshotInterval'?: number;
+    /**
+     * The number of snapshots to keep beyond the current snapshot. 
+     * @type {number}
+     */
+    'KeepOldSnapshots'?: number;
+    /**
+     * The number of log entries to keep around to sync up slow followers after a snapshot is created. 
+     * @type {number}
+     */
+    'LogEntriesForSlowFollowers'?: number;
+    /**
+     * The number of ticks that a follower will wait for a message from the leader before becoming a candidate and starting an election. `ElectionTick` must be greater than `HeartbeatTick`.  A tick currently defaults to one second, so these translate directly to seconds currently, but this is NOT guaranteed. 
+     * @type {number}
+     */
+    'ElectionTick'?: number;
+    /**
+     * The number of ticks between heartbeats. Every HeartbeatTick ticks, the leader will send a heartbeat to the followers.  A tick currently defaults to one second, so these translate directly to seconds currently, but this is NOT guaranteed. 
+     * @type {number}
+     */
+    'HeartbeatTick'?: number;
+}
+/**
+ * Defaults for creating tasks in this cluster.
+ * @interface SwarmSpecTaskDefaults
+ */
+export interface SwarmSpecTaskDefaults {
+    /**
+     * 
+     * @type {SwarmSpecTaskDefaultsLogDriver}
+     */
+    'LogDriver'?: SwarmSpecTaskDefaultsLogDriver;
+}
+/**
+ * The log driver to use for tasks created in the orchestrator if unspecified by a service.  Updating this value only affects new tasks. Existing tasks continue to use their previously configured log driver until recreated. 
+ * @interface SwarmSpecTaskDefaultsLogDriver
+ */
+export interface SwarmSpecTaskDefaultsLogDriver {
+    /**
+     * The log driver to use as a default for new tasks. 
+     * @type {string}
+     */
+    'Name'?: string;
+    /**
+     * Driver-specific options for the selectd log driver, specified as key/value pairs. 
+     * @type {{ [key: string]: string; }}
+     */
+    'Options'?: { [key: string]: string; };
+}
+/**
+ * 
+ * @interface SwarmUnlockRequest
+ */
+export interface SwarmUnlockRequest {
+    /**
+     * The swarm\'s unlock key.
+     * @type {string}
+     */
+    'UnlockKey'?: string;
+}
+/**
+ * 
+ * @interface SystemAuthResponse
+ */
+export interface SystemAuthResponse {
+    /**
+     * The status of the authentication
+     * @type {string}
+     */
+    'Status': string;
+    /**
+     * An opaque token used to authenticate a user after a successful login
+     * @type {string}
+     */
+    'IdentityToken'?: string;
+}
+/**
+ * 
+ * @interface SystemDataUsageResponse
+ */
+export interface SystemDataUsageResponse {
+    /**
+     * 
+     * @type {number}
+     */
+    'LayersSize'?: number;
+    /**
+     * 
+     * @type {Array<ImageSummary>}
+     */
+    'Images'?: Array<ImageSummary>;
+    /**
+     * 
+     * @type {Array<ContainerSummary>}
+     */
+    'Containers'?: Array<ContainerSummary>;
+    /**
+     * 
+     * @type {Array<Volume>}
+     */
+    'Volumes'?: Array<Volume>;
+    /**
+     * 
+     * @type {Array<BuildCache>}
+     */
+    'BuildCache'?: Array<BuildCache>;
+}
+/**
+ * 
+ * @interface SystemInfo
+ */
+export interface SystemInfo {
+    /**
+     * Unique identifier of the daemon.  <p><br /></p>  > **Note**: The format of the ID itself is not part of the API, and > should not be considered stable. 
+     * @type {string}
+     */
+    'ID'?: string;
+    /**
+     * Total number of containers on the host.
+     * @type {number}
+     */
+    'Containers'?: number;
+    /**
+     * Number of containers with status `\"running\"`. 
+     * @type {number}
+     */
+    'ContainersRunning'?: number;
+    /**
+     * Number of containers with status `\"paused\"`. 
+     * @type {number}
+     */
+    'ContainersPaused'?: number;
+    /**
+     * Number of containers with status `\"stopped\"`. 
+     * @type {number}
+     */
+    'ContainersStopped'?: number;
+    /**
+     * Total number of images on the host.  Both _tagged_ and _untagged_ (dangling) images are counted. 
+     * @type {number}
+     */
+    'Images'?: number;
+    /**
+     * Name of the storage driver in use.
+     * @type {string}
+     */
+    'Driver'?: string;
+    /**
+     * Information specific to the storage driver, provided as \"label\" / \"value\" pairs.  This information is provided by the storage driver, and formatted in a way consistent with the output of `docker info` on the command line.  <p><br /></p>  > **Note**: The information returned in this field, including the > formatting of values and labels, should not be considered stable, > and may change without notice. 
+     * @type {Array<Array<string>>}
+     */
+    'DriverStatus'?: Array<Array<string>>;
+    /**
+     * Root directory of persistent Docker state.  Defaults to `/var/lib/docker` on Linux, and `C:\\ProgramData\\docker` on Windows. 
+     * @type {string}
+     */
+    'DockerRootDir'?: string;
+    /**
+     * 
+     * @type {PluginsInfo}
+     */
+    'Plugins'?: PluginsInfo;
+    /**
+     * Indicates if the host has memory limit support enabled.
+     * @type {boolean}
+     */
+    'MemoryLimit'?: boolean;
+    /**
+     * Indicates if the host has memory swap limit support enabled.
+     * @type {boolean}
+     */
+    'SwapLimit'?: boolean;
+    /**
+     * Indicates if the host has kernel memory limit support enabled.  <p><br /></p>  > **Deprecated**: This field is deprecated as the kernel 5.4 deprecated > `kmem.limit_in_bytes`. 
+     * @type {boolean}
+     */
+    'KernelMemory'?: boolean;
+    /**
+     * Indicates if the host has kernel memory TCP limit support enabled.  Kernel memory TCP limits are not supported when using cgroups v2, which does not support the corresponding `memory.kmem.tcp.limit_in_bytes` cgroup. 
+     * @type {boolean}
+     */
+    'KernelMemoryTCP'?: boolean;
+    /**
+     * Indicates if CPU CFS(Completely Fair Scheduler) period is supported by the host. 
+     * @type {boolean}
+     */
+    'CpuCfsPeriod'?: boolean;
+    /**
+     * Indicates if CPU CFS(Completely Fair Scheduler) quota is supported by the host. 
+     * @type {boolean}
+     */
+    'CpuCfsQuota'?: boolean;
+    /**
+     * Indicates if CPU Shares limiting is supported by the host. 
+     * @type {boolean}
+     */
+    'CPUShares'?: boolean;
+    /**
+     * Indicates if CPUsets (cpuset.cpus, cpuset.mems) are supported by the host.  See [cpuset(7)](https://www.kernel.org/doc/Documentation/cgroup-v1/cpusets.txt) 
+     * @type {boolean}
+     */
+    'CPUSet'?: boolean;
+    /**
+     * Indicates if the host kernel has PID limit support enabled.
+     * @type {boolean}
+     */
+    'PidsLimit'?: boolean;
+    /**
+     * Indicates if OOM killer disable is supported on the host.
+     * @type {boolean}
+     */
+    'OomKillDisable'?: boolean;
+    /**
+     * Indicates IPv4 forwarding is enabled.
+     * @type {boolean}
+     */
+    'IPv4Forwarding'?: boolean;
+    /**
+     * Indicates if `bridge-nf-call-iptables` is available on the host.
+     * @type {boolean}
+     */
+    'BridgeNfIptables'?: boolean;
+    /**
+     * Indicates if `bridge-nf-call-ip6tables` is available on the host.
+     * @type {boolean}
+     */
+    'BridgeNfIp6tables'?: boolean;
+    /**
+     * Indicates if the daemon is running in debug-mode / with debug-level logging enabled. 
+     * @type {boolean}
+     */
+    'Debug'?: boolean;
+    /**
+     * The total number of file Descriptors in use by the daemon process.  This information is only returned if debug-mode is enabled. 
+     * @type {number}
+     */
+    'NFd'?: number;
+    /**
+     * The  number of goroutines that currently exist.  This information is only returned if debug-mode is enabled. 
+     * @type {number}
+     */
+    'NGoroutines'?: number;
+    /**
+     * Current system-time in [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format with nano-seconds. 
+     * @type {string}
+     */
+    'SystemTime'?: string;
+    /**
+     * The logging driver to use as a default for new containers. 
+     * @type {string}
+     */
+    'LoggingDriver'?: string;
+    /**
+     * The driver to use for managing cgroups. 
+     * @type {string}
+     */
+    'CgroupDriver'?: SystemInfoCgroupDriverEnum;
+    /**
+     * The version of the cgroup. 
+     * @type {string}
+     */
+    'CgroupVersion'?: SystemInfoCgroupVersionEnum;
+    /**
+     * Number of event listeners subscribed.
+     * @type {number}
+     */
+    'NEventsListener'?: number;
+    /**
+     * Kernel version of the host.  On Linux, this information obtained from `uname`. On Windows this information is queried from the <kbd>HKEY_LOCAL_MACHINE\\\\SOFTWARE\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\</kbd> registry value, for example _\"10.0 14393 (14393.1198.amd64fre.rs1_release_sec.170427-1353)\"_. 
+     * @type {string}
+     */
+    'KernelVersion'?: string;
+    /**
+     * Name of the host\'s operating system, for example: \"Ubuntu 16.04.2 LTS\" or \"Windows Server 2016 Datacenter\" 
+     * @type {string}
+     */
+    'OperatingSystem'?: string;
+    /**
+     * Version of the host\'s operating system  <p><br /></p>  > **Note**: The information returned in this field, including its > very existence, and the formatting of values, should not be considered > stable, and may change without notice. 
+     * @type {string}
+     */
+    'OSVersion'?: string;
+    /**
+     * Generic type of the operating system of the host, as returned by the Go runtime (`GOOS`).  Currently returned values are \"linux\" and \"windows\". A full list of possible values can be found in the [Go documentation](https://go.dev/doc/install/source#environment). 
+     * @type {string}
+     */
+    'OSType'?: string;
+    /**
+     * Hardware architecture of the host, as returned by the Go runtime (`GOARCH`).  A full list of possible values can be found in the [Go documentation](https://go.dev/doc/install/source#environment). 
+     * @type {string}
+     */
+    'Architecture'?: string;
+    /**
+     * The number of logical CPUs usable by the daemon.  The number of available CPUs is checked by querying the operating system when the daemon starts. Changes to operating system CPU allocation after the daemon is started are not reflected. 
+     * @type {number}
+     */
+    'NCPU'?: number;
+    /**
+     * Total amount of physical memory available on the host, in bytes. 
+     * @type {number}
+     */
+    'MemTotal'?: number;
+    /**
+     * Address / URL of the index server that is used for image search, and as a default for user authentication for Docker Hub and Docker Cloud. 
+     * @type {string}
+     */
+    'IndexServerAddress'?: string;
+    /**
+     * 
+     * @type {RegistryServiceConfig}
+     */
+    'RegistryConfig'?: RegistryServiceConfig | null;
+    /**
+     * User-defined resources can be either Integer resources (e.g, `SSD=3`) or String resources (e.g, `GPU=UUID1`). 
+     * @type {Array<GenericResourcesInner>}
+     */
+    'GenericResources'?: Array<GenericResourcesInner>;
+    /**
+     * HTTP-proxy configured for the daemon. This value is obtained from the [`HTTP_PROXY`](https://www.gnu.org/software/wget/manual/html_node/Proxies.html) environment variable. Credentials ([user info component](https://tools.ietf.org/html/rfc3986#section-3.2.1)) in the proxy URL are masked in the API response.  Containers do not automatically inherit this configuration. 
+     * @type {string}
+     */
+    'HttpProxy'?: string;
+    /**
+     * HTTPS-proxy configured for the daemon. This value is obtained from the [`HTTPS_PROXY`](https://www.gnu.org/software/wget/manual/html_node/Proxies.html) environment variable. Credentials ([user info component](https://tools.ietf.org/html/rfc3986#section-3.2.1)) in the proxy URL are masked in the API response.  Containers do not automatically inherit this configuration. 
+     * @type {string}
+     */
+    'HttpsProxy'?: string;
+    /**
+     * Comma-separated list of domain extensions for which no proxy should be used. This value is obtained from the [`NO_PROXY`](https://www.gnu.org/software/wget/manual/html_node/Proxies.html) environment variable.  Containers do not automatically inherit this configuration. 
+     * @type {string}
+     */
+    'NoProxy'?: string;
+    /**
+     * Hostname of the host.
+     * @type {string}
+     */
+    'Name'?: string;
+    /**
+     * User-defined labels (key/value metadata) as set on the daemon.  <p><br /></p>  > **Note**: When part of a Swarm, nodes can both have _daemon_ labels, > set through the daemon configuration, and _node_ labels, set from a > manager node in the Swarm. Node labels are not included in this > field. Node labels can be retrieved using the `/nodes/(id)` endpoint > on a manager node in the Swarm. 
+     * @type {Array<string>}
+     */
+    'Labels'?: Array<string>;
+    /**
+     * Indicates if experimental features are enabled on the daemon. 
+     * @type {boolean}
+     */
+    'ExperimentalBuild'?: boolean;
+    /**
+     * Version string of the daemon. 
+     * @type {string}
+     */
+    'ServerVersion'?: string;
+    /**
+     * URL of the distributed storage backend.   The storage backend is used for multihost networking (to store network and endpoint information) and by the node discovery mechanism.  <p><br /></p>  > **Deprecated**: This field is only propagated when using standalone Swarm > mode, and overlay networking using an external k/v store. Overlay > networks with Swarm mode enabled use the built-in raft store, and > this field will be empty. 
+     * @type {string}
+     */
+    'ClusterStore'?: string;
+    /**
+     * The network endpoint that the Engine advertises for the purpose of node discovery. ClusterAdvertise is a `host:port` combination on which the daemon is reachable by other hosts.  <p><br /></p>  > **Deprecated**: This field is only propagated when using standalone Swarm > mode, and overlay networking using an external k/v store. Overlay > networks with Swarm mode enabled use the built-in raft store, and > this field will be empty. 
+     * @type {string}
+     */
+    'ClusterAdvertise'?: string;
+    /**
+     * List of [OCI compliant](https://github.com/opencontainers/runtime-spec) runtimes configured on the daemon. Keys hold the \"name\" used to reference the runtime.  The Docker daemon relies on an OCI compliant runtime (invoked via the `containerd` daemon) as its interface to the Linux kernel namespaces, cgroups, and SELinux.  The default runtime is `runc`, and automatically configured. Additional runtimes can be configured by the user and will be listed here. 
+     * @type {{ [key: string]: Runtime; }}
+     */
+    'Runtimes'?: { [key: string]: Runtime; };
+    /**
+     * Name of the default OCI runtime that is used when starting containers.  The default can be overridden per-container at create time. 
+     * @type {string}
+     */
+    'DefaultRuntime'?: string;
+    /**
+     * 
+     * @type {SwarmInfo}
+     */
+    'Swarm'?: SwarmInfo;
+    /**
+     * Indicates if live restore is enabled.  If enabled, containers are kept running when the daemon is shutdown or upon daemon start if running containers are detected. 
+     * @type {boolean}
+     */
+    'LiveRestoreEnabled'?: boolean;
+    /**
+     * Represents the isolation technology to use as a default for containers. The supported values are platform-specific.  If no isolation value is specified on daemon start, on Windows client, the default is `hyperv`, and on Windows server, the default is `process`.  This option is currently not used on other platforms. 
+     * @type {string}
+     */
+    'Isolation'?: SystemInfoIsolationEnum;
+    /**
+     * Name and, optional, path of the `docker-init` binary.  If the path is omitted, the daemon searches the host\'s `$PATH` for the binary and uses the first result. 
+     * @type {string}
+     */
+    'InitBinary'?: string;
+    /**
+     * 
+     * @type {Commit}
+     */
+    'ContainerdCommit'?: Commit;
+    /**
+     * 
+     * @type {Commit}
+     */
+    'RuncCommit'?: Commit;
+    /**
+     * 
+     * @type {Commit}
+     */
+    'InitCommit'?: Commit;
+    /**
+     * List of security features that are enabled on the daemon, such as apparmor, seccomp, SELinux, user-namespaces (userns), and rootless.  Additional configuration options for each security feature may be present, and are included as a comma-separated list of key/value pairs. 
+     * @type {Array<string>}
+     */
+    'SecurityOptions'?: Array<string>;
+    /**
+     * Reports a summary of the product license on the daemon.  If a commercial license has been applied to the daemon, information such as number of nodes, and expiration are included. 
+     * @type {string}
+     */
+    'ProductLicense'?: string;
+    /**
+     * List of custom default address pools for local networks, which can be specified in the daemon.json file or dockerd option.  Example: a Base \"10.10.0.0/16\" with Size 24 will define the set of 256 10.10.[0-255].0/24 address pools. 
+     * @type {Array<SystemInfoDefaultAddressPoolsInner>}
+     */
+    'DefaultAddressPools'?: Array<SystemInfoDefaultAddressPoolsInner>;
+    /**
+     * List of warnings / informational messages about missing features, or issues related to the daemon configuration.  These messages can be printed by the client as information to the user. 
+     * @type {Array<string>}
+     */
+    'Warnings'?: Array<string>;
+}
+
+/**
+    * @enum {string}
+    */
+export enum SystemInfoCgroupDriverEnum {
+    Cgroupfs = 'cgroupfs',
+    Systemd = 'systemd',
+    None = 'none'
+}
+/**
+    * @enum {string}
+    */
+export enum SystemInfoCgroupVersionEnum {
+    _1 = '1',
+    _2 = '2'
+}
+/**
+    * @enum {string}
+    */
+export enum SystemInfoIsolationEnum {
+    Default = 'default',
+    Hyperv = 'hyperv',
+    Process = 'process'
+}
+
+/**
+ * 
+ * @interface SystemInfoDefaultAddressPoolsInner
+ */
+export interface SystemInfoDefaultAddressPoolsInner {
+    /**
+     * The network address in CIDR format
+     * @type {string}
+     */
+    'Base'?: string;
+    /**
+     * The network pool size
+     * @type {number}
+     */
+    'Size'?: number;
+}
+/**
+ * Response of Engine API: GET \"/version\" 
+ * @interface SystemVersion
+ */
+export interface SystemVersion {
+    /**
+     * 
+     * @type {SystemVersionPlatform}
+     */
+    'Platform'?: SystemVersionPlatform;
+    /**
+     * Information about system components 
+     * @type {Array<SystemVersionComponentsInner>}
+     */
+    'Components'?: Array<SystemVersionComponentsInner>;
+    /**
+     * The version of the daemon
+     * @type {string}
+     */
+    'Version'?: string;
+    /**
+     * The default (and highest) API version that is supported by the daemon 
+     * @type {string}
+     */
+    'ApiVersion'?: string;
+    /**
+     * The minimum API version that is supported by the daemon 
+     * @type {string}
+     */
+    'MinAPIVersion'?: string;
+    /**
+     * The Git commit of the source code that was used to build the daemon 
+     * @type {string}
+     */
+    'GitCommit'?: string;
+    /**
+     * The version Go used to compile the daemon, and the version of the Go runtime in use. 
+     * @type {string}
+     */
+    'GoVersion'?: string;
+    /**
+     * The operating system that the daemon is running on (\"linux\" or \"windows\") 
+     * @type {string}
+     */
+    'Os'?: string;
+    /**
+     * The architecture that the daemon is running on 
+     * @type {string}
+     */
+    'Arch'?: string;
+    /**
+     * The kernel version (`uname -r`) that the daemon is running on.  This field is omitted when empty. 
+     * @type {string}
+     */
+    'KernelVersion'?: string;
+    /**
+     * Indicates if the daemon is started with experimental features enabled.  This field is omitted when empty / false. 
+     * @type {boolean}
+     */
+    'Experimental'?: boolean;
+    /**
+     * The date and time that the daemon was compiled. 
+     * @type {string}
+     */
+    'BuildTime'?: string;
+}
+/**
+ * 
+ * @interface SystemVersionComponentsInner
+ */
+export interface SystemVersionComponentsInner {
+    /**
+     * Name of the component 
+     * @type {string}
+     */
+    'Name': string;
+    /**
+     * Version of the component 
+     * @type {string}
+     */
+    'Version': string;
+    /**
+     * Key/value pairs of strings with additional information about the component. These values are intended for informational purposes only, and their content is not defined, and not part of the API specification.  These messages can be printed by the client as information to the user. 
+     * @type {object}
+     */
+    'Details'?: object | null;
+}
+/**
+ * 
+ * @interface SystemVersionPlatform
+ */
+export interface SystemVersionPlatform {
+    /**
+     * 
+     * @type {string}
+     */
+    'Name': string;
+}
+/**
+ * Information about the issuer of leaf TLS certificates and the trusted root CA certificate. 
+ * @interface TLSInfo
+ */
+export interface TLSInfo {
+    /**
+     * The root CA certificate(s) that are used to validate leaf TLS certificates. 
+     * @type {string}
+     */
+    'TrustRoot'?: string;
+    /**
+     * The base64-url-safe-encoded raw subject bytes of the issuer.
+     * @type {string}
+     */
+    'CertIssuerSubject'?: string;
+    /**
+     * The base64-url-safe-encoded raw public key bytes of the issuer. 
+     * @type {string}
+     */
+    'CertIssuerPublicKey'?: string;
+}
+/**
+ * 
+ * @interface Task
+ */
+export interface Task {
+    /**
+     * The ID of the task.
+     * @type {string}
+     */
+    'ID'?: string;
+    /**
+     * 
+     * @type {ObjectVersion}
+     */
+    'Version'?: ObjectVersion;
+    /**
+     * 
+     * @type {string}
+     */
+    'CreatedAt'?: string;
+    /**
+     * 
+     * @type {string}
+     */
+    'UpdatedAt'?: string;
+    /**
+     * Name of the task.
+     * @type {string}
+     */
+    'Name'?: string;
+    /**
+     * User-defined key/value metadata.
+     * @type {{ [key: string]: string; }}
+     */
+    'Labels'?: { [key: string]: string; };
+    /**
+     * 
+     * @type {TaskSpec}
+     */
+    'Spec'?: TaskSpec;
+    /**
+     * The ID of the service this task is part of.
+     * @type {string}
+     */
+    'ServiceID'?: string;
+    /**
+     * 
+     * @type {number}
+     */
+    'Slot'?: number;
+    /**
+     * The ID of the node that this task is on.
+     * @type {string}
+     */
+    'NodeID'?: string;
+    /**
+     * User-defined resources can be either Integer resources (e.g, `SSD=3`) or String resources (e.g, `GPU=UUID1`). 
+     * @type {Array<GenericResourcesInner>}
+     */
+    'AssignedGenericResources'?: Array<GenericResourcesInner>;
+    /**
+     * 
+     * @type {TaskStatus}
+     */
+    'Status'?: TaskStatus;
+    /**
+     * 
+     * @type {TaskState}
+     */
+    'DesiredState'?: TaskState;
+    /**
+     * 
+     * @type {ObjectVersion}
+     */
+    'JobIteration'?: ObjectVersion;
+}
+
+
+/**
+ * User modifiable task configuration.
+ * @interface TaskSpec
+ */
+export interface TaskSpec {
+    /**
+     * 
+     * @type {TaskSpecPluginSpec}
+     */
+    'PluginSpec'?: TaskSpecPluginSpec;
+    /**
+     * 
+     * @type {TaskSpecContainerSpec}
+     */
+    'ContainerSpec'?: TaskSpecContainerSpec;
+    /**
+     * 
+     * @type {TaskSpecNetworkAttachmentSpec}
+     */
+    'NetworkAttachmentSpec'?: TaskSpecNetworkAttachmentSpec;
+    /**
+     * 
+     * @type {TaskSpecResources}
+     */
+    'Resources'?: TaskSpecResources;
+    /**
+     * 
+     * @type {TaskSpecRestartPolicy}
+     */
+    'RestartPolicy'?: TaskSpecRestartPolicy;
+    /**
+     * 
+     * @type {TaskSpecPlacement}
+     */
+    'Placement'?: TaskSpecPlacement;
+    /**
+     * A counter that triggers an update even if no relevant parameters have been changed. 
+     * @type {number}
+     */
+    'ForceUpdate'?: number;
+    /**
+     * Runtime is the type of runtime specified for the task executor. 
+     * @type {string}
+     */
+    'Runtime'?: string;
+    /**
+     * Specifies which networks the service should attach to.
+     * @type {Array<NetworkAttachmentConfig>}
+     */
+    'Networks'?: Array<NetworkAttachmentConfig>;
+    /**
+     * 
+     * @type {TaskSpecLogDriver}
+     */
+    'LogDriver'?: TaskSpecLogDriver;
+}
+/**
+ * Container spec for the service.  <p><br /></p>  > **Note**: ContainerSpec, NetworkAttachmentSpec, and PluginSpec are > mutually exclusive. PluginSpec is only used when the Runtime field > is set to `plugin`. NetworkAttachmentSpec is used when the Runtime > field is set to `attachment`. 
+ * @interface TaskSpecContainerSpec
+ */
+export interface TaskSpecContainerSpec {
+    /**
+     * The image name to use for the container
+     * @type {string}
+     */
+    'Image'?: string;
+    /**
+     * User-defined key/value data.
+     * @type {{ [key: string]: string; }}
+     */
+    'Labels'?: { [key: string]: string; };
+    /**
+     * The command to be run in the image.
+     * @type {Array<string>}
+     */
+    'Command'?: Array<string>;
+    /**
+     * Arguments to the command.
+     * @type {Array<string>}
+     */
+    'Args'?: Array<string>;
+    /**
+     * The hostname to use for the container, as a valid [RFC 1123](https://tools.ietf.org/html/rfc1123) hostname. 
+     * @type {string}
+     */
+    'Hostname'?: string;
+    /**
+     * A list of environment variables in the form `VAR=value`. 
+     * @type {Array<string>}
+     */
+    'Env'?: Array<string>;
+    /**
+     * The working directory for commands to run in.
+     * @type {string}
+     */
+    'Dir'?: string;
+    /**
+     * The user inside the container.
+     * @type {string}
+     */
+    'User'?: string;
+    /**
+     * A list of additional groups that the container process will run as. 
+     * @type {Array<string>}
+     */
+    'Groups'?: Array<string>;
+    /**
+     * 
+     * @type {TaskSpecContainerSpecPrivileges}
+     */
+    'Privileges'?: TaskSpecContainerSpecPrivileges;
+    /**
+     * Whether a pseudo-TTY should be allocated.
+     * @type {boolean}
+     */
+    'TTY'?: boolean;
+    /**
+     * Open `stdin`
+     * @type {boolean}
+     */
+    'OpenStdin'?: boolean;
+    /**
+     * Mount the container\'s root filesystem as read only.
+     * @type {boolean}
+     */
+    'ReadOnly'?: boolean;
+    /**
+     * Specification for mounts to be added to containers created as part of the service. 
+     * @type {Array<Mount>}
+     */
+    'Mounts'?: Array<Mount>;
+    /**
+     * Signal to stop the container.
+     * @type {string}
+     */
+    'StopSignal'?: string;
+    /**
+     * Amount of time to wait for the container to terminate before forcefully killing it. 
+     * @type {number}
+     */
+    'StopGracePeriod'?: number;
+    /**
+     * 
+     * @type {HealthConfig}
+     */
+    'HealthCheck'?: HealthConfig;
+    /**
+     * A list of hostname/IP mappings to add to the container\'s `hosts` file. The format of extra hosts is specified in the [hosts(5)](http://man7.org/linux/man-pages/man5/hosts.5.html) man page:      IP_address canonical_hostname [aliases...] 
+     * @type {Array<string>}
+     */
+    'Hosts'?: Array<string>;
+    /**
+     * 
+     * @type {TaskSpecContainerSpecDNSConfig}
+     */
+    'DNSConfig'?: TaskSpecContainerSpecDNSConfig;
+    /**
+     * Secrets contains references to zero or more secrets that will be exposed to the service. 
+     * @type {Array<TaskSpecContainerSpecSecretsInner>}
+     */
+    'Secrets'?: Array<TaskSpecContainerSpecSecretsInner>;
+    /**
+     * Configs contains references to zero or more configs that will be exposed to the service. 
+     * @type {Array<TaskSpecContainerSpecConfigsInner>}
+     */
+    'Configs'?: Array<TaskSpecContainerSpecConfigsInner>;
+    /**
+     * Isolation technology of the containers running the service. (Windows only) 
+     * @type {string}
+     */
+    'Isolation'?: TaskSpecContainerSpecIsolationEnum;
+    /**
+     * Run an init inside the container that forwards signals and reaps processes. This field is omitted if empty, and the default (as configured on the daemon) is used. 
+     * @type {boolean}
+     */
+    'Init'?: boolean | null;
+    /**
+     * Set kernel namedspaced parameters (sysctls) in the container. The Sysctls option on services accepts the same sysctls as the are supported on containers. Note that while the same sysctls are supported, no guarantees or checks are made about their suitability for a clustered environment, and it\'s up to the user to determine whether a given sysctl will work properly in a Service. 
+     * @type {{ [key: string]: string; }}
+     */
+    'Sysctls'?: { [key: string]: string; };
+    /**
+     * A list of kernel capabilities to add to the default set for the container. 
+     * @type {Array<string>}
+     */
+    'CapabilityAdd'?: Array<string>;
+    /**
+     * A list of kernel capabilities to drop from the default set for the container. 
+     * @type {Array<string>}
+     */
+    'CapabilityDrop'?: Array<string>;
+    /**
+     * A list of resource limits to set in the container. For example: `{\"Name\": \"nofile\", \"Soft\": 1024, \"Hard\": 2048}`\" 
+     * @type {Array<ResourcesUlimitsInner>}
+     */
+    'Ulimits'?: Array<ResourcesUlimitsInner>;
+}
+
+/**
+    * @enum {string}
+    */
+export enum TaskSpecContainerSpecIsolationEnum {
+    Default = 'default',
+    Process = 'process',
+    Hyperv = 'hyperv'
+}
+
+/**
+ * 
+ * @interface TaskSpecContainerSpecConfigsInner
+ */
+export interface TaskSpecContainerSpecConfigsInner {
+    /**
+     * 
+     * @type {TaskSpecContainerSpecConfigsInnerFile}
+     */
+    'File'?: TaskSpecContainerSpecConfigsInnerFile;
+    /**
+     * Runtime represents a target that is not mounted into the container but is used by the task  <p><br /><p>  > **Note**: `Configs.File` and `Configs.Runtime` are mutually > exclusive 
+     * @type {object}
+     */
+    'Runtime'?: object;
+    /**
+     * ConfigID represents the ID of the specific config that we\'re referencing. 
+     * @type {string}
+     */
+    'ConfigID'?: string;
+    /**
+     * ConfigName is the name of the config that this references, but this is just provided for lookup/display purposes. The config in the reference will be identified by its ID. 
+     * @type {string}
+     */
+    'ConfigName'?: string;
+}
+/**
+ * File represents a specific target that is backed by a file.  <p><br /><p>  > **Note**: `Configs.File` and `Configs.Runtime` are mutually exclusive 
+ * @interface TaskSpecContainerSpecConfigsInnerFile
+ */
+export interface TaskSpecContainerSpecConfigsInnerFile {
+    /**
+     * Name represents the final filename in the filesystem. 
+     * @type {string}
+     */
+    'Name'?: string;
+    /**
+     * UID represents the file UID.
+     * @type {string}
+     */
+    'UID'?: string;
+    /**
+     * GID represents the file GID.
+     * @type {string}
+     */
+    'GID'?: string;
+    /**
+     * Mode represents the FileMode of the file.
+     * @type {number}
+     */
+    'Mode'?: number;
+}
+/**
+ * Specification for DNS related configurations in resolver configuration file (`resolv.conf`). 
+ * @interface TaskSpecContainerSpecDNSConfig
+ */
+export interface TaskSpecContainerSpecDNSConfig {
+    /**
+     * The IP addresses of the name servers.
+     * @type {Array<string>}
+     */
+    'Nameservers'?: Array<string>;
+    /**
+     * A search list for host-name lookup.
+     * @type {Array<string>}
+     */
+    'Search'?: Array<string>;
+    /**
+     * A list of internal resolver variables to be modified (e.g., `debug`, `ndots:3`, etc.). 
+     * @type {Array<string>}
+     */
+    'Options'?: Array<string>;
+}
+/**
+ * Security options for the container
+ * @interface TaskSpecContainerSpecPrivileges
+ */
+export interface TaskSpecContainerSpecPrivileges {
+    /**
+     * 
+     * @type {TaskSpecContainerSpecPrivilegesCredentialSpec}
+     */
+    'CredentialSpec'?: TaskSpecContainerSpecPrivilegesCredentialSpec;
+    /**
+     * 
+     * @type {TaskSpecContainerSpecPrivilegesSELinuxContext}
+     */
+    'SELinuxContext'?: TaskSpecContainerSpecPrivilegesSELinuxContext;
+}
+/**
+ * CredentialSpec for managed service account (Windows only)
+ * @interface TaskSpecContainerSpecPrivilegesCredentialSpec
+ */
+export interface TaskSpecContainerSpecPrivilegesCredentialSpec {
+    /**
+     * Load credential spec from a Swarm Config with the given ID. The specified config must also be present in the Configs field with the Runtime property set.  <p><br /></p>   > **Note**: `CredentialSpec.File`, `CredentialSpec.Registry`, > and `CredentialSpec.Config` are mutually exclusive. 
+     * @type {string}
+     */
+    'Config'?: string;
+    /**
+     * Load credential spec from this file. The file is read by the daemon, and must be present in the `CredentialSpecs` subdirectory in the docker data directory, which defaults to `C:\\ProgramData\\Docker\\` on Windows.  For example, specifying `spec.json` loads `C:\\ProgramData\\Docker\\CredentialSpecs\\spec.json`.  <p><br /></p>  > **Note**: `CredentialSpec.File`, `CredentialSpec.Registry`, > and `CredentialSpec.Config` are mutually exclusive. 
+     * @type {string}
+     */
+    'File'?: string;
+    /**
+     * Load credential spec from this value in the Windows registry. The specified registry value must be located in:  `HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Virtualization\\Containers\\CredentialSpecs`  <p><br /></p>   > **Note**: `CredentialSpec.File`, `CredentialSpec.Registry`, > and `CredentialSpec.Config` are mutually exclusive. 
+     * @type {string}
+     */
+    'Registry'?: string;
+}
+/**
+ * SELinux labels of the container
+ * @interface TaskSpecContainerSpecPrivilegesSELinuxContext
+ */
+export interface TaskSpecContainerSpecPrivilegesSELinuxContext {
+    /**
+     * Disable SELinux
+     * @type {boolean}
+     */
+    'Disable'?: boolean;
+    /**
+     * SELinux user label
+     * @type {string}
+     */
+    'User'?: string;
+    /**
+     * SELinux role label
+     * @type {string}
+     */
+    'Role'?: string;
+    /**
+     * SELinux type label
+     * @type {string}
+     */
+    'Type'?: string;
+    /**
+     * SELinux level label
+     * @type {string}
+     */
+    'Level'?: string;
+}
+/**
+ * 
+ * @interface TaskSpecContainerSpecSecretsInner
+ */
+export interface TaskSpecContainerSpecSecretsInner {
+    /**
+     * 
+     * @type {TaskSpecContainerSpecSecretsInnerFile}
+     */
+    'File'?: TaskSpecContainerSpecSecretsInnerFile;
+    /**
+     * SecretID represents the ID of the specific secret that we\'re referencing. 
+     * @type {string}
+     */
+    'SecretID'?: string;
+    /**
+     * SecretName is the name of the secret that this references, but this is just provided for lookup/display purposes. The secret in the reference will be identified by its ID. 
+     * @type {string}
+     */
+    'SecretName'?: string;
+}
+/**
+ * File represents a specific target that is backed by a file. 
+ * @interface TaskSpecContainerSpecSecretsInnerFile
+ */
+export interface TaskSpecContainerSpecSecretsInnerFile {
+    /**
+     * Name represents the final filename in the filesystem. 
+     * @type {string}
+     */
+    'Name'?: string;
+    /**
+     * UID represents the file UID.
+     * @type {string}
+     */
+    'UID'?: string;
+    /**
+     * GID represents the file GID.
+     * @type {string}
+     */
+    'GID'?: string;
+    /**
+     * Mode represents the FileMode of the file.
+     * @type {number}
+     */
+    'Mode'?: number;
+}
+/**
+ * Specifies the log driver to use for tasks created from this spec. If not present, the default one for the swarm will be used, finally falling back to the engine default if not specified. 
+ * @interface TaskSpecLogDriver
+ */
+export interface TaskSpecLogDriver {
+    /**
+     * 
+     * @type {string}
+     */
+    'Name'?: string;
+    /**
+     * 
+     * @type {{ [key: string]: string; }}
+     */
+    'Options'?: { [key: string]: string; };
+}
+/**
+ * Read-only spec type for non-swarm containers attached to swarm overlay networks.  <p><br /></p>  > **Note**: ContainerSpec, NetworkAttachmentSpec, and PluginSpec are > mutually exclusive. PluginSpec is only used when the Runtime field > is set to `plugin`. NetworkAttachmentSpec is used when the Runtime > field is set to `attachment`. 
+ * @interface TaskSpecNetworkAttachmentSpec
+ */
+export interface TaskSpecNetworkAttachmentSpec {
+    /**
+     * ID of the container represented by this task
+     * @type {string}
+     */
+    'ContainerID'?: string;
+}
+/**
+ * 
+ * @interface TaskSpecPlacement
+ */
+export interface TaskSpecPlacement {
+    /**
+     * An array of constraint expressions to limit the set of nodes where a task can be scheduled. Constraint expressions can either use a _match_ (`==`) or _exclude_ (`!=`) rule. Multiple constraints find nodes that satisfy every expression (AND match). Constraints can match node or Docker Engine labels as follows:  node attribute       | matches                        | example ---------------------|--------------------------------|----------------------------------------------- `node.id`            | Node ID                        | `node.id==2ivku8v2gvtg4` `node.hostname`      | Node hostname                  | `node.hostname!=node-2` `node.role`          | Node role (`manager`/`worker`) | `node.role==manager` `node.platform.os`   | Node operating system          | `node.platform.os==windows` `node.platform.arch` | Node architecture              | `node.platform.arch==x86_64` `node.labels`        | User-defined node labels       | `node.labels.security==high` `engine.labels`      | Docker Engine\'s labels         | `engine.labels.operatingsystem==ubuntu-14.04`  `engine.labels` apply to Docker Engine labels like operating system, drivers, etc. Swarm administrators add `node.labels` for operational purposes by using the [`node update endpoint`](#operation/NodeUpdate). 
+     * @type {Array<string>}
+     */
+    'Constraints'?: Array<string>;
+    /**
+     * Preferences provide a way to make the scheduler aware of factors such as topology. They are provided in order from highest to lowest precedence. 
+     * @type {Array<TaskSpecPlacementPreferencesInner>}
+     */
+    'Preferences'?: Array<TaskSpecPlacementPreferencesInner>;
+    /**
+     * Maximum number of replicas for per node (default value is 0, which is unlimited) 
+     * @type {number}
+     */
+    'MaxReplicas'?: number;
+    /**
+     * Platforms stores all the platforms that the service\'s image can run on. This field is used in the platform filter for scheduling. If empty, then the platform filter is off, meaning there are no scheduling restrictions. 
+     * @type {Array<Platform>}
+     */
+    'Platforms'?: Array<Platform>;
+}
+/**
+ * 
+ * @interface TaskSpecPlacementPreferencesInner
+ */
+export interface TaskSpecPlacementPreferencesInner {
+    /**
+     * 
+     * @type {TaskSpecPlacementPreferencesInnerSpread}
+     */
+    'Spread'?: TaskSpecPlacementPreferencesInnerSpread;
+}
+/**
+ * 
+ * @interface TaskSpecPlacementPreferencesInnerSpread
+ */
+export interface TaskSpecPlacementPreferencesInnerSpread {
+    /**
+     * label descriptor, such as `engine.labels.az`. 
+     * @type {string}
+     */
+    'SpreadDescriptor'?: string;
+}
+/**
+ * Plugin spec for the service.  *(Experimental release only.)*  <p><br /></p>  > **Note**: ContainerSpec, NetworkAttachmentSpec, and PluginSpec are > mutually exclusive. PluginSpec is only used when the Runtime field > is set to `plugin`. NetworkAttachmentSpec is used when the Runtime > field is set to `attachment`. 
+ * @interface TaskSpecPluginSpec
+ */
+export interface TaskSpecPluginSpec {
+    /**
+     * The name or \'alias\' to use for the plugin.
+     * @type {string}
+     */
+    'Name'?: string;
+    /**
+     * The plugin image reference to use.
+     * @type {string}
+     */
+    'Remote'?: string;
+    /**
+     * Disable the plugin once scheduled.
+     * @type {boolean}
+     */
+    'Disabled'?: boolean;
+    /**
+     * 
+     * @type {Array<PluginPrivilege>}
+     */
+    'PluginPrivilege'?: Array<PluginPrivilege>;
+}
+/**
+ * Resource requirements which apply to each individual container created as part of the service. 
+ * @interface TaskSpecResources
+ */
+export interface TaskSpecResources {
+    /**
+     * 
+     * @type {Limit}
+     */
+    'Limits'?: Limit;
+    /**
+     * 
+     * @type {ResourceObject}
+     */
+    'Reservations'?: ResourceObject;
+}
+/**
+ * Specification for the restart policy which applies to containers created as part of this service. 
+ * @interface TaskSpecRestartPolicy
+ */
+export interface TaskSpecRestartPolicy {
+    /**
+     * Condition for restart.
+     * @type {string}
+     */
+    'Condition'?: TaskSpecRestartPolicyConditionEnum;
+    /**
+     * Delay between restart attempts.
+     * @type {number}
+     */
+    'Delay'?: number;
+    /**
+     * Maximum attempts to restart a given container before giving up (default value is 0, which is ignored). 
+     * @type {number}
+     */
+    'MaxAttempts'?: number;
+    /**
+     * Windows is the time window used to evaluate the restart policy (default value is 0, which is unbounded). 
+     * @type {number}
+     */
+    'Window'?: number;
+}
+
+/**
+    * @enum {string}
+    */
+export enum TaskSpecRestartPolicyConditionEnum {
+    None = 'none',
+    OnFailure = 'on-failure',
+    Any = 'any'
+}
+
+/**
+ * 
+ * @enum {string}
+ */
+
+export enum TaskState {
+    New = 'new',
+    Allocated = 'allocated',
+    Pending = 'pending',
+    Assigned = 'assigned',
+    Accepted = 'accepted',
+    Preparing = 'preparing',
+    Ready = 'ready',
+    Starting = 'starting',
+    Running = 'running',
+    Complete = 'complete',
+    Shutdown = 'shutdown',
+    Failed = 'failed',
+    Rejected = 'rejected',
+    Remove = 'remove',
+    Orphaned = 'orphaned'
+}
+
+
+/**
+ * 
+ * @interface TaskStatus
+ */
+export interface TaskStatus {
+    /**
+     * 
+     * @type {string}
+     */
+    'Timestamp'?: string;
+    /**
+     * 
+     * @type {TaskState}
+     */
+    'State'?: TaskState;
+    /**
+     * 
+     * @type {string}
+     */
+    'Message'?: string;
+    /**
+     * 
+     * @type {string}
+     */
+    'Err'?: string;
+    /**
+     * 
+     * @type {TaskStatusContainerStatus}
+     */
+    'ContainerStatus'?: TaskStatusContainerStatus;
+}
+
+
+/**
+ * 
+ * @interface TaskStatusContainerStatus
+ */
+export interface TaskStatusContainerStatus {
+    /**
+     * 
+     * @type {string}
+     */
+    'ContainerID'?: string;
+    /**
+     * 
+     * @type {number}
+     */
+    'PID'?: number;
+    /**
+     * 
+     * @type {number}
+     */
+    'ExitCode'?: number;
+}
+/**
+ * 
+ * @interface ThrottleDevice
+ */
+export interface ThrottleDevice {
+    /**
+     * Device path
+     * @type {string}
+     */
+    'Path'?: string;
+    /**
+     * Rate
+     * @type {number}
+     */
+    'Rate'?: number;
+}
+/**
+ * 
+ * @interface UnlockKeyResponse
+ */
+export interface UnlockKeyResponse {
+    /**
+     * The swarm\'s unlock key.
+     * @type {string}
+     */
+    'UnlockKey'?: string;
+}
+/**
+ * 
+ * @interface Volume
+ */
+export interface Volume {
+    /**
+     * Name of the volume.
+     * @type {string}
+     */
+    'Name': string;
+    /**
+     * Name of the volume driver used by the volume.
+     * @type {string}
+     */
+    'Driver': string;
+    /**
+     * Mount path of the volume on the host.
+     * @type {string}
+     */
+    'Mountpoint': string;
+    /**
+     * Date/Time the volume was created.
+     * @type {string}
+     */
+    'CreatedAt'?: string;
+    /**
+     * Low-level details about the volume, provided by the volume driver. Details are returned as a map with key/value pairs: `{\"key\":\"value\",\"key2\":\"value2\"}`.  The `Status` field is optional, and is omitted if the volume driver does not support this feature. 
+     * @type {{ [key: string]: object; }}
+     */
+    'Status'?: { [key: string]: object; };
+    /**
+     * User-defined key/value metadata.
+     * @type {{ [key: string]: string; }}
+     */
+    'Labels': { [key: string]: string; };
+    /**
+     * The level at which the volume exists. Either `global` for cluster-wide, or `local` for machine level. 
+     * @type {string}
+     */
+    'Scope': VolumeScopeEnum;
+    /**
+     * The driver specific options used when creating the volume. 
+     * @type {{ [key: string]: string; }}
+     */
+    'Options': { [key: string]: string; };
+    /**
+     * 
+     * @type {VolumeUsageData}
+     */
+    'UsageData'?: VolumeUsageData | null;
+}
+
+/**
+    * @enum {string}
+    */
+export enum VolumeScopeEnum {
+    Local = 'local',
+    Global = 'global'
+}
+
+/**
+ * Volume configuration
+ * @interface VolumeCreateOptions
+ */
+export interface VolumeCreateOptions {
+    /**
+     * The new volume\'s name. If not specified, Docker generates a name. 
+     * @type {string}
+     */
+    'Name'?: string;
+    /**
+     * Name of the volume driver to use.
+     * @type {string}
+     */
+    'Driver'?: string;
+    /**
+     * A mapping of driver options and values. These options are passed directly to the driver and are driver specific. 
+     * @type {{ [key: string]: string; }}
+     */
+    'DriverOpts'?: { [key: string]: string; };
+    /**
+     * User-defined key/value metadata.
+     * @type {{ [key: string]: string; }}
+     */
+    'Labels'?: { [key: string]: string; };
+}
+/**
+ * Volume list response
+ * @interface VolumeListResponse
+ */
+export interface VolumeListResponse {
+    /**
+     * List of volumes
+     * @type {Array<Volume>}
+     */
+    'Volumes'?: Array<Volume>;
+    /**
+     * Warnings that occurred when fetching the list of volumes. 
+     * @type {Array<string>}
+     */
+    'Warnings'?: Array<string>;
+}
+/**
+ * 
+ * @interface VolumePruneResponse
+ */
+export interface VolumePruneResponse {
+    /**
+     * Volumes that were deleted
+     * @type {Array<string>}
+     */
+    'VolumesDeleted'?: Array<string>;
+    /**
+     * Disk space reclaimed in bytes
+     * @type {number}
+     */
+    'SpaceReclaimed'?: number;
+}
+/**
+ * Usage details about the volume. This information is used by the `GET /system/df` endpoint, and omitted in other endpoints. 
+ * @interface VolumeUsageData
+ */
+export interface VolumeUsageData {
+    /**
+     * Amount of disk space used by the volume (in bytes). This information is only available for volumes created with the `\"local\"` volume driver. For volumes created with other volume drivers, this field is set to `-1` (\"not available\") 
+     * @type {number}
+     */
+    'Size': number;
+    /**
+     * The number of containers referencing this volume. This field is set to `-1` if the reference-count is not available. 
+     * @type {number}
+     */
+    'RefCount': number;
+}
+
+/**
+ * ConfigApi - axios parameter creator
+ */
+export const ConfigApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary Create a config
+         * @param {ConfigCreateRequest} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        configCreate: async (body?: ConfigCreateRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/configs/create`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Delete a config
+         * @param {string} id ID of the config
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        configDelete: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('configDelete', 'id', id)
+            const localVarPath = `/configs/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Inspect a config
+         * @param {string} id ID of the config
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        configInspect: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('configInspect', 'id', id)
+            const localVarPath = `/configs/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary List configs
+         * @param {string} [filters] A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the configs list.  Available filters:  - &#x60;id&#x3D;&lt;config id&gt;&#x60; - &#x60;label&#x3D;&lt;key&gt; or label&#x3D;&lt;key&gt;&#x3D;value&#x60; - &#x60;name&#x3D;&lt;config name&gt;&#x60; - &#x60;names&#x3D;&lt;config name&gt;&#x60; 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        configList: async (filters?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/configs`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (filters !== undefined) {
+                localVarQueryParameter['filters'] = filters;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Update a Config
+         * @param {string} id The ID or name of the config
+         * @param {number} version The version number of the config object being updated. This is required to avoid conflicting writes. 
+         * @param {ConfigSpec} [body] The spec of the config to update. Currently, only the Labels field can be updated. All other fields must remain unchanged from the [ConfigInspect endpoint](#operation/ConfigInspect) response values. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        configUpdate: async (id: string, version: number, body?: ConfigSpec, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('configUpdate', 'id', id)
+            // verify required parameter 'version' is not null or undefined
+            assertParamExists('configUpdate', 'version', version)
+            const localVarPath = `/configs/{id}/update`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (version !== undefined) {
+                localVarQueryParameter['version'] = version;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * ConfigApi - functional programming interface
+ */
+export const ConfigApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = ConfigApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary Create a config
+         * @param {ConfigCreateRequest} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async configCreate(body?: ConfigCreateRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IdResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.configCreate(body, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ConfigApi.configCreate']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Delete a config
+         * @param {string} id ID of the config
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async configDelete(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.configDelete(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ConfigApi.configDelete']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Inspect a config
+         * @param {string} id ID of the config
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async configInspect(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Config>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.configInspect(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ConfigApi.configInspect']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary List configs
+         * @param {string} [filters] A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the configs list.  Available filters:  - &#x60;id&#x3D;&lt;config id&gt;&#x60; - &#x60;label&#x3D;&lt;key&gt; or label&#x3D;&lt;key&gt;&#x3D;value&#x60; - &#x60;name&#x3D;&lt;config name&gt;&#x60; - &#x60;names&#x3D;&lt;config name&gt;&#x60; 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async configList(filters?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Config>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.configList(filters, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ConfigApi.configList']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Update a Config
+         * @param {string} id The ID or name of the config
+         * @param {number} version The version number of the config object being updated. This is required to avoid conflicting writes. 
+         * @param {ConfigSpec} [body] The spec of the config to update. Currently, only the Labels field can be updated. All other fields must remain unchanged from the [ConfigInspect endpoint](#operation/ConfigInspect) response values. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async configUpdate(id: string, version: number, body?: ConfigSpec, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.configUpdate(id, version, body, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ConfigApi.configUpdate']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * ConfigApi - factory interface
+ */
+export const ConfigApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = ConfigApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary Create a config
+         * @param {ConfigCreateRequest} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        configCreate(body?: ConfigCreateRequest, options?: any): AxiosPromise<IdResponse> {
+            return localVarFp.configCreate(body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Delete a config
+         * @param {string} id ID of the config
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        configDelete(id: string, options?: any): AxiosPromise<void> {
+            return localVarFp.configDelete(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Inspect a config
+         * @param {string} id ID of the config
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        configInspect(id: string, options?: any): AxiosPromise<Config> {
+            return localVarFp.configInspect(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary List configs
+         * @param {string} [filters] A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the configs list.  Available filters:  - &#x60;id&#x3D;&lt;config id&gt;&#x60; - &#x60;label&#x3D;&lt;key&gt; or label&#x3D;&lt;key&gt;&#x3D;value&#x60; - &#x60;name&#x3D;&lt;config name&gt;&#x60; - &#x60;names&#x3D;&lt;config name&gt;&#x60; 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        configList(filters?: string, options?: any): AxiosPromise<Array<Config>> {
+            return localVarFp.configList(filters, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Update a Config
+         * @param {string} id The ID or name of the config
+         * @param {number} version The version number of the config object being updated. This is required to avoid conflicting writes. 
+         * @param {ConfigSpec} [body] The spec of the config to update. Currently, only the Labels field can be updated. All other fields must remain unchanged from the [ConfigInspect endpoint](#operation/ConfigInspect) response values. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        configUpdate(id: string, version: number, body?: ConfigSpec, options?: any): AxiosPromise<void> {
+            return localVarFp.configUpdate(id, version, body, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * ConfigApi - object-oriented interface
+ * @class ConfigApi
+ * @extends {BaseAPI}
+ */
+export class ConfigApi extends BaseAPI {
+    /**
+     * 
+     * @summary Create a config
+     * @param {ConfigCreateRequest} [body] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public configCreate(body?: ConfigCreateRequest, options?: RawAxiosRequestConfig) {
+        return ConfigApiFp(this.configuration).configCreate(body, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Delete a config
+     * @param {string} id ID of the config
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public configDelete(id: string, options?: RawAxiosRequestConfig) {
+        return ConfigApiFp(this.configuration).configDelete(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Inspect a config
+     * @param {string} id ID of the config
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public configInspect(id: string, options?: RawAxiosRequestConfig) {
+        return ConfigApiFp(this.configuration).configInspect(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary List configs
+     * @param {string} [filters] A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the configs list.  Available filters:  - &#x60;id&#x3D;&lt;config id&gt;&#x60; - &#x60;label&#x3D;&lt;key&gt; or label&#x3D;&lt;key&gt;&#x3D;value&#x60; - &#x60;name&#x3D;&lt;config name&gt;&#x60; - &#x60;names&#x3D;&lt;config name&gt;&#x60; 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public configList(filters?: string, options?: RawAxiosRequestConfig) {
+        return ConfigApiFp(this.configuration).configList(filters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Update a Config
+     * @param {string} id The ID or name of the config
+     * @param {number} version The version number of the config object being updated. This is required to avoid conflicting writes. 
+     * @param {ConfigSpec} [body] The spec of the config to update. Currently, only the Labels field can be updated. All other fields must remain unchanged from the [ConfigInspect endpoint](#operation/ConfigInspect) response values. 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public configUpdate(id: string, version: number, body?: ConfigSpec, options?: RawAxiosRequestConfig) {
+        return ConfigApiFp(this.configuration).configUpdate(id, version, body, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * ContainerApi - axios parameter creator
+ */
+export const ContainerApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Get a tar archive of a resource in the filesystem of container id.
+         * @summary Get an archive of a filesystem resource in a container
+         * @param {string} id ID or name of the container
+         * @param {string} path Resource in the container’s filesystem to archive.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerArchive: async (id: string, path: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('containerArchive', 'id', id)
+            // verify required parameter 'path' is not null or undefined
+            assertParamExists('containerArchive', 'path', path)
+            const localVarPath = `/containers/{id}/archive`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (path !== undefined) {
+                localVarQueryParameter['path'] = path;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * A response header `X-Docker-Container-Path-Stat` is returned, containing a base64 - encoded JSON object with some filesystem header information about the path. 
+         * @summary Get information about files in a container
+         * @param {string} id ID or name of the container
+         * @param {string} path Resource in the container’s filesystem to archive.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerArchiveInfo: async (id: string, path: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('containerArchiveInfo', 'id', id)
+            // verify required parameter 'path' is not null or undefined
+            assertParamExists('containerArchiveInfo', 'path', path)
+            const localVarPath = `/containers/{id}/archive`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'HEAD', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (path !== undefined) {
+                localVarQueryParameter['path'] = path;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Attach to a container to read its output or send it input. You can attach to the same container multiple times and you can reattach to containers that have been detached.  Either the `stream` or `logs` parameter must be `true` for this endpoint to do anything.  See the [documentation for the `docker attach` command](https://docs.docker.com/engine/reference/commandline/attach/) for more details.  ### Hijacking  This endpoint hijacks the HTTP connection to transport `stdin`, `stdout`, and `stderr` on the same socket.  This is the response from the daemon for an attach request:  ``` HTTP/1.1 200 OK Content-Type: application/vnd.docker.raw-stream  [STREAM] ```  After the headers and two new lines, the TCP connection can now be used for raw, bidirectional communication between the client and server.  To hint potential proxies about connection hijacking, the Docker client can also optionally send connection upgrade headers.  For example, the client sends this request to upgrade the connection:  ``` POST /containers/16253994b7c4/attach?stream=1&stdout=1 HTTP/1.1 Upgrade: tcp Connection: Upgrade ```  The Docker daemon will respond with a `101 UPGRADED` response, and will similarly follow with the raw stream:  ``` HTTP/1.1 101 UPGRADED Content-Type: application/vnd.docker.raw-stream Connection: Upgrade Upgrade: tcp  [STREAM] ```  ### Stream format  When the TTY setting is disabled in [`POST /containers/create`](#operation/ContainerCreate), the stream over the hijacked connected is multiplexed to separate out `stdout` and `stderr`. The stream consists of a series of frames, each containing a header and a payload.  The header contains the information which the stream writes (`stdout` or `stderr`). It also contains the size of the associated frame encoded in the last four bytes (`uint32`).  It is encoded on the first eight bytes like this:  ```go header := [8]byte{STREAM_TYPE, 0, 0, 0, SIZE1, SIZE2, SIZE3, SIZE4} ```  `STREAM_TYPE` can be:  - 0: `stdin` (is written on `stdout`) - 1: `stdout` - 2: `stderr`  `SIZE1, SIZE2, SIZE3, SIZE4` are the four bytes of the `uint32` size encoded as big endian.  Following the header is the payload, which is the specified number of bytes of `STREAM_TYPE`.  The simplest way to implement this protocol is the following:  1. Read 8 bytes. 2. Choose `stdout` or `stderr` depending on the first byte. 3. Extract the frame size from the last four bytes. 4. Read the extracted size and output it on the correct output. 5. Goto 1.  ### Stream format when using a TTY  When the TTY setting is enabled in [`POST /containers/create`](#operation/ContainerCreate), the stream is not multiplexed. The data exchanged over the hijacked connection is simply the raw data from the process PTY and client\'s `stdin`. 
+         * @summary Attach to a container
+         * @param {string} id ID or name of the container
+         * @param {string} [detachKeys] Override the key sequence for detaching a container.Format is a single character &#x60;[a-Z]&#x60; or &#x60;ctrl-&lt;value&gt;&#x60; where &#x60;&lt;value&gt;&#x60; is one of: &#x60;a-z&#x60;, &#x60;@&#x60;, &#x60;^&#x60;, &#x60;[&#x60;, &#x60;,&#x60; or &#x60;_&#x60;. 
+         * @param {boolean} [logs] Replay previous logs from the container.  This is useful for attaching to a container that has started and you want to output everything since the container started.  If &#x60;stream&#x60; is also enabled, once all the previous output has been returned, it will seamlessly transition into streaming current output. 
+         * @param {boolean} [stream] Stream attached streams from the time the request was made onwards. 
+         * @param {boolean} [stdin] Attach to &#x60;stdin&#x60;
+         * @param {boolean} [stdout] Attach to &#x60;stdout&#x60;
+         * @param {boolean} [stderr] Attach to &#x60;stderr&#x60;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerAttach: async (id: string, detachKeys?: string, logs?: boolean, stream?: boolean, stdin?: boolean, stdout?: boolean, stderr?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('containerAttach', 'id', id)
+            const localVarPath = `/containers/{id}/attach`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (detachKeys !== undefined) {
+                localVarQueryParameter['detachKeys'] = detachKeys;
+            }
+
+            if (logs !== undefined) {
+                localVarQueryParameter['logs'] = logs;
+            }
+
+            if (stream !== undefined) {
+                localVarQueryParameter['stream'] = stream;
+            }
+
+            if (stdin !== undefined) {
+                localVarQueryParameter['stdin'] = stdin;
+            }
+
+            if (stdout !== undefined) {
+                localVarQueryParameter['stdout'] = stdout;
+            }
+
+            if (stderr !== undefined) {
+                localVarQueryParameter['stderr'] = stderr;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Attach to a container via a websocket
+         * @param {string} id ID or name of the container
+         * @param {string} [detachKeys] Override the key sequence for detaching a container.Format is a single character &#x60;[a-Z]&#x60; or &#x60;ctrl-&lt;value&gt;&#x60; where &#x60;&lt;value&gt;&#x60; is one of: &#x60;a-z&#x60;, &#x60;@&#x60;, &#x60;^&#x60;, &#x60;[&#x60;, &#x60;,&#x60;, or &#x60;_&#x60;. 
+         * @param {boolean} [logs] Return logs
+         * @param {boolean} [stream] Return stream
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerAttachWebsocket: async (id: string, detachKeys?: string, logs?: boolean, stream?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('containerAttachWebsocket', 'id', id)
+            const localVarPath = `/containers/{id}/attach/ws`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (detachKeys !== undefined) {
+                localVarQueryParameter['detachKeys'] = detachKeys;
+            }
+
+            if (logs !== undefined) {
+                localVarQueryParameter['logs'] = logs;
+            }
+
+            if (stream !== undefined) {
+                localVarQueryParameter['stream'] = stream;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns which files in a container\'s filesystem have been added, deleted, or modified. The `Kind` of modification can be one of:  - `0`: Modified - `1`: Added - `2`: Deleted 
+         * @summary Get changes on a container’s filesystem
+         * @param {string} id ID or name of the container
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerChanges: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('containerChanges', 'id', id)
+            const localVarPath = `/containers/{id}/changes`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Create a container
+         * @param {ContainerCreateRequest} body Container to create
+         * @param {string} [name] Assign the specified name to the container. Must match &#x60;/?[a-zA-Z0-9][a-zA-Z0-9_.-]+&#x60;. 
+         * @param {string} [platform] Platform in the format &#x60;os[/arch[/variant]]&#x60; used for image lookup.  When specified, the daemon checks if the requested image is present in the local image cache with the given OS and Architecture, and otherwise returns a &#x60;404&#x60; status.  If the option is not set, the host\&#39;s native OS and Architecture are used to look up the image in the image cache. However, if no platform is passed and the given image does exist in the local image cache, but its OS or architecture does not match, the container is created with the available image, and a warning is added to the &#x60;Warnings&#x60; field in the response, for example;      WARNING: The requested image\&#39;s platform (linux/arm64/v8) does not              match the detected host platform (linux/amd64) and no              specific platform was requested 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerCreate: async (body: ContainerCreateRequest, name?: string, platform?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'body' is not null or undefined
+            assertParamExists('containerCreate', 'body', body)
+            const localVarPath = `/containers/create`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (name !== undefined) {
+                localVarQueryParameter['name'] = name;
+            }
+
+            if (platform !== undefined) {
+                localVarQueryParameter['platform'] = platform;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Remove a container
+         * @param {string} id ID or name of the container
+         * @param {boolean} [v] Remove anonymous volumes associated with the container.
+         * @param {boolean} [force] If the container is running, kill it before removing it.
+         * @param {boolean} [link] Remove the specified link associated with the container.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerDelete: async (id: string, v?: boolean, force?: boolean, link?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('containerDelete', 'id', id)
+            const localVarPath = `/containers/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (v !== undefined) {
+                localVarQueryParameter['v'] = v;
+            }
+
+            if (force !== undefined) {
+                localVarQueryParameter['force'] = force;
+            }
+
+            if (link !== undefined) {
+                localVarQueryParameter['link'] = link;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Export the contents of a container as a tarball.
+         * @summary Export a container
+         * @param {string} id ID or name of the container
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerExport: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('containerExport', 'id', id)
+            const localVarPath = `/containers/{id}/export`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Return low-level information about a container.
+         * @summary Inspect a container
+         * @param {string} id ID or name of the container
+         * @param {boolean} [size] Return the size of container as fields &#x60;SizeRw&#x60; and &#x60;SizeRootFs&#x60;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerInspect: async (id: string, size?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('containerInspect', 'id', id)
+            const localVarPath = `/containers/{id}/json`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (size !== undefined) {
+                localVarQueryParameter['size'] = size;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Send a POSIX signal to a container, defaulting to killing to the container. 
+         * @summary Kill a container
+         * @param {string} id ID or name of the container
+         * @param {string} [signal] Signal to send to the container as an integer or string (e.g. &#x60;SIGINT&#x60;). 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerKill: async (id: string, signal?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('containerKill', 'id', id)
+            const localVarPath = `/containers/{id}/kill`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (signal !== undefined) {
+                localVarQueryParameter['signal'] = signal;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns a list of containers. For details on the format, see the [inspect endpoint](#operation/ContainerInspect).  Note that it uses a different, smaller representation of a container than inspecting a single container. For example, the list of linked containers is not propagated . 
+         * @summary List containers
+         * @param {boolean} [all] Return all containers. By default, only running containers are shown. 
+         * @param {number} [limit] Return this number of most recently created containers, including non-running ones. 
+         * @param {boolean} [size] Return the size of container as fields &#x60;SizeRw&#x60; and &#x60;SizeRootFs&#x60;. 
+         * @param {string} [filters] Filters to process on the container list, encoded as JSON (a &#x60;map[string][]string&#x60;). For example, &#x60;{\&quot;status\&quot;: [\&quot;paused\&quot;]}&#x60; will only return paused containers.  Available filters:  - &#x60;ancestor&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;, &#x60;&lt;image id&gt;&#x60;, or &#x60;&lt;image@digest&gt;&#x60;) - &#x60;before&#x60;&#x3D;(&#x60;&lt;container id&gt;&#x60; or &#x60;&lt;container name&gt;&#x60;) - &#x60;expose&#x60;&#x3D;(&#x60;&lt;port&gt;[/&lt;proto&gt;]&#x60;|&#x60;&lt;startport-endport&gt;/[&lt;proto&gt;]&#x60;) - &#x60;exited&#x3D;&lt;int&gt;&#x60; containers with exit code of &#x60;&lt;int&gt;&#x60; - &#x60;health&#x60;&#x3D;(&#x60;starting&#x60;|&#x60;healthy&#x60;|&#x60;unhealthy&#x60;|&#x60;none&#x60;) - &#x60;id&#x3D;&lt;ID&gt;&#x60; a container\&#39;s ID - &#x60;isolation&#x3D;&#x60;(&#x60;default&#x60;|&#x60;process&#x60;|&#x60;hyperv&#x60;) (Windows daemon only) - &#x60;is-task&#x3D;&#x60;(&#x60;true&#x60;|&#x60;false&#x60;) - &#x60;label&#x3D;key&#x60; or &#x60;label&#x3D;\&quot;key&#x3D;value\&quot;&#x60; of a container label - &#x60;name&#x3D;&lt;name&gt;&#x60; a container\&#39;s name - &#x60;network&#x60;&#x3D;(&#x60;&lt;network id&gt;&#x60; or &#x60;&lt;network name&gt;&#x60;) - &#x60;publish&#x60;&#x3D;(&#x60;&lt;port&gt;[/&lt;proto&gt;]&#x60;|&#x60;&lt;startport-endport&gt;/[&lt;proto&gt;]&#x60;) - &#x60;since&#x60;&#x3D;(&#x60;&lt;container id&gt;&#x60; or &#x60;&lt;container name&gt;&#x60;) - &#x60;status&#x3D;&#x60;(&#x60;created&#x60;|&#x60;restarting&#x60;|&#x60;running&#x60;|&#x60;removing&#x60;|&#x60;paused&#x60;|&#x60;exited&#x60;|&#x60;dead&#x60;) - &#x60;volume&#x60;&#x3D;(&#x60;&lt;volume name&gt;&#x60; or &#x60;&lt;mount point destination&gt;&#x60;) 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerList: async (all?: boolean, limit?: number, size?: boolean, filters?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/containers/json`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (all !== undefined) {
+                localVarQueryParameter['all'] = all;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (size !== undefined) {
+                localVarQueryParameter['size'] = size;
+            }
+
+            if (filters !== undefined) {
+                localVarQueryParameter['filters'] = filters;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Get `stdout` and `stderr` logs from a container.  Note: This endpoint works only for containers with the `json-file` or `journald` logging driver. 
+         * @summary Get container logs
+         * @param {string} id ID or name of the container
+         * @param {boolean} [follow] Keep connection after returning logs.
+         * @param {boolean} [stdout] Return logs from &#x60;stdout&#x60;
+         * @param {boolean} [stderr] Return logs from &#x60;stderr&#x60;
+         * @param {number} [since] Only return logs since this time, as a UNIX timestamp
+         * @param {number} [until] Only return logs before this time, as a UNIX timestamp
+         * @param {boolean} [timestamps] Add timestamps to every log line
+         * @param {string} [tail] Only return this number of log lines from the end of the logs. Specify as an integer or &#x60;all&#x60; to output all log lines. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerLogs: async (id: string, follow?: boolean, stdout?: boolean, stderr?: boolean, since?: number, until?: number, timestamps?: boolean, tail?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('containerLogs', 'id', id)
+            const localVarPath = `/containers/{id}/logs`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (follow !== undefined) {
+                localVarQueryParameter['follow'] = follow;
+            }
+
+            if (stdout !== undefined) {
+                localVarQueryParameter['stdout'] = stdout;
+            }
+
+            if (stderr !== undefined) {
+                localVarQueryParameter['stderr'] = stderr;
+            }
+
+            if (since !== undefined) {
+                localVarQueryParameter['since'] = since;
+            }
+
+            if (until !== undefined) {
+                localVarQueryParameter['until'] = until;
+            }
+
+            if (timestamps !== undefined) {
+                localVarQueryParameter['timestamps'] = timestamps;
+            }
+
+            if (tail !== undefined) {
+                localVarQueryParameter['tail'] = tail;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use the freezer cgroup to suspend all processes in a container.  Traditionally, when suspending a process the `SIGSTOP` signal is used, which is observable by the process being suspended. With the freezer cgroup the process is unaware, and unable to capture, that it is being suspended, and subsequently resumed. 
+         * @summary Pause a container
+         * @param {string} id ID or name of the container
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerPause: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('containerPause', 'id', id)
+            const localVarPath = `/containers/{id}/pause`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Delete stopped containers
+         * @param {string} [filters] Filters to process on the prune list, encoded as JSON (a &#x60;map[string][]string&#x60;).  Available filters: - &#x60;until&#x3D;&lt;timestamp&gt;&#x60; Prune containers created before this timestamp. The &#x60;&lt;timestamp&gt;&#x60; can be Unix timestamps, date formatted timestamps, or Go duration strings (e.g. &#x60;10m&#x60;, &#x60;1h30m&#x60;) computed relative to the daemon machine’s time. - &#x60;label&#x60; (&#x60;label&#x3D;&lt;key&gt;&#x60;, &#x60;label&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60;, &#x60;label!&#x3D;&lt;key&gt;&#x60;, or &#x60;label!&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60;) Prune containers with (or without, in case &#x60;label!&#x3D;...&#x60; is used) the specified labels. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerPrune: async (filters?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/containers/prune`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (filters !== undefined) {
+                localVarQueryParameter['filters'] = filters;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Rename a container
+         * @param {string} id ID or name of the container
+         * @param {string} name New name for the container
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerRename: async (id: string, name: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('containerRename', 'id', id)
+            // verify required parameter 'name' is not null or undefined
+            assertParamExists('containerRename', 'name', name)
+            const localVarPath = `/containers/{id}/rename`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (name !== undefined) {
+                localVarQueryParameter['name'] = name;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Resize the TTY for a container.
+         * @summary Resize a container TTY
+         * @param {string} id ID or name of the container
+         * @param {number} [h] Height of the TTY session in characters
+         * @param {number} [w] Width of the TTY session in characters
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerResize: async (id: string, h?: number, w?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('containerResize', 'id', id)
+            const localVarPath = `/containers/{id}/resize`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (h !== undefined) {
+                localVarQueryParameter['h'] = h;
+            }
+
+            if (w !== undefined) {
+                localVarQueryParameter['w'] = w;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Restart a container
+         * @param {string} id ID or name of the container
+         * @param {number} [t] Number of seconds to wait before killing the container
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerRestart: async (id: string, t?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('containerRestart', 'id', id)
+            const localVarPath = `/containers/{id}/restart`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (t !== undefined) {
+                localVarQueryParameter['t'] = t;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Start a container
+         * @param {string} id ID or name of the container
+         * @param {string} [detachKeys] Override the key sequence for detaching a container. Format is a single character &#x60;[a-Z]&#x60; or &#x60;ctrl-&lt;value&gt;&#x60; where &#x60;&lt;value&gt;&#x60; is one of: &#x60;a-z&#x60;, &#x60;@&#x60;, &#x60;^&#x60;, &#x60;[&#x60;, &#x60;,&#x60; or &#x60;_&#x60;. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerStart: async (id: string, detachKeys?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('containerStart', 'id', id)
+            const localVarPath = `/containers/{id}/start`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (detachKeys !== undefined) {
+                localVarQueryParameter['detachKeys'] = detachKeys;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This endpoint returns a live stream of a container’s resource usage statistics.  The `precpu_stats` is the CPU statistic of the *previous* read, and is used to calculate the CPU usage percentage. It is not an exact copy of the `cpu_stats` field.  If either `precpu_stats.online_cpus` or `cpu_stats.online_cpus` is nil then for compatibility with older daemons the length of the corresponding `cpu_usage.percpu_usage` array should be used.  On a cgroup v2 host, the following fields are not set * `blkio_stats`: all fields other than `io_service_bytes_recursive` * `cpu_stats`: `cpu_usage.percpu_usage` * `memory_stats`: `max_usage` and `failcnt` Also, `memory_stats.stats` fields are incompatible with cgroup v1.  To calculate the values shown by the `stats` command of the docker cli tool the following formulas can be used: * used_memory = `memory_stats.usage - memory_stats.stats.cache` * available_memory = `memory_stats.limit` * Memory usage % = `(used_memory / available_memory) * 100.0` * cpu_delta = `cpu_stats.cpu_usage.total_usage - precpu_stats.cpu_usage.total_usage` * system_cpu_delta = `cpu_stats.system_cpu_usage - precpu_stats.system_cpu_usage` * number_cpus = `lenght(cpu_stats.cpu_usage.percpu_usage)` or `cpu_stats.online_cpus` * CPU usage % = `(cpu_delta / system_cpu_delta) * number_cpus * 100.0` 
+         * @summary Get container stats based on resource usage
+         * @param {string} id ID or name of the container
+         * @param {boolean} [stream] Stream the output. If false, the stats will be output once and then it will disconnect. 
+         * @param {boolean} [oneShot] Only get a single stat instead of waiting for 2 cycles. Must be used with &#x60;stream&#x3D;false&#x60;. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerStats: async (id: string, stream?: boolean, oneShot?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('containerStats', 'id', id)
+            const localVarPath = `/containers/{id}/stats`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (stream !== undefined) {
+                localVarQueryParameter['stream'] = stream;
+            }
+
+            if (oneShot !== undefined) {
+                localVarQueryParameter['one-shot'] = oneShot;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Stop a container
+         * @param {string} id ID or name of the container
+         * @param {number} [t] Number of seconds to wait before killing the container
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerStop: async (id: string, t?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('containerStop', 'id', id)
+            const localVarPath = `/containers/{id}/stop`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (t !== undefined) {
+                localVarQueryParameter['t'] = t;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * On Unix systems, this is done by running the `ps` command. This endpoint is not supported on Windows. 
+         * @summary List processes running inside a container
+         * @param {string} id ID or name of the container
+         * @param {string} [psArgs] The arguments to pass to &#x60;ps&#x60;. For example, &#x60;aux&#x60;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerTop: async (id: string, psArgs?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('containerTop', 'id', id)
+            const localVarPath = `/containers/{id}/top`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (psArgs !== undefined) {
+                localVarQueryParameter['ps_args'] = psArgs;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Resume a container which has been paused.
+         * @summary Unpause a container
+         * @param {string} id ID or name of the container
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerUnpause: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('containerUnpause', 'id', id)
+            const localVarPath = `/containers/{id}/unpause`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Change various configuration options of a container without having to recreate it. 
+         * @summary Update a container
+         * @param {string} id ID or name of the container
+         * @param {ContainerUpdateRequest} update 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerUpdate: async (id: string, update: ContainerUpdateRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('containerUpdate', 'id', id)
+            // verify required parameter 'update' is not null or undefined
+            assertParamExists('containerUpdate', 'update', update)
+            const localVarPath = `/containers/{id}/update`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(update, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Block until a container stops, then returns the exit code.
+         * @summary Wait for a container
+         * @param {string} id ID or name of the container
+         * @param {ContainerWaitConditionEnum} [condition] Wait until a container state reaches the given condition.  Defaults to &#x60;not-running&#x60; if omitted or empty. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerWait: async (id: string, condition?: ContainerWaitConditionEnum, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('containerWait', 'id', id)
+            const localVarPath = `/containers/{id}/wait`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (condition !== undefined) {
+                localVarQueryParameter['condition'] = condition;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Upload a tar archive to be extracted to a path in the filesystem of container id. `path` parameter is asserted to be a directory. If it exists as a file, 400 error will be returned with message \"not a directory\". 
+         * @summary Extract an archive of files or folders to a directory in a container
+         * @param {string} id ID or name of the container
+         * @param {string} path Path to a directory in the container to extract the archive’s contents into. 
+         * @param {File} inputStream The input stream must be a tar archive compressed with one of the following algorithms: &#x60;identity&#x60; (no compression), &#x60;gzip&#x60;, &#x60;bzip2&#x60;, or &#x60;xz&#x60;. 
+         * @param {string} [noOverwriteDirNonDir] If &#x60;1&#x60;, &#x60;true&#x60;, or &#x60;True&#x60; then it will be an error if unpacking the given content would cause an existing directory to be replaced with a non-directory and vice versa. 
+         * @param {string} [copyUIDGID] If &#x60;1&#x60;, &#x60;true&#x60;, then it will copy UID/GID maps to the dest file or dir 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        putContainerArchive: async (id: string, path: string, inputStream: File, noOverwriteDirNonDir?: string, copyUIDGID?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('putContainerArchive', 'id', id)
+            // verify required parameter 'path' is not null or undefined
+            assertParamExists('putContainerArchive', 'path', path)
+            // verify required parameter 'inputStream' is not null or undefined
+            assertParamExists('putContainerArchive', 'inputStream', inputStream)
+            const localVarPath = `/containers/{id}/archive`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (path !== undefined) {
+                localVarQueryParameter['path'] = path;
+            }
+
+            if (noOverwriteDirNonDir !== undefined) {
+                localVarQueryParameter['noOverwriteDirNonDir'] = noOverwriteDirNonDir;
+            }
+
+            if (copyUIDGID !== undefined) {
+                localVarQueryParameter['copyUIDGID'] = copyUIDGID;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/x-tar';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(inputStream, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * ContainerApi - functional programming interface
+ */
+export const ContainerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = ContainerApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * Get a tar archive of a resource in the filesystem of container id.
+         * @summary Get an archive of a filesystem resource in a container
+         * @param {string} id ID or name of the container
+         * @param {string} path Resource in the container’s filesystem to archive.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async containerArchive(id: string, path: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.containerArchive(id, path, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ContainerApi.containerArchive']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * A response header `X-Docker-Container-Path-Stat` is returned, containing a base64 - encoded JSON object with some filesystem header information about the path. 
+         * @summary Get information about files in a container
+         * @param {string} id ID or name of the container
+         * @param {string} path Resource in the container’s filesystem to archive.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async containerArchiveInfo(id: string, path: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.containerArchiveInfo(id, path, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ContainerApi.containerArchiveInfo']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Attach to a container to read its output or send it input. You can attach to the same container multiple times and you can reattach to containers that have been detached.  Either the `stream` or `logs` parameter must be `true` for this endpoint to do anything.  See the [documentation for the `docker attach` command](https://docs.docker.com/engine/reference/commandline/attach/) for more details.  ### Hijacking  This endpoint hijacks the HTTP connection to transport `stdin`, `stdout`, and `stderr` on the same socket.  This is the response from the daemon for an attach request:  ``` HTTP/1.1 200 OK Content-Type: application/vnd.docker.raw-stream  [STREAM] ```  After the headers and two new lines, the TCP connection can now be used for raw, bidirectional communication between the client and server.  To hint potential proxies about connection hijacking, the Docker client can also optionally send connection upgrade headers.  For example, the client sends this request to upgrade the connection:  ``` POST /containers/16253994b7c4/attach?stream=1&stdout=1 HTTP/1.1 Upgrade: tcp Connection: Upgrade ```  The Docker daemon will respond with a `101 UPGRADED` response, and will similarly follow with the raw stream:  ``` HTTP/1.1 101 UPGRADED Content-Type: application/vnd.docker.raw-stream Connection: Upgrade Upgrade: tcp  [STREAM] ```  ### Stream format  When the TTY setting is disabled in [`POST /containers/create`](#operation/ContainerCreate), the stream over the hijacked connected is multiplexed to separate out `stdout` and `stderr`. The stream consists of a series of frames, each containing a header and a payload.  The header contains the information which the stream writes (`stdout` or `stderr`). It also contains the size of the associated frame encoded in the last four bytes (`uint32`).  It is encoded on the first eight bytes like this:  ```go header := [8]byte{STREAM_TYPE, 0, 0, 0, SIZE1, SIZE2, SIZE3, SIZE4} ```  `STREAM_TYPE` can be:  - 0: `stdin` (is written on `stdout`) - 1: `stdout` - 2: `stderr`  `SIZE1, SIZE2, SIZE3, SIZE4` are the four bytes of the `uint32` size encoded as big endian.  Following the header is the payload, which is the specified number of bytes of `STREAM_TYPE`.  The simplest way to implement this protocol is the following:  1. Read 8 bytes. 2. Choose `stdout` or `stderr` depending on the first byte. 3. Extract the frame size from the last four bytes. 4. Read the extracted size and output it on the correct output. 5. Goto 1.  ### Stream format when using a TTY  When the TTY setting is enabled in [`POST /containers/create`](#operation/ContainerCreate), the stream is not multiplexed. The data exchanged over the hijacked connection is simply the raw data from the process PTY and client\'s `stdin`. 
+         * @summary Attach to a container
+         * @param {string} id ID or name of the container
+         * @param {string} [detachKeys] Override the key sequence for detaching a container.Format is a single character &#x60;[a-Z]&#x60; or &#x60;ctrl-&lt;value&gt;&#x60; where &#x60;&lt;value&gt;&#x60; is one of: &#x60;a-z&#x60;, &#x60;@&#x60;, &#x60;^&#x60;, &#x60;[&#x60;, &#x60;,&#x60; or &#x60;_&#x60;. 
+         * @param {boolean} [logs] Replay previous logs from the container.  This is useful for attaching to a container that has started and you want to output everything since the container started.  If &#x60;stream&#x60; is also enabled, once all the previous output has been returned, it will seamlessly transition into streaming current output. 
+         * @param {boolean} [stream] Stream attached streams from the time the request was made onwards. 
+         * @param {boolean} [stdin] Attach to &#x60;stdin&#x60;
+         * @param {boolean} [stdout] Attach to &#x60;stdout&#x60;
+         * @param {boolean} [stderr] Attach to &#x60;stderr&#x60;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async containerAttach(id: string, detachKeys?: string, logs?: boolean, stream?: boolean, stdin?: boolean, stdout?: boolean, stderr?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.containerAttach(id, detachKeys, logs, stream, stdin, stdout, stderr, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ContainerApi.containerAttach']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Attach to a container via a websocket
+         * @param {string} id ID or name of the container
+         * @param {string} [detachKeys] Override the key sequence for detaching a container.Format is a single character &#x60;[a-Z]&#x60; or &#x60;ctrl-&lt;value&gt;&#x60; where &#x60;&lt;value&gt;&#x60; is one of: &#x60;a-z&#x60;, &#x60;@&#x60;, &#x60;^&#x60;, &#x60;[&#x60;, &#x60;,&#x60;, or &#x60;_&#x60;. 
+         * @param {boolean} [logs] Return logs
+         * @param {boolean} [stream] Return stream
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async containerAttachWebsocket(id: string, detachKeys?: string, logs?: boolean, stream?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.containerAttachWebsocket(id, detachKeys, logs, stream, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ContainerApi.containerAttachWebsocket']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns which files in a container\'s filesystem have been added, deleted, or modified. The `Kind` of modification can be one of:  - `0`: Modified - `1`: Added - `2`: Deleted 
+         * @summary Get changes on a container’s filesystem
+         * @param {string} id ID or name of the container
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async containerChanges(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ContainerChangeResponseItem>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.containerChanges(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ContainerApi.containerChanges']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Create a container
+         * @param {ContainerCreateRequest} body Container to create
+         * @param {string} [name] Assign the specified name to the container. Must match &#x60;/?[a-zA-Z0-9][a-zA-Z0-9_.-]+&#x60;. 
+         * @param {string} [platform] Platform in the format &#x60;os[/arch[/variant]]&#x60; used for image lookup.  When specified, the daemon checks if the requested image is present in the local image cache with the given OS and Architecture, and otherwise returns a &#x60;404&#x60; status.  If the option is not set, the host\&#39;s native OS and Architecture are used to look up the image in the image cache. However, if no platform is passed and the given image does exist in the local image cache, but its OS or architecture does not match, the container is created with the available image, and a warning is added to the &#x60;Warnings&#x60; field in the response, for example;      WARNING: The requested image\&#39;s platform (linux/arm64/v8) does not              match the detected host platform (linux/amd64) and no              specific platform was requested 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async containerCreate(body: ContainerCreateRequest, name?: string, platform?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerCreateResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.containerCreate(body, name, platform, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ContainerApi.containerCreate']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Remove a container
+         * @param {string} id ID or name of the container
+         * @param {boolean} [v] Remove anonymous volumes associated with the container.
+         * @param {boolean} [force] If the container is running, kill it before removing it.
+         * @param {boolean} [link] Remove the specified link associated with the container.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async containerDelete(id: string, v?: boolean, force?: boolean, link?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.containerDelete(id, v, force, link, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ContainerApi.containerDelete']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Export the contents of a container as a tarball.
+         * @summary Export a container
+         * @param {string} id ID or name of the container
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async containerExport(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.containerExport(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ContainerApi.containerExport']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Return low-level information about a container.
+         * @summary Inspect a container
+         * @param {string} id ID or name of the container
+         * @param {boolean} [size] Return the size of container as fields &#x60;SizeRw&#x60; and &#x60;SizeRootFs&#x60;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async containerInspect(id: string, size?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerInspectResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.containerInspect(id, size, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ContainerApi.containerInspect']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Send a POSIX signal to a container, defaulting to killing to the container. 
+         * @summary Kill a container
+         * @param {string} id ID or name of the container
+         * @param {string} [signal] Signal to send to the container as an integer or string (e.g. &#x60;SIGINT&#x60;). 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async containerKill(id: string, signal?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.containerKill(id, signal, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ContainerApi.containerKill']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns a list of containers. For details on the format, see the [inspect endpoint](#operation/ContainerInspect).  Note that it uses a different, smaller representation of a container than inspecting a single container. For example, the list of linked containers is not propagated . 
+         * @summary List containers
+         * @param {boolean} [all] Return all containers. By default, only running containers are shown. 
+         * @param {number} [limit] Return this number of most recently created containers, including non-running ones. 
+         * @param {boolean} [size] Return the size of container as fields &#x60;SizeRw&#x60; and &#x60;SizeRootFs&#x60;. 
+         * @param {string} [filters] Filters to process on the container list, encoded as JSON (a &#x60;map[string][]string&#x60;). For example, &#x60;{\&quot;status\&quot;: [\&quot;paused\&quot;]}&#x60; will only return paused containers.  Available filters:  - &#x60;ancestor&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;, &#x60;&lt;image id&gt;&#x60;, or &#x60;&lt;image@digest&gt;&#x60;) - &#x60;before&#x60;&#x3D;(&#x60;&lt;container id&gt;&#x60; or &#x60;&lt;container name&gt;&#x60;) - &#x60;expose&#x60;&#x3D;(&#x60;&lt;port&gt;[/&lt;proto&gt;]&#x60;|&#x60;&lt;startport-endport&gt;/[&lt;proto&gt;]&#x60;) - &#x60;exited&#x3D;&lt;int&gt;&#x60; containers with exit code of &#x60;&lt;int&gt;&#x60; - &#x60;health&#x60;&#x3D;(&#x60;starting&#x60;|&#x60;healthy&#x60;|&#x60;unhealthy&#x60;|&#x60;none&#x60;) - &#x60;id&#x3D;&lt;ID&gt;&#x60; a container\&#39;s ID - &#x60;isolation&#x3D;&#x60;(&#x60;default&#x60;|&#x60;process&#x60;|&#x60;hyperv&#x60;) (Windows daemon only) - &#x60;is-task&#x3D;&#x60;(&#x60;true&#x60;|&#x60;false&#x60;) - &#x60;label&#x3D;key&#x60; or &#x60;label&#x3D;\&quot;key&#x3D;value\&quot;&#x60; of a container label - &#x60;name&#x3D;&lt;name&gt;&#x60; a container\&#39;s name - &#x60;network&#x60;&#x3D;(&#x60;&lt;network id&gt;&#x60; or &#x60;&lt;network name&gt;&#x60;) - &#x60;publish&#x60;&#x3D;(&#x60;&lt;port&gt;[/&lt;proto&gt;]&#x60;|&#x60;&lt;startport-endport&gt;/[&lt;proto&gt;]&#x60;) - &#x60;since&#x60;&#x3D;(&#x60;&lt;container id&gt;&#x60; or &#x60;&lt;container name&gt;&#x60;) - &#x60;status&#x3D;&#x60;(&#x60;created&#x60;|&#x60;restarting&#x60;|&#x60;running&#x60;|&#x60;removing&#x60;|&#x60;paused&#x60;|&#x60;exited&#x60;|&#x60;dead&#x60;) - &#x60;volume&#x60;&#x3D;(&#x60;&lt;volume name&gt;&#x60; or &#x60;&lt;mount point destination&gt;&#x60;) 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async containerList(all?: boolean, limit?: number, size?: boolean, filters?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ContainerSummary>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.containerList(all, limit, size, filters, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ContainerApi.containerList']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Get `stdout` and `stderr` logs from a container.  Note: This endpoint works only for containers with the `json-file` or `journald` logging driver. 
+         * @summary Get container logs
+         * @param {string} id ID or name of the container
+         * @param {boolean} [follow] Keep connection after returning logs.
+         * @param {boolean} [stdout] Return logs from &#x60;stdout&#x60;
+         * @param {boolean} [stderr] Return logs from &#x60;stderr&#x60;
+         * @param {number} [since] Only return logs since this time, as a UNIX timestamp
+         * @param {number} [until] Only return logs before this time, as a UNIX timestamp
+         * @param {boolean} [timestamps] Add timestamps to every log line
+         * @param {string} [tail] Only return this number of log lines from the end of the logs. Specify as an integer or &#x60;all&#x60; to output all log lines. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async containerLogs(id: string, follow?: boolean, stdout?: boolean, stderr?: boolean, since?: number, until?: number, timestamps?: boolean, tail?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<File>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.containerLogs(id, follow, stdout, stderr, since, until, timestamps, tail, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ContainerApi.containerLogs']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Use the freezer cgroup to suspend all processes in a container.  Traditionally, when suspending a process the `SIGSTOP` signal is used, which is observable by the process being suspended. With the freezer cgroup the process is unaware, and unable to capture, that it is being suspended, and subsequently resumed. 
+         * @summary Pause a container
+         * @param {string} id ID or name of the container
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async containerPause(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.containerPause(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ContainerApi.containerPause']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Delete stopped containers
+         * @param {string} [filters] Filters to process on the prune list, encoded as JSON (a &#x60;map[string][]string&#x60;).  Available filters: - &#x60;until&#x3D;&lt;timestamp&gt;&#x60; Prune containers created before this timestamp. The &#x60;&lt;timestamp&gt;&#x60; can be Unix timestamps, date formatted timestamps, or Go duration strings (e.g. &#x60;10m&#x60;, &#x60;1h30m&#x60;) computed relative to the daemon machine’s time. - &#x60;label&#x60; (&#x60;label&#x3D;&lt;key&gt;&#x60;, &#x60;label&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60;, &#x60;label!&#x3D;&lt;key&gt;&#x60;, or &#x60;label!&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60;) Prune containers with (or without, in case &#x60;label!&#x3D;...&#x60; is used) the specified labels. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async containerPrune(filters?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerPruneResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.containerPrune(filters, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ContainerApi.containerPrune']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Rename a container
+         * @param {string} id ID or name of the container
+         * @param {string} name New name for the container
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async containerRename(id: string, name: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.containerRename(id, name, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ContainerApi.containerRename']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Resize the TTY for a container.
+         * @summary Resize a container TTY
+         * @param {string} id ID or name of the container
+         * @param {number} [h] Height of the TTY session in characters
+         * @param {number} [w] Width of the TTY session in characters
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async containerResize(id: string, h?: number, w?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.containerResize(id, h, w, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ContainerApi.containerResize']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Restart a container
+         * @param {string} id ID or name of the container
+         * @param {number} [t] Number of seconds to wait before killing the container
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async containerRestart(id: string, t?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.containerRestart(id, t, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ContainerApi.containerRestart']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Start a container
+         * @param {string} id ID or name of the container
+         * @param {string} [detachKeys] Override the key sequence for detaching a container. Format is a single character &#x60;[a-Z]&#x60; or &#x60;ctrl-&lt;value&gt;&#x60; where &#x60;&lt;value&gt;&#x60; is one of: &#x60;a-z&#x60;, &#x60;@&#x60;, &#x60;^&#x60;, &#x60;[&#x60;, &#x60;,&#x60; or &#x60;_&#x60;. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async containerStart(id: string, detachKeys?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.containerStart(id, detachKeys, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ContainerApi.containerStart']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * This endpoint returns a live stream of a container’s resource usage statistics.  The `precpu_stats` is the CPU statistic of the *previous* read, and is used to calculate the CPU usage percentage. It is not an exact copy of the `cpu_stats` field.  If either `precpu_stats.online_cpus` or `cpu_stats.online_cpus` is nil then for compatibility with older daemons the length of the corresponding `cpu_usage.percpu_usage` array should be used.  On a cgroup v2 host, the following fields are not set * `blkio_stats`: all fields other than `io_service_bytes_recursive` * `cpu_stats`: `cpu_usage.percpu_usage` * `memory_stats`: `max_usage` and `failcnt` Also, `memory_stats.stats` fields are incompatible with cgroup v1.  To calculate the values shown by the `stats` command of the docker cli tool the following formulas can be used: * used_memory = `memory_stats.usage - memory_stats.stats.cache` * available_memory = `memory_stats.limit` * Memory usage % = `(used_memory / available_memory) * 100.0` * cpu_delta = `cpu_stats.cpu_usage.total_usage - precpu_stats.cpu_usage.total_usage` * system_cpu_delta = `cpu_stats.system_cpu_usage - precpu_stats.system_cpu_usage` * number_cpus = `lenght(cpu_stats.cpu_usage.percpu_usage)` or `cpu_stats.online_cpus` * CPU usage % = `(cpu_delta / system_cpu_delta) * number_cpus * 100.0` 
+         * @summary Get container stats based on resource usage
+         * @param {string} id ID or name of the container
+         * @param {boolean} [stream] Stream the output. If false, the stats will be output once and then it will disconnect. 
+         * @param {boolean} [oneShot] Only get a single stat instead of waiting for 2 cycles. Must be used with &#x60;stream&#x3D;false&#x60;. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async containerStats(id: string, stream?: boolean, oneShot?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.containerStats(id, stream, oneShot, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ContainerApi.containerStats']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Stop a container
+         * @param {string} id ID or name of the container
+         * @param {number} [t] Number of seconds to wait before killing the container
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async containerStop(id: string, t?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.containerStop(id, t, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ContainerApi.containerStop']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * On Unix systems, this is done by running the `ps` command. This endpoint is not supported on Windows. 
+         * @summary List processes running inside a container
+         * @param {string} id ID or name of the container
+         * @param {string} [psArgs] The arguments to pass to &#x60;ps&#x60;. For example, &#x60;aux&#x60;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async containerTop(id: string, psArgs?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerTopResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.containerTop(id, psArgs, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ContainerApi.containerTop']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Resume a container which has been paused.
+         * @summary Unpause a container
+         * @param {string} id ID or name of the container
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async containerUnpause(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.containerUnpause(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ContainerApi.containerUnpause']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Change various configuration options of a container without having to recreate it. 
+         * @summary Update a container
+         * @param {string} id ID or name of the container
+         * @param {ContainerUpdateRequest} update 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async containerUpdate(id: string, update: ContainerUpdateRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerUpdateResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.containerUpdate(id, update, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ContainerApi.containerUpdate']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Block until a container stops, then returns the exit code.
+         * @summary Wait for a container
+         * @param {string} id ID or name of the container
+         * @param {ContainerWaitConditionEnum} [condition] Wait until a container state reaches the given condition.  Defaults to &#x60;not-running&#x60; if omitted or empty. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async containerWait(id: string, condition?: ContainerWaitConditionEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerWaitResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.containerWait(id, condition, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ContainerApi.containerWait']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Upload a tar archive to be extracted to a path in the filesystem of container id. `path` parameter is asserted to be a directory. If it exists as a file, 400 error will be returned with message \"not a directory\". 
+         * @summary Extract an archive of files or folders to a directory in a container
+         * @param {string} id ID or name of the container
+         * @param {string} path Path to a directory in the container to extract the archive’s contents into. 
+         * @param {File} inputStream The input stream must be a tar archive compressed with one of the following algorithms: &#x60;identity&#x60; (no compression), &#x60;gzip&#x60;, &#x60;bzip2&#x60;, or &#x60;xz&#x60;. 
+         * @param {string} [noOverwriteDirNonDir] If &#x60;1&#x60;, &#x60;true&#x60;, or &#x60;True&#x60; then it will be an error if unpacking the given content would cause an existing directory to be replaced with a non-directory and vice versa. 
+         * @param {string} [copyUIDGID] If &#x60;1&#x60;, &#x60;true&#x60;, then it will copy UID/GID maps to the dest file or dir 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async putContainerArchive(id: string, path: string, inputStream: File, noOverwriteDirNonDir?: string, copyUIDGID?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.putContainerArchive(id, path, inputStream, noOverwriteDirNonDir, copyUIDGID, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ContainerApi.putContainerArchive']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * ContainerApi - factory interface
+ */
+export const ContainerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = ContainerApiFp(configuration)
+    return {
+        /**
+         * Get a tar archive of a resource in the filesystem of container id.
+         * @summary Get an archive of a filesystem resource in a container
+         * @param {string} id ID or name of the container
+         * @param {string} path Resource in the container’s filesystem to archive.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerArchive(id: string, path: string, options?: any): AxiosPromise<void> {
+            return localVarFp.containerArchive(id, path, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * A response header `X-Docker-Container-Path-Stat` is returned, containing a base64 - encoded JSON object with some filesystem header information about the path. 
+         * @summary Get information about files in a container
+         * @param {string} id ID or name of the container
+         * @param {string} path Resource in the container’s filesystem to archive.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerArchiveInfo(id: string, path: string, options?: any): AxiosPromise<void> {
+            return localVarFp.containerArchiveInfo(id, path, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Attach to a container to read its output or send it input. You can attach to the same container multiple times and you can reattach to containers that have been detached.  Either the `stream` or `logs` parameter must be `true` for this endpoint to do anything.  See the [documentation for the `docker attach` command](https://docs.docker.com/engine/reference/commandline/attach/) for more details.  ### Hijacking  This endpoint hijacks the HTTP connection to transport `stdin`, `stdout`, and `stderr` on the same socket.  This is the response from the daemon for an attach request:  ``` HTTP/1.1 200 OK Content-Type: application/vnd.docker.raw-stream  [STREAM] ```  After the headers and two new lines, the TCP connection can now be used for raw, bidirectional communication between the client and server.  To hint potential proxies about connection hijacking, the Docker client can also optionally send connection upgrade headers.  For example, the client sends this request to upgrade the connection:  ``` POST /containers/16253994b7c4/attach?stream=1&stdout=1 HTTP/1.1 Upgrade: tcp Connection: Upgrade ```  The Docker daemon will respond with a `101 UPGRADED` response, and will similarly follow with the raw stream:  ``` HTTP/1.1 101 UPGRADED Content-Type: application/vnd.docker.raw-stream Connection: Upgrade Upgrade: tcp  [STREAM] ```  ### Stream format  When the TTY setting is disabled in [`POST /containers/create`](#operation/ContainerCreate), the stream over the hijacked connected is multiplexed to separate out `stdout` and `stderr`. The stream consists of a series of frames, each containing a header and a payload.  The header contains the information which the stream writes (`stdout` or `stderr`). It also contains the size of the associated frame encoded in the last four bytes (`uint32`).  It is encoded on the first eight bytes like this:  ```go header := [8]byte{STREAM_TYPE, 0, 0, 0, SIZE1, SIZE2, SIZE3, SIZE4} ```  `STREAM_TYPE` can be:  - 0: `stdin` (is written on `stdout`) - 1: `stdout` - 2: `stderr`  `SIZE1, SIZE2, SIZE3, SIZE4` are the four bytes of the `uint32` size encoded as big endian.  Following the header is the payload, which is the specified number of bytes of `STREAM_TYPE`.  The simplest way to implement this protocol is the following:  1. Read 8 bytes. 2. Choose `stdout` or `stderr` depending on the first byte. 3. Extract the frame size from the last four bytes. 4. Read the extracted size and output it on the correct output. 5. Goto 1.  ### Stream format when using a TTY  When the TTY setting is enabled in [`POST /containers/create`](#operation/ContainerCreate), the stream is not multiplexed. The data exchanged over the hijacked connection is simply the raw data from the process PTY and client\'s `stdin`. 
+         * @summary Attach to a container
+         * @param {string} id ID or name of the container
+         * @param {string} [detachKeys] Override the key sequence for detaching a container.Format is a single character &#x60;[a-Z]&#x60; or &#x60;ctrl-&lt;value&gt;&#x60; where &#x60;&lt;value&gt;&#x60; is one of: &#x60;a-z&#x60;, &#x60;@&#x60;, &#x60;^&#x60;, &#x60;[&#x60;, &#x60;,&#x60; or &#x60;_&#x60;. 
+         * @param {boolean} [logs] Replay previous logs from the container.  This is useful for attaching to a container that has started and you want to output everything since the container started.  If &#x60;stream&#x60; is also enabled, once all the previous output has been returned, it will seamlessly transition into streaming current output. 
+         * @param {boolean} [stream] Stream attached streams from the time the request was made onwards. 
+         * @param {boolean} [stdin] Attach to &#x60;stdin&#x60;
+         * @param {boolean} [stdout] Attach to &#x60;stdout&#x60;
+         * @param {boolean} [stderr] Attach to &#x60;stderr&#x60;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerAttach(id: string, detachKeys?: string, logs?: boolean, stream?: boolean, stdin?: boolean, stdout?: boolean, stderr?: boolean, options?: any): AxiosPromise<void> {
+            return localVarFp.containerAttach(id, detachKeys, logs, stream, stdin, stdout, stderr, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Attach to a container via a websocket
+         * @param {string} id ID or name of the container
+         * @param {string} [detachKeys] Override the key sequence for detaching a container.Format is a single character &#x60;[a-Z]&#x60; or &#x60;ctrl-&lt;value&gt;&#x60; where &#x60;&lt;value&gt;&#x60; is one of: &#x60;a-z&#x60;, &#x60;@&#x60;, &#x60;^&#x60;, &#x60;[&#x60;, &#x60;,&#x60;, or &#x60;_&#x60;. 
+         * @param {boolean} [logs] Return logs
+         * @param {boolean} [stream] Return stream
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerAttachWebsocket(id: string, detachKeys?: string, logs?: boolean, stream?: boolean, options?: any): AxiosPromise<void> {
+            return localVarFp.containerAttachWebsocket(id, detachKeys, logs, stream, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns which files in a container\'s filesystem have been added, deleted, or modified. The `Kind` of modification can be one of:  - `0`: Modified - `1`: Added - `2`: Deleted 
+         * @summary Get changes on a container’s filesystem
+         * @param {string} id ID or name of the container
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerChanges(id: string, options?: any): AxiosPromise<Array<ContainerChangeResponseItem>> {
+            return localVarFp.containerChanges(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Create a container
+         * @param {ContainerCreateRequest} body Container to create
+         * @param {string} [name] Assign the specified name to the container. Must match &#x60;/?[a-zA-Z0-9][a-zA-Z0-9_.-]+&#x60;. 
+         * @param {string} [platform] Platform in the format &#x60;os[/arch[/variant]]&#x60; used for image lookup.  When specified, the daemon checks if the requested image is present in the local image cache with the given OS and Architecture, and otherwise returns a &#x60;404&#x60; status.  If the option is not set, the host\&#39;s native OS and Architecture are used to look up the image in the image cache. However, if no platform is passed and the given image does exist in the local image cache, but its OS or architecture does not match, the container is created with the available image, and a warning is added to the &#x60;Warnings&#x60; field in the response, for example;      WARNING: The requested image\&#39;s platform (linux/arm64/v8) does not              match the detected host platform (linux/amd64) and no              specific platform was requested 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerCreate(body: ContainerCreateRequest, name?: string, platform?: string, options?: any): AxiosPromise<ContainerCreateResponse> {
+            return localVarFp.containerCreate(body, name, platform, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Remove a container
+         * @param {string} id ID or name of the container
+         * @param {boolean} [v] Remove anonymous volumes associated with the container.
+         * @param {boolean} [force] If the container is running, kill it before removing it.
+         * @param {boolean} [link] Remove the specified link associated with the container.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerDelete(id: string, v?: boolean, force?: boolean, link?: boolean, options?: any): AxiosPromise<void> {
+            return localVarFp.containerDelete(id, v, force, link, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Export the contents of a container as a tarball.
+         * @summary Export a container
+         * @param {string} id ID or name of the container
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerExport(id: string, options?: any): AxiosPromise<void> {
+            return localVarFp.containerExport(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Return low-level information about a container.
+         * @summary Inspect a container
+         * @param {string} id ID or name of the container
+         * @param {boolean} [size] Return the size of container as fields &#x60;SizeRw&#x60; and &#x60;SizeRootFs&#x60;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerInspect(id: string, size?: boolean, options?: any): AxiosPromise<ContainerInspectResponse> {
+            return localVarFp.containerInspect(id, size, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Send a POSIX signal to a container, defaulting to killing to the container. 
+         * @summary Kill a container
+         * @param {string} id ID or name of the container
+         * @param {string} [signal] Signal to send to the container as an integer or string (e.g. &#x60;SIGINT&#x60;). 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerKill(id: string, signal?: string, options?: any): AxiosPromise<void> {
+            return localVarFp.containerKill(id, signal, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns a list of containers. For details on the format, see the [inspect endpoint](#operation/ContainerInspect).  Note that it uses a different, smaller representation of a container than inspecting a single container. For example, the list of linked containers is not propagated . 
+         * @summary List containers
+         * @param {boolean} [all] Return all containers. By default, only running containers are shown. 
+         * @param {number} [limit] Return this number of most recently created containers, including non-running ones. 
+         * @param {boolean} [size] Return the size of container as fields &#x60;SizeRw&#x60; and &#x60;SizeRootFs&#x60;. 
+         * @param {string} [filters] Filters to process on the container list, encoded as JSON (a &#x60;map[string][]string&#x60;). For example, &#x60;{\&quot;status\&quot;: [\&quot;paused\&quot;]}&#x60; will only return paused containers.  Available filters:  - &#x60;ancestor&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;, &#x60;&lt;image id&gt;&#x60;, or &#x60;&lt;image@digest&gt;&#x60;) - &#x60;before&#x60;&#x3D;(&#x60;&lt;container id&gt;&#x60; or &#x60;&lt;container name&gt;&#x60;) - &#x60;expose&#x60;&#x3D;(&#x60;&lt;port&gt;[/&lt;proto&gt;]&#x60;|&#x60;&lt;startport-endport&gt;/[&lt;proto&gt;]&#x60;) - &#x60;exited&#x3D;&lt;int&gt;&#x60; containers with exit code of &#x60;&lt;int&gt;&#x60; - &#x60;health&#x60;&#x3D;(&#x60;starting&#x60;|&#x60;healthy&#x60;|&#x60;unhealthy&#x60;|&#x60;none&#x60;) - &#x60;id&#x3D;&lt;ID&gt;&#x60; a container\&#39;s ID - &#x60;isolation&#x3D;&#x60;(&#x60;default&#x60;|&#x60;process&#x60;|&#x60;hyperv&#x60;) (Windows daemon only) - &#x60;is-task&#x3D;&#x60;(&#x60;true&#x60;|&#x60;false&#x60;) - &#x60;label&#x3D;key&#x60; or &#x60;label&#x3D;\&quot;key&#x3D;value\&quot;&#x60; of a container label - &#x60;name&#x3D;&lt;name&gt;&#x60; a container\&#39;s name - &#x60;network&#x60;&#x3D;(&#x60;&lt;network id&gt;&#x60; or &#x60;&lt;network name&gt;&#x60;) - &#x60;publish&#x60;&#x3D;(&#x60;&lt;port&gt;[/&lt;proto&gt;]&#x60;|&#x60;&lt;startport-endport&gt;/[&lt;proto&gt;]&#x60;) - &#x60;since&#x60;&#x3D;(&#x60;&lt;container id&gt;&#x60; or &#x60;&lt;container name&gt;&#x60;) - &#x60;status&#x3D;&#x60;(&#x60;created&#x60;|&#x60;restarting&#x60;|&#x60;running&#x60;|&#x60;removing&#x60;|&#x60;paused&#x60;|&#x60;exited&#x60;|&#x60;dead&#x60;) - &#x60;volume&#x60;&#x3D;(&#x60;&lt;volume name&gt;&#x60; or &#x60;&lt;mount point destination&gt;&#x60;) 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerList(all?: boolean, limit?: number, size?: boolean, filters?: string, options?: any): AxiosPromise<Array<ContainerSummary>> {
+            return localVarFp.containerList(all, limit, size, filters, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Get `stdout` and `stderr` logs from a container.  Note: This endpoint works only for containers with the `json-file` or `journald` logging driver. 
+         * @summary Get container logs
+         * @param {string} id ID or name of the container
+         * @param {boolean} [follow] Keep connection after returning logs.
+         * @param {boolean} [stdout] Return logs from &#x60;stdout&#x60;
+         * @param {boolean} [stderr] Return logs from &#x60;stderr&#x60;
+         * @param {number} [since] Only return logs since this time, as a UNIX timestamp
+         * @param {number} [until] Only return logs before this time, as a UNIX timestamp
+         * @param {boolean} [timestamps] Add timestamps to every log line
+         * @param {string} [tail] Only return this number of log lines from the end of the logs. Specify as an integer or &#x60;all&#x60; to output all log lines. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerLogs(id: string, follow?: boolean, stdout?: boolean, stderr?: boolean, since?: number, until?: number, timestamps?: boolean, tail?: string, options?: any): AxiosPromise<File> {
+            return localVarFp.containerLogs(id, follow, stdout, stderr, since, until, timestamps, tail, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Use the freezer cgroup to suspend all processes in a container.  Traditionally, when suspending a process the `SIGSTOP` signal is used, which is observable by the process being suspended. With the freezer cgroup the process is unaware, and unable to capture, that it is being suspended, and subsequently resumed. 
+         * @summary Pause a container
+         * @param {string} id ID or name of the container
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerPause(id: string, options?: any): AxiosPromise<void> {
+            return localVarFp.containerPause(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Delete stopped containers
+         * @param {string} [filters] Filters to process on the prune list, encoded as JSON (a &#x60;map[string][]string&#x60;).  Available filters: - &#x60;until&#x3D;&lt;timestamp&gt;&#x60; Prune containers created before this timestamp. The &#x60;&lt;timestamp&gt;&#x60; can be Unix timestamps, date formatted timestamps, or Go duration strings (e.g. &#x60;10m&#x60;, &#x60;1h30m&#x60;) computed relative to the daemon machine’s time. - &#x60;label&#x60; (&#x60;label&#x3D;&lt;key&gt;&#x60;, &#x60;label&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60;, &#x60;label!&#x3D;&lt;key&gt;&#x60;, or &#x60;label!&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60;) Prune containers with (or without, in case &#x60;label!&#x3D;...&#x60; is used) the specified labels. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerPrune(filters?: string, options?: any): AxiosPromise<ContainerPruneResponse> {
+            return localVarFp.containerPrune(filters, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Rename a container
+         * @param {string} id ID or name of the container
+         * @param {string} name New name for the container
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerRename(id: string, name: string, options?: any): AxiosPromise<void> {
+            return localVarFp.containerRename(id, name, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Resize the TTY for a container.
+         * @summary Resize a container TTY
+         * @param {string} id ID or name of the container
+         * @param {number} [h] Height of the TTY session in characters
+         * @param {number} [w] Width of the TTY session in characters
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerResize(id: string, h?: number, w?: number, options?: any): AxiosPromise<void> {
+            return localVarFp.containerResize(id, h, w, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Restart a container
+         * @param {string} id ID or name of the container
+         * @param {number} [t] Number of seconds to wait before killing the container
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerRestart(id: string, t?: number, options?: any): AxiosPromise<void> {
+            return localVarFp.containerRestart(id, t, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Start a container
+         * @param {string} id ID or name of the container
+         * @param {string} [detachKeys] Override the key sequence for detaching a container. Format is a single character &#x60;[a-Z]&#x60; or &#x60;ctrl-&lt;value&gt;&#x60; where &#x60;&lt;value&gt;&#x60; is one of: &#x60;a-z&#x60;, &#x60;@&#x60;, &#x60;^&#x60;, &#x60;[&#x60;, &#x60;,&#x60; or &#x60;_&#x60;. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerStart(id: string, detachKeys?: string, options?: any): AxiosPromise<void> {
+            return localVarFp.containerStart(id, detachKeys, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * This endpoint returns a live stream of a container’s resource usage statistics.  The `precpu_stats` is the CPU statistic of the *previous* read, and is used to calculate the CPU usage percentage. It is not an exact copy of the `cpu_stats` field.  If either `precpu_stats.online_cpus` or `cpu_stats.online_cpus` is nil then for compatibility with older daemons the length of the corresponding `cpu_usage.percpu_usage` array should be used.  On a cgroup v2 host, the following fields are not set * `blkio_stats`: all fields other than `io_service_bytes_recursive` * `cpu_stats`: `cpu_usage.percpu_usage` * `memory_stats`: `max_usage` and `failcnt` Also, `memory_stats.stats` fields are incompatible with cgroup v1.  To calculate the values shown by the `stats` command of the docker cli tool the following formulas can be used: * used_memory = `memory_stats.usage - memory_stats.stats.cache` * available_memory = `memory_stats.limit` * Memory usage % = `(used_memory / available_memory) * 100.0` * cpu_delta = `cpu_stats.cpu_usage.total_usage - precpu_stats.cpu_usage.total_usage` * system_cpu_delta = `cpu_stats.system_cpu_usage - precpu_stats.system_cpu_usage` * number_cpus = `lenght(cpu_stats.cpu_usage.percpu_usage)` or `cpu_stats.online_cpus` * CPU usage % = `(cpu_delta / system_cpu_delta) * number_cpus * 100.0` 
+         * @summary Get container stats based on resource usage
+         * @param {string} id ID or name of the container
+         * @param {boolean} [stream] Stream the output. If false, the stats will be output once and then it will disconnect. 
+         * @param {boolean} [oneShot] Only get a single stat instead of waiting for 2 cycles. Must be used with &#x60;stream&#x3D;false&#x60;. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerStats(id: string, stream?: boolean, oneShot?: boolean, options?: any): AxiosPromise<object> {
+            return localVarFp.containerStats(id, stream, oneShot, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Stop a container
+         * @param {string} id ID or name of the container
+         * @param {number} [t] Number of seconds to wait before killing the container
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerStop(id: string, t?: number, options?: any): AxiosPromise<void> {
+            return localVarFp.containerStop(id, t, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * On Unix systems, this is done by running the `ps` command. This endpoint is not supported on Windows. 
+         * @summary List processes running inside a container
+         * @param {string} id ID or name of the container
+         * @param {string} [psArgs] The arguments to pass to &#x60;ps&#x60;. For example, &#x60;aux&#x60;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerTop(id: string, psArgs?: string, options?: any): AxiosPromise<ContainerTopResponse> {
+            return localVarFp.containerTop(id, psArgs, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Resume a container which has been paused.
+         * @summary Unpause a container
+         * @param {string} id ID or name of the container
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerUnpause(id: string, options?: any): AxiosPromise<void> {
+            return localVarFp.containerUnpause(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Change various configuration options of a container without having to recreate it. 
+         * @summary Update a container
+         * @param {string} id ID or name of the container
+         * @param {ContainerUpdateRequest} update 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerUpdate(id: string, update: ContainerUpdateRequest, options?: any): AxiosPromise<ContainerUpdateResponse> {
+            return localVarFp.containerUpdate(id, update, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Block until a container stops, then returns the exit code.
+         * @summary Wait for a container
+         * @param {string} id ID or name of the container
+         * @param {ContainerWaitConditionEnum} [condition] Wait until a container state reaches the given condition.  Defaults to &#x60;not-running&#x60; if omitted or empty. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerWait(id: string, condition?: ContainerWaitConditionEnum, options?: any): AxiosPromise<ContainerWaitResponse> {
+            return localVarFp.containerWait(id, condition, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Upload a tar archive to be extracted to a path in the filesystem of container id. `path` parameter is asserted to be a directory. If it exists as a file, 400 error will be returned with message \"not a directory\". 
+         * @summary Extract an archive of files or folders to a directory in a container
+         * @param {string} id ID or name of the container
+         * @param {string} path Path to a directory in the container to extract the archive’s contents into. 
+         * @param {File} inputStream The input stream must be a tar archive compressed with one of the following algorithms: &#x60;identity&#x60; (no compression), &#x60;gzip&#x60;, &#x60;bzip2&#x60;, or &#x60;xz&#x60;. 
+         * @param {string} [noOverwriteDirNonDir] If &#x60;1&#x60;, &#x60;true&#x60;, or &#x60;True&#x60; then it will be an error if unpacking the given content would cause an existing directory to be replaced with a non-directory and vice versa. 
+         * @param {string} [copyUIDGID] If &#x60;1&#x60;, &#x60;true&#x60;, then it will copy UID/GID maps to the dest file or dir 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        putContainerArchive(id: string, path: string, inputStream: File, noOverwriteDirNonDir?: string, copyUIDGID?: string, options?: any): AxiosPromise<void> {
+            return localVarFp.putContainerArchive(id, path, inputStream, noOverwriteDirNonDir, copyUIDGID, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * ContainerApi - object-oriented interface
+ * @class ContainerApi
+ * @extends {BaseAPI}
+ */
+export class ContainerApi extends BaseAPI {
+    /**
+     * Get a tar archive of a resource in the filesystem of container id.
+     * @summary Get an archive of a filesystem resource in a container
+     * @param {string} id ID or name of the container
+     * @param {string} path Resource in the container’s filesystem to archive.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public containerArchive(id: string, path: string, options?: RawAxiosRequestConfig) {
+        return ContainerApiFp(this.configuration).containerArchive(id, path, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * A response header `X-Docker-Container-Path-Stat` is returned, containing a base64 - encoded JSON object with some filesystem header information about the path. 
+     * @summary Get information about files in a container
+     * @param {string} id ID or name of the container
+     * @param {string} path Resource in the container’s filesystem to archive.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public containerArchiveInfo(id: string, path: string, options?: RawAxiosRequestConfig) {
+        return ContainerApiFp(this.configuration).containerArchiveInfo(id, path, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Attach to a container to read its output or send it input. You can attach to the same container multiple times and you can reattach to containers that have been detached.  Either the `stream` or `logs` parameter must be `true` for this endpoint to do anything.  See the [documentation for the `docker attach` command](https://docs.docker.com/engine/reference/commandline/attach/) for more details.  ### Hijacking  This endpoint hijacks the HTTP connection to transport `stdin`, `stdout`, and `stderr` on the same socket.  This is the response from the daemon for an attach request:  ``` HTTP/1.1 200 OK Content-Type: application/vnd.docker.raw-stream  [STREAM] ```  After the headers and two new lines, the TCP connection can now be used for raw, bidirectional communication between the client and server.  To hint potential proxies about connection hijacking, the Docker client can also optionally send connection upgrade headers.  For example, the client sends this request to upgrade the connection:  ``` POST /containers/16253994b7c4/attach?stream=1&stdout=1 HTTP/1.1 Upgrade: tcp Connection: Upgrade ```  The Docker daemon will respond with a `101 UPGRADED` response, and will similarly follow with the raw stream:  ``` HTTP/1.1 101 UPGRADED Content-Type: application/vnd.docker.raw-stream Connection: Upgrade Upgrade: tcp  [STREAM] ```  ### Stream format  When the TTY setting is disabled in [`POST /containers/create`](#operation/ContainerCreate), the stream over the hijacked connected is multiplexed to separate out `stdout` and `stderr`. The stream consists of a series of frames, each containing a header and a payload.  The header contains the information which the stream writes (`stdout` or `stderr`). It also contains the size of the associated frame encoded in the last four bytes (`uint32`).  It is encoded on the first eight bytes like this:  ```go header := [8]byte{STREAM_TYPE, 0, 0, 0, SIZE1, SIZE2, SIZE3, SIZE4} ```  `STREAM_TYPE` can be:  - 0: `stdin` (is written on `stdout`) - 1: `stdout` - 2: `stderr`  `SIZE1, SIZE2, SIZE3, SIZE4` are the four bytes of the `uint32` size encoded as big endian.  Following the header is the payload, which is the specified number of bytes of `STREAM_TYPE`.  The simplest way to implement this protocol is the following:  1. Read 8 bytes. 2. Choose `stdout` or `stderr` depending on the first byte. 3. Extract the frame size from the last four bytes. 4. Read the extracted size and output it on the correct output. 5. Goto 1.  ### Stream format when using a TTY  When the TTY setting is enabled in [`POST /containers/create`](#operation/ContainerCreate), the stream is not multiplexed. The data exchanged over the hijacked connection is simply the raw data from the process PTY and client\'s `stdin`. 
+     * @summary Attach to a container
+     * @param {string} id ID or name of the container
+     * @param {string} [detachKeys] Override the key sequence for detaching a container.Format is a single character &#x60;[a-Z]&#x60; or &#x60;ctrl-&lt;value&gt;&#x60; where &#x60;&lt;value&gt;&#x60; is one of: &#x60;a-z&#x60;, &#x60;@&#x60;, &#x60;^&#x60;, &#x60;[&#x60;, &#x60;,&#x60; or &#x60;_&#x60;. 
+     * @param {boolean} [logs] Replay previous logs from the container.  This is useful for attaching to a container that has started and you want to output everything since the container started.  If &#x60;stream&#x60; is also enabled, once all the previous output has been returned, it will seamlessly transition into streaming current output. 
+     * @param {boolean} [stream] Stream attached streams from the time the request was made onwards. 
+     * @param {boolean} [stdin] Attach to &#x60;stdin&#x60;
+     * @param {boolean} [stdout] Attach to &#x60;stdout&#x60;
+     * @param {boolean} [stderr] Attach to &#x60;stderr&#x60;
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public containerAttach(id: string, detachKeys?: string, logs?: boolean, stream?: boolean, stdin?: boolean, stdout?: boolean, stderr?: boolean, options?: RawAxiosRequestConfig) {
+        return ContainerApiFp(this.configuration).containerAttach(id, detachKeys, logs, stream, stdin, stdout, stderr, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Attach to a container via a websocket
+     * @param {string} id ID or name of the container
+     * @param {string} [detachKeys] Override the key sequence for detaching a container.Format is a single character &#x60;[a-Z]&#x60; or &#x60;ctrl-&lt;value&gt;&#x60; where &#x60;&lt;value&gt;&#x60; is one of: &#x60;a-z&#x60;, &#x60;@&#x60;, &#x60;^&#x60;, &#x60;[&#x60;, &#x60;,&#x60;, or &#x60;_&#x60;. 
+     * @param {boolean} [logs] Return logs
+     * @param {boolean} [stream] Return stream
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public containerAttachWebsocket(id: string, detachKeys?: string, logs?: boolean, stream?: boolean, options?: RawAxiosRequestConfig) {
+        return ContainerApiFp(this.configuration).containerAttachWebsocket(id, detachKeys, logs, stream, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns which files in a container\'s filesystem have been added, deleted, or modified. The `Kind` of modification can be one of:  - `0`: Modified - `1`: Added - `2`: Deleted 
+     * @summary Get changes on a container’s filesystem
+     * @param {string} id ID or name of the container
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public containerChanges(id: string, options?: RawAxiosRequestConfig) {
+        return ContainerApiFp(this.configuration).containerChanges(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Create a container
+     * @param {ContainerCreateRequest} body Container to create
+     * @param {string} [name] Assign the specified name to the container. Must match &#x60;/?[a-zA-Z0-9][a-zA-Z0-9_.-]+&#x60;. 
+     * @param {string} [platform] Platform in the format &#x60;os[/arch[/variant]]&#x60; used for image lookup.  When specified, the daemon checks if the requested image is present in the local image cache with the given OS and Architecture, and otherwise returns a &#x60;404&#x60; status.  If the option is not set, the host\&#39;s native OS and Architecture are used to look up the image in the image cache. However, if no platform is passed and the given image does exist in the local image cache, but its OS or architecture does not match, the container is created with the available image, and a warning is added to the &#x60;Warnings&#x60; field in the response, for example;      WARNING: The requested image\&#39;s platform (linux/arm64/v8) does not              match the detected host platform (linux/amd64) and no              specific platform was requested 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public containerCreate(body: ContainerCreateRequest, name?: string, platform?: string, options?: RawAxiosRequestConfig) {
+        return ContainerApiFp(this.configuration).containerCreate(body, name, platform, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Remove a container
+     * @param {string} id ID or name of the container
+     * @param {boolean} [v] Remove anonymous volumes associated with the container.
+     * @param {boolean} [force] If the container is running, kill it before removing it.
+     * @param {boolean} [link] Remove the specified link associated with the container.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public containerDelete(id: string, v?: boolean, force?: boolean, link?: boolean, options?: RawAxiosRequestConfig) {
+        return ContainerApiFp(this.configuration).containerDelete(id, v, force, link, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Export the contents of a container as a tarball.
+     * @summary Export a container
+     * @param {string} id ID or name of the container
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public containerExport(id: string, options?: RawAxiosRequestConfig) {
+        return ContainerApiFp(this.configuration).containerExport(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Return low-level information about a container.
+     * @summary Inspect a container
+     * @param {string} id ID or name of the container
+     * @param {boolean} [size] Return the size of container as fields &#x60;SizeRw&#x60; and &#x60;SizeRootFs&#x60;
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public containerInspect(id: string, size?: boolean, options?: RawAxiosRequestConfig) {
+        return ContainerApiFp(this.configuration).containerInspect(id, size, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Send a POSIX signal to a container, defaulting to killing to the container. 
+     * @summary Kill a container
+     * @param {string} id ID or name of the container
+     * @param {string} [signal] Signal to send to the container as an integer or string (e.g. &#x60;SIGINT&#x60;). 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public containerKill(id: string, signal?: string, options?: RawAxiosRequestConfig) {
+        return ContainerApiFp(this.configuration).containerKill(id, signal, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns a list of containers. For details on the format, see the [inspect endpoint](#operation/ContainerInspect).  Note that it uses a different, smaller representation of a container than inspecting a single container. For example, the list of linked containers is not propagated . 
+     * @summary List containers
+     * @param {boolean} [all] Return all containers. By default, only running containers are shown. 
+     * @param {number} [limit] Return this number of most recently created containers, including non-running ones. 
+     * @param {boolean} [size] Return the size of container as fields &#x60;SizeRw&#x60; and &#x60;SizeRootFs&#x60;. 
+     * @param {string} [filters] Filters to process on the container list, encoded as JSON (a &#x60;map[string][]string&#x60;). For example, &#x60;{\&quot;status\&quot;: [\&quot;paused\&quot;]}&#x60; will only return paused containers.  Available filters:  - &#x60;ancestor&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;, &#x60;&lt;image id&gt;&#x60;, or &#x60;&lt;image@digest&gt;&#x60;) - &#x60;before&#x60;&#x3D;(&#x60;&lt;container id&gt;&#x60; or &#x60;&lt;container name&gt;&#x60;) - &#x60;expose&#x60;&#x3D;(&#x60;&lt;port&gt;[/&lt;proto&gt;]&#x60;|&#x60;&lt;startport-endport&gt;/[&lt;proto&gt;]&#x60;) - &#x60;exited&#x3D;&lt;int&gt;&#x60; containers with exit code of &#x60;&lt;int&gt;&#x60; - &#x60;health&#x60;&#x3D;(&#x60;starting&#x60;|&#x60;healthy&#x60;|&#x60;unhealthy&#x60;|&#x60;none&#x60;) - &#x60;id&#x3D;&lt;ID&gt;&#x60; a container\&#39;s ID - &#x60;isolation&#x3D;&#x60;(&#x60;default&#x60;|&#x60;process&#x60;|&#x60;hyperv&#x60;) (Windows daemon only) - &#x60;is-task&#x3D;&#x60;(&#x60;true&#x60;|&#x60;false&#x60;) - &#x60;label&#x3D;key&#x60; or &#x60;label&#x3D;\&quot;key&#x3D;value\&quot;&#x60; of a container label - &#x60;name&#x3D;&lt;name&gt;&#x60; a container\&#39;s name - &#x60;network&#x60;&#x3D;(&#x60;&lt;network id&gt;&#x60; or &#x60;&lt;network name&gt;&#x60;) - &#x60;publish&#x60;&#x3D;(&#x60;&lt;port&gt;[/&lt;proto&gt;]&#x60;|&#x60;&lt;startport-endport&gt;/[&lt;proto&gt;]&#x60;) - &#x60;since&#x60;&#x3D;(&#x60;&lt;container id&gt;&#x60; or &#x60;&lt;container name&gt;&#x60;) - &#x60;status&#x3D;&#x60;(&#x60;created&#x60;|&#x60;restarting&#x60;|&#x60;running&#x60;|&#x60;removing&#x60;|&#x60;paused&#x60;|&#x60;exited&#x60;|&#x60;dead&#x60;) - &#x60;volume&#x60;&#x3D;(&#x60;&lt;volume name&gt;&#x60; or &#x60;&lt;mount point destination&gt;&#x60;) 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public containerList(all?: boolean, limit?: number, size?: boolean, filters?: string, options?: RawAxiosRequestConfig) {
+        return ContainerApiFp(this.configuration).containerList(all, limit, size, filters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Get `stdout` and `stderr` logs from a container.  Note: This endpoint works only for containers with the `json-file` or `journald` logging driver. 
+     * @summary Get container logs
+     * @param {string} id ID or name of the container
+     * @param {boolean} [follow] Keep connection after returning logs.
+     * @param {boolean} [stdout] Return logs from &#x60;stdout&#x60;
+     * @param {boolean} [stderr] Return logs from &#x60;stderr&#x60;
+     * @param {number} [since] Only return logs since this time, as a UNIX timestamp
+     * @param {number} [until] Only return logs before this time, as a UNIX timestamp
+     * @param {boolean} [timestamps] Add timestamps to every log line
+     * @param {string} [tail] Only return this number of log lines from the end of the logs. Specify as an integer or &#x60;all&#x60; to output all log lines. 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public containerLogs(id: string, follow?: boolean, stdout?: boolean, stderr?: boolean, since?: number, until?: number, timestamps?: boolean, tail?: string, options?: RawAxiosRequestConfig) {
+        return ContainerApiFp(this.configuration).containerLogs(id, follow, stdout, stderr, since, until, timestamps, tail, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Use the freezer cgroup to suspend all processes in a container.  Traditionally, when suspending a process the `SIGSTOP` signal is used, which is observable by the process being suspended. With the freezer cgroup the process is unaware, and unable to capture, that it is being suspended, and subsequently resumed. 
+     * @summary Pause a container
+     * @param {string} id ID or name of the container
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public containerPause(id: string, options?: RawAxiosRequestConfig) {
+        return ContainerApiFp(this.configuration).containerPause(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Delete stopped containers
+     * @param {string} [filters] Filters to process on the prune list, encoded as JSON (a &#x60;map[string][]string&#x60;).  Available filters: - &#x60;until&#x3D;&lt;timestamp&gt;&#x60; Prune containers created before this timestamp. The &#x60;&lt;timestamp&gt;&#x60; can be Unix timestamps, date formatted timestamps, or Go duration strings (e.g. &#x60;10m&#x60;, &#x60;1h30m&#x60;) computed relative to the daemon machine’s time. - &#x60;label&#x60; (&#x60;label&#x3D;&lt;key&gt;&#x60;, &#x60;label&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60;, &#x60;label!&#x3D;&lt;key&gt;&#x60;, or &#x60;label!&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60;) Prune containers with (or without, in case &#x60;label!&#x3D;...&#x60; is used) the specified labels. 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public containerPrune(filters?: string, options?: RawAxiosRequestConfig) {
+        return ContainerApiFp(this.configuration).containerPrune(filters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Rename a container
+     * @param {string} id ID or name of the container
+     * @param {string} name New name for the container
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public containerRename(id: string, name: string, options?: RawAxiosRequestConfig) {
+        return ContainerApiFp(this.configuration).containerRename(id, name, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Resize the TTY for a container.
+     * @summary Resize a container TTY
+     * @param {string} id ID or name of the container
+     * @param {number} [h] Height of the TTY session in characters
+     * @param {number} [w] Width of the TTY session in characters
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public containerResize(id: string, h?: number, w?: number, options?: RawAxiosRequestConfig) {
+        return ContainerApiFp(this.configuration).containerResize(id, h, w, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Restart a container
+     * @param {string} id ID or name of the container
+     * @param {number} [t] Number of seconds to wait before killing the container
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public containerRestart(id: string, t?: number, options?: RawAxiosRequestConfig) {
+        return ContainerApiFp(this.configuration).containerRestart(id, t, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Start a container
+     * @param {string} id ID or name of the container
+     * @param {string} [detachKeys] Override the key sequence for detaching a container. Format is a single character &#x60;[a-Z]&#x60; or &#x60;ctrl-&lt;value&gt;&#x60; where &#x60;&lt;value&gt;&#x60; is one of: &#x60;a-z&#x60;, &#x60;@&#x60;, &#x60;^&#x60;, &#x60;[&#x60;, &#x60;,&#x60; or &#x60;_&#x60;. 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public containerStart(id: string, detachKeys?: string, options?: RawAxiosRequestConfig) {
+        return ContainerApiFp(this.configuration).containerStart(id, detachKeys, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * This endpoint returns a live stream of a container’s resource usage statistics.  The `precpu_stats` is the CPU statistic of the *previous* read, and is used to calculate the CPU usage percentage. It is not an exact copy of the `cpu_stats` field.  If either `precpu_stats.online_cpus` or `cpu_stats.online_cpus` is nil then for compatibility with older daemons the length of the corresponding `cpu_usage.percpu_usage` array should be used.  On a cgroup v2 host, the following fields are not set * `blkio_stats`: all fields other than `io_service_bytes_recursive` * `cpu_stats`: `cpu_usage.percpu_usage` * `memory_stats`: `max_usage` and `failcnt` Also, `memory_stats.stats` fields are incompatible with cgroup v1.  To calculate the values shown by the `stats` command of the docker cli tool the following formulas can be used: * used_memory = `memory_stats.usage - memory_stats.stats.cache` * available_memory = `memory_stats.limit` * Memory usage % = `(used_memory / available_memory) * 100.0` * cpu_delta = `cpu_stats.cpu_usage.total_usage - precpu_stats.cpu_usage.total_usage` * system_cpu_delta = `cpu_stats.system_cpu_usage - precpu_stats.system_cpu_usage` * number_cpus = `lenght(cpu_stats.cpu_usage.percpu_usage)` or `cpu_stats.online_cpus` * CPU usage % = `(cpu_delta / system_cpu_delta) * number_cpus * 100.0` 
+     * @summary Get container stats based on resource usage
+     * @param {string} id ID or name of the container
+     * @param {boolean} [stream] Stream the output. If false, the stats will be output once and then it will disconnect. 
+     * @param {boolean} [oneShot] Only get a single stat instead of waiting for 2 cycles. Must be used with &#x60;stream&#x3D;false&#x60;. 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public containerStats(id: string, stream?: boolean, oneShot?: boolean, options?: RawAxiosRequestConfig) {
+        return ContainerApiFp(this.configuration).containerStats(id, stream, oneShot, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Stop a container
+     * @param {string} id ID or name of the container
+     * @param {number} [t] Number of seconds to wait before killing the container
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public containerStop(id: string, t?: number, options?: RawAxiosRequestConfig) {
+        return ContainerApiFp(this.configuration).containerStop(id, t, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * On Unix systems, this is done by running the `ps` command. This endpoint is not supported on Windows. 
+     * @summary List processes running inside a container
+     * @param {string} id ID or name of the container
+     * @param {string} [psArgs] The arguments to pass to &#x60;ps&#x60;. For example, &#x60;aux&#x60;
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public containerTop(id: string, psArgs?: string, options?: RawAxiosRequestConfig) {
+        return ContainerApiFp(this.configuration).containerTop(id, psArgs, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Resume a container which has been paused.
+     * @summary Unpause a container
+     * @param {string} id ID or name of the container
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public containerUnpause(id: string, options?: RawAxiosRequestConfig) {
+        return ContainerApiFp(this.configuration).containerUnpause(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Change various configuration options of a container without having to recreate it. 
+     * @summary Update a container
+     * @param {string} id ID or name of the container
+     * @param {ContainerUpdateRequest} update 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public containerUpdate(id: string, update: ContainerUpdateRequest, options?: RawAxiosRequestConfig) {
+        return ContainerApiFp(this.configuration).containerUpdate(id, update, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Block until a container stops, then returns the exit code.
+     * @summary Wait for a container
+     * @param {string} id ID or name of the container
+     * @param {ContainerWaitConditionEnum} [condition] Wait until a container state reaches the given condition.  Defaults to &#x60;not-running&#x60; if omitted or empty. 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public containerWait(id: string, condition?: ContainerWaitConditionEnum, options?: RawAxiosRequestConfig) {
+        return ContainerApiFp(this.configuration).containerWait(id, condition, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Upload a tar archive to be extracted to a path in the filesystem of container id. `path` parameter is asserted to be a directory. If it exists as a file, 400 error will be returned with message \"not a directory\". 
+     * @summary Extract an archive of files or folders to a directory in a container
+     * @param {string} id ID or name of the container
+     * @param {string} path Path to a directory in the container to extract the archive’s contents into. 
+     * @param {File} inputStream The input stream must be a tar archive compressed with one of the following algorithms: &#x60;identity&#x60; (no compression), &#x60;gzip&#x60;, &#x60;bzip2&#x60;, or &#x60;xz&#x60;. 
+     * @param {string} [noOverwriteDirNonDir] If &#x60;1&#x60;, &#x60;true&#x60;, or &#x60;True&#x60; then it will be an error if unpacking the given content would cause an existing directory to be replaced with a non-directory and vice versa. 
+     * @param {string} [copyUIDGID] If &#x60;1&#x60;, &#x60;true&#x60;, then it will copy UID/GID maps to the dest file or dir 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public putContainerArchive(id: string, path: string, inputStream: File, noOverwriteDirNonDir?: string, copyUIDGID?: string, options?: RawAxiosRequestConfig) {
+        return ContainerApiFp(this.configuration).putContainerArchive(id, path, inputStream, noOverwriteDirNonDir, copyUIDGID, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+/**
+  * @enum {string}
+  */
+export enum ContainerWaitConditionEnum {
+    NotRunning = 'not-running',
+    NextExit = 'next-exit',
+    Removed = 'removed'
+}
+
+
+/**
+ * DistributionApi - axios parameter creator
+ */
+export const DistributionApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Return image digest and platform information by contacting the registry. 
+         * @summary Get image information from the registry
+         * @param {string} name Image name or id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        distributionInspect: async (name: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'name' is not null or undefined
+            assertParamExists('distributionInspect', 'name', name)
+            const localVarPath = `/distribution/{name}/json`
+                .replace(`{${"name"}}`, encodeURIComponent(String(name)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * DistributionApi - functional programming interface
+ */
+export const DistributionApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = DistributionApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * Return image digest and platform information by contacting the registry. 
+         * @summary Get image information from the registry
+         * @param {string} name Image name or id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async distributionInspect(name: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DistributionInspect>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.distributionInspect(name, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['DistributionApi.distributionInspect']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * DistributionApi - factory interface
+ */
+export const DistributionApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = DistributionApiFp(configuration)
+    return {
+        /**
+         * Return image digest and platform information by contacting the registry. 
+         * @summary Get image information from the registry
+         * @param {string} name Image name or id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        distributionInspect(name: string, options?: any): AxiosPromise<DistributionInspect> {
+            return localVarFp.distributionInspect(name, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * DistributionApi - object-oriented interface
+ * @class DistributionApi
+ * @extends {BaseAPI}
+ */
+export class DistributionApi extends BaseAPI {
+    /**
+     * Return image digest and platform information by contacting the registry. 
+     * @summary Get image information from the registry
+     * @param {string} name Image name or id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public distributionInspect(name: string, options?: RawAxiosRequestConfig) {
+        return DistributionApiFp(this.configuration).distributionInspect(name, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * ExecApi - axios parameter creator
+ */
+export const ExecApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Run a command inside a running container.
+         * @summary Create an exec instance
+         * @param {string} id ID or name of container
+         * @param {ExecConfig} execConfig Exec configuration
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerExec: async (id: string, execConfig: ExecConfig, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('containerExec', 'id', id)
+            // verify required parameter 'execConfig' is not null or undefined
+            assertParamExists('containerExec', 'execConfig', execConfig)
+            const localVarPath = `/containers/{id}/exec`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(execConfig, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Return low-level information about an exec instance.
+         * @summary Inspect an exec instance
+         * @param {string} id Exec instance ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        execInspect: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('execInspect', 'id', id)
+            const localVarPath = `/exec/{id}/json`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Resize the TTY session used by an exec instance. This endpoint only works if `tty` was specified as part of creating and starting the exec instance. 
+         * @summary Resize an exec instance
+         * @param {string} id Exec instance ID
+         * @param {number} [h] Height of the TTY session in characters
+         * @param {number} [w] Width of the TTY session in characters
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        execResize: async (id: string, h?: number, w?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('execResize', 'id', id)
+            const localVarPath = `/exec/{id}/resize`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (h !== undefined) {
+                localVarQueryParameter['h'] = h;
+            }
+
+            if (w !== undefined) {
+                localVarQueryParameter['w'] = w;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Starts a previously set up exec instance. If detach is true, this endpoint returns immediately after starting the command. Otherwise, it sets up an interactive session with the command. 
+         * @summary Start an exec instance
+         * @param {string} id Exec instance ID
+         * @param {ExecStartConfig} [execStartConfig] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        execStart: async (id: string, execStartConfig?: ExecStartConfig, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('execStart', 'id', id)
+            const localVarPath = `/exec/{id}/start`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(execStartConfig, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * ExecApi - functional programming interface
+ */
+export const ExecApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = ExecApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * Run a command inside a running container.
+         * @summary Create an exec instance
+         * @param {string} id ID or name of container
+         * @param {ExecConfig} execConfig Exec configuration
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async containerExec(id: string, execConfig: ExecConfig, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IdResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.containerExec(id, execConfig, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ExecApi.containerExec']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Return low-level information about an exec instance.
+         * @summary Inspect an exec instance
+         * @param {string} id Exec instance ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async execInspect(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ExecInspectResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.execInspect(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ExecApi.execInspect']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Resize the TTY session used by an exec instance. This endpoint only works if `tty` was specified as part of creating and starting the exec instance. 
+         * @summary Resize an exec instance
+         * @param {string} id Exec instance ID
+         * @param {number} [h] Height of the TTY session in characters
+         * @param {number} [w] Width of the TTY session in characters
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async execResize(id: string, h?: number, w?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.execResize(id, h, w, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ExecApi.execResize']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Starts a previously set up exec instance. If detach is true, this endpoint returns immediately after starting the command. Otherwise, it sets up an interactive session with the command. 
+         * @summary Start an exec instance
+         * @param {string} id Exec instance ID
+         * @param {ExecStartConfig} [execStartConfig] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async execStart(id: string, execStartConfig?: ExecStartConfig, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.execStart(id, execStartConfig, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ExecApi.execStart']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * ExecApi - factory interface
+ */
+export const ExecApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = ExecApiFp(configuration)
+    return {
+        /**
+         * Run a command inside a running container.
+         * @summary Create an exec instance
+         * @param {string} id ID or name of container
+         * @param {ExecConfig} execConfig Exec configuration
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        containerExec(id: string, execConfig: ExecConfig, options?: any): AxiosPromise<IdResponse> {
+            return localVarFp.containerExec(id, execConfig, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Return low-level information about an exec instance.
+         * @summary Inspect an exec instance
+         * @param {string} id Exec instance ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        execInspect(id: string, options?: any): AxiosPromise<ExecInspectResponse> {
+            return localVarFp.execInspect(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Resize the TTY session used by an exec instance. This endpoint only works if `tty` was specified as part of creating and starting the exec instance. 
+         * @summary Resize an exec instance
+         * @param {string} id Exec instance ID
+         * @param {number} [h] Height of the TTY session in characters
+         * @param {number} [w] Width of the TTY session in characters
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        execResize(id: string, h?: number, w?: number, options?: any): AxiosPromise<void> {
+            return localVarFp.execResize(id, h, w, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Starts a previously set up exec instance. If detach is true, this endpoint returns immediately after starting the command. Otherwise, it sets up an interactive session with the command. 
+         * @summary Start an exec instance
+         * @param {string} id Exec instance ID
+         * @param {ExecStartConfig} [execStartConfig] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        execStart(id: string, execStartConfig?: ExecStartConfig, options?: any): AxiosPromise<void> {
+            return localVarFp.execStart(id, execStartConfig, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * ExecApi - object-oriented interface
+ * @class ExecApi
+ * @extends {BaseAPI}
+ */
+export class ExecApi extends BaseAPI {
+    /**
+     * Run a command inside a running container.
+     * @summary Create an exec instance
+     * @param {string} id ID or name of container
+     * @param {ExecConfig} execConfig Exec configuration
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public containerExec(id: string, execConfig: ExecConfig, options?: RawAxiosRequestConfig) {
+        return ExecApiFp(this.configuration).containerExec(id, execConfig, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Return low-level information about an exec instance.
+     * @summary Inspect an exec instance
+     * @param {string} id Exec instance ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public execInspect(id: string, options?: RawAxiosRequestConfig) {
+        return ExecApiFp(this.configuration).execInspect(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Resize the TTY session used by an exec instance. This endpoint only works if `tty` was specified as part of creating and starting the exec instance. 
+     * @summary Resize an exec instance
+     * @param {string} id Exec instance ID
+     * @param {number} [h] Height of the TTY session in characters
+     * @param {number} [w] Width of the TTY session in characters
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public execResize(id: string, h?: number, w?: number, options?: RawAxiosRequestConfig) {
+        return ExecApiFp(this.configuration).execResize(id, h, w, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Starts a previously set up exec instance. If detach is true, this endpoint returns immediately after starting the command. Otherwise, it sets up an interactive session with the command. 
+     * @summary Start an exec instance
+     * @param {string} id Exec instance ID
+     * @param {ExecStartConfig} [execStartConfig] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public execStart(id: string, execStartConfig?: ExecStartConfig, options?: RawAxiosRequestConfig) {
+        return ExecApiFp(this.configuration).execStart(id, execStartConfig, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * ImageApi - axios parameter creator
+ */
+export const ImageApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary Delete builder cache
+         * @param {number} [keepStorage] Amount of disk space in bytes to keep for cache
+         * @param {boolean} [all] Remove all types of build cache
+         * @param {string} [filters] A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the list of build cache objects.  Available filters:  - &#x60;until&#x3D;&lt;duration&gt;&#x60;: duration relative to daemon\&#39;s time, during which build cache was not used, in Go\&#39;s duration format (e.g., \&#39;24h\&#39;) - &#x60;id&#x3D;&lt;id&gt;&#x60; - &#x60;parent&#x3D;&lt;id&gt;&#x60; - &#x60;type&#x3D;&lt;string&gt;&#x60; - &#x60;description&#x3D;&lt;string&gt;&#x60; - &#x60;inuse&#x60; - &#x60;shared&#x60; - &#x60;private&#x60; 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        buildPrune: async (keepStorage?: number, all?: boolean, filters?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/build/prune`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (keepStorage !== undefined) {
+                localVarQueryParameter['keep-storage'] = keepStorage;
+            }
+
+            if (all !== undefined) {
+                localVarQueryParameter['all'] = all;
+            }
+
+            if (filters !== undefined) {
+                localVarQueryParameter['filters'] = filters;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Build an image from a tar archive with a `Dockerfile` in it.  The `Dockerfile` specifies how the image is built from the tar archive. It is typically in the archive\'s root, but can be at a different path or have a different name by specifying the `dockerfile` parameter. [See the `Dockerfile` reference for more information](https://docs.docker.com/engine/reference/builder/).  The Docker daemon performs a preliminary validation of the `Dockerfile` before starting the build, and returns an error if the syntax is incorrect. After that, each instruction is run one-by-one until the ID of the new image is output.  The build is canceled if the client drops the connection by quitting or being killed. 
+         * @summary Build an image
+         * @param {string} [dockerfile] Path within the build context to the &#x60;Dockerfile&#x60;. This is ignored if &#x60;remote&#x60; is specified and points to an external &#x60;Dockerfile&#x60;.
+         * @param {string} [t] A name and optional tag to apply to the image in the &#x60;name:tag&#x60; format. If you omit the tag the default &#x60;latest&#x60; value is assumed. You can provide several &#x60;t&#x60; parameters.
+         * @param {string} [extrahosts] Extra hosts to add to /etc/hosts
+         * @param {string} [remote] A Git repository URI or HTTP/HTTPS context URI. If the URI points to a single text file, the file’s contents are placed into a file called &#x60;Dockerfile&#x60; and the image is built from that file. If the URI points to a tarball, the file is downloaded by the daemon and the contents therein used as the context for the build. If the URI points to a tarball and the &#x60;dockerfile&#x60; parameter is also specified, there must be a file with the corresponding path inside the tarball.
+         * @param {boolean} [q] Suppress verbose build output.
+         * @param {boolean} [nocache] Do not use the cache when building the image.
+         * @param {string} [cachefrom] JSON array of images used for build cache resolution.
+         * @param {string} [pull] Attempt to pull the image even if an older image exists locally.
+         * @param {boolean} [rm] Remove intermediate containers after a successful build.
+         * @param {boolean} [forcerm] Always remove intermediate containers, even upon failure.
+         * @param {number} [memory] Set memory limit for build.
+         * @param {number} [memswap] Total memory (memory + swap). Set as &#x60;-1&#x60; to disable swap.
+         * @param {number} [cpushares] CPU shares (relative weight).
+         * @param {string} [cpusetcpus] CPUs in which to allow execution (e.g., &#x60;0-3&#x60;, &#x60;0,1&#x60;).
+         * @param {number} [cpuperiod] The length of a CPU period in microseconds.
+         * @param {number} [cpuquota] Microseconds of CPU time that the container can get in a CPU period.
+         * @param {string} [buildargs] JSON map of string pairs for build-time variables. Users pass these values at build-time. Docker uses the buildargs as the environment context for commands run via the &#x60;Dockerfile&#x60; RUN instruction, or for variable expansion in other &#x60;Dockerfile&#x60; instructions. This is not meant for passing secret values.  For example, the build arg &#x60;FOO&#x3D;bar&#x60; would become &#x60;{\&quot;FOO\&quot;:\&quot;bar\&quot;}&#x60; in JSON. This would result in the query parameter &#x60;buildargs&#x3D;{\&quot;FOO\&quot;:\&quot;bar\&quot;}&#x60;. Note that &#x60;{\&quot;FOO\&quot;:\&quot;bar\&quot;}&#x60; should be URI component encoded.  [Read more about the buildargs instruction.](https://docs.docker.com/engine/reference/builder/#arg) 
+         * @param {number} [shmsize] Size of &#x60;/dev/shm&#x60; in bytes. The size must be greater than 0. If omitted the system uses 64MB.
+         * @param {boolean} [squash] Squash the resulting images layers into a single layer. *(Experimental release only.)*
+         * @param {string} [labels] Arbitrary key/value labels to set on the image, as a JSON map of string pairs.
+         * @param {string} [networkmode] Sets the networking mode for the run commands during build. Supported standard values are: &#x60;bridge&#x60;, &#x60;host&#x60;, &#x60;none&#x60;, and &#x60;container:&lt;name|id&gt;&#x60;. Any other value is taken as a custom network\&#39;s name or ID to which this container should connect to. 
+         * @param {ImageBuildContentTypeEnum} [contentType] 
+         * @param {string} [xRegistryConfig] This is a base64-encoded JSON object with auth configurations for multiple registries that a build may refer to.  The key is a registry URL, and the value is an auth configuration object, [as described in the authentication section](#section/Authentication). For example:  &#x60;&#x60;&#x60; {   \&quot;docker.example.com\&quot;: {     \&quot;username\&quot;: \&quot;janedoe\&quot;,     \&quot;password\&quot;: \&quot;hunter2\&quot;   },   \&quot;https://index.docker.io/v1/\&quot;: {     \&quot;username\&quot;: \&quot;mobydock\&quot;,     \&quot;password\&quot;: \&quot;conta1n3rize14\&quot;   } } &#x60;&#x60;&#x60;  Only the registry domain name (and port if not the default 443) are required. However, for legacy reasons, the Docker Hub registry must be specified with both a &#x60;https://&#x60; prefix and a &#x60;/v1/&#x60; suffix even though Docker will prefer to use the v2 registry API. 
+         * @param {string} [platform] Platform in the format os[/arch[/variant]]
+         * @param {string} [target] Target build stage
+         * @param {string} [outputs] BuildKit output configuration
+         * @param {ImageBuildVersionEnum} [version] Version of the builder backend to use.  - &#x60;1&#x60; is the first generation classic (deprecated) builder in the Docker daemon (default) - &#x60;2&#x60; is [BuildKit](https://github.com/moby/buildkit) 
+         * @param {File} [inputStream] A tar archive compressed with one of the following algorithms: identity (no compression), gzip, bzip2, xz.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        imageBuild: async (dockerfile?: string, t?: string, extrahosts?: string, remote?: string, q?: boolean, nocache?: boolean, cachefrom?: string, pull?: string, rm?: boolean, forcerm?: boolean, memory?: number, memswap?: number, cpushares?: number, cpusetcpus?: string, cpuperiod?: number, cpuquota?: number, buildargs?: string, shmsize?: number, squash?: boolean, labels?: string, networkmode?: string, contentType?: ImageBuildContentTypeEnum, xRegistryConfig?: string, platform?: string, target?: string, outputs?: string, version?: ImageBuildVersionEnum, inputStream?: File, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/build`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (dockerfile !== undefined) {
+                localVarQueryParameter['dockerfile'] = dockerfile;
+            }
+
+            if (t !== undefined) {
+                localVarQueryParameter['t'] = t;
+            }
+
+            if (extrahosts !== undefined) {
+                localVarQueryParameter['extrahosts'] = extrahosts;
+            }
+
+            if (remote !== undefined) {
+                localVarQueryParameter['remote'] = remote;
+            }
+
+            if (q !== undefined) {
+                localVarQueryParameter['q'] = q;
+            }
+
+            if (nocache !== undefined) {
+                localVarQueryParameter['nocache'] = nocache;
+            }
+
+            if (cachefrom !== undefined) {
+                localVarQueryParameter['cachefrom'] = cachefrom;
+            }
+
+            if (pull !== undefined) {
+                localVarQueryParameter['pull'] = pull;
+            }
+
+            if (rm !== undefined) {
+                localVarQueryParameter['rm'] = rm;
+            }
+
+            if (forcerm !== undefined) {
+                localVarQueryParameter['forcerm'] = forcerm;
+            }
+
+            if (memory !== undefined) {
+                localVarQueryParameter['memory'] = memory;
+            }
+
+            if (memswap !== undefined) {
+                localVarQueryParameter['memswap'] = memswap;
+            }
+
+            if (cpushares !== undefined) {
+                localVarQueryParameter['cpushares'] = cpushares;
+            }
+
+            if (cpusetcpus !== undefined) {
+                localVarQueryParameter['cpusetcpus'] = cpusetcpus;
+            }
+
+            if (cpuperiod !== undefined) {
+                localVarQueryParameter['cpuperiod'] = cpuperiod;
+            }
+
+            if (cpuquota !== undefined) {
+                localVarQueryParameter['cpuquota'] = cpuquota;
+            }
+
+            if (buildargs !== undefined) {
+                localVarQueryParameter['buildargs'] = buildargs;
+            }
+
+            if (shmsize !== undefined) {
+                localVarQueryParameter['shmsize'] = shmsize;
+            }
+
+            if (squash !== undefined) {
+                localVarQueryParameter['squash'] = squash;
+            }
+
+            if (labels !== undefined) {
+                localVarQueryParameter['labels'] = labels;
+            }
+
+            if (networkmode !== undefined) {
+                localVarQueryParameter['networkmode'] = networkmode;
+            }
+
+            if (platform !== undefined) {
+                localVarQueryParameter['platform'] = platform;
+            }
+
+            if (target !== undefined) {
+                localVarQueryParameter['target'] = target;
+            }
+
+            if (outputs !== undefined) {
+                localVarQueryParameter['outputs'] = outputs;
+            }
+
+            if (version !== undefined) {
+                localVarQueryParameter['version'] = version;
+            }
+
+            if (contentType != null) {
+                localVarHeaderParameter['Content-type'] = String(contentType);
+            }
+
+            if (xRegistryConfig != null) {
+                localVarHeaderParameter['X-Registry-Config'] = String(xRegistryConfig);
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/octet-stream';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(inputStream, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Create a new image from a container
+         * @param {string} [container] The ID or name of the container to commit
+         * @param {string} [repo] Repository name for the created image
+         * @param {string} [tag] Tag name for the create image
+         * @param {string} [comment] Commit message
+         * @param {string} [author] Author of the image (e.g., &#x60;John Hannibal Smith &lt;hannibal@a-team.com&gt;&#x60;)
+         * @param {boolean} [pause] Whether to pause the container before committing
+         * @param {string} [changes] &#x60;Dockerfile&#x60; instructions to apply while committing
+         * @param {ContainerConfig} [containerConfig] The container configuration
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        imageCommit: async (container?: string, repo?: string, tag?: string, comment?: string, author?: string, pause?: boolean, changes?: string, containerConfig?: ContainerConfig, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/commit`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (container !== undefined) {
+                localVarQueryParameter['container'] = container;
+            }
+
+            if (repo !== undefined) {
+                localVarQueryParameter['repo'] = repo;
+            }
+
+            if (tag !== undefined) {
+                localVarQueryParameter['tag'] = tag;
+            }
+
+            if (comment !== undefined) {
+                localVarQueryParameter['comment'] = comment;
+            }
+
+            if (author !== undefined) {
+                localVarQueryParameter['author'] = author;
+            }
+
+            if (pause !== undefined) {
+                localVarQueryParameter['pause'] = pause;
+            }
+
+            if (changes !== undefined) {
+                localVarQueryParameter['changes'] = changes;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(containerConfig, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Create an image by either pulling it from a registry or importing it.
+         * @summary Create an image
+         * @param {string} [fromImage] Name of the image to pull. The name may include a tag or digest. This parameter may only be used when pulling an image. The pull is cancelled if the HTTP connection is closed.
+         * @param {string} [fromSrc] Source to import. The value may be a URL from which the image can be retrieved or &#x60;-&#x60; to read the image from the request body. This parameter may only be used when importing an image.
+         * @param {string} [repo] Repository name given to an image when it is imported. The repo may include a tag. This parameter may only be used when importing an image.
+         * @param {string} [tag] Tag or digest. If empty when pulling an image, this causes all tags for the given image to be pulled.
+         * @param {string} [message] Set commit message for imported image.
+         * @param {string} [xRegistryAuth] A base64url-encoded auth configuration.  Refer to the [authentication section](#section/Authentication) for details. 
+         * @param {Array<string>} [changes] Apply &#x60;Dockerfile&#x60; instructions to the image that is created, for example: &#x60;changes&#x3D;ENV DEBUG&#x3D;true&#x60;. Note that &#x60;ENV DEBUG&#x3D;true&#x60; should be URI component encoded.  Supported &#x60;Dockerfile&#x60; instructions: &#x60;CMD&#x60;|&#x60;ENTRYPOINT&#x60;|&#x60;ENV&#x60;|&#x60;EXPOSE&#x60;|&#x60;ONBUILD&#x60;|&#x60;USER&#x60;|&#x60;VOLUME&#x60;|&#x60;WORKDIR&#x60; 
+         * @param {string} [platform] Platform in the format os[/arch[/variant]]
+         * @param {string} [inputImage] Image content if the value &#x60;-&#x60; has been specified in fromSrc query parameter
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        imageCreate: async (fromImage?: string, fromSrc?: string, repo?: string, tag?: string, message?: string, xRegistryAuth?: string, changes?: Array<string>, platform?: string, inputImage?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/images/create`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (fromImage !== undefined) {
+                localVarQueryParameter['fromImage'] = fromImage;
+            }
+
+            if (fromSrc !== undefined) {
+                localVarQueryParameter['fromSrc'] = fromSrc;
+            }
+
+            if (repo !== undefined) {
+                localVarQueryParameter['repo'] = repo;
+            }
+
+            if (tag !== undefined) {
+                localVarQueryParameter['tag'] = tag;
+            }
+
+            if (message !== undefined) {
+                localVarQueryParameter['message'] = message;
+            }
+
+            if (changes) {
+                localVarQueryParameter['changes'] = changes.join(COLLECTION_FORMATS.csv);
+            }
+
+            if (platform !== undefined) {
+                localVarQueryParameter['platform'] = platform;
+            }
+
+            if (xRegistryAuth != null) {
+                localVarHeaderParameter['X-Registry-Auth'] = String(xRegistryAuth);
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'text/plain';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(inputImage, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Remove an image, along with any untagged parent images that were referenced by that image.  Images can\'t be removed if they have descendant images, are being used by a running container or are being used by a build. 
+         * @summary Remove an image
+         * @param {string} name Image name or ID
+         * @param {boolean} [force] Remove the image even if it is being used by stopped containers or has other tags
+         * @param {boolean} [noprune] Do not delete untagged parent images
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        imageDelete: async (name: string, force?: boolean, noprune?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'name' is not null or undefined
+            assertParamExists('imageDelete', 'name', name)
+            const localVarPath = `/images/{name}`
+                .replace(`{${"name"}}`, encodeURIComponent(String(name)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (force !== undefined) {
+                localVarQueryParameter['force'] = force;
+            }
+
+            if (noprune !== undefined) {
+                localVarQueryParameter['noprune'] = noprune;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Get a tarball containing all images and metadata for a repository.  If `name` is a specific name and tag (e.g. `ubuntu:latest`), then only that image (and its parents) are returned. If `name` is an image ID, similarly only that image (and its parents) are returned, but with the exclusion of the `repositories` file in the tarball, as there were no image names referenced.  ### Image tarball format  An image tarball contains one directory per image layer (named using its long ID), each containing these files:  - `VERSION`: currently `1.0` - the file format version - `json`: detailed layer information, similar to `docker inspect layer_id` - `layer.tar`: A tarfile containing the filesystem changes in this layer  The `layer.tar` file contains `aufs` style `.wh..wh.aufs` files and directories for storing attribute changes and deletions.  If the tarball defines a repository, the tarball should also include a `repositories` file at the root that contains a list of repository and tag names mapped to layer IDs.  ```json {   \"hello-world\": {     \"latest\": \"565a9d68a73f6706862bfe8409a7f659776d4d60a8d096eb4a3cbce6999cc2a1\"   } } ``` 
+         * @summary Export an image
+         * @param {string} name Image name or ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        imageGet: async (name: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'name' is not null or undefined
+            assertParamExists('imageGet', 'name', name)
+            const localVarPath = `/images/{name}/get`
+                .replace(`{${"name"}}`, encodeURIComponent(String(name)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Get a tarball containing all images and metadata for several image repositories.  For each value of the `names` parameter: if it is a specific name and tag (e.g. `ubuntu:latest`), then only that image (and its parents) are returned; if it is an image ID, similarly only that image (and its parents) are returned and there would be no names referenced in the \'repositories\' file for this image ID.  For details on the format, see the [export image endpoint](#operation/ImageGet). 
+         * @summary Export several images
+         * @param {Array<string>} [names] Image names to filter by
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        imageGetAll: async (names?: Array<string>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/images/get`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (names) {
+                localVarQueryParameter['names'] = names.join(COLLECTION_FORMATS.csv);
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Return parent layers of an image.
+         * @summary Get the history of an image
+         * @param {string} name Image name or ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        imageHistory: async (name: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'name' is not null or undefined
+            assertParamExists('imageHistory', 'name', name)
+            const localVarPath = `/images/{name}/history`
+                .replace(`{${"name"}}`, encodeURIComponent(String(name)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Return low-level information about an image.
+         * @summary Inspect an image
+         * @param {string} name Image name or id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        imageInspect: async (name: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'name' is not null or undefined
+            assertParamExists('imageInspect', 'name', name)
+            const localVarPath = `/images/{name}/json`
+                .replace(`{${"name"}}`, encodeURIComponent(String(name)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns a list of images on the server. Note that it uses a different, smaller representation of an image than inspecting a single image.
+         * @summary List Images
+         * @param {boolean} [all] Show all images. Only images from a final layer (no children) are shown by default.
+         * @param {string} [filters] A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the images list.  Available filters:  - &#x60;before&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;,  &#x60;&lt;image id&gt;&#x60; or &#x60;&lt;image@digest&gt;&#x60;) - &#x60;dangling&#x3D;true&#x60; - &#x60;label&#x3D;key&#x60; or &#x60;label&#x3D;\&quot;key&#x3D;value\&quot;&#x60; of an image label - &#x60;reference&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;) - &#x60;since&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;,  &#x60;&lt;image id&gt;&#x60; or &#x60;&lt;image@digest&gt;&#x60;) 
+         * @param {boolean} [digests] Show digest information as a &#x60;RepoDigests&#x60; field on each image.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        imageList: async (all?: boolean, filters?: string, digests?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/images/json`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (all !== undefined) {
+                localVarQueryParameter['all'] = all;
+            }
+
+            if (filters !== undefined) {
+                localVarQueryParameter['filters'] = filters;
+            }
+
+            if (digests !== undefined) {
+                localVarQueryParameter['digests'] = digests;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Load a set of images and tags into a repository.  For details on the format, see the [export image endpoint](#operation/ImageGet). 
+         * @summary Import images
+         * @param {boolean} [quiet] Suppress progress details during load.
+         * @param {File} [imagesTarball] Tar archive containing images
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        imageLoad: async (quiet?: boolean, imagesTarball?: File, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/images/load`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (quiet !== undefined) {
+                localVarQueryParameter['quiet'] = quiet;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/x-tar';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(imagesTarball, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Delete unused images
+         * @param {string} [filters] Filters to process on the prune list, encoded as JSON (a &#x60;map[string][]string&#x60;). Available filters:  - &#x60;dangling&#x3D;&lt;boolean&gt;&#x60; When set to &#x60;true&#x60; (or &#x60;1&#x60;), prune only    unused *and* untagged images. When set to &#x60;false&#x60;    (or &#x60;0&#x60;), all unused images are pruned. - &#x60;until&#x3D;&lt;string&gt;&#x60; Prune images created before this timestamp. The &#x60;&lt;timestamp&gt;&#x60; can be Unix timestamps, date formatted timestamps, or Go duration strings (e.g. &#x60;10m&#x60;, &#x60;1h30m&#x60;) computed relative to the daemon machine’s time. - &#x60;label&#x60; (&#x60;label&#x3D;&lt;key&gt;&#x60;, &#x60;label&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60;, &#x60;label!&#x3D;&lt;key&gt;&#x60;, or &#x60;label!&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60;) Prune images with (or without, in case &#x60;label!&#x3D;...&#x60; is used) the specified labels. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        imagePrune: async (filters?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/images/prune`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (filters !== undefined) {
+                localVarQueryParameter['filters'] = filters;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Push an image to a registry.  If you wish to push an image on to a private registry, that image must already have a tag which references the registry. For example, `registry.example.com/myimage:latest`.  The push is cancelled if the HTTP connection is closed. 
+         * @summary Push an image
+         * @param {string} name Image name or ID.
+         * @param {string} xRegistryAuth A base64url-encoded auth configuration.  Refer to the [authentication section](#section/Authentication) for details. 
+         * @param {string} [tag] The tag to associate with the image on the registry.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        imagePush: async (name: string, xRegistryAuth: string, tag?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'name' is not null or undefined
+            assertParamExists('imagePush', 'name', name)
+            // verify required parameter 'xRegistryAuth' is not null or undefined
+            assertParamExists('imagePush', 'xRegistryAuth', xRegistryAuth)
+            const localVarPath = `/images/{name}/push`
+                .replace(`{${"name"}}`, encodeURIComponent(String(name)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (tag !== undefined) {
+                localVarQueryParameter['tag'] = tag;
+            }
+
+            if (xRegistryAuth != null) {
+                localVarHeaderParameter['X-Registry-Auth'] = String(xRegistryAuth);
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Search for an image on Docker Hub.
+         * @summary Search images
+         * @param {string} term Term to search
+         * @param {number} [limit] Maximum number of results to return
+         * @param {string} [filters] A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the images list. Available filters:  - &#x60;is-automated&#x3D;(true|false)&#x60; - &#x60;is-official&#x3D;(true|false)&#x60; - &#x60;stars&#x3D;&lt;number&gt;&#x60; Matches images that has at least \&#39;number\&#39; stars. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        imageSearch: async (term: string, limit?: number, filters?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'term' is not null or undefined
+            assertParamExists('imageSearch', 'term', term)
+            const localVarPath = `/images/search`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (term !== undefined) {
+                localVarQueryParameter['term'] = term;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (filters !== undefined) {
+                localVarQueryParameter['filters'] = filters;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Tag an image so that it becomes part of a repository.
+         * @summary Tag an image
+         * @param {string} name Image name or ID to tag.
+         * @param {string} [repo] The repository to tag in. For example, &#x60;someuser/someimage&#x60;.
+         * @param {string} [tag] The name of the new tag.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        imageTag: async (name: string, repo?: string, tag?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'name' is not null or undefined
+            assertParamExists('imageTag', 'name', name)
+            const localVarPath = `/images/{name}/tag`
+                .replace(`{${"name"}}`, encodeURIComponent(String(name)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (repo !== undefined) {
+                localVarQueryParameter['repo'] = repo;
+            }
+
+            if (tag !== undefined) {
+                localVarQueryParameter['tag'] = tag;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * ImageApi - functional programming interface
+ */
+export const ImageApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = ImageApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary Delete builder cache
+         * @param {number} [keepStorage] Amount of disk space in bytes to keep for cache
+         * @param {boolean} [all] Remove all types of build cache
+         * @param {string} [filters] A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the list of build cache objects.  Available filters:  - &#x60;until&#x3D;&lt;duration&gt;&#x60;: duration relative to daemon\&#39;s time, during which build cache was not used, in Go\&#39;s duration format (e.g., \&#39;24h\&#39;) - &#x60;id&#x3D;&lt;id&gt;&#x60; - &#x60;parent&#x3D;&lt;id&gt;&#x60; - &#x60;type&#x3D;&lt;string&gt;&#x60; - &#x60;description&#x3D;&lt;string&gt;&#x60; - &#x60;inuse&#x60; - &#x60;shared&#x60; - &#x60;private&#x60; 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async buildPrune(keepStorage?: number, all?: boolean, filters?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BuildPruneResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.buildPrune(keepStorage, all, filters, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ImageApi.buildPrune']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Build an image from a tar archive with a `Dockerfile` in it.  The `Dockerfile` specifies how the image is built from the tar archive. It is typically in the archive\'s root, but can be at a different path or have a different name by specifying the `dockerfile` parameter. [See the `Dockerfile` reference for more information](https://docs.docker.com/engine/reference/builder/).  The Docker daemon performs a preliminary validation of the `Dockerfile` before starting the build, and returns an error if the syntax is incorrect. After that, each instruction is run one-by-one until the ID of the new image is output.  The build is canceled if the client drops the connection by quitting or being killed. 
+         * @summary Build an image
+         * @param {string} [dockerfile] Path within the build context to the &#x60;Dockerfile&#x60;. This is ignored if &#x60;remote&#x60; is specified and points to an external &#x60;Dockerfile&#x60;.
+         * @param {string} [t] A name and optional tag to apply to the image in the &#x60;name:tag&#x60; format. If you omit the tag the default &#x60;latest&#x60; value is assumed. You can provide several &#x60;t&#x60; parameters.
+         * @param {string} [extrahosts] Extra hosts to add to /etc/hosts
+         * @param {string} [remote] A Git repository URI or HTTP/HTTPS context URI. If the URI points to a single text file, the file’s contents are placed into a file called &#x60;Dockerfile&#x60; and the image is built from that file. If the URI points to a tarball, the file is downloaded by the daemon and the contents therein used as the context for the build. If the URI points to a tarball and the &#x60;dockerfile&#x60; parameter is also specified, there must be a file with the corresponding path inside the tarball.
+         * @param {boolean} [q] Suppress verbose build output.
+         * @param {boolean} [nocache] Do not use the cache when building the image.
+         * @param {string} [cachefrom] JSON array of images used for build cache resolution.
+         * @param {string} [pull] Attempt to pull the image even if an older image exists locally.
+         * @param {boolean} [rm] Remove intermediate containers after a successful build.
+         * @param {boolean} [forcerm] Always remove intermediate containers, even upon failure.
+         * @param {number} [memory] Set memory limit for build.
+         * @param {number} [memswap] Total memory (memory + swap). Set as &#x60;-1&#x60; to disable swap.
+         * @param {number} [cpushares] CPU shares (relative weight).
+         * @param {string} [cpusetcpus] CPUs in which to allow execution (e.g., &#x60;0-3&#x60;, &#x60;0,1&#x60;).
+         * @param {number} [cpuperiod] The length of a CPU period in microseconds.
+         * @param {number} [cpuquota] Microseconds of CPU time that the container can get in a CPU period.
+         * @param {string} [buildargs] JSON map of string pairs for build-time variables. Users pass these values at build-time. Docker uses the buildargs as the environment context for commands run via the &#x60;Dockerfile&#x60; RUN instruction, or for variable expansion in other &#x60;Dockerfile&#x60; instructions. This is not meant for passing secret values.  For example, the build arg &#x60;FOO&#x3D;bar&#x60; would become &#x60;{\&quot;FOO\&quot;:\&quot;bar\&quot;}&#x60; in JSON. This would result in the query parameter &#x60;buildargs&#x3D;{\&quot;FOO\&quot;:\&quot;bar\&quot;}&#x60;. Note that &#x60;{\&quot;FOO\&quot;:\&quot;bar\&quot;}&#x60; should be URI component encoded.  [Read more about the buildargs instruction.](https://docs.docker.com/engine/reference/builder/#arg) 
+         * @param {number} [shmsize] Size of &#x60;/dev/shm&#x60; in bytes. The size must be greater than 0. If omitted the system uses 64MB.
+         * @param {boolean} [squash] Squash the resulting images layers into a single layer. *(Experimental release only.)*
+         * @param {string} [labels] Arbitrary key/value labels to set on the image, as a JSON map of string pairs.
+         * @param {string} [networkmode] Sets the networking mode for the run commands during build. Supported standard values are: &#x60;bridge&#x60;, &#x60;host&#x60;, &#x60;none&#x60;, and &#x60;container:&lt;name|id&gt;&#x60;. Any other value is taken as a custom network\&#39;s name or ID to which this container should connect to. 
+         * @param {ImageBuildContentTypeEnum} [contentType] 
+         * @param {string} [xRegistryConfig] This is a base64-encoded JSON object with auth configurations for multiple registries that a build may refer to.  The key is a registry URL, and the value is an auth configuration object, [as described in the authentication section](#section/Authentication). For example:  &#x60;&#x60;&#x60; {   \&quot;docker.example.com\&quot;: {     \&quot;username\&quot;: \&quot;janedoe\&quot;,     \&quot;password\&quot;: \&quot;hunter2\&quot;   },   \&quot;https://index.docker.io/v1/\&quot;: {     \&quot;username\&quot;: \&quot;mobydock\&quot;,     \&quot;password\&quot;: \&quot;conta1n3rize14\&quot;   } } &#x60;&#x60;&#x60;  Only the registry domain name (and port if not the default 443) are required. However, for legacy reasons, the Docker Hub registry must be specified with both a &#x60;https://&#x60; prefix and a &#x60;/v1/&#x60; suffix even though Docker will prefer to use the v2 registry API. 
+         * @param {string} [platform] Platform in the format os[/arch[/variant]]
+         * @param {string} [target] Target build stage
+         * @param {string} [outputs] BuildKit output configuration
+         * @param {ImageBuildVersionEnum} [version] Version of the builder backend to use.  - &#x60;1&#x60; is the first generation classic (deprecated) builder in the Docker daemon (default) - &#x60;2&#x60; is [BuildKit](https://github.com/moby/buildkit) 
+         * @param {File} [inputStream] A tar archive compressed with one of the following algorithms: identity (no compression), gzip, bzip2, xz.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async imageBuild(dockerfile?: string, t?: string, extrahosts?: string, remote?: string, q?: boolean, nocache?: boolean, cachefrom?: string, pull?: string, rm?: boolean, forcerm?: boolean, memory?: number, memswap?: number, cpushares?: number, cpusetcpus?: string, cpuperiod?: number, cpuquota?: number, buildargs?: string, shmsize?: number, squash?: boolean, labels?: string, networkmode?: string, contentType?: ImageBuildContentTypeEnum, xRegistryConfig?: string, platform?: string, target?: string, outputs?: string, version?: ImageBuildVersionEnum, inputStream?: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.imageBuild(dockerfile, t, extrahosts, remote, q, nocache, cachefrom, pull, rm, forcerm, memory, memswap, cpushares, cpusetcpus, cpuperiod, cpuquota, buildargs, shmsize, squash, labels, networkmode, contentType, xRegistryConfig, platform, target, outputs, version, inputStream, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ImageApi.imageBuild']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Create a new image from a container
+         * @param {string} [container] The ID or name of the container to commit
+         * @param {string} [repo] Repository name for the created image
+         * @param {string} [tag] Tag name for the create image
+         * @param {string} [comment] Commit message
+         * @param {string} [author] Author of the image (e.g., &#x60;John Hannibal Smith &lt;hannibal@a-team.com&gt;&#x60;)
+         * @param {boolean} [pause] Whether to pause the container before committing
+         * @param {string} [changes] &#x60;Dockerfile&#x60; instructions to apply while committing
+         * @param {ContainerConfig} [containerConfig] The container configuration
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async imageCommit(container?: string, repo?: string, tag?: string, comment?: string, author?: string, pause?: boolean, changes?: string, containerConfig?: ContainerConfig, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IdResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.imageCommit(container, repo, tag, comment, author, pause, changes, containerConfig, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ImageApi.imageCommit']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Create an image by either pulling it from a registry or importing it.
+         * @summary Create an image
+         * @param {string} [fromImage] Name of the image to pull. The name may include a tag or digest. This parameter may only be used when pulling an image. The pull is cancelled if the HTTP connection is closed.
+         * @param {string} [fromSrc] Source to import. The value may be a URL from which the image can be retrieved or &#x60;-&#x60; to read the image from the request body. This parameter may only be used when importing an image.
+         * @param {string} [repo] Repository name given to an image when it is imported. The repo may include a tag. This parameter may only be used when importing an image.
+         * @param {string} [tag] Tag or digest. If empty when pulling an image, this causes all tags for the given image to be pulled.
+         * @param {string} [message] Set commit message for imported image.
+         * @param {string} [xRegistryAuth] A base64url-encoded auth configuration.  Refer to the [authentication section](#section/Authentication) for details. 
+         * @param {Array<string>} [changes] Apply &#x60;Dockerfile&#x60; instructions to the image that is created, for example: &#x60;changes&#x3D;ENV DEBUG&#x3D;true&#x60;. Note that &#x60;ENV DEBUG&#x3D;true&#x60; should be URI component encoded.  Supported &#x60;Dockerfile&#x60; instructions: &#x60;CMD&#x60;|&#x60;ENTRYPOINT&#x60;|&#x60;ENV&#x60;|&#x60;EXPOSE&#x60;|&#x60;ONBUILD&#x60;|&#x60;USER&#x60;|&#x60;VOLUME&#x60;|&#x60;WORKDIR&#x60; 
+         * @param {string} [platform] Platform in the format os[/arch[/variant]]
+         * @param {string} [inputImage] Image content if the value &#x60;-&#x60; has been specified in fromSrc query parameter
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async imageCreate(fromImage?: string, fromSrc?: string, repo?: string, tag?: string, message?: string, xRegistryAuth?: string, changes?: Array<string>, platform?: string, inputImage?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.imageCreate(fromImage, fromSrc, repo, tag, message, xRegistryAuth, changes, platform, inputImage, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ImageApi.imageCreate']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Remove an image, along with any untagged parent images that were referenced by that image.  Images can\'t be removed if they have descendant images, are being used by a running container or are being used by a build. 
+         * @summary Remove an image
+         * @param {string} name Image name or ID
+         * @param {boolean} [force] Remove the image even if it is being used by stopped containers or has other tags
+         * @param {boolean} [noprune] Do not delete untagged parent images
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async imageDelete(name: string, force?: boolean, noprune?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ImageDeleteResponseItem>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.imageDelete(name, force, noprune, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ImageApi.imageDelete']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Get a tarball containing all images and metadata for a repository.  If `name` is a specific name and tag (e.g. `ubuntu:latest`), then only that image (and its parents) are returned. If `name` is an image ID, similarly only that image (and its parents) are returned, but with the exclusion of the `repositories` file in the tarball, as there were no image names referenced.  ### Image tarball format  An image tarball contains one directory per image layer (named using its long ID), each containing these files:  - `VERSION`: currently `1.0` - the file format version - `json`: detailed layer information, similar to `docker inspect layer_id` - `layer.tar`: A tarfile containing the filesystem changes in this layer  The `layer.tar` file contains `aufs` style `.wh..wh.aufs` files and directories for storing attribute changes and deletions.  If the tarball defines a repository, the tarball should also include a `repositories` file at the root that contains a list of repository and tag names mapped to layer IDs.  ```json {   \"hello-world\": {     \"latest\": \"565a9d68a73f6706862bfe8409a7f659776d4d60a8d096eb4a3cbce6999cc2a1\"   } } ``` 
+         * @summary Export an image
+         * @param {string} name Image name or ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async imageGet(name: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<File>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.imageGet(name, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ImageApi.imageGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Get a tarball containing all images and metadata for several image repositories.  For each value of the `names` parameter: if it is a specific name and tag (e.g. `ubuntu:latest`), then only that image (and its parents) are returned; if it is an image ID, similarly only that image (and its parents) are returned and there would be no names referenced in the \'repositories\' file for this image ID.  For details on the format, see the [export image endpoint](#operation/ImageGet). 
+         * @summary Export several images
+         * @param {Array<string>} [names] Image names to filter by
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async imageGetAll(names?: Array<string>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<File>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.imageGetAll(names, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ImageApi.imageGetAll']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Return parent layers of an image.
+         * @summary Get the history of an image
+         * @param {string} name Image name or ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async imageHistory(name: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<HistoryResponseItem>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.imageHistory(name, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ImageApi.imageHistory']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Return low-level information about an image.
+         * @summary Inspect an image
+         * @param {string} name Image name or id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async imageInspect(name: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ImageInspect>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.imageInspect(name, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ImageApi.imageInspect']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns a list of images on the server. Note that it uses a different, smaller representation of an image than inspecting a single image.
+         * @summary List Images
+         * @param {boolean} [all] Show all images. Only images from a final layer (no children) are shown by default.
+         * @param {string} [filters] A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the images list.  Available filters:  - &#x60;before&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;,  &#x60;&lt;image id&gt;&#x60; or &#x60;&lt;image@digest&gt;&#x60;) - &#x60;dangling&#x3D;true&#x60; - &#x60;label&#x3D;key&#x60; or &#x60;label&#x3D;\&quot;key&#x3D;value\&quot;&#x60; of an image label - &#x60;reference&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;) - &#x60;since&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;,  &#x60;&lt;image id&gt;&#x60; or &#x60;&lt;image@digest&gt;&#x60;) 
+         * @param {boolean} [digests] Show digest information as a &#x60;RepoDigests&#x60; field on each image.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async imageList(all?: boolean, filters?: string, digests?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ImageSummary>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.imageList(all, filters, digests, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ImageApi.imageList']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Load a set of images and tags into a repository.  For details on the format, see the [export image endpoint](#operation/ImageGet). 
+         * @summary Import images
+         * @param {boolean} [quiet] Suppress progress details during load.
+         * @param {File} [imagesTarball] Tar archive containing images
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async imageLoad(quiet?: boolean, imagesTarball?: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.imageLoad(quiet, imagesTarball, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ImageApi.imageLoad']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Delete unused images
+         * @param {string} [filters] Filters to process on the prune list, encoded as JSON (a &#x60;map[string][]string&#x60;). Available filters:  - &#x60;dangling&#x3D;&lt;boolean&gt;&#x60; When set to &#x60;true&#x60; (or &#x60;1&#x60;), prune only    unused *and* untagged images. When set to &#x60;false&#x60;    (or &#x60;0&#x60;), all unused images are pruned. - &#x60;until&#x3D;&lt;string&gt;&#x60; Prune images created before this timestamp. The &#x60;&lt;timestamp&gt;&#x60; can be Unix timestamps, date formatted timestamps, or Go duration strings (e.g. &#x60;10m&#x60;, &#x60;1h30m&#x60;) computed relative to the daemon machine’s time. - &#x60;label&#x60; (&#x60;label&#x3D;&lt;key&gt;&#x60;, &#x60;label&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60;, &#x60;label!&#x3D;&lt;key&gt;&#x60;, or &#x60;label!&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60;) Prune images with (or without, in case &#x60;label!&#x3D;...&#x60; is used) the specified labels. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async imagePrune(filters?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ImagePruneResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.imagePrune(filters, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ImageApi.imagePrune']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Push an image to a registry.  If you wish to push an image on to a private registry, that image must already have a tag which references the registry. For example, `registry.example.com/myimage:latest`.  The push is cancelled if the HTTP connection is closed. 
+         * @summary Push an image
+         * @param {string} name Image name or ID.
+         * @param {string} xRegistryAuth A base64url-encoded auth configuration.  Refer to the [authentication section](#section/Authentication) for details. 
+         * @param {string} [tag] The tag to associate with the image on the registry.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async imagePush(name: string, xRegistryAuth: string, tag?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.imagePush(name, xRegistryAuth, tag, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ImageApi.imagePush']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Search for an image on Docker Hub.
+         * @summary Search images
+         * @param {string} term Term to search
+         * @param {number} [limit] Maximum number of results to return
+         * @param {string} [filters] A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the images list. Available filters:  - &#x60;is-automated&#x3D;(true|false)&#x60; - &#x60;is-official&#x3D;(true|false)&#x60; - &#x60;stars&#x3D;&lt;number&gt;&#x60; Matches images that has at least \&#39;number\&#39; stars. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async imageSearch(term: string, limit?: number, filters?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ImageSearchResponseItem>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.imageSearch(term, limit, filters, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ImageApi.imageSearch']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Tag an image so that it becomes part of a repository.
+         * @summary Tag an image
+         * @param {string} name Image name or ID to tag.
+         * @param {string} [repo] The repository to tag in. For example, &#x60;someuser/someimage&#x60;.
+         * @param {string} [tag] The name of the new tag.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async imageTag(name: string, repo?: string, tag?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.imageTag(name, repo, tag, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ImageApi.imageTag']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * ImageApi - factory interface
+ */
+export const ImageApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = ImageApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary Delete builder cache
+         * @param {number} [keepStorage] Amount of disk space in bytes to keep for cache
+         * @param {boolean} [all] Remove all types of build cache
+         * @param {string} [filters] A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the list of build cache objects.  Available filters:  - &#x60;until&#x3D;&lt;duration&gt;&#x60;: duration relative to daemon\&#39;s time, during which build cache was not used, in Go\&#39;s duration format (e.g., \&#39;24h\&#39;) - &#x60;id&#x3D;&lt;id&gt;&#x60; - &#x60;parent&#x3D;&lt;id&gt;&#x60; - &#x60;type&#x3D;&lt;string&gt;&#x60; - &#x60;description&#x3D;&lt;string&gt;&#x60; - &#x60;inuse&#x60; - &#x60;shared&#x60; - &#x60;private&#x60; 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        buildPrune(keepStorage?: number, all?: boolean, filters?: string, options?: any): AxiosPromise<BuildPruneResponse> {
+            return localVarFp.buildPrune(keepStorage, all, filters, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Build an image from a tar archive with a `Dockerfile` in it.  The `Dockerfile` specifies how the image is built from the tar archive. It is typically in the archive\'s root, but can be at a different path or have a different name by specifying the `dockerfile` parameter. [See the `Dockerfile` reference for more information](https://docs.docker.com/engine/reference/builder/).  The Docker daemon performs a preliminary validation of the `Dockerfile` before starting the build, and returns an error if the syntax is incorrect. After that, each instruction is run one-by-one until the ID of the new image is output.  The build is canceled if the client drops the connection by quitting or being killed. 
+         * @summary Build an image
+         * @param {string} [dockerfile] Path within the build context to the &#x60;Dockerfile&#x60;. This is ignored if &#x60;remote&#x60; is specified and points to an external &#x60;Dockerfile&#x60;.
+         * @param {string} [t] A name and optional tag to apply to the image in the &#x60;name:tag&#x60; format. If you omit the tag the default &#x60;latest&#x60; value is assumed. You can provide several &#x60;t&#x60; parameters.
+         * @param {string} [extrahosts] Extra hosts to add to /etc/hosts
+         * @param {string} [remote] A Git repository URI or HTTP/HTTPS context URI. If the URI points to a single text file, the file’s contents are placed into a file called &#x60;Dockerfile&#x60; and the image is built from that file. If the URI points to a tarball, the file is downloaded by the daemon and the contents therein used as the context for the build. If the URI points to a tarball and the &#x60;dockerfile&#x60; parameter is also specified, there must be a file with the corresponding path inside the tarball.
+         * @param {boolean} [q] Suppress verbose build output.
+         * @param {boolean} [nocache] Do not use the cache when building the image.
+         * @param {string} [cachefrom] JSON array of images used for build cache resolution.
+         * @param {string} [pull] Attempt to pull the image even if an older image exists locally.
+         * @param {boolean} [rm] Remove intermediate containers after a successful build.
+         * @param {boolean} [forcerm] Always remove intermediate containers, even upon failure.
+         * @param {number} [memory] Set memory limit for build.
+         * @param {number} [memswap] Total memory (memory + swap). Set as &#x60;-1&#x60; to disable swap.
+         * @param {number} [cpushares] CPU shares (relative weight).
+         * @param {string} [cpusetcpus] CPUs in which to allow execution (e.g., &#x60;0-3&#x60;, &#x60;0,1&#x60;).
+         * @param {number} [cpuperiod] The length of a CPU period in microseconds.
+         * @param {number} [cpuquota] Microseconds of CPU time that the container can get in a CPU period.
+         * @param {string} [buildargs] JSON map of string pairs for build-time variables. Users pass these values at build-time. Docker uses the buildargs as the environment context for commands run via the &#x60;Dockerfile&#x60; RUN instruction, or for variable expansion in other &#x60;Dockerfile&#x60; instructions. This is not meant for passing secret values.  For example, the build arg &#x60;FOO&#x3D;bar&#x60; would become &#x60;{\&quot;FOO\&quot;:\&quot;bar\&quot;}&#x60; in JSON. This would result in the query parameter &#x60;buildargs&#x3D;{\&quot;FOO\&quot;:\&quot;bar\&quot;}&#x60;. Note that &#x60;{\&quot;FOO\&quot;:\&quot;bar\&quot;}&#x60; should be URI component encoded.  [Read more about the buildargs instruction.](https://docs.docker.com/engine/reference/builder/#arg) 
+         * @param {number} [shmsize] Size of &#x60;/dev/shm&#x60; in bytes. The size must be greater than 0. If omitted the system uses 64MB.
+         * @param {boolean} [squash] Squash the resulting images layers into a single layer. *(Experimental release only.)*
+         * @param {string} [labels] Arbitrary key/value labels to set on the image, as a JSON map of string pairs.
+         * @param {string} [networkmode] Sets the networking mode for the run commands during build. Supported standard values are: &#x60;bridge&#x60;, &#x60;host&#x60;, &#x60;none&#x60;, and &#x60;container:&lt;name|id&gt;&#x60;. Any other value is taken as a custom network\&#39;s name or ID to which this container should connect to. 
+         * @param {ImageBuildContentTypeEnum} [contentType] 
+         * @param {string} [xRegistryConfig] This is a base64-encoded JSON object with auth configurations for multiple registries that a build may refer to.  The key is a registry URL, and the value is an auth configuration object, [as described in the authentication section](#section/Authentication). For example:  &#x60;&#x60;&#x60; {   \&quot;docker.example.com\&quot;: {     \&quot;username\&quot;: \&quot;janedoe\&quot;,     \&quot;password\&quot;: \&quot;hunter2\&quot;   },   \&quot;https://index.docker.io/v1/\&quot;: {     \&quot;username\&quot;: \&quot;mobydock\&quot;,     \&quot;password\&quot;: \&quot;conta1n3rize14\&quot;   } } &#x60;&#x60;&#x60;  Only the registry domain name (and port if not the default 443) are required. However, for legacy reasons, the Docker Hub registry must be specified with both a &#x60;https://&#x60; prefix and a &#x60;/v1/&#x60; suffix even though Docker will prefer to use the v2 registry API. 
+         * @param {string} [platform] Platform in the format os[/arch[/variant]]
+         * @param {string} [target] Target build stage
+         * @param {string} [outputs] BuildKit output configuration
+         * @param {ImageBuildVersionEnum} [version] Version of the builder backend to use.  - &#x60;1&#x60; is the first generation classic (deprecated) builder in the Docker daemon (default) - &#x60;2&#x60; is [BuildKit](https://github.com/moby/buildkit) 
+         * @param {File} [inputStream] A tar archive compressed with one of the following algorithms: identity (no compression), gzip, bzip2, xz.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        imageBuild(dockerfile?: string, t?: string, extrahosts?: string, remote?: string, q?: boolean, nocache?: boolean, cachefrom?: string, pull?: string, rm?: boolean, forcerm?: boolean, memory?: number, memswap?: number, cpushares?: number, cpusetcpus?: string, cpuperiod?: number, cpuquota?: number, buildargs?: string, shmsize?: number, squash?: boolean, labels?: string, networkmode?: string, contentType?: ImageBuildContentTypeEnum, xRegistryConfig?: string, platform?: string, target?: string, outputs?: string, version?: ImageBuildVersionEnum, inputStream?: File, options?: any): AxiosPromise<void> {
+            return localVarFp.imageBuild(dockerfile, t, extrahosts, remote, q, nocache, cachefrom, pull, rm, forcerm, memory, memswap, cpushares, cpusetcpus, cpuperiod, cpuquota, buildargs, shmsize, squash, labels, networkmode, contentType, xRegistryConfig, platform, target, outputs, version, inputStream, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Create a new image from a container
+         * @param {string} [container] The ID or name of the container to commit
+         * @param {string} [repo] Repository name for the created image
+         * @param {string} [tag] Tag name for the create image
+         * @param {string} [comment] Commit message
+         * @param {string} [author] Author of the image (e.g., &#x60;John Hannibal Smith &lt;hannibal@a-team.com&gt;&#x60;)
+         * @param {boolean} [pause] Whether to pause the container before committing
+         * @param {string} [changes] &#x60;Dockerfile&#x60; instructions to apply while committing
+         * @param {ContainerConfig} [containerConfig] The container configuration
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        imageCommit(container?: string, repo?: string, tag?: string, comment?: string, author?: string, pause?: boolean, changes?: string, containerConfig?: ContainerConfig, options?: any): AxiosPromise<IdResponse> {
+            return localVarFp.imageCommit(container, repo, tag, comment, author, pause, changes, containerConfig, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Create an image by either pulling it from a registry or importing it.
+         * @summary Create an image
+         * @param {string} [fromImage] Name of the image to pull. The name may include a tag or digest. This parameter may only be used when pulling an image. The pull is cancelled if the HTTP connection is closed.
+         * @param {string} [fromSrc] Source to import. The value may be a URL from which the image can be retrieved or &#x60;-&#x60; to read the image from the request body. This parameter may only be used when importing an image.
+         * @param {string} [repo] Repository name given to an image when it is imported. The repo may include a tag. This parameter may only be used when importing an image.
+         * @param {string} [tag] Tag or digest. If empty when pulling an image, this causes all tags for the given image to be pulled.
+         * @param {string} [message] Set commit message for imported image.
+         * @param {string} [xRegistryAuth] A base64url-encoded auth configuration.  Refer to the [authentication section](#section/Authentication) for details. 
+         * @param {Array<string>} [changes] Apply &#x60;Dockerfile&#x60; instructions to the image that is created, for example: &#x60;changes&#x3D;ENV DEBUG&#x3D;true&#x60;. Note that &#x60;ENV DEBUG&#x3D;true&#x60; should be URI component encoded.  Supported &#x60;Dockerfile&#x60; instructions: &#x60;CMD&#x60;|&#x60;ENTRYPOINT&#x60;|&#x60;ENV&#x60;|&#x60;EXPOSE&#x60;|&#x60;ONBUILD&#x60;|&#x60;USER&#x60;|&#x60;VOLUME&#x60;|&#x60;WORKDIR&#x60; 
+         * @param {string} [platform] Platform in the format os[/arch[/variant]]
+         * @param {string} [inputImage] Image content if the value &#x60;-&#x60; has been specified in fromSrc query parameter
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        imageCreate(fromImage?: string, fromSrc?: string, repo?: string, tag?: string, message?: string, xRegistryAuth?: string, changes?: Array<string>, platform?: string, inputImage?: string, options?: any): AxiosPromise<void> {
+            return localVarFp.imageCreate(fromImage, fromSrc, repo, tag, message, xRegistryAuth, changes, platform, inputImage, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Remove an image, along with any untagged parent images that were referenced by that image.  Images can\'t be removed if they have descendant images, are being used by a running container or are being used by a build. 
+         * @summary Remove an image
+         * @param {string} name Image name or ID
+         * @param {boolean} [force] Remove the image even if it is being used by stopped containers or has other tags
+         * @param {boolean} [noprune] Do not delete untagged parent images
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        imageDelete(name: string, force?: boolean, noprune?: boolean, options?: any): AxiosPromise<Array<ImageDeleteResponseItem>> {
+            return localVarFp.imageDelete(name, force, noprune, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Get a tarball containing all images and metadata for a repository.  If `name` is a specific name and tag (e.g. `ubuntu:latest`), then only that image (and its parents) are returned. If `name` is an image ID, similarly only that image (and its parents) are returned, but with the exclusion of the `repositories` file in the tarball, as there were no image names referenced.  ### Image tarball format  An image tarball contains one directory per image layer (named using its long ID), each containing these files:  - `VERSION`: currently `1.0` - the file format version - `json`: detailed layer information, similar to `docker inspect layer_id` - `layer.tar`: A tarfile containing the filesystem changes in this layer  The `layer.tar` file contains `aufs` style `.wh..wh.aufs` files and directories for storing attribute changes and deletions.  If the tarball defines a repository, the tarball should also include a `repositories` file at the root that contains a list of repository and tag names mapped to layer IDs.  ```json {   \"hello-world\": {     \"latest\": \"565a9d68a73f6706862bfe8409a7f659776d4d60a8d096eb4a3cbce6999cc2a1\"   } } ``` 
+         * @summary Export an image
+         * @param {string} name Image name or ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        imageGet(name: string, options?: any): AxiosPromise<File> {
+            return localVarFp.imageGet(name, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Get a tarball containing all images and metadata for several image repositories.  For each value of the `names` parameter: if it is a specific name and tag (e.g. `ubuntu:latest`), then only that image (and its parents) are returned; if it is an image ID, similarly only that image (and its parents) are returned and there would be no names referenced in the \'repositories\' file for this image ID.  For details on the format, see the [export image endpoint](#operation/ImageGet). 
+         * @summary Export several images
+         * @param {Array<string>} [names] Image names to filter by
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        imageGetAll(names?: Array<string>, options?: any): AxiosPromise<File> {
+            return localVarFp.imageGetAll(names, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Return parent layers of an image.
+         * @summary Get the history of an image
+         * @param {string} name Image name or ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        imageHistory(name: string, options?: any): AxiosPromise<Array<HistoryResponseItem>> {
+            return localVarFp.imageHistory(name, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Return low-level information about an image.
+         * @summary Inspect an image
+         * @param {string} name Image name or id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        imageInspect(name: string, options?: any): AxiosPromise<ImageInspect> {
+            return localVarFp.imageInspect(name, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns a list of images on the server. Note that it uses a different, smaller representation of an image than inspecting a single image.
+         * @summary List Images
+         * @param {boolean} [all] Show all images. Only images from a final layer (no children) are shown by default.
+         * @param {string} [filters] A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the images list.  Available filters:  - &#x60;before&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;,  &#x60;&lt;image id&gt;&#x60; or &#x60;&lt;image@digest&gt;&#x60;) - &#x60;dangling&#x3D;true&#x60; - &#x60;label&#x3D;key&#x60; or &#x60;label&#x3D;\&quot;key&#x3D;value\&quot;&#x60; of an image label - &#x60;reference&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;) - &#x60;since&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;,  &#x60;&lt;image id&gt;&#x60; or &#x60;&lt;image@digest&gt;&#x60;) 
+         * @param {boolean} [digests] Show digest information as a &#x60;RepoDigests&#x60; field on each image.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        imageList(all?: boolean, filters?: string, digests?: boolean, options?: any): AxiosPromise<Array<ImageSummary>> {
+            return localVarFp.imageList(all, filters, digests, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Load a set of images and tags into a repository.  For details on the format, see the [export image endpoint](#operation/ImageGet). 
+         * @summary Import images
+         * @param {boolean} [quiet] Suppress progress details during load.
+         * @param {File} [imagesTarball] Tar archive containing images
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        imageLoad(quiet?: boolean, imagesTarball?: File, options?: any): AxiosPromise<void> {
+            return localVarFp.imageLoad(quiet, imagesTarball, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Delete unused images
+         * @param {string} [filters] Filters to process on the prune list, encoded as JSON (a &#x60;map[string][]string&#x60;). Available filters:  - &#x60;dangling&#x3D;&lt;boolean&gt;&#x60; When set to &#x60;true&#x60; (or &#x60;1&#x60;), prune only    unused *and* untagged images. When set to &#x60;false&#x60;    (or &#x60;0&#x60;), all unused images are pruned. - &#x60;until&#x3D;&lt;string&gt;&#x60; Prune images created before this timestamp. The &#x60;&lt;timestamp&gt;&#x60; can be Unix timestamps, date formatted timestamps, or Go duration strings (e.g. &#x60;10m&#x60;, &#x60;1h30m&#x60;) computed relative to the daemon machine’s time. - &#x60;label&#x60; (&#x60;label&#x3D;&lt;key&gt;&#x60;, &#x60;label&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60;, &#x60;label!&#x3D;&lt;key&gt;&#x60;, or &#x60;label!&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60;) Prune images with (or without, in case &#x60;label!&#x3D;...&#x60; is used) the specified labels. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        imagePrune(filters?: string, options?: any): AxiosPromise<ImagePruneResponse> {
+            return localVarFp.imagePrune(filters, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Push an image to a registry.  If you wish to push an image on to a private registry, that image must already have a tag which references the registry. For example, `registry.example.com/myimage:latest`.  The push is cancelled if the HTTP connection is closed. 
+         * @summary Push an image
+         * @param {string} name Image name or ID.
+         * @param {string} xRegistryAuth A base64url-encoded auth configuration.  Refer to the [authentication section](#section/Authentication) for details. 
+         * @param {string} [tag] The tag to associate with the image on the registry.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        imagePush(name: string, xRegistryAuth: string, tag?: string, options?: any): AxiosPromise<void> {
+            return localVarFp.imagePush(name, xRegistryAuth, tag, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Search for an image on Docker Hub.
+         * @summary Search images
+         * @param {string} term Term to search
+         * @param {number} [limit] Maximum number of results to return
+         * @param {string} [filters] A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the images list. Available filters:  - &#x60;is-automated&#x3D;(true|false)&#x60; - &#x60;is-official&#x3D;(true|false)&#x60; - &#x60;stars&#x3D;&lt;number&gt;&#x60; Matches images that has at least \&#39;number\&#39; stars. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        imageSearch(term: string, limit?: number, filters?: string, options?: any): AxiosPromise<Array<ImageSearchResponseItem>> {
+            return localVarFp.imageSearch(term, limit, filters, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Tag an image so that it becomes part of a repository.
+         * @summary Tag an image
+         * @param {string} name Image name or ID to tag.
+         * @param {string} [repo] The repository to tag in. For example, &#x60;someuser/someimage&#x60;.
+         * @param {string} [tag] The name of the new tag.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        imageTag(name: string, repo?: string, tag?: string, options?: any): AxiosPromise<void> {
+            return localVarFp.imageTag(name, repo, tag, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * ImageApi - object-oriented interface
+ * @class ImageApi
+ * @extends {BaseAPI}
+ */
+export class ImageApi extends BaseAPI {
+    /**
+     * 
+     * @summary Delete builder cache
+     * @param {number} [keepStorage] Amount of disk space in bytes to keep for cache
+     * @param {boolean} [all] Remove all types of build cache
+     * @param {string} [filters] A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the list of build cache objects.  Available filters:  - &#x60;until&#x3D;&lt;duration&gt;&#x60;: duration relative to daemon\&#39;s time, during which build cache was not used, in Go\&#39;s duration format (e.g., \&#39;24h\&#39;) - &#x60;id&#x3D;&lt;id&gt;&#x60; - &#x60;parent&#x3D;&lt;id&gt;&#x60; - &#x60;type&#x3D;&lt;string&gt;&#x60; - &#x60;description&#x3D;&lt;string&gt;&#x60; - &#x60;inuse&#x60; - &#x60;shared&#x60; - &#x60;private&#x60; 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public buildPrune(keepStorage?: number, all?: boolean, filters?: string, options?: RawAxiosRequestConfig) {
+        return ImageApiFp(this.configuration).buildPrune(keepStorage, all, filters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Build an image from a tar archive with a `Dockerfile` in it.  The `Dockerfile` specifies how the image is built from the tar archive. It is typically in the archive\'s root, but can be at a different path or have a different name by specifying the `dockerfile` parameter. [See the `Dockerfile` reference for more information](https://docs.docker.com/engine/reference/builder/).  The Docker daemon performs a preliminary validation of the `Dockerfile` before starting the build, and returns an error if the syntax is incorrect. After that, each instruction is run one-by-one until the ID of the new image is output.  The build is canceled if the client drops the connection by quitting or being killed. 
+     * @summary Build an image
+     * @param {string} [dockerfile] Path within the build context to the &#x60;Dockerfile&#x60;. This is ignored if &#x60;remote&#x60; is specified and points to an external &#x60;Dockerfile&#x60;.
+     * @param {string} [t] A name and optional tag to apply to the image in the &#x60;name:tag&#x60; format. If you omit the tag the default &#x60;latest&#x60; value is assumed. You can provide several &#x60;t&#x60; parameters.
+     * @param {string} [extrahosts] Extra hosts to add to /etc/hosts
+     * @param {string} [remote] A Git repository URI or HTTP/HTTPS context URI. If the URI points to a single text file, the file’s contents are placed into a file called &#x60;Dockerfile&#x60; and the image is built from that file. If the URI points to a tarball, the file is downloaded by the daemon and the contents therein used as the context for the build. If the URI points to a tarball and the &#x60;dockerfile&#x60; parameter is also specified, there must be a file with the corresponding path inside the tarball.
+     * @param {boolean} [q] Suppress verbose build output.
+     * @param {boolean} [nocache] Do not use the cache when building the image.
+     * @param {string} [cachefrom] JSON array of images used for build cache resolution.
+     * @param {string} [pull] Attempt to pull the image even if an older image exists locally.
+     * @param {boolean} [rm] Remove intermediate containers after a successful build.
+     * @param {boolean} [forcerm] Always remove intermediate containers, even upon failure.
+     * @param {number} [memory] Set memory limit for build.
+     * @param {number} [memswap] Total memory (memory + swap). Set as &#x60;-1&#x60; to disable swap.
+     * @param {number} [cpushares] CPU shares (relative weight).
+     * @param {string} [cpusetcpus] CPUs in which to allow execution (e.g., &#x60;0-3&#x60;, &#x60;0,1&#x60;).
+     * @param {number} [cpuperiod] The length of a CPU period in microseconds.
+     * @param {number} [cpuquota] Microseconds of CPU time that the container can get in a CPU period.
+     * @param {string} [buildargs] JSON map of string pairs for build-time variables. Users pass these values at build-time. Docker uses the buildargs as the environment context for commands run via the &#x60;Dockerfile&#x60; RUN instruction, or for variable expansion in other &#x60;Dockerfile&#x60; instructions. This is not meant for passing secret values.  For example, the build arg &#x60;FOO&#x3D;bar&#x60; would become &#x60;{\&quot;FOO\&quot;:\&quot;bar\&quot;}&#x60; in JSON. This would result in the query parameter &#x60;buildargs&#x3D;{\&quot;FOO\&quot;:\&quot;bar\&quot;}&#x60;. Note that &#x60;{\&quot;FOO\&quot;:\&quot;bar\&quot;}&#x60; should be URI component encoded.  [Read more about the buildargs instruction.](https://docs.docker.com/engine/reference/builder/#arg) 
+     * @param {number} [shmsize] Size of &#x60;/dev/shm&#x60; in bytes. The size must be greater than 0. If omitted the system uses 64MB.
+     * @param {boolean} [squash] Squash the resulting images layers into a single layer. *(Experimental release only.)*
+     * @param {string} [labels] Arbitrary key/value labels to set on the image, as a JSON map of string pairs.
+     * @param {string} [networkmode] Sets the networking mode for the run commands during build. Supported standard values are: &#x60;bridge&#x60;, &#x60;host&#x60;, &#x60;none&#x60;, and &#x60;container:&lt;name|id&gt;&#x60;. Any other value is taken as a custom network\&#39;s name or ID to which this container should connect to. 
+     * @param {ImageBuildContentTypeEnum} [contentType] 
+     * @param {string} [xRegistryConfig] This is a base64-encoded JSON object with auth configurations for multiple registries that a build may refer to.  The key is a registry URL, and the value is an auth configuration object, [as described in the authentication section](#section/Authentication). For example:  &#x60;&#x60;&#x60; {   \&quot;docker.example.com\&quot;: {     \&quot;username\&quot;: \&quot;janedoe\&quot;,     \&quot;password\&quot;: \&quot;hunter2\&quot;   },   \&quot;https://index.docker.io/v1/\&quot;: {     \&quot;username\&quot;: \&quot;mobydock\&quot;,     \&quot;password\&quot;: \&quot;conta1n3rize14\&quot;   } } &#x60;&#x60;&#x60;  Only the registry domain name (and port if not the default 443) are required. However, for legacy reasons, the Docker Hub registry must be specified with both a &#x60;https://&#x60; prefix and a &#x60;/v1/&#x60; suffix even though Docker will prefer to use the v2 registry API. 
+     * @param {string} [platform] Platform in the format os[/arch[/variant]]
+     * @param {string} [target] Target build stage
+     * @param {string} [outputs] BuildKit output configuration
+     * @param {ImageBuildVersionEnum} [version] Version of the builder backend to use.  - &#x60;1&#x60; is the first generation classic (deprecated) builder in the Docker daemon (default) - &#x60;2&#x60; is [BuildKit](https://github.com/moby/buildkit) 
+     * @param {File} [inputStream] A tar archive compressed with one of the following algorithms: identity (no compression), gzip, bzip2, xz.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public imageBuild(dockerfile?: string, t?: string, extrahosts?: string, remote?: string, q?: boolean, nocache?: boolean, cachefrom?: string, pull?: string, rm?: boolean, forcerm?: boolean, memory?: number, memswap?: number, cpushares?: number, cpusetcpus?: string, cpuperiod?: number, cpuquota?: number, buildargs?: string, shmsize?: number, squash?: boolean, labels?: string, networkmode?: string, contentType?: ImageBuildContentTypeEnum, xRegistryConfig?: string, platform?: string, target?: string, outputs?: string, version?: ImageBuildVersionEnum, inputStream?: File, options?: RawAxiosRequestConfig) {
+        return ImageApiFp(this.configuration).imageBuild(dockerfile, t, extrahosts, remote, q, nocache, cachefrom, pull, rm, forcerm, memory, memswap, cpushares, cpusetcpus, cpuperiod, cpuquota, buildargs, shmsize, squash, labels, networkmode, contentType, xRegistryConfig, platform, target, outputs, version, inputStream, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Create a new image from a container
+     * @param {string} [container] The ID or name of the container to commit
+     * @param {string} [repo] Repository name for the created image
+     * @param {string} [tag] Tag name for the create image
+     * @param {string} [comment] Commit message
+     * @param {string} [author] Author of the image (e.g., &#x60;John Hannibal Smith &lt;hannibal@a-team.com&gt;&#x60;)
+     * @param {boolean} [pause] Whether to pause the container before committing
+     * @param {string} [changes] &#x60;Dockerfile&#x60; instructions to apply while committing
+     * @param {ContainerConfig} [containerConfig] The container configuration
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public imageCommit(container?: string, repo?: string, tag?: string, comment?: string, author?: string, pause?: boolean, changes?: string, containerConfig?: ContainerConfig, options?: RawAxiosRequestConfig) {
+        return ImageApiFp(this.configuration).imageCommit(container, repo, tag, comment, author, pause, changes, containerConfig, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Create an image by either pulling it from a registry or importing it.
+     * @summary Create an image
+     * @param {string} [fromImage] Name of the image to pull. The name may include a tag or digest. This parameter may only be used when pulling an image. The pull is cancelled if the HTTP connection is closed.
+     * @param {string} [fromSrc] Source to import. The value may be a URL from which the image can be retrieved or &#x60;-&#x60; to read the image from the request body. This parameter may only be used when importing an image.
+     * @param {string} [repo] Repository name given to an image when it is imported. The repo may include a tag. This parameter may only be used when importing an image.
+     * @param {string} [tag] Tag or digest. If empty when pulling an image, this causes all tags for the given image to be pulled.
+     * @param {string} [message] Set commit message for imported image.
+     * @param {string} [xRegistryAuth] A base64url-encoded auth configuration.  Refer to the [authentication section](#section/Authentication) for details. 
+     * @param {Array<string>} [changes] Apply &#x60;Dockerfile&#x60; instructions to the image that is created, for example: &#x60;changes&#x3D;ENV DEBUG&#x3D;true&#x60;. Note that &#x60;ENV DEBUG&#x3D;true&#x60; should be URI component encoded.  Supported &#x60;Dockerfile&#x60; instructions: &#x60;CMD&#x60;|&#x60;ENTRYPOINT&#x60;|&#x60;ENV&#x60;|&#x60;EXPOSE&#x60;|&#x60;ONBUILD&#x60;|&#x60;USER&#x60;|&#x60;VOLUME&#x60;|&#x60;WORKDIR&#x60; 
+     * @param {string} [platform] Platform in the format os[/arch[/variant]]
+     * @param {string} [inputImage] Image content if the value &#x60;-&#x60; has been specified in fromSrc query parameter
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public imageCreate(fromImage?: string, fromSrc?: string, repo?: string, tag?: string, message?: string, xRegistryAuth?: string, changes?: Array<string>, platform?: string, inputImage?: string, options?: RawAxiosRequestConfig) {
+        return ImageApiFp(this.configuration).imageCreate(fromImage, fromSrc, repo, tag, message, xRegistryAuth, changes, platform, inputImage, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Remove an image, along with any untagged parent images that were referenced by that image.  Images can\'t be removed if they have descendant images, are being used by a running container or are being used by a build. 
+     * @summary Remove an image
+     * @param {string} name Image name or ID
+     * @param {boolean} [force] Remove the image even if it is being used by stopped containers or has other tags
+     * @param {boolean} [noprune] Do not delete untagged parent images
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public imageDelete(name: string, force?: boolean, noprune?: boolean, options?: RawAxiosRequestConfig) {
+        return ImageApiFp(this.configuration).imageDelete(name, force, noprune, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Get a tarball containing all images and metadata for a repository.  If `name` is a specific name and tag (e.g. `ubuntu:latest`), then only that image (and its parents) are returned. If `name` is an image ID, similarly only that image (and its parents) are returned, but with the exclusion of the `repositories` file in the tarball, as there were no image names referenced.  ### Image tarball format  An image tarball contains one directory per image layer (named using its long ID), each containing these files:  - `VERSION`: currently `1.0` - the file format version - `json`: detailed layer information, similar to `docker inspect layer_id` - `layer.tar`: A tarfile containing the filesystem changes in this layer  The `layer.tar` file contains `aufs` style `.wh..wh.aufs` files and directories for storing attribute changes and deletions.  If the tarball defines a repository, the tarball should also include a `repositories` file at the root that contains a list of repository and tag names mapped to layer IDs.  ```json {   \"hello-world\": {     \"latest\": \"565a9d68a73f6706862bfe8409a7f659776d4d60a8d096eb4a3cbce6999cc2a1\"   } } ``` 
+     * @summary Export an image
+     * @param {string} name Image name or ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public imageGet(name: string, options?: RawAxiosRequestConfig) {
+        return ImageApiFp(this.configuration).imageGet(name, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Get a tarball containing all images and metadata for several image repositories.  For each value of the `names` parameter: if it is a specific name and tag (e.g. `ubuntu:latest`), then only that image (and its parents) are returned; if it is an image ID, similarly only that image (and its parents) are returned and there would be no names referenced in the \'repositories\' file for this image ID.  For details on the format, see the [export image endpoint](#operation/ImageGet). 
+     * @summary Export several images
+     * @param {Array<string>} [names] Image names to filter by
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public imageGetAll(names?: Array<string>, options?: RawAxiosRequestConfig) {
+        return ImageApiFp(this.configuration).imageGetAll(names, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Return parent layers of an image.
+     * @summary Get the history of an image
+     * @param {string} name Image name or ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public imageHistory(name: string, options?: RawAxiosRequestConfig) {
+        return ImageApiFp(this.configuration).imageHistory(name, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Return low-level information about an image.
+     * @summary Inspect an image
+     * @param {string} name Image name or id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public imageInspect(name: string, options?: RawAxiosRequestConfig) {
+        return ImageApiFp(this.configuration).imageInspect(name, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns a list of images on the server. Note that it uses a different, smaller representation of an image than inspecting a single image.
+     * @summary List Images
+     * @param {boolean} [all] Show all images. Only images from a final layer (no children) are shown by default.
+     * @param {string} [filters] A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the images list.  Available filters:  - &#x60;before&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;,  &#x60;&lt;image id&gt;&#x60; or &#x60;&lt;image@digest&gt;&#x60;) - &#x60;dangling&#x3D;true&#x60; - &#x60;label&#x3D;key&#x60; or &#x60;label&#x3D;\&quot;key&#x3D;value\&quot;&#x60; of an image label - &#x60;reference&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;) - &#x60;since&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;,  &#x60;&lt;image id&gt;&#x60; or &#x60;&lt;image@digest&gt;&#x60;) 
+     * @param {boolean} [digests] Show digest information as a &#x60;RepoDigests&#x60; field on each image.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public imageList(all?: boolean, filters?: string, digests?: boolean, options?: RawAxiosRequestConfig) {
+        return ImageApiFp(this.configuration).imageList(all, filters, digests, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Load a set of images and tags into a repository.  For details on the format, see the [export image endpoint](#operation/ImageGet). 
+     * @summary Import images
+     * @param {boolean} [quiet] Suppress progress details during load.
+     * @param {File} [imagesTarball] Tar archive containing images
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public imageLoad(quiet?: boolean, imagesTarball?: File, options?: RawAxiosRequestConfig) {
+        return ImageApiFp(this.configuration).imageLoad(quiet, imagesTarball, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Delete unused images
+     * @param {string} [filters] Filters to process on the prune list, encoded as JSON (a &#x60;map[string][]string&#x60;). Available filters:  - &#x60;dangling&#x3D;&lt;boolean&gt;&#x60; When set to &#x60;true&#x60; (or &#x60;1&#x60;), prune only    unused *and* untagged images. When set to &#x60;false&#x60;    (or &#x60;0&#x60;), all unused images are pruned. - &#x60;until&#x3D;&lt;string&gt;&#x60; Prune images created before this timestamp. The &#x60;&lt;timestamp&gt;&#x60; can be Unix timestamps, date formatted timestamps, or Go duration strings (e.g. &#x60;10m&#x60;, &#x60;1h30m&#x60;) computed relative to the daemon machine’s time. - &#x60;label&#x60; (&#x60;label&#x3D;&lt;key&gt;&#x60;, &#x60;label&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60;, &#x60;label!&#x3D;&lt;key&gt;&#x60;, or &#x60;label!&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60;) Prune images with (or without, in case &#x60;label!&#x3D;...&#x60; is used) the specified labels. 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public imagePrune(filters?: string, options?: RawAxiosRequestConfig) {
+        return ImageApiFp(this.configuration).imagePrune(filters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Push an image to a registry.  If you wish to push an image on to a private registry, that image must already have a tag which references the registry. For example, `registry.example.com/myimage:latest`.  The push is cancelled if the HTTP connection is closed. 
+     * @summary Push an image
+     * @param {string} name Image name or ID.
+     * @param {string} xRegistryAuth A base64url-encoded auth configuration.  Refer to the [authentication section](#section/Authentication) for details. 
+     * @param {string} [tag] The tag to associate with the image on the registry.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public imagePush(name: string, xRegistryAuth: string, tag?: string, options?: RawAxiosRequestConfig) {
+        return ImageApiFp(this.configuration).imagePush(name, xRegistryAuth, tag, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Search for an image on Docker Hub.
+     * @summary Search images
+     * @param {string} term Term to search
+     * @param {number} [limit] Maximum number of results to return
+     * @param {string} [filters] A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the images list. Available filters:  - &#x60;is-automated&#x3D;(true|false)&#x60; - &#x60;is-official&#x3D;(true|false)&#x60; - &#x60;stars&#x3D;&lt;number&gt;&#x60; Matches images that has at least \&#39;number\&#39; stars. 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public imageSearch(term: string, limit?: number, filters?: string, options?: RawAxiosRequestConfig) {
+        return ImageApiFp(this.configuration).imageSearch(term, limit, filters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Tag an image so that it becomes part of a repository.
+     * @summary Tag an image
+     * @param {string} name Image name or ID to tag.
+     * @param {string} [repo] The repository to tag in. For example, &#x60;someuser/someimage&#x60;.
+     * @param {string} [tag] The name of the new tag.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public imageTag(name: string, repo?: string, tag?: string, options?: RawAxiosRequestConfig) {
+        return ImageApiFp(this.configuration).imageTag(name, repo, tag, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+/**
+  * @enum {string}
+  */
+export enum ImageBuildContentTypeEnum {
+    ApplicationXTar = 'application/x-tar'
+}
+/**
+  * @enum {string}
+  */
+export enum ImageBuildVersionEnum {
+    _1 = '1',
+    _2 = '2'
+}
+
+
+/**
+ * NetworkApi - axios parameter creator
+ */
+export const NetworkApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary Connect a container to a network
+         * @param {string} id Network ID or name
+         * @param {NetworkDisconnectRequest} container 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        networkConnect: async (id: string, container: NetworkDisconnectRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('networkConnect', 'id', id)
+            // verify required parameter 'container' is not null or undefined
+            assertParamExists('networkConnect', 'container', container)
+            const localVarPath = `/networks/{id}/connect`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(container, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Create a network
+         * @param {NetworkCreateRequest} networkConfig Network configuration
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        networkCreate: async (networkConfig: NetworkCreateRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'networkConfig' is not null or undefined
+            assertParamExists('networkCreate', 'networkConfig', networkConfig)
+            const localVarPath = `/networks/create`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(networkConfig, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Remove a network
+         * @param {string} id Network ID or name
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        networkDelete: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('networkDelete', 'id', id)
+            const localVarPath = `/networks/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Disconnect a container from a network
+         * @param {string} id Network ID or name
+         * @param {NetworkConnectRequest} container 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        networkDisconnect: async (id: string, container: NetworkConnectRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('networkDisconnect', 'id', id)
+            // verify required parameter 'container' is not null or undefined
+            assertParamExists('networkDisconnect', 'container', container)
+            const localVarPath = `/networks/{id}/disconnect`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(container, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Inspect a network
+         * @param {string} id Network ID or name
+         * @param {boolean} [verbose] Detailed inspect output for troubleshooting
+         * @param {string} [scope] Filter the network by scope (swarm, global, or local)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        networkInspect: async (id: string, verbose?: boolean, scope?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('networkInspect', 'id', id)
+            const localVarPath = `/networks/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (verbose !== undefined) {
+                localVarQueryParameter['verbose'] = verbose;
+            }
+
+            if (scope !== undefined) {
+                localVarQueryParameter['scope'] = scope;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns a list of networks. For details on the format, see the [network inspect endpoint](#operation/NetworkInspect).  Note that it uses a different, smaller representation of a network than inspecting a single network. For example, the list of containers attached to the network is not propagated in API versions 1.28 and up. 
+         * @summary List networks
+         * @param {string} [filters] JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the networks list.  Available filters:  - &#x60;dangling&#x3D;&lt;boolean&gt;&#x60; When set to &#x60;true&#x60; (or &#x60;1&#x60;), returns all    networks that are not in use by a container. When set to &#x60;false&#x60;    (or &#x60;0&#x60;), only networks that are in use by one or more    containers are returned. - &#x60;driver&#x3D;&lt;driver-name&gt;&#x60; Matches a network\&#39;s driver. - &#x60;id&#x3D;&lt;network-id&gt;&#x60; Matches all or part of a network ID. - &#x60;label&#x3D;&lt;key&gt;&#x60; or &#x60;label&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60; of a network label. - &#x60;name&#x3D;&lt;network-name&gt;&#x60; Matches all or part of a network name. - &#x60;scope&#x3D;[\&quot;swarm\&quot;|\&quot;global\&quot;|\&quot;local\&quot;]&#x60; Filters networks by scope (&#x60;swarm&#x60;, &#x60;global&#x60;, or &#x60;local&#x60;). - &#x60;type&#x3D;[\&quot;custom\&quot;|\&quot;builtin\&quot;]&#x60; Filters networks by type. The &#x60;custom&#x60; keyword returns all user-defined networks. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        networkList: async (filters?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/networks`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (filters !== undefined) {
+                localVarQueryParameter['filters'] = filters;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Delete unused networks
+         * @param {string} [filters] Filters to process on the prune list, encoded as JSON (a &#x60;map[string][]string&#x60;).  Available filters: - &#x60;until&#x3D;&lt;timestamp&gt;&#x60; Prune networks created before this timestamp. The &#x60;&lt;timestamp&gt;&#x60; can be Unix timestamps, date formatted timestamps, or Go duration strings (e.g. &#x60;10m&#x60;, &#x60;1h30m&#x60;) computed relative to the daemon machine’s time. - &#x60;label&#x60; (&#x60;label&#x3D;&lt;key&gt;&#x60;, &#x60;label&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60;, &#x60;label!&#x3D;&lt;key&gt;&#x60;, or &#x60;label!&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60;) Prune networks with (or without, in case &#x60;label!&#x3D;...&#x60; is used) the specified labels. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        networkPrune: async (filters?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/networks/prune`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (filters !== undefined) {
+                localVarQueryParameter['filters'] = filters;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * NetworkApi - functional programming interface
+ */
+export const NetworkApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = NetworkApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary Connect a container to a network
+         * @param {string} id Network ID or name
+         * @param {NetworkDisconnectRequest} container 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async networkConnect(id: string, container: NetworkDisconnectRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.networkConnect(id, container, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['NetworkApi.networkConnect']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Create a network
+         * @param {NetworkCreateRequest} networkConfig Network configuration
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async networkCreate(networkConfig: NetworkCreateRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NetworkCreateResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.networkCreate(networkConfig, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['NetworkApi.networkCreate']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Remove a network
+         * @param {string} id Network ID or name
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async networkDelete(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.networkDelete(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['NetworkApi.networkDelete']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Disconnect a container from a network
+         * @param {string} id Network ID or name
+         * @param {NetworkConnectRequest} container 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async networkDisconnect(id: string, container: NetworkConnectRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.networkDisconnect(id, container, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['NetworkApi.networkDisconnect']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Inspect a network
+         * @param {string} id Network ID or name
+         * @param {boolean} [verbose] Detailed inspect output for troubleshooting
+         * @param {string} [scope] Filter the network by scope (swarm, global, or local)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async networkInspect(id: string, verbose?: boolean, scope?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Network>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.networkInspect(id, verbose, scope, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['NetworkApi.networkInspect']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns a list of networks. For details on the format, see the [network inspect endpoint](#operation/NetworkInspect).  Note that it uses a different, smaller representation of a network than inspecting a single network. For example, the list of containers attached to the network is not propagated in API versions 1.28 and up. 
+         * @summary List networks
+         * @param {string} [filters] JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the networks list.  Available filters:  - &#x60;dangling&#x3D;&lt;boolean&gt;&#x60; When set to &#x60;true&#x60; (or &#x60;1&#x60;), returns all    networks that are not in use by a container. When set to &#x60;false&#x60;    (or &#x60;0&#x60;), only networks that are in use by one or more    containers are returned. - &#x60;driver&#x3D;&lt;driver-name&gt;&#x60; Matches a network\&#39;s driver. - &#x60;id&#x3D;&lt;network-id&gt;&#x60; Matches all or part of a network ID. - &#x60;label&#x3D;&lt;key&gt;&#x60; or &#x60;label&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60; of a network label. - &#x60;name&#x3D;&lt;network-name&gt;&#x60; Matches all or part of a network name. - &#x60;scope&#x3D;[\&quot;swarm\&quot;|\&quot;global\&quot;|\&quot;local\&quot;]&#x60; Filters networks by scope (&#x60;swarm&#x60;, &#x60;global&#x60;, or &#x60;local&#x60;). - &#x60;type&#x3D;[\&quot;custom\&quot;|\&quot;builtin\&quot;]&#x60; Filters networks by type. The &#x60;custom&#x60; keyword returns all user-defined networks. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async networkList(filters?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Network>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.networkList(filters, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['NetworkApi.networkList']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Delete unused networks
+         * @param {string} [filters] Filters to process on the prune list, encoded as JSON (a &#x60;map[string][]string&#x60;).  Available filters: - &#x60;until&#x3D;&lt;timestamp&gt;&#x60; Prune networks created before this timestamp. The &#x60;&lt;timestamp&gt;&#x60; can be Unix timestamps, date formatted timestamps, or Go duration strings (e.g. &#x60;10m&#x60;, &#x60;1h30m&#x60;) computed relative to the daemon machine’s time. - &#x60;label&#x60; (&#x60;label&#x3D;&lt;key&gt;&#x60;, &#x60;label&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60;, &#x60;label!&#x3D;&lt;key&gt;&#x60;, or &#x60;label!&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60;) Prune networks with (or without, in case &#x60;label!&#x3D;...&#x60; is used) the specified labels. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async networkPrune(filters?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NetworkPruneResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.networkPrune(filters, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['NetworkApi.networkPrune']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * NetworkApi - factory interface
+ */
+export const NetworkApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = NetworkApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary Connect a container to a network
+         * @param {string} id Network ID or name
+         * @param {NetworkDisconnectRequest} container 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        networkConnect(id: string, container: NetworkDisconnectRequest, options?: any): AxiosPromise<void> {
+            return localVarFp.networkConnect(id, container, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Create a network
+         * @param {NetworkCreateRequest} networkConfig Network configuration
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        networkCreate(networkConfig: NetworkCreateRequest, options?: any): AxiosPromise<NetworkCreateResponse> {
+            return localVarFp.networkCreate(networkConfig, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Remove a network
+         * @param {string} id Network ID or name
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        networkDelete(id: string, options?: any): AxiosPromise<void> {
+            return localVarFp.networkDelete(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Disconnect a container from a network
+         * @param {string} id Network ID or name
+         * @param {NetworkConnectRequest} container 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        networkDisconnect(id: string, container: NetworkConnectRequest, options?: any): AxiosPromise<void> {
+            return localVarFp.networkDisconnect(id, container, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Inspect a network
+         * @param {string} id Network ID or name
+         * @param {boolean} [verbose] Detailed inspect output for troubleshooting
+         * @param {string} [scope] Filter the network by scope (swarm, global, or local)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        networkInspect(id: string, verbose?: boolean, scope?: string, options?: any): AxiosPromise<Network> {
+            return localVarFp.networkInspect(id, verbose, scope, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns a list of networks. For details on the format, see the [network inspect endpoint](#operation/NetworkInspect).  Note that it uses a different, smaller representation of a network than inspecting a single network. For example, the list of containers attached to the network is not propagated in API versions 1.28 and up. 
+         * @summary List networks
+         * @param {string} [filters] JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the networks list.  Available filters:  - &#x60;dangling&#x3D;&lt;boolean&gt;&#x60; When set to &#x60;true&#x60; (or &#x60;1&#x60;), returns all    networks that are not in use by a container. When set to &#x60;false&#x60;    (or &#x60;0&#x60;), only networks that are in use by one or more    containers are returned. - &#x60;driver&#x3D;&lt;driver-name&gt;&#x60; Matches a network\&#39;s driver. - &#x60;id&#x3D;&lt;network-id&gt;&#x60; Matches all or part of a network ID. - &#x60;label&#x3D;&lt;key&gt;&#x60; or &#x60;label&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60; of a network label. - &#x60;name&#x3D;&lt;network-name&gt;&#x60; Matches all or part of a network name. - &#x60;scope&#x3D;[\&quot;swarm\&quot;|\&quot;global\&quot;|\&quot;local\&quot;]&#x60; Filters networks by scope (&#x60;swarm&#x60;, &#x60;global&#x60;, or &#x60;local&#x60;). - &#x60;type&#x3D;[\&quot;custom\&quot;|\&quot;builtin\&quot;]&#x60; Filters networks by type. The &#x60;custom&#x60; keyword returns all user-defined networks. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        networkList(filters?: string, options?: any): AxiosPromise<Array<Network>> {
+            return localVarFp.networkList(filters, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Delete unused networks
+         * @param {string} [filters] Filters to process on the prune list, encoded as JSON (a &#x60;map[string][]string&#x60;).  Available filters: - &#x60;until&#x3D;&lt;timestamp&gt;&#x60; Prune networks created before this timestamp. The &#x60;&lt;timestamp&gt;&#x60; can be Unix timestamps, date formatted timestamps, or Go duration strings (e.g. &#x60;10m&#x60;, &#x60;1h30m&#x60;) computed relative to the daemon machine’s time. - &#x60;label&#x60; (&#x60;label&#x3D;&lt;key&gt;&#x60;, &#x60;label&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60;, &#x60;label!&#x3D;&lt;key&gt;&#x60;, or &#x60;label!&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60;) Prune networks with (or without, in case &#x60;label!&#x3D;...&#x60; is used) the specified labels. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        networkPrune(filters?: string, options?: any): AxiosPromise<NetworkPruneResponse> {
+            return localVarFp.networkPrune(filters, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * NetworkApi - object-oriented interface
+ * @class NetworkApi
+ * @extends {BaseAPI}
+ */
+export class NetworkApi extends BaseAPI {
+    /**
+     * 
+     * @summary Connect a container to a network
+     * @param {string} id Network ID or name
+     * @param {NetworkDisconnectRequest} container 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public networkConnect(id: string, container: NetworkDisconnectRequest, options?: RawAxiosRequestConfig) {
+        return NetworkApiFp(this.configuration).networkConnect(id, container, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Create a network
+     * @param {NetworkCreateRequest} networkConfig Network configuration
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public networkCreate(networkConfig: NetworkCreateRequest, options?: RawAxiosRequestConfig) {
+        return NetworkApiFp(this.configuration).networkCreate(networkConfig, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Remove a network
+     * @param {string} id Network ID or name
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public networkDelete(id: string, options?: RawAxiosRequestConfig) {
+        return NetworkApiFp(this.configuration).networkDelete(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Disconnect a container from a network
+     * @param {string} id Network ID or name
+     * @param {NetworkConnectRequest} container 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public networkDisconnect(id: string, container: NetworkConnectRequest, options?: RawAxiosRequestConfig) {
+        return NetworkApiFp(this.configuration).networkDisconnect(id, container, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Inspect a network
+     * @param {string} id Network ID or name
+     * @param {boolean} [verbose] Detailed inspect output for troubleshooting
+     * @param {string} [scope] Filter the network by scope (swarm, global, or local)
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public networkInspect(id: string, verbose?: boolean, scope?: string, options?: RawAxiosRequestConfig) {
+        return NetworkApiFp(this.configuration).networkInspect(id, verbose, scope, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns a list of networks. For details on the format, see the [network inspect endpoint](#operation/NetworkInspect).  Note that it uses a different, smaller representation of a network than inspecting a single network. For example, the list of containers attached to the network is not propagated in API versions 1.28 and up. 
+     * @summary List networks
+     * @param {string} [filters] JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the networks list.  Available filters:  - &#x60;dangling&#x3D;&lt;boolean&gt;&#x60; When set to &#x60;true&#x60; (or &#x60;1&#x60;), returns all    networks that are not in use by a container. When set to &#x60;false&#x60;    (or &#x60;0&#x60;), only networks that are in use by one or more    containers are returned. - &#x60;driver&#x3D;&lt;driver-name&gt;&#x60; Matches a network\&#39;s driver. - &#x60;id&#x3D;&lt;network-id&gt;&#x60; Matches all or part of a network ID. - &#x60;label&#x3D;&lt;key&gt;&#x60; or &#x60;label&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60; of a network label. - &#x60;name&#x3D;&lt;network-name&gt;&#x60; Matches all or part of a network name. - &#x60;scope&#x3D;[\&quot;swarm\&quot;|\&quot;global\&quot;|\&quot;local\&quot;]&#x60; Filters networks by scope (&#x60;swarm&#x60;, &#x60;global&#x60;, or &#x60;local&#x60;). - &#x60;type&#x3D;[\&quot;custom\&quot;|\&quot;builtin\&quot;]&#x60; Filters networks by type. The &#x60;custom&#x60; keyword returns all user-defined networks. 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public networkList(filters?: string, options?: RawAxiosRequestConfig) {
+        return NetworkApiFp(this.configuration).networkList(filters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Delete unused networks
+     * @param {string} [filters] Filters to process on the prune list, encoded as JSON (a &#x60;map[string][]string&#x60;).  Available filters: - &#x60;until&#x3D;&lt;timestamp&gt;&#x60; Prune networks created before this timestamp. The &#x60;&lt;timestamp&gt;&#x60; can be Unix timestamps, date formatted timestamps, or Go duration strings (e.g. &#x60;10m&#x60;, &#x60;1h30m&#x60;) computed relative to the daemon machine’s time. - &#x60;label&#x60; (&#x60;label&#x3D;&lt;key&gt;&#x60;, &#x60;label&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60;, &#x60;label!&#x3D;&lt;key&gt;&#x60;, or &#x60;label!&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60;) Prune networks with (or without, in case &#x60;label!&#x3D;...&#x60; is used) the specified labels. 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public networkPrune(filters?: string, options?: RawAxiosRequestConfig) {
+        return NetworkApiFp(this.configuration).networkPrune(filters, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * NodeApi - axios parameter creator
+ */
+export const NodeApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary Delete a node
+         * @param {string} id The ID or name of the node
+         * @param {boolean} [force] Force remove a node from the swarm
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        nodeDelete: async (id: string, force?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('nodeDelete', 'id', id)
+            const localVarPath = `/nodes/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (force !== undefined) {
+                localVarQueryParameter['force'] = force;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Inspect a node
+         * @param {string} id The ID or name of the node
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        nodeInspect: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('nodeInspect', 'id', id)
+            const localVarPath = `/nodes/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary List nodes
+         * @param {string} [filters] Filters to process on the nodes list, encoded as JSON (a &#x60;map[string][]string&#x60;).  Available filters: - &#x60;id&#x3D;&lt;node id&gt;&#x60; - &#x60;label&#x3D;&lt;engine label&gt;&#x60; - &#x60;membership&#x3D;&#x60;(&#x60;accepted&#x60;|&#x60;pending&#x60;)&#x60; - &#x60;name&#x3D;&lt;node name&gt;&#x60; - &#x60;node.label&#x3D;&lt;node label&gt;&#x60; - &#x60;role&#x3D;&#x60;(&#x60;manager&#x60;|&#x60;worker&#x60;)&#x60; 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        nodeList: async (filters?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/nodes`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (filters !== undefined) {
+                localVarQueryParameter['filters'] = filters;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Update a node
+         * @param {string} id The ID of the node
+         * @param {number} version The version number of the node object being updated. This is required to avoid conflicting writes. 
+         * @param {NodeSpec} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        nodeUpdate: async (id: string, version: number, body?: NodeSpec, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('nodeUpdate', 'id', id)
+            // verify required parameter 'version' is not null or undefined
+            assertParamExists('nodeUpdate', 'version', version)
+            const localVarPath = `/nodes/{id}/update`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (version !== undefined) {
+                localVarQueryParameter['version'] = version;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * NodeApi - functional programming interface
+ */
+export const NodeApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = NodeApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary Delete a node
+         * @param {string} id The ID or name of the node
+         * @param {boolean} [force] Force remove a node from the swarm
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async nodeDelete(id: string, force?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.nodeDelete(id, force, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['NodeApi.nodeDelete']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Inspect a node
+         * @param {string} id The ID or name of the node
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async nodeInspect(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Node>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.nodeInspect(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['NodeApi.nodeInspect']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary List nodes
+         * @param {string} [filters] Filters to process on the nodes list, encoded as JSON (a &#x60;map[string][]string&#x60;).  Available filters: - &#x60;id&#x3D;&lt;node id&gt;&#x60; - &#x60;label&#x3D;&lt;engine label&gt;&#x60; - &#x60;membership&#x3D;&#x60;(&#x60;accepted&#x60;|&#x60;pending&#x60;)&#x60; - &#x60;name&#x3D;&lt;node name&gt;&#x60; - &#x60;node.label&#x3D;&lt;node label&gt;&#x60; - &#x60;role&#x3D;&#x60;(&#x60;manager&#x60;|&#x60;worker&#x60;)&#x60; 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async nodeList(filters?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Node>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.nodeList(filters, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['NodeApi.nodeList']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Update a node
+         * @param {string} id The ID of the node
+         * @param {number} version The version number of the node object being updated. This is required to avoid conflicting writes. 
+         * @param {NodeSpec} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async nodeUpdate(id: string, version: number, body?: NodeSpec, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.nodeUpdate(id, version, body, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['NodeApi.nodeUpdate']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * NodeApi - factory interface
+ */
+export const NodeApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = NodeApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary Delete a node
+         * @param {string} id The ID or name of the node
+         * @param {boolean} [force] Force remove a node from the swarm
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        nodeDelete(id: string, force?: boolean, options?: any): AxiosPromise<void> {
+            return localVarFp.nodeDelete(id, force, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Inspect a node
+         * @param {string} id The ID or name of the node
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        nodeInspect(id: string, options?: any): AxiosPromise<Node> {
+            return localVarFp.nodeInspect(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary List nodes
+         * @param {string} [filters] Filters to process on the nodes list, encoded as JSON (a &#x60;map[string][]string&#x60;).  Available filters: - &#x60;id&#x3D;&lt;node id&gt;&#x60; - &#x60;label&#x3D;&lt;engine label&gt;&#x60; - &#x60;membership&#x3D;&#x60;(&#x60;accepted&#x60;|&#x60;pending&#x60;)&#x60; - &#x60;name&#x3D;&lt;node name&gt;&#x60; - &#x60;node.label&#x3D;&lt;node label&gt;&#x60; - &#x60;role&#x3D;&#x60;(&#x60;manager&#x60;|&#x60;worker&#x60;)&#x60; 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        nodeList(filters?: string, options?: any): AxiosPromise<Array<Node>> {
+            return localVarFp.nodeList(filters, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Update a node
+         * @param {string} id The ID of the node
+         * @param {number} version The version number of the node object being updated. This is required to avoid conflicting writes. 
+         * @param {NodeSpec} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        nodeUpdate(id: string, version: number, body?: NodeSpec, options?: any): AxiosPromise<void> {
+            return localVarFp.nodeUpdate(id, version, body, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * NodeApi - object-oriented interface
+ * @class NodeApi
+ * @extends {BaseAPI}
+ */
+export class NodeApi extends BaseAPI {
+    /**
+     * 
+     * @summary Delete a node
+     * @param {string} id The ID or name of the node
+     * @param {boolean} [force] Force remove a node from the swarm
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public nodeDelete(id: string, force?: boolean, options?: RawAxiosRequestConfig) {
+        return NodeApiFp(this.configuration).nodeDelete(id, force, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Inspect a node
+     * @param {string} id The ID or name of the node
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public nodeInspect(id: string, options?: RawAxiosRequestConfig) {
+        return NodeApiFp(this.configuration).nodeInspect(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary List nodes
+     * @param {string} [filters] Filters to process on the nodes list, encoded as JSON (a &#x60;map[string][]string&#x60;).  Available filters: - &#x60;id&#x3D;&lt;node id&gt;&#x60; - &#x60;label&#x3D;&lt;engine label&gt;&#x60; - &#x60;membership&#x3D;&#x60;(&#x60;accepted&#x60;|&#x60;pending&#x60;)&#x60; - &#x60;name&#x3D;&lt;node name&gt;&#x60; - &#x60;node.label&#x3D;&lt;node label&gt;&#x60; - &#x60;role&#x3D;&#x60;(&#x60;manager&#x60;|&#x60;worker&#x60;)&#x60; 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public nodeList(filters?: string, options?: RawAxiosRequestConfig) {
+        return NodeApiFp(this.configuration).nodeList(filters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Update a node
+     * @param {string} id The ID of the node
+     * @param {number} version The version number of the node object being updated. This is required to avoid conflicting writes. 
+     * @param {NodeSpec} [body] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public nodeUpdate(id: string, version: number, body?: NodeSpec, options?: RawAxiosRequestConfig) {
+        return NodeApiFp(this.configuration).nodeUpdate(id, version, body, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * PluginApi - axios parameter creator
+ */
+export const PluginApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary Get plugin privileges
+         * @param {string} remote The name of the plugin. The &#x60;:latest&#x60; tag is optional, and is the default if omitted. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPluginPrivileges: async (remote: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'remote' is not null or undefined
+            assertParamExists('getPluginPrivileges', 'remote', remote)
+            const localVarPath = `/plugins/privileges`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (remote !== undefined) {
+                localVarQueryParameter['remote'] = remote;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Create a plugin
+         * @param {string} name The name of the plugin. The &#x60;:latest&#x60; tag is optional, and is the default if omitted. 
+         * @param {File} [tarContext] Path to tar containing plugin rootfs and manifest
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pluginCreate: async (name: string, tarContext?: File, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'name' is not null or undefined
+            assertParamExists('pluginCreate', 'name', name)
+            const localVarPath = `/plugins/create`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (name !== undefined) {
+                localVarQueryParameter['name'] = name;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/x-tar';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(tarContext, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Remove a plugin
+         * @param {string} name The name of the plugin. The &#x60;:latest&#x60; tag is optional, and is the default if omitted. 
+         * @param {boolean} [force] Disable the plugin before removing. This may result in issues if the plugin is in use by a container. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pluginDelete: async (name: string, force?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'name' is not null or undefined
+            assertParamExists('pluginDelete', 'name', name)
+            const localVarPath = `/plugins/{name}`
+                .replace(`{${"name"}}`, encodeURIComponent(String(name)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (force !== undefined) {
+                localVarQueryParameter['force'] = force;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Disable a plugin
+         * @param {string} name The name of the plugin. The &#x60;:latest&#x60; tag is optional, and is the default if omitted. 
+         * @param {boolean} [force] Force disable a plugin even if still in use. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pluginDisable: async (name: string, force?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'name' is not null or undefined
+            assertParamExists('pluginDisable', 'name', name)
+            const localVarPath = `/plugins/{name}/disable`
+                .replace(`{${"name"}}`, encodeURIComponent(String(name)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (force !== undefined) {
+                localVarQueryParameter['force'] = force;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Enable a plugin
+         * @param {string} name The name of the plugin. The &#x60;:latest&#x60; tag is optional, and is the default if omitted. 
+         * @param {number} [timeout] Set the HTTP client timeout (in seconds)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pluginEnable: async (name: string, timeout?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'name' is not null or undefined
+            assertParamExists('pluginEnable', 'name', name)
+            const localVarPath = `/plugins/{name}/enable`
+                .replace(`{${"name"}}`, encodeURIComponent(String(name)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (timeout !== undefined) {
+                localVarQueryParameter['timeout'] = timeout;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Inspect a plugin
+         * @param {string} name The name of the plugin. The &#x60;:latest&#x60; tag is optional, and is the default if omitted. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pluginInspect: async (name: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'name' is not null or undefined
+            assertParamExists('pluginInspect', 'name', name)
+            const localVarPath = `/plugins/{name}/json`
+                .replace(`{${"name"}}`, encodeURIComponent(String(name)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns information about installed plugins.
+         * @summary List plugins
+         * @param {string} [filters] A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the plugin list.  Available filters:  - &#x60;capability&#x3D;&lt;capability name&gt;&#x60; - &#x60;enable&#x3D;&lt;true&gt;|&lt;false&gt;&#x60; 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pluginList: async (filters?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/plugins`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (filters !== undefined) {
+                localVarQueryParameter['filters'] = filters;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Pulls and installs a plugin. After the plugin is installed, it can be enabled using the [`POST /plugins/{name}/enable` endpoint](#operation/PostPluginsEnable). 
+         * @summary Install a plugin
+         * @param {string} remote Remote reference for plugin to install.  The &#x60;:latest&#x60; tag is optional, and is used as the default if omitted. 
+         * @param {string} [name] Local name for the pulled plugin.  The &#x60;:latest&#x60; tag is optional, and is used as the default if omitted. 
+         * @param {string} [xRegistryAuth] A base64url-encoded auth configuration to use when pulling a plugin from a registry.  Refer to the [authentication section](#section/Authentication) for details. 
+         * @param {Array<PluginPrivilege>} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pluginPull: async (remote: string, name?: string, xRegistryAuth?: string, body?: Array<PluginPrivilege>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'remote' is not null or undefined
+            assertParamExists('pluginPull', 'remote', remote)
+            const localVarPath = `/plugins/pull`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (remote !== undefined) {
+                localVarQueryParameter['remote'] = remote;
+            }
+
+            if (name !== undefined) {
+                localVarQueryParameter['name'] = name;
+            }
+
+            if (xRegistryAuth != null) {
+                localVarHeaderParameter['X-Registry-Auth'] = String(xRegistryAuth);
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Push a plugin to the registry. 
+         * @summary Push a plugin
+         * @param {string} name The name of the plugin. The &#x60;:latest&#x60; tag is optional, and is the default if omitted. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pluginPush: async (name: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'name' is not null or undefined
+            assertParamExists('pluginPush', 'name', name)
+            const localVarPath = `/plugins/{name}/push`
+                .replace(`{${"name"}}`, encodeURIComponent(String(name)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Configure a plugin
+         * @param {string} name The name of the plugin. The &#x60;:latest&#x60; tag is optional, and is the default if omitted. 
+         * @param {Array<string>} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pluginSet: async (name: string, body?: Array<string>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'name' is not null or undefined
+            assertParamExists('pluginSet', 'name', name)
+            const localVarPath = `/plugins/{name}/set`
+                .replace(`{${"name"}}`, encodeURIComponent(String(name)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Upgrade a plugin
+         * @param {string} name The name of the plugin. The &#x60;:latest&#x60; tag is optional, and is the default if omitted. 
+         * @param {string} remote Remote reference to upgrade to.  The &#x60;:latest&#x60; tag is optional, and is used as the default if omitted. 
+         * @param {string} [xRegistryAuth] A base64url-encoded auth configuration to use when pulling a plugin from a registry.  Refer to the [authentication section](#section/Authentication) for details. 
+         * @param {Array<PluginPrivilege>} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pluginUpgrade: async (name: string, remote: string, xRegistryAuth?: string, body?: Array<PluginPrivilege>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'name' is not null or undefined
+            assertParamExists('pluginUpgrade', 'name', name)
+            // verify required parameter 'remote' is not null or undefined
+            assertParamExists('pluginUpgrade', 'remote', remote)
+            const localVarPath = `/plugins/{name}/upgrade`
+                .replace(`{${"name"}}`, encodeURIComponent(String(name)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (remote !== undefined) {
+                localVarQueryParameter['remote'] = remote;
+            }
+
+            if (xRegistryAuth != null) {
+                localVarHeaderParameter['X-Registry-Auth'] = String(xRegistryAuth);
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * PluginApi - functional programming interface
+ */
+export const PluginApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = PluginApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary Get plugin privileges
+         * @param {string} remote The name of the plugin. The &#x60;:latest&#x60; tag is optional, and is the default if omitted. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getPluginPrivileges(remote: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PluginPrivilege>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getPluginPrivileges(remote, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PluginApi.getPluginPrivileges']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Create a plugin
+         * @param {string} name The name of the plugin. The &#x60;:latest&#x60; tag is optional, and is the default if omitted. 
+         * @param {File} [tarContext] Path to tar containing plugin rootfs and manifest
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async pluginCreate(name: string, tarContext?: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.pluginCreate(name, tarContext, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PluginApi.pluginCreate']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Remove a plugin
+         * @param {string} name The name of the plugin. The &#x60;:latest&#x60; tag is optional, and is the default if omitted. 
+         * @param {boolean} [force] Disable the plugin before removing. This may result in issues if the plugin is in use by a container. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async pluginDelete(name: string, force?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Plugin>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.pluginDelete(name, force, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PluginApi.pluginDelete']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Disable a plugin
+         * @param {string} name The name of the plugin. The &#x60;:latest&#x60; tag is optional, and is the default if omitted. 
+         * @param {boolean} [force] Force disable a plugin even if still in use. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async pluginDisable(name: string, force?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.pluginDisable(name, force, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PluginApi.pluginDisable']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Enable a plugin
+         * @param {string} name The name of the plugin. The &#x60;:latest&#x60; tag is optional, and is the default if omitted. 
+         * @param {number} [timeout] Set the HTTP client timeout (in seconds)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async pluginEnable(name: string, timeout?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.pluginEnable(name, timeout, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PluginApi.pluginEnable']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Inspect a plugin
+         * @param {string} name The name of the plugin. The &#x60;:latest&#x60; tag is optional, and is the default if omitted. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async pluginInspect(name: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Plugin>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.pluginInspect(name, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PluginApi.pluginInspect']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns information about installed plugins.
+         * @summary List plugins
+         * @param {string} [filters] A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the plugin list.  Available filters:  - &#x60;capability&#x3D;&lt;capability name&gt;&#x60; - &#x60;enable&#x3D;&lt;true&gt;|&lt;false&gt;&#x60; 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async pluginList(filters?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Plugin>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.pluginList(filters, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PluginApi.pluginList']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Pulls and installs a plugin. After the plugin is installed, it can be enabled using the [`POST /plugins/{name}/enable` endpoint](#operation/PostPluginsEnable). 
+         * @summary Install a plugin
+         * @param {string} remote Remote reference for plugin to install.  The &#x60;:latest&#x60; tag is optional, and is used as the default if omitted. 
+         * @param {string} [name] Local name for the pulled plugin.  The &#x60;:latest&#x60; tag is optional, and is used as the default if omitted. 
+         * @param {string} [xRegistryAuth] A base64url-encoded auth configuration to use when pulling a plugin from a registry.  Refer to the [authentication section](#section/Authentication) for details. 
+         * @param {Array<PluginPrivilege>} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async pluginPull(remote: string, name?: string, xRegistryAuth?: string, body?: Array<PluginPrivilege>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.pluginPull(remote, name, xRegistryAuth, body, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PluginApi.pluginPull']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Push a plugin to the registry. 
+         * @summary Push a plugin
+         * @param {string} name The name of the plugin. The &#x60;:latest&#x60; tag is optional, and is the default if omitted. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async pluginPush(name: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.pluginPush(name, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PluginApi.pluginPush']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Configure a plugin
+         * @param {string} name The name of the plugin. The &#x60;:latest&#x60; tag is optional, and is the default if omitted. 
+         * @param {Array<string>} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async pluginSet(name: string, body?: Array<string>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.pluginSet(name, body, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PluginApi.pluginSet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Upgrade a plugin
+         * @param {string} name The name of the plugin. The &#x60;:latest&#x60; tag is optional, and is the default if omitted. 
+         * @param {string} remote Remote reference to upgrade to.  The &#x60;:latest&#x60; tag is optional, and is used as the default if omitted. 
+         * @param {string} [xRegistryAuth] A base64url-encoded auth configuration to use when pulling a plugin from a registry.  Refer to the [authentication section](#section/Authentication) for details. 
+         * @param {Array<PluginPrivilege>} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async pluginUpgrade(name: string, remote: string, xRegistryAuth?: string, body?: Array<PluginPrivilege>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.pluginUpgrade(name, remote, xRegistryAuth, body, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PluginApi.pluginUpgrade']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * PluginApi - factory interface
+ */
+export const PluginApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = PluginApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary Get plugin privileges
+         * @param {string} remote The name of the plugin. The &#x60;:latest&#x60; tag is optional, and is the default if omitted. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPluginPrivileges(remote: string, options?: any): AxiosPromise<Array<PluginPrivilege>> {
+            return localVarFp.getPluginPrivileges(remote, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Create a plugin
+         * @param {string} name The name of the plugin. The &#x60;:latest&#x60; tag is optional, and is the default if omitted. 
+         * @param {File} [tarContext] Path to tar containing plugin rootfs and manifest
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pluginCreate(name: string, tarContext?: File, options?: any): AxiosPromise<void> {
+            return localVarFp.pluginCreate(name, tarContext, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Remove a plugin
+         * @param {string} name The name of the plugin. The &#x60;:latest&#x60; tag is optional, and is the default if omitted. 
+         * @param {boolean} [force] Disable the plugin before removing. This may result in issues if the plugin is in use by a container. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pluginDelete(name: string, force?: boolean, options?: any): AxiosPromise<Plugin> {
+            return localVarFp.pluginDelete(name, force, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Disable a plugin
+         * @param {string} name The name of the plugin. The &#x60;:latest&#x60; tag is optional, and is the default if omitted. 
+         * @param {boolean} [force] Force disable a plugin even if still in use. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pluginDisable(name: string, force?: boolean, options?: any): AxiosPromise<void> {
+            return localVarFp.pluginDisable(name, force, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Enable a plugin
+         * @param {string} name The name of the plugin. The &#x60;:latest&#x60; tag is optional, and is the default if omitted. 
+         * @param {number} [timeout] Set the HTTP client timeout (in seconds)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pluginEnable(name: string, timeout?: number, options?: any): AxiosPromise<void> {
+            return localVarFp.pluginEnable(name, timeout, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Inspect a plugin
+         * @param {string} name The name of the plugin. The &#x60;:latest&#x60; tag is optional, and is the default if omitted. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pluginInspect(name: string, options?: any): AxiosPromise<Plugin> {
+            return localVarFp.pluginInspect(name, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns information about installed plugins.
+         * @summary List plugins
+         * @param {string} [filters] A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the plugin list.  Available filters:  - &#x60;capability&#x3D;&lt;capability name&gt;&#x60; - &#x60;enable&#x3D;&lt;true&gt;|&lt;false&gt;&#x60; 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pluginList(filters?: string, options?: any): AxiosPromise<Array<Plugin>> {
+            return localVarFp.pluginList(filters, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Pulls and installs a plugin. After the plugin is installed, it can be enabled using the [`POST /plugins/{name}/enable` endpoint](#operation/PostPluginsEnable). 
+         * @summary Install a plugin
+         * @param {string} remote Remote reference for plugin to install.  The &#x60;:latest&#x60; tag is optional, and is used as the default if omitted. 
+         * @param {string} [name] Local name for the pulled plugin.  The &#x60;:latest&#x60; tag is optional, and is used as the default if omitted. 
+         * @param {string} [xRegistryAuth] A base64url-encoded auth configuration to use when pulling a plugin from a registry.  Refer to the [authentication section](#section/Authentication) for details. 
+         * @param {Array<PluginPrivilege>} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pluginPull(remote: string, name?: string, xRegistryAuth?: string, body?: Array<PluginPrivilege>, options?: any): AxiosPromise<void> {
+            return localVarFp.pluginPull(remote, name, xRegistryAuth, body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Push a plugin to the registry. 
+         * @summary Push a plugin
+         * @param {string} name The name of the plugin. The &#x60;:latest&#x60; tag is optional, and is the default if omitted. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pluginPush(name: string, options?: any): AxiosPromise<void> {
+            return localVarFp.pluginPush(name, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Configure a plugin
+         * @param {string} name The name of the plugin. The &#x60;:latest&#x60; tag is optional, and is the default if omitted. 
+         * @param {Array<string>} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pluginSet(name: string, body?: Array<string>, options?: any): AxiosPromise<void> {
+            return localVarFp.pluginSet(name, body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Upgrade a plugin
+         * @param {string} name The name of the plugin. The &#x60;:latest&#x60; tag is optional, and is the default if omitted. 
+         * @param {string} remote Remote reference to upgrade to.  The &#x60;:latest&#x60; tag is optional, and is used as the default if omitted. 
+         * @param {string} [xRegistryAuth] A base64url-encoded auth configuration to use when pulling a plugin from a registry.  Refer to the [authentication section](#section/Authentication) for details. 
+         * @param {Array<PluginPrivilege>} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        pluginUpgrade(name: string, remote: string, xRegistryAuth?: string, body?: Array<PluginPrivilege>, options?: any): AxiosPromise<void> {
+            return localVarFp.pluginUpgrade(name, remote, xRegistryAuth, body, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * PluginApi - object-oriented interface
+ * @class PluginApi
+ * @extends {BaseAPI}
+ */
+export class PluginApi extends BaseAPI {
+    /**
+     * 
+     * @summary Get plugin privileges
+     * @param {string} remote The name of the plugin. The &#x60;:latest&#x60; tag is optional, and is the default if omitted. 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public getPluginPrivileges(remote: string, options?: RawAxiosRequestConfig) {
+        return PluginApiFp(this.configuration).getPluginPrivileges(remote, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Create a plugin
+     * @param {string} name The name of the plugin. The &#x60;:latest&#x60; tag is optional, and is the default if omitted. 
+     * @param {File} [tarContext] Path to tar containing plugin rootfs and manifest
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public pluginCreate(name: string, tarContext?: File, options?: RawAxiosRequestConfig) {
+        return PluginApiFp(this.configuration).pluginCreate(name, tarContext, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Remove a plugin
+     * @param {string} name The name of the plugin. The &#x60;:latest&#x60; tag is optional, and is the default if omitted. 
+     * @param {boolean} [force] Disable the plugin before removing. This may result in issues if the plugin is in use by a container. 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public pluginDelete(name: string, force?: boolean, options?: RawAxiosRequestConfig) {
+        return PluginApiFp(this.configuration).pluginDelete(name, force, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Disable a plugin
+     * @param {string} name The name of the plugin. The &#x60;:latest&#x60; tag is optional, and is the default if omitted. 
+     * @param {boolean} [force] Force disable a plugin even if still in use. 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public pluginDisable(name: string, force?: boolean, options?: RawAxiosRequestConfig) {
+        return PluginApiFp(this.configuration).pluginDisable(name, force, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Enable a plugin
+     * @param {string} name The name of the plugin. The &#x60;:latest&#x60; tag is optional, and is the default if omitted. 
+     * @param {number} [timeout] Set the HTTP client timeout (in seconds)
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public pluginEnable(name: string, timeout?: number, options?: RawAxiosRequestConfig) {
+        return PluginApiFp(this.configuration).pluginEnable(name, timeout, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Inspect a plugin
+     * @param {string} name The name of the plugin. The &#x60;:latest&#x60; tag is optional, and is the default if omitted. 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public pluginInspect(name: string, options?: RawAxiosRequestConfig) {
+        return PluginApiFp(this.configuration).pluginInspect(name, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns information about installed plugins.
+     * @summary List plugins
+     * @param {string} [filters] A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the plugin list.  Available filters:  - &#x60;capability&#x3D;&lt;capability name&gt;&#x60; - &#x60;enable&#x3D;&lt;true&gt;|&lt;false&gt;&#x60; 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public pluginList(filters?: string, options?: RawAxiosRequestConfig) {
+        return PluginApiFp(this.configuration).pluginList(filters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Pulls and installs a plugin. After the plugin is installed, it can be enabled using the [`POST /plugins/{name}/enable` endpoint](#operation/PostPluginsEnable). 
+     * @summary Install a plugin
+     * @param {string} remote Remote reference for plugin to install.  The &#x60;:latest&#x60; tag is optional, and is used as the default if omitted. 
+     * @param {string} [name] Local name for the pulled plugin.  The &#x60;:latest&#x60; tag is optional, and is used as the default if omitted. 
+     * @param {string} [xRegistryAuth] A base64url-encoded auth configuration to use when pulling a plugin from a registry.  Refer to the [authentication section](#section/Authentication) for details. 
+     * @param {Array<PluginPrivilege>} [body] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public pluginPull(remote: string, name?: string, xRegistryAuth?: string, body?: Array<PluginPrivilege>, options?: RawAxiosRequestConfig) {
+        return PluginApiFp(this.configuration).pluginPull(remote, name, xRegistryAuth, body, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Push a plugin to the registry. 
+     * @summary Push a plugin
+     * @param {string} name The name of the plugin. The &#x60;:latest&#x60; tag is optional, and is the default if omitted. 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public pluginPush(name: string, options?: RawAxiosRequestConfig) {
+        return PluginApiFp(this.configuration).pluginPush(name, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Configure a plugin
+     * @param {string} name The name of the plugin. The &#x60;:latest&#x60; tag is optional, and is the default if omitted. 
+     * @param {Array<string>} [body] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public pluginSet(name: string, body?: Array<string>, options?: RawAxiosRequestConfig) {
+        return PluginApiFp(this.configuration).pluginSet(name, body, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Upgrade a plugin
+     * @param {string} name The name of the plugin. The &#x60;:latest&#x60; tag is optional, and is the default if omitted. 
+     * @param {string} remote Remote reference to upgrade to.  The &#x60;:latest&#x60; tag is optional, and is used as the default if omitted. 
+     * @param {string} [xRegistryAuth] A base64url-encoded auth configuration to use when pulling a plugin from a registry.  Refer to the [authentication section](#section/Authentication) for details. 
+     * @param {Array<PluginPrivilege>} [body] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public pluginUpgrade(name: string, remote: string, xRegistryAuth?: string, body?: Array<PluginPrivilege>, options?: RawAxiosRequestConfig) {
+        return PluginApiFp(this.configuration).pluginUpgrade(name, remote, xRegistryAuth, body, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * SecretApi - axios parameter creator
+ */
+export const SecretApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary Create a secret
+         * @param {SecretCreateRequest} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        secretCreate: async (body?: SecretCreateRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/secrets/create`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Delete a secret
+         * @param {string} id ID of the secret
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        secretDelete: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('secretDelete', 'id', id)
+            const localVarPath = `/secrets/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Inspect a secret
+         * @param {string} id ID of the secret
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        secretInspect: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('secretInspect', 'id', id)
+            const localVarPath = `/secrets/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary List secrets
+         * @param {string} [filters] A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the secrets list.  Available filters:  - &#x60;id&#x3D;&lt;secret id&gt;&#x60; - &#x60;label&#x3D;&lt;key&gt; or label&#x3D;&lt;key&gt;&#x3D;value&#x60; - &#x60;name&#x3D;&lt;secret name&gt;&#x60; - &#x60;names&#x3D;&lt;secret name&gt;&#x60; 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        secretList: async (filters?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/secrets`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (filters !== undefined) {
+                localVarQueryParameter['filters'] = filters;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Update a Secret
+         * @param {string} id The ID or name of the secret
+         * @param {number} version The version number of the secret object being updated. This is required to avoid conflicting writes. 
+         * @param {SecretSpec} [body] The spec of the secret to update. Currently, only the Labels field can be updated. All other fields must remain unchanged from the [SecretInspect endpoint](#operation/SecretInspect) response values. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        secretUpdate: async (id: string, version: number, body?: SecretSpec, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('secretUpdate', 'id', id)
+            // verify required parameter 'version' is not null or undefined
+            assertParamExists('secretUpdate', 'version', version)
+            const localVarPath = `/secrets/{id}/update`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (version !== undefined) {
+                localVarQueryParameter['version'] = version;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * SecretApi - functional programming interface
+ */
+export const SecretApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = SecretApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary Create a secret
+         * @param {SecretCreateRequest} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async secretCreate(body?: SecretCreateRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IdResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.secretCreate(body, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SecretApi.secretCreate']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Delete a secret
+         * @param {string} id ID of the secret
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async secretDelete(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.secretDelete(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SecretApi.secretDelete']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Inspect a secret
+         * @param {string} id ID of the secret
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async secretInspect(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Secret>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.secretInspect(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SecretApi.secretInspect']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary List secrets
+         * @param {string} [filters] A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the secrets list.  Available filters:  - &#x60;id&#x3D;&lt;secret id&gt;&#x60; - &#x60;label&#x3D;&lt;key&gt; or label&#x3D;&lt;key&gt;&#x3D;value&#x60; - &#x60;name&#x3D;&lt;secret name&gt;&#x60; - &#x60;names&#x3D;&lt;secret name&gt;&#x60; 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async secretList(filters?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Secret>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.secretList(filters, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SecretApi.secretList']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Update a Secret
+         * @param {string} id The ID or name of the secret
+         * @param {number} version The version number of the secret object being updated. This is required to avoid conflicting writes. 
+         * @param {SecretSpec} [body] The spec of the secret to update. Currently, only the Labels field can be updated. All other fields must remain unchanged from the [SecretInspect endpoint](#operation/SecretInspect) response values. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async secretUpdate(id: string, version: number, body?: SecretSpec, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.secretUpdate(id, version, body, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SecretApi.secretUpdate']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * SecretApi - factory interface
+ */
+export const SecretApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = SecretApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary Create a secret
+         * @param {SecretCreateRequest} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        secretCreate(body?: SecretCreateRequest, options?: any): AxiosPromise<IdResponse> {
+            return localVarFp.secretCreate(body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Delete a secret
+         * @param {string} id ID of the secret
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        secretDelete(id: string, options?: any): AxiosPromise<void> {
+            return localVarFp.secretDelete(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Inspect a secret
+         * @param {string} id ID of the secret
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        secretInspect(id: string, options?: any): AxiosPromise<Secret> {
+            return localVarFp.secretInspect(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary List secrets
+         * @param {string} [filters] A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the secrets list.  Available filters:  - &#x60;id&#x3D;&lt;secret id&gt;&#x60; - &#x60;label&#x3D;&lt;key&gt; or label&#x3D;&lt;key&gt;&#x3D;value&#x60; - &#x60;name&#x3D;&lt;secret name&gt;&#x60; - &#x60;names&#x3D;&lt;secret name&gt;&#x60; 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        secretList(filters?: string, options?: any): AxiosPromise<Array<Secret>> {
+            return localVarFp.secretList(filters, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Update a Secret
+         * @param {string} id The ID or name of the secret
+         * @param {number} version The version number of the secret object being updated. This is required to avoid conflicting writes. 
+         * @param {SecretSpec} [body] The spec of the secret to update. Currently, only the Labels field can be updated. All other fields must remain unchanged from the [SecretInspect endpoint](#operation/SecretInspect) response values. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        secretUpdate(id: string, version: number, body?: SecretSpec, options?: any): AxiosPromise<void> {
+            return localVarFp.secretUpdate(id, version, body, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * SecretApi - object-oriented interface
+ * @class SecretApi
+ * @extends {BaseAPI}
+ */
+export class SecretApi extends BaseAPI {
+    /**
+     * 
+     * @summary Create a secret
+     * @param {SecretCreateRequest} [body] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public secretCreate(body?: SecretCreateRequest, options?: RawAxiosRequestConfig) {
+        return SecretApiFp(this.configuration).secretCreate(body, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Delete a secret
+     * @param {string} id ID of the secret
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public secretDelete(id: string, options?: RawAxiosRequestConfig) {
+        return SecretApiFp(this.configuration).secretDelete(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Inspect a secret
+     * @param {string} id ID of the secret
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public secretInspect(id: string, options?: RawAxiosRequestConfig) {
+        return SecretApiFp(this.configuration).secretInspect(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary List secrets
+     * @param {string} [filters] A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the secrets list.  Available filters:  - &#x60;id&#x3D;&lt;secret id&gt;&#x60; - &#x60;label&#x3D;&lt;key&gt; or label&#x3D;&lt;key&gt;&#x3D;value&#x60; - &#x60;name&#x3D;&lt;secret name&gt;&#x60; - &#x60;names&#x3D;&lt;secret name&gt;&#x60; 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public secretList(filters?: string, options?: RawAxiosRequestConfig) {
+        return SecretApiFp(this.configuration).secretList(filters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Update a Secret
+     * @param {string} id The ID or name of the secret
+     * @param {number} version The version number of the secret object being updated. This is required to avoid conflicting writes. 
+     * @param {SecretSpec} [body] The spec of the secret to update. Currently, only the Labels field can be updated. All other fields must remain unchanged from the [SecretInspect endpoint](#operation/SecretInspect) response values. 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public secretUpdate(id: string, version: number, body?: SecretSpec, options?: RawAxiosRequestConfig) {
+        return SecretApiFp(this.configuration).secretUpdate(id, version, body, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * ServiceApi - axios parameter creator
+ */
+export const ServiceApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary Create a service
+         * @param {ServiceCreateRequest} body 
+         * @param {string} [xRegistryAuth] A base64url-encoded auth configuration for pulling from private registries.  Refer to the [authentication section](#section/Authentication) for details. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        serviceCreate: async (body: ServiceCreateRequest, xRegistryAuth?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'body' is not null or undefined
+            assertParamExists('serviceCreate', 'body', body)
+            const localVarPath = `/services/create`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (xRegistryAuth != null) {
+                localVarHeaderParameter['X-Registry-Auth'] = String(xRegistryAuth);
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Delete a service
+         * @param {string} id ID or name of service.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        serviceDelete: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('serviceDelete', 'id', id)
+            const localVarPath = `/services/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Inspect a service
+         * @param {string} id ID or name of service.
+         * @param {boolean} [insertDefaults] Fill empty fields with default values.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        serviceInspect: async (id: string, insertDefaults?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('serviceInspect', 'id', id)
+            const localVarPath = `/services/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (insertDefaults !== undefined) {
+                localVarQueryParameter['insertDefaults'] = insertDefaults;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary List services
+         * @param {string} [filters] A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the services list.  Available filters:  - &#x60;id&#x3D;&lt;service id&gt;&#x60; - &#x60;label&#x3D;&lt;service label&gt;&#x60; - &#x60;mode&#x3D;[\&quot;replicated\&quot;|\&quot;global\&quot;]&#x60; - &#x60;name&#x3D;&lt;service name&gt;&#x60; 
+         * @param {boolean} [status] Include service status, with count of running and desired tasks. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        serviceList: async (filters?: string, status?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/services`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (filters !== undefined) {
+                localVarQueryParameter['filters'] = filters;
+            }
+
+            if (status !== undefined) {
+                localVarQueryParameter['status'] = status;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Get `stdout` and `stderr` logs from a service. See also [`/containers/{id}/logs`](#operation/ContainerLogs).  **Note**: This endpoint works only for services with the `local`, `json-file` or `journald` logging drivers. 
+         * @summary Get service logs
+         * @param {string} id ID or name of the service
+         * @param {boolean} [details] Show service context and extra details provided to logs.
+         * @param {boolean} [follow] Keep connection after returning logs.
+         * @param {boolean} [stdout] Return logs from &#x60;stdout&#x60;
+         * @param {boolean} [stderr] Return logs from &#x60;stderr&#x60;
+         * @param {number} [since] Only return logs since this time, as a UNIX timestamp
+         * @param {boolean} [timestamps] Add timestamps to every log line
+         * @param {string} [tail] Only return this number of log lines from the end of the logs. Specify as an integer or &#x60;all&#x60; to output all log lines. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        serviceLogs: async (id: string, details?: boolean, follow?: boolean, stdout?: boolean, stderr?: boolean, since?: number, timestamps?: boolean, tail?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('serviceLogs', 'id', id)
+            const localVarPath = `/services/{id}/logs`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (details !== undefined) {
+                localVarQueryParameter['details'] = details;
+            }
+
+            if (follow !== undefined) {
+                localVarQueryParameter['follow'] = follow;
+            }
+
+            if (stdout !== undefined) {
+                localVarQueryParameter['stdout'] = stdout;
+            }
+
+            if (stderr !== undefined) {
+                localVarQueryParameter['stderr'] = stderr;
+            }
+
+            if (since !== undefined) {
+                localVarQueryParameter['since'] = since;
+            }
+
+            if (timestamps !== undefined) {
+                localVarQueryParameter['timestamps'] = timestamps;
+            }
+
+            if (tail !== undefined) {
+                localVarQueryParameter['tail'] = tail;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Update a service
+         * @param {string} id ID or name of service.
+         * @param {number} version The version number of the service object being updated. This is required to avoid conflicting writes. This version number should be the value as currently set on the service *before* the update. You can find the current version by calling &#x60;GET /services/{id}&#x60; 
+         * @param {ServiceUpdateRequest} body 
+         * @param {ServiceUpdateRegistryAuthFromEnum} [registryAuthFrom] If the &#x60;X-Registry-Auth&#x60; header is not specified, this parameter indicates where to find registry authorization credentials. 
+         * @param {string} [rollback] Set to this parameter to &#x60;previous&#x60; to cause a server-side rollback to the previous service spec. The supplied spec will be ignored in this case. 
+         * @param {string} [xRegistryAuth] A base64url-encoded auth configuration for pulling from private registries.  Refer to the [authentication section](#section/Authentication) for details. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        serviceUpdate: async (id: string, version: number, body: ServiceUpdateRequest, registryAuthFrom?: ServiceUpdateRegistryAuthFromEnum, rollback?: string, xRegistryAuth?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('serviceUpdate', 'id', id)
+            // verify required parameter 'version' is not null or undefined
+            assertParamExists('serviceUpdate', 'version', version)
+            // verify required parameter 'body' is not null or undefined
+            assertParamExists('serviceUpdate', 'body', body)
+            const localVarPath = `/services/{id}/update`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (version !== undefined) {
+                localVarQueryParameter['version'] = version;
+            }
+
+            if (registryAuthFrom !== undefined) {
+                localVarQueryParameter['registryAuthFrom'] = registryAuthFrom;
+            }
+
+            if (rollback !== undefined) {
+                localVarQueryParameter['rollback'] = rollback;
+            }
+
+            if (xRegistryAuth != null) {
+                localVarHeaderParameter['X-Registry-Auth'] = String(xRegistryAuth);
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * ServiceApi - functional programming interface
+ */
+export const ServiceApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = ServiceApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary Create a service
+         * @param {ServiceCreateRequest} body 
+         * @param {string} [xRegistryAuth] A base64url-encoded auth configuration for pulling from private registries.  Refer to the [authentication section](#section/Authentication) for details. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async serviceCreate(body: ServiceCreateRequest, xRegistryAuth?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceCreateResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.serviceCreate(body, xRegistryAuth, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ServiceApi.serviceCreate']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Delete a service
+         * @param {string} id ID or name of service.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async serviceDelete(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.serviceDelete(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ServiceApi.serviceDelete']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Inspect a service
+         * @param {string} id ID or name of service.
+         * @param {boolean} [insertDefaults] Fill empty fields with default values.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async serviceInspect(id: string, insertDefaults?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Service>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.serviceInspect(id, insertDefaults, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ServiceApi.serviceInspect']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary List services
+         * @param {string} [filters] A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the services list.  Available filters:  - &#x60;id&#x3D;&lt;service id&gt;&#x60; - &#x60;label&#x3D;&lt;service label&gt;&#x60; - &#x60;mode&#x3D;[\&quot;replicated\&quot;|\&quot;global\&quot;]&#x60; - &#x60;name&#x3D;&lt;service name&gt;&#x60; 
+         * @param {boolean} [status] Include service status, with count of running and desired tasks. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async serviceList(filters?: string, status?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Service>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.serviceList(filters, status, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ServiceApi.serviceList']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Get `stdout` and `stderr` logs from a service. See also [`/containers/{id}/logs`](#operation/ContainerLogs).  **Note**: This endpoint works only for services with the `local`, `json-file` or `journald` logging drivers. 
+         * @summary Get service logs
+         * @param {string} id ID or name of the service
+         * @param {boolean} [details] Show service context and extra details provided to logs.
+         * @param {boolean} [follow] Keep connection after returning logs.
+         * @param {boolean} [stdout] Return logs from &#x60;stdout&#x60;
+         * @param {boolean} [stderr] Return logs from &#x60;stderr&#x60;
+         * @param {number} [since] Only return logs since this time, as a UNIX timestamp
+         * @param {boolean} [timestamps] Add timestamps to every log line
+         * @param {string} [tail] Only return this number of log lines from the end of the logs. Specify as an integer or &#x60;all&#x60; to output all log lines. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async serviceLogs(id: string, details?: boolean, follow?: boolean, stdout?: boolean, stderr?: boolean, since?: number, timestamps?: boolean, tail?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<File>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.serviceLogs(id, details, follow, stdout, stderr, since, timestamps, tail, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ServiceApi.serviceLogs']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Update a service
+         * @param {string} id ID or name of service.
+         * @param {number} version The version number of the service object being updated. This is required to avoid conflicting writes. This version number should be the value as currently set on the service *before* the update. You can find the current version by calling &#x60;GET /services/{id}&#x60; 
+         * @param {ServiceUpdateRequest} body 
+         * @param {ServiceUpdateRegistryAuthFromEnum} [registryAuthFrom] If the &#x60;X-Registry-Auth&#x60; header is not specified, this parameter indicates where to find registry authorization credentials. 
+         * @param {string} [rollback] Set to this parameter to &#x60;previous&#x60; to cause a server-side rollback to the previous service spec. The supplied spec will be ignored in this case. 
+         * @param {string} [xRegistryAuth] A base64url-encoded auth configuration for pulling from private registries.  Refer to the [authentication section](#section/Authentication) for details. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async serviceUpdate(id: string, version: number, body: ServiceUpdateRequest, registryAuthFrom?: ServiceUpdateRegistryAuthFromEnum, rollback?: string, xRegistryAuth?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceUpdateResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.serviceUpdate(id, version, body, registryAuthFrom, rollback, xRegistryAuth, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ServiceApi.serviceUpdate']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * ServiceApi - factory interface
+ */
+export const ServiceApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = ServiceApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary Create a service
+         * @param {ServiceCreateRequest} body 
+         * @param {string} [xRegistryAuth] A base64url-encoded auth configuration for pulling from private registries.  Refer to the [authentication section](#section/Authentication) for details. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        serviceCreate(body: ServiceCreateRequest, xRegistryAuth?: string, options?: any): AxiosPromise<ServiceCreateResponse> {
+            return localVarFp.serviceCreate(body, xRegistryAuth, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Delete a service
+         * @param {string} id ID or name of service.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        serviceDelete(id: string, options?: any): AxiosPromise<void> {
+            return localVarFp.serviceDelete(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Inspect a service
+         * @param {string} id ID or name of service.
+         * @param {boolean} [insertDefaults] Fill empty fields with default values.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        serviceInspect(id: string, insertDefaults?: boolean, options?: any): AxiosPromise<Service> {
+            return localVarFp.serviceInspect(id, insertDefaults, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary List services
+         * @param {string} [filters] A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the services list.  Available filters:  - &#x60;id&#x3D;&lt;service id&gt;&#x60; - &#x60;label&#x3D;&lt;service label&gt;&#x60; - &#x60;mode&#x3D;[\&quot;replicated\&quot;|\&quot;global\&quot;]&#x60; - &#x60;name&#x3D;&lt;service name&gt;&#x60; 
+         * @param {boolean} [status] Include service status, with count of running and desired tasks. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        serviceList(filters?: string, status?: boolean, options?: any): AxiosPromise<Array<Service>> {
+            return localVarFp.serviceList(filters, status, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Get `stdout` and `stderr` logs from a service. See also [`/containers/{id}/logs`](#operation/ContainerLogs).  **Note**: This endpoint works only for services with the `local`, `json-file` or `journald` logging drivers. 
+         * @summary Get service logs
+         * @param {string} id ID or name of the service
+         * @param {boolean} [details] Show service context and extra details provided to logs.
+         * @param {boolean} [follow] Keep connection after returning logs.
+         * @param {boolean} [stdout] Return logs from &#x60;stdout&#x60;
+         * @param {boolean} [stderr] Return logs from &#x60;stderr&#x60;
+         * @param {number} [since] Only return logs since this time, as a UNIX timestamp
+         * @param {boolean} [timestamps] Add timestamps to every log line
+         * @param {string} [tail] Only return this number of log lines from the end of the logs. Specify as an integer or &#x60;all&#x60; to output all log lines. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        serviceLogs(id: string, details?: boolean, follow?: boolean, stdout?: boolean, stderr?: boolean, since?: number, timestamps?: boolean, tail?: string, options?: any): AxiosPromise<File> {
+            return localVarFp.serviceLogs(id, details, follow, stdout, stderr, since, timestamps, tail, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Update a service
+         * @param {string} id ID or name of service.
+         * @param {number} version The version number of the service object being updated. This is required to avoid conflicting writes. This version number should be the value as currently set on the service *before* the update. You can find the current version by calling &#x60;GET /services/{id}&#x60; 
+         * @param {ServiceUpdateRequest} body 
+         * @param {ServiceUpdateRegistryAuthFromEnum} [registryAuthFrom] If the &#x60;X-Registry-Auth&#x60; header is not specified, this parameter indicates where to find registry authorization credentials. 
+         * @param {string} [rollback] Set to this parameter to &#x60;previous&#x60; to cause a server-side rollback to the previous service spec. The supplied spec will be ignored in this case. 
+         * @param {string} [xRegistryAuth] A base64url-encoded auth configuration for pulling from private registries.  Refer to the [authentication section](#section/Authentication) for details. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        serviceUpdate(id: string, version: number, body: ServiceUpdateRequest, registryAuthFrom?: ServiceUpdateRegistryAuthFromEnum, rollback?: string, xRegistryAuth?: string, options?: any): AxiosPromise<ServiceUpdateResponse> {
+            return localVarFp.serviceUpdate(id, version, body, registryAuthFrom, rollback, xRegistryAuth, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * ServiceApi - object-oriented interface
+ * @class ServiceApi
+ * @extends {BaseAPI}
+ */
+export class ServiceApi extends BaseAPI {
+    /**
+     * 
+     * @summary Create a service
+     * @param {ServiceCreateRequest} body 
+     * @param {string} [xRegistryAuth] A base64url-encoded auth configuration for pulling from private registries.  Refer to the [authentication section](#section/Authentication) for details. 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public serviceCreate(body: ServiceCreateRequest, xRegistryAuth?: string, options?: RawAxiosRequestConfig) {
+        return ServiceApiFp(this.configuration).serviceCreate(body, xRegistryAuth, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Delete a service
+     * @param {string} id ID or name of service.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public serviceDelete(id: string, options?: RawAxiosRequestConfig) {
+        return ServiceApiFp(this.configuration).serviceDelete(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Inspect a service
+     * @param {string} id ID or name of service.
+     * @param {boolean} [insertDefaults] Fill empty fields with default values.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public serviceInspect(id: string, insertDefaults?: boolean, options?: RawAxiosRequestConfig) {
+        return ServiceApiFp(this.configuration).serviceInspect(id, insertDefaults, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary List services
+     * @param {string} [filters] A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the services list.  Available filters:  - &#x60;id&#x3D;&lt;service id&gt;&#x60; - &#x60;label&#x3D;&lt;service label&gt;&#x60; - &#x60;mode&#x3D;[\&quot;replicated\&quot;|\&quot;global\&quot;]&#x60; - &#x60;name&#x3D;&lt;service name&gt;&#x60; 
+     * @param {boolean} [status] Include service status, with count of running and desired tasks. 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public serviceList(filters?: string, status?: boolean, options?: RawAxiosRequestConfig) {
+        return ServiceApiFp(this.configuration).serviceList(filters, status, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Get `stdout` and `stderr` logs from a service. See also [`/containers/{id}/logs`](#operation/ContainerLogs).  **Note**: This endpoint works only for services with the `local`, `json-file` or `journald` logging drivers. 
+     * @summary Get service logs
+     * @param {string} id ID or name of the service
+     * @param {boolean} [details] Show service context and extra details provided to logs.
+     * @param {boolean} [follow] Keep connection after returning logs.
+     * @param {boolean} [stdout] Return logs from &#x60;stdout&#x60;
+     * @param {boolean} [stderr] Return logs from &#x60;stderr&#x60;
+     * @param {number} [since] Only return logs since this time, as a UNIX timestamp
+     * @param {boolean} [timestamps] Add timestamps to every log line
+     * @param {string} [tail] Only return this number of log lines from the end of the logs. Specify as an integer or &#x60;all&#x60; to output all log lines. 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public serviceLogs(id: string, details?: boolean, follow?: boolean, stdout?: boolean, stderr?: boolean, since?: number, timestamps?: boolean, tail?: string, options?: RawAxiosRequestConfig) {
+        return ServiceApiFp(this.configuration).serviceLogs(id, details, follow, stdout, stderr, since, timestamps, tail, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Update a service
+     * @param {string} id ID or name of service.
+     * @param {number} version The version number of the service object being updated. This is required to avoid conflicting writes. This version number should be the value as currently set on the service *before* the update. You can find the current version by calling &#x60;GET /services/{id}&#x60; 
+     * @param {ServiceUpdateRequest} body 
+     * @param {ServiceUpdateRegistryAuthFromEnum} [registryAuthFrom] If the &#x60;X-Registry-Auth&#x60; header is not specified, this parameter indicates where to find registry authorization credentials. 
+     * @param {string} [rollback] Set to this parameter to &#x60;previous&#x60; to cause a server-side rollback to the previous service spec. The supplied spec will be ignored in this case. 
+     * @param {string} [xRegistryAuth] A base64url-encoded auth configuration for pulling from private registries.  Refer to the [authentication section](#section/Authentication) for details. 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public serviceUpdate(id: string, version: number, body: ServiceUpdateRequest, registryAuthFrom?: ServiceUpdateRegistryAuthFromEnum, rollback?: string, xRegistryAuth?: string, options?: RawAxiosRequestConfig) {
+        return ServiceApiFp(this.configuration).serviceUpdate(id, version, body, registryAuthFrom, rollback, xRegistryAuth, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+/**
+  * @enum {string}
+  */
+export enum ServiceUpdateRegistryAuthFromEnum {
+    Spec = 'spec',
+    PreviousSpec = 'previous-spec'
+}
+
+
+/**
+ * SessionApi - axios parameter creator
+ */
+export const SessionApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Start a new interactive session with a server. Session allows server to call back to the client for advanced capabilities.  ### Hijacking  This endpoint hijacks the HTTP connection to HTTP2 transport that allows the client to expose gPRC services on that connection.  For example, the client sends this request to upgrade the connection:  ``` POST /session HTTP/1.1 Upgrade: h2c Connection: Upgrade ```  The Docker daemon responds with a `101 UPGRADED` response follow with the raw stream:  ``` HTTP/1.1 101 UPGRADED Connection: Upgrade Upgrade: h2c ``` 
+         * @summary Initialize interactive session
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        session: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/session`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * SessionApi - functional programming interface
+ */
+export const SessionApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = SessionApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * Start a new interactive session with a server. Session allows server to call back to the client for advanced capabilities.  ### Hijacking  This endpoint hijacks the HTTP connection to HTTP2 transport that allows the client to expose gPRC services on that connection.  For example, the client sends this request to upgrade the connection:  ``` POST /session HTTP/1.1 Upgrade: h2c Connection: Upgrade ```  The Docker daemon responds with a `101 UPGRADED` response follow with the raw stream:  ``` HTTP/1.1 101 UPGRADED Connection: Upgrade Upgrade: h2c ``` 
+         * @summary Initialize interactive session
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async session(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.session(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SessionApi.session']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * SessionApi - factory interface
+ */
+export const SessionApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = SessionApiFp(configuration)
+    return {
+        /**
+         * Start a new interactive session with a server. Session allows server to call back to the client for advanced capabilities.  ### Hijacking  This endpoint hijacks the HTTP connection to HTTP2 transport that allows the client to expose gPRC services on that connection.  For example, the client sends this request to upgrade the connection:  ``` POST /session HTTP/1.1 Upgrade: h2c Connection: Upgrade ```  The Docker daemon responds with a `101 UPGRADED` response follow with the raw stream:  ``` HTTP/1.1 101 UPGRADED Connection: Upgrade Upgrade: h2c ``` 
+         * @summary Initialize interactive session
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        session(options?: any): AxiosPromise<void> {
+            return localVarFp.session(options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * SessionApi - object-oriented interface
+ * @class SessionApi
+ * @extends {BaseAPI}
+ */
+export class SessionApi extends BaseAPI {
+    /**
+     * Start a new interactive session with a server. Session allows server to call back to the client for advanced capabilities.  ### Hijacking  This endpoint hijacks the HTTP connection to HTTP2 transport that allows the client to expose gPRC services on that connection.  For example, the client sends this request to upgrade the connection:  ``` POST /session HTTP/1.1 Upgrade: h2c Connection: Upgrade ```  The Docker daemon responds with a `101 UPGRADED` response follow with the raw stream:  ``` HTTP/1.1 101 UPGRADED Connection: Upgrade Upgrade: h2c ``` 
+     * @summary Initialize interactive session
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public session(options?: RawAxiosRequestConfig) {
+        return SessionApiFp(this.configuration).session(options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * SwarmApi - axios parameter creator
+ */
+export const SwarmApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary Initialize a new swarm
+         * @param {SwarmInitRequest} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        swarmInit: async (body: SwarmInitRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'body' is not null or undefined
+            assertParamExists('swarmInit', 'body', body)
+            const localVarPath = `/swarm/init`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Inspect swarm
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        swarmInspect: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/swarm`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Join an existing swarm
+         * @param {SwarmJoinRequest} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        swarmJoin: async (body: SwarmJoinRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'body' is not null or undefined
+            assertParamExists('swarmJoin', 'body', body)
+            const localVarPath = `/swarm/join`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Leave a swarm
+         * @param {boolean} [force] Force leave swarm, even if this is the last manager or that it will break the cluster. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        swarmLeave: async (force?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/swarm/leave`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (force !== undefined) {
+                localVarQueryParameter['force'] = force;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Unlock a locked manager
+         * @param {SwarmUnlockRequest} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        swarmUnlock: async (body: SwarmUnlockRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'body' is not null or undefined
+            assertParamExists('swarmUnlock', 'body', body)
+            const localVarPath = `/swarm/unlock`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get the unlock key
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        swarmUnlockkey: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/swarm/unlockkey`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Update a swarm
+         * @param {number} version The version number of the swarm object being updated. This is required to avoid conflicting writes. 
+         * @param {SwarmSpec} body 
+         * @param {boolean} [rotateWorkerToken] Rotate the worker join token.
+         * @param {boolean} [rotateManagerToken] Rotate the manager join token.
+         * @param {boolean} [rotateManagerUnlockKey] Rotate the manager unlock key.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        swarmUpdate: async (version: number, body: SwarmSpec, rotateWorkerToken?: boolean, rotateManagerToken?: boolean, rotateManagerUnlockKey?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'version' is not null or undefined
+            assertParamExists('swarmUpdate', 'version', version)
+            // verify required parameter 'body' is not null or undefined
+            assertParamExists('swarmUpdate', 'body', body)
+            const localVarPath = `/swarm/update`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (version !== undefined) {
+                localVarQueryParameter['version'] = version;
+            }
+
+            if (rotateWorkerToken !== undefined) {
+                localVarQueryParameter['rotateWorkerToken'] = rotateWorkerToken;
+            }
+
+            if (rotateManagerToken !== undefined) {
+                localVarQueryParameter['rotateManagerToken'] = rotateManagerToken;
+            }
+
+            if (rotateManagerUnlockKey !== undefined) {
+                localVarQueryParameter['rotateManagerUnlockKey'] = rotateManagerUnlockKey;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * SwarmApi - functional programming interface
+ */
+export const SwarmApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = SwarmApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary Initialize a new swarm
+         * @param {SwarmInitRequest} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async swarmInit(body: SwarmInitRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.swarmInit(body, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SwarmApi.swarmInit']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Inspect swarm
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async swarmInspect(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Swarm>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.swarmInspect(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SwarmApi.swarmInspect']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Join an existing swarm
+         * @param {SwarmJoinRequest} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async swarmJoin(body: SwarmJoinRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.swarmJoin(body, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SwarmApi.swarmJoin']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Leave a swarm
+         * @param {boolean} [force] Force leave swarm, even if this is the last manager or that it will break the cluster. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async swarmLeave(force?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.swarmLeave(force, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SwarmApi.swarmLeave']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Unlock a locked manager
+         * @param {SwarmUnlockRequest} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async swarmUnlock(body: SwarmUnlockRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.swarmUnlock(body, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SwarmApi.swarmUnlock']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Get the unlock key
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async swarmUnlockkey(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UnlockKeyResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.swarmUnlockkey(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SwarmApi.swarmUnlockkey']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Update a swarm
+         * @param {number} version The version number of the swarm object being updated. This is required to avoid conflicting writes. 
+         * @param {SwarmSpec} body 
+         * @param {boolean} [rotateWorkerToken] Rotate the worker join token.
+         * @param {boolean} [rotateManagerToken] Rotate the manager join token.
+         * @param {boolean} [rotateManagerUnlockKey] Rotate the manager unlock key.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async swarmUpdate(version: number, body: SwarmSpec, rotateWorkerToken?: boolean, rotateManagerToken?: boolean, rotateManagerUnlockKey?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.swarmUpdate(version, body, rotateWorkerToken, rotateManagerToken, rotateManagerUnlockKey, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SwarmApi.swarmUpdate']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * SwarmApi - factory interface
+ */
+export const SwarmApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = SwarmApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary Initialize a new swarm
+         * @param {SwarmInitRequest} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        swarmInit(body: SwarmInitRequest, options?: any): AxiosPromise<string> {
+            return localVarFp.swarmInit(body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Inspect swarm
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        swarmInspect(options?: any): AxiosPromise<Swarm> {
+            return localVarFp.swarmInspect(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Join an existing swarm
+         * @param {SwarmJoinRequest} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        swarmJoin(body: SwarmJoinRequest, options?: any): AxiosPromise<void> {
+            return localVarFp.swarmJoin(body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Leave a swarm
+         * @param {boolean} [force] Force leave swarm, even if this is the last manager or that it will break the cluster. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        swarmLeave(force?: boolean, options?: any): AxiosPromise<void> {
+            return localVarFp.swarmLeave(force, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Unlock a locked manager
+         * @param {SwarmUnlockRequest} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        swarmUnlock(body: SwarmUnlockRequest, options?: any): AxiosPromise<void> {
+            return localVarFp.swarmUnlock(body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get the unlock key
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        swarmUnlockkey(options?: any): AxiosPromise<UnlockKeyResponse> {
+            return localVarFp.swarmUnlockkey(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Update a swarm
+         * @param {number} version The version number of the swarm object being updated. This is required to avoid conflicting writes. 
+         * @param {SwarmSpec} body 
+         * @param {boolean} [rotateWorkerToken] Rotate the worker join token.
+         * @param {boolean} [rotateManagerToken] Rotate the manager join token.
+         * @param {boolean} [rotateManagerUnlockKey] Rotate the manager unlock key.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        swarmUpdate(version: number, body: SwarmSpec, rotateWorkerToken?: boolean, rotateManagerToken?: boolean, rotateManagerUnlockKey?: boolean, options?: any): AxiosPromise<void> {
+            return localVarFp.swarmUpdate(version, body, rotateWorkerToken, rotateManagerToken, rotateManagerUnlockKey, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * SwarmApi - object-oriented interface
+ * @class SwarmApi
+ * @extends {BaseAPI}
+ */
+export class SwarmApi extends BaseAPI {
+    /**
+     * 
+     * @summary Initialize a new swarm
+     * @param {SwarmInitRequest} body 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public swarmInit(body: SwarmInitRequest, options?: RawAxiosRequestConfig) {
+        return SwarmApiFp(this.configuration).swarmInit(body, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Inspect swarm
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public swarmInspect(options?: RawAxiosRequestConfig) {
+        return SwarmApiFp(this.configuration).swarmInspect(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Join an existing swarm
+     * @param {SwarmJoinRequest} body 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public swarmJoin(body: SwarmJoinRequest, options?: RawAxiosRequestConfig) {
+        return SwarmApiFp(this.configuration).swarmJoin(body, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Leave a swarm
+     * @param {boolean} [force] Force leave swarm, even if this is the last manager or that it will break the cluster. 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public swarmLeave(force?: boolean, options?: RawAxiosRequestConfig) {
+        return SwarmApiFp(this.configuration).swarmLeave(force, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Unlock a locked manager
+     * @param {SwarmUnlockRequest} body 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public swarmUnlock(body: SwarmUnlockRequest, options?: RawAxiosRequestConfig) {
+        return SwarmApiFp(this.configuration).swarmUnlock(body, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get the unlock key
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public swarmUnlockkey(options?: RawAxiosRequestConfig) {
+        return SwarmApiFp(this.configuration).swarmUnlockkey(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Update a swarm
+     * @param {number} version The version number of the swarm object being updated. This is required to avoid conflicting writes. 
+     * @param {SwarmSpec} body 
+     * @param {boolean} [rotateWorkerToken] Rotate the worker join token.
+     * @param {boolean} [rotateManagerToken] Rotate the manager join token.
+     * @param {boolean} [rotateManagerUnlockKey] Rotate the manager unlock key.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public swarmUpdate(version: number, body: SwarmSpec, rotateWorkerToken?: boolean, rotateManagerToken?: boolean, rotateManagerUnlockKey?: boolean, options?: RawAxiosRequestConfig) {
+        return SwarmApiFp(this.configuration).swarmUpdate(version, body, rotateWorkerToken, rotateManagerToken, rotateManagerUnlockKey, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * SystemApi - axios parameter creator
+ */
+export const SystemApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Validate credentials for a registry and, if available, get an identity token for accessing the registry without password. 
+         * @summary Check auth configuration
+         * @param {AuthConfig} [authConfig] Authentication to check
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        systemAuth: async (authConfig?: AuthConfig, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/auth`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(authConfig, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get data usage information
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        systemDataUsage: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/system/df`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Stream real-time events from the server.  Various objects within Docker report events when something happens to them.  Containers report these events: `attach`, `commit`, `copy`, `create`, `destroy`, `detach`, `die`, `exec_create`, `exec_detach`, `exec_start`, `exec_die`, `export`, `health_status`, `kill`, `oom`, `pause`, `rename`, `resize`, `restart`, `start`, `stop`, `top`, `unpause`, `update`, and `prune`  Images report these events: `delete`, `import`, `load`, `pull`, `push`, `save`, `tag`, `untag`, and `prune`  Volumes report these events: `create`, `mount`, `unmount`, `destroy`, and `prune`  Networks report these events: `create`, `connect`, `disconnect`, `destroy`, `update`, `remove`, and `prune`  The Docker daemon reports these events: `reload`  Services report these events: `create`, `update`, and `remove`  Nodes report these events: `create`, `update`, and `remove`  Secrets report these events: `create`, `update`, and `remove`  Configs report these events: `create`, `update`, and `remove`  The Builder reports `prune` events 
+         * @summary Monitor events
+         * @param {string} [since] Show events created since this timestamp then stream new events.
+         * @param {string} [until] Show events created until this timestamp then stop streaming.
+         * @param {string} [filters] A JSON encoded value of filters (a &#x60;map[string][]string&#x60;) to process on the event list. Available filters:  - &#x60;config&#x3D;&lt;string&gt;&#x60; config name or ID - &#x60;container&#x3D;&lt;string&gt;&#x60; container name or ID - &#x60;daemon&#x3D;&lt;string&gt;&#x60; daemon name or ID - &#x60;event&#x3D;&lt;string&gt;&#x60; event type - &#x60;image&#x3D;&lt;string&gt;&#x60; image name or ID - &#x60;label&#x3D;&lt;string&gt;&#x60; image or container label - &#x60;network&#x3D;&lt;string&gt;&#x60; network name or ID - &#x60;node&#x3D;&lt;string&gt;&#x60; node ID - &#x60;plugin&#x60;&#x3D;&lt;string&gt; plugin name or ID - &#x60;scope&#x60;&#x3D;&lt;string&gt; local or swarm - &#x60;secret&#x3D;&lt;string&gt;&#x60; secret name or ID - &#x60;service&#x3D;&lt;string&gt;&#x60; service name or ID - &#x60;type&#x3D;&lt;string&gt;&#x60; object to filter by, one of &#x60;container&#x60;, &#x60;image&#x60;, &#x60;volume&#x60;, &#x60;network&#x60;, &#x60;daemon&#x60;, &#x60;plugin&#x60;, &#x60;node&#x60;, &#x60;service&#x60;, &#x60;secret&#x60; or &#x60;config&#x60; - &#x60;volume&#x3D;&lt;string&gt;&#x60; volume name 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        systemEvents: async (since?: string, until?: string, filters?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/events`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (since !== undefined) {
+                localVarQueryParameter['since'] = since;
+            }
+
+            if (until !== undefined) {
+                localVarQueryParameter['until'] = until;
+            }
+
+            if (filters !== undefined) {
+                localVarQueryParameter['filters'] = filters;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get system information
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        systemInfo: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/info`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This is a dummy endpoint you can use to test if the server is accessible.
+         * @summary Ping
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        systemPing: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/_ping`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This is a dummy endpoint you can use to test if the server is accessible.
+         * @summary Ping
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        systemPingHead: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/_ping`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'HEAD', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns the version of Docker that is running and various information about the system that Docker is running on.
+         * @summary Get version
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        systemVersion: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/version`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * SystemApi - functional programming interface
+ */
+export const SystemApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = SystemApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * Validate credentials for a registry and, if available, get an identity token for accessing the registry without password. 
+         * @summary Check auth configuration
+         * @param {AuthConfig} [authConfig] Authentication to check
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async systemAuth(authConfig?: AuthConfig, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SystemAuthResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.systemAuth(authConfig, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SystemApi.systemAuth']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Get data usage information
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async systemDataUsage(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SystemDataUsageResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.systemDataUsage(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SystemApi.systemDataUsage']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Stream real-time events from the server.  Various objects within Docker report events when something happens to them.  Containers report these events: `attach`, `commit`, `copy`, `create`, `destroy`, `detach`, `die`, `exec_create`, `exec_detach`, `exec_start`, `exec_die`, `export`, `health_status`, `kill`, `oom`, `pause`, `rename`, `resize`, `restart`, `start`, `stop`, `top`, `unpause`, `update`, and `prune`  Images report these events: `delete`, `import`, `load`, `pull`, `push`, `save`, `tag`, `untag`, and `prune`  Volumes report these events: `create`, `mount`, `unmount`, `destroy`, and `prune`  Networks report these events: `create`, `connect`, `disconnect`, `destroy`, `update`, `remove`, and `prune`  The Docker daemon reports these events: `reload`  Services report these events: `create`, `update`, and `remove`  Nodes report these events: `create`, `update`, and `remove`  Secrets report these events: `create`, `update`, and `remove`  Configs report these events: `create`, `update`, and `remove`  The Builder reports `prune` events 
+         * @summary Monitor events
+         * @param {string} [since] Show events created since this timestamp then stream new events.
+         * @param {string} [until] Show events created until this timestamp then stop streaming.
+         * @param {string} [filters] A JSON encoded value of filters (a &#x60;map[string][]string&#x60;) to process on the event list. Available filters:  - &#x60;config&#x3D;&lt;string&gt;&#x60; config name or ID - &#x60;container&#x3D;&lt;string&gt;&#x60; container name or ID - &#x60;daemon&#x3D;&lt;string&gt;&#x60; daemon name or ID - &#x60;event&#x3D;&lt;string&gt;&#x60; event type - &#x60;image&#x3D;&lt;string&gt;&#x60; image name or ID - &#x60;label&#x3D;&lt;string&gt;&#x60; image or container label - &#x60;network&#x3D;&lt;string&gt;&#x60; network name or ID - &#x60;node&#x3D;&lt;string&gt;&#x60; node ID - &#x60;plugin&#x60;&#x3D;&lt;string&gt; plugin name or ID - &#x60;scope&#x60;&#x3D;&lt;string&gt; local or swarm - &#x60;secret&#x3D;&lt;string&gt;&#x60; secret name or ID - &#x60;service&#x3D;&lt;string&gt;&#x60; service name or ID - &#x60;type&#x3D;&lt;string&gt;&#x60; object to filter by, one of &#x60;container&#x60;, &#x60;image&#x60;, &#x60;volume&#x60;, &#x60;network&#x60;, &#x60;daemon&#x60;, &#x60;plugin&#x60;, &#x60;node&#x60;, &#x60;service&#x60;, &#x60;secret&#x60; or &#x60;config&#x60; - &#x60;volume&#x3D;&lt;string&gt;&#x60; volume name 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async systemEvents(since?: string, until?: string, filters?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EventMessage>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.systemEvents(since, until, filters, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SystemApi.systemEvents']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Get system information
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async systemInfo(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SystemInfo>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.systemInfo(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SystemApi.systemInfo']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * This is a dummy endpoint you can use to test if the server is accessible.
+         * @summary Ping
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async systemPing(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.systemPing(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SystemApi.systemPing']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * This is a dummy endpoint you can use to test if the server is accessible.
+         * @summary Ping
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async systemPingHead(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.systemPingHead(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SystemApi.systemPingHead']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns the version of Docker that is running and various information about the system that Docker is running on.
+         * @summary Get version
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async systemVersion(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SystemVersion>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.systemVersion(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SystemApi.systemVersion']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * SystemApi - factory interface
+ */
+export const SystemApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = SystemApiFp(configuration)
+    return {
+        /**
+         * Validate credentials for a registry and, if available, get an identity token for accessing the registry without password. 
+         * @summary Check auth configuration
+         * @param {AuthConfig} [authConfig] Authentication to check
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        systemAuth(authConfig?: AuthConfig, options?: any): AxiosPromise<SystemAuthResponse> {
+            return localVarFp.systemAuth(authConfig, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get data usage information
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        systemDataUsage(options?: any): AxiosPromise<SystemDataUsageResponse> {
+            return localVarFp.systemDataUsage(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Stream real-time events from the server.  Various objects within Docker report events when something happens to them.  Containers report these events: `attach`, `commit`, `copy`, `create`, `destroy`, `detach`, `die`, `exec_create`, `exec_detach`, `exec_start`, `exec_die`, `export`, `health_status`, `kill`, `oom`, `pause`, `rename`, `resize`, `restart`, `start`, `stop`, `top`, `unpause`, `update`, and `prune`  Images report these events: `delete`, `import`, `load`, `pull`, `push`, `save`, `tag`, `untag`, and `prune`  Volumes report these events: `create`, `mount`, `unmount`, `destroy`, and `prune`  Networks report these events: `create`, `connect`, `disconnect`, `destroy`, `update`, `remove`, and `prune`  The Docker daemon reports these events: `reload`  Services report these events: `create`, `update`, and `remove`  Nodes report these events: `create`, `update`, and `remove`  Secrets report these events: `create`, `update`, and `remove`  Configs report these events: `create`, `update`, and `remove`  The Builder reports `prune` events 
+         * @summary Monitor events
+         * @param {string} [since] Show events created since this timestamp then stream new events.
+         * @param {string} [until] Show events created until this timestamp then stop streaming.
+         * @param {string} [filters] A JSON encoded value of filters (a &#x60;map[string][]string&#x60;) to process on the event list. Available filters:  - &#x60;config&#x3D;&lt;string&gt;&#x60; config name or ID - &#x60;container&#x3D;&lt;string&gt;&#x60; container name or ID - &#x60;daemon&#x3D;&lt;string&gt;&#x60; daemon name or ID - &#x60;event&#x3D;&lt;string&gt;&#x60; event type - &#x60;image&#x3D;&lt;string&gt;&#x60; image name or ID - &#x60;label&#x3D;&lt;string&gt;&#x60; image or container label - &#x60;network&#x3D;&lt;string&gt;&#x60; network name or ID - &#x60;node&#x3D;&lt;string&gt;&#x60; node ID - &#x60;plugin&#x60;&#x3D;&lt;string&gt; plugin name or ID - &#x60;scope&#x60;&#x3D;&lt;string&gt; local or swarm - &#x60;secret&#x3D;&lt;string&gt;&#x60; secret name or ID - &#x60;service&#x3D;&lt;string&gt;&#x60; service name or ID - &#x60;type&#x3D;&lt;string&gt;&#x60; object to filter by, one of &#x60;container&#x60;, &#x60;image&#x60;, &#x60;volume&#x60;, &#x60;network&#x60;, &#x60;daemon&#x60;, &#x60;plugin&#x60;, &#x60;node&#x60;, &#x60;service&#x60;, &#x60;secret&#x60; or &#x60;config&#x60; - &#x60;volume&#x3D;&lt;string&gt;&#x60; volume name 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        systemEvents(since?: string, until?: string, filters?: string, options?: any): AxiosPromise<EventMessage> {
+            return localVarFp.systemEvents(since, until, filters, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get system information
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        systemInfo(options?: any): AxiosPromise<SystemInfo> {
+            return localVarFp.systemInfo(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * This is a dummy endpoint you can use to test if the server is accessible.
+         * @summary Ping
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        systemPing(options?: any): AxiosPromise<string> {
+            return localVarFp.systemPing(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * This is a dummy endpoint you can use to test if the server is accessible.
+         * @summary Ping
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        systemPingHead(options?: any): AxiosPromise<string> {
+            return localVarFp.systemPingHead(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns the version of Docker that is running and various information about the system that Docker is running on.
+         * @summary Get version
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        systemVersion(options?: any): AxiosPromise<SystemVersion> {
+            return localVarFp.systemVersion(options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * SystemApi - object-oriented interface
+ * @class SystemApi
+ * @extends {BaseAPI}
+ */
+export class SystemApi extends BaseAPI {
+    /**
+     * Validate credentials for a registry and, if available, get an identity token for accessing the registry without password. 
+     * @summary Check auth configuration
+     * @param {AuthConfig} [authConfig] Authentication to check
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public systemAuth(authConfig?: AuthConfig, options?: RawAxiosRequestConfig) {
+        return SystemApiFp(this.configuration).systemAuth(authConfig, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get data usage information
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public systemDataUsage(options?: RawAxiosRequestConfig) {
+        return SystemApiFp(this.configuration).systemDataUsage(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Stream real-time events from the server.  Various objects within Docker report events when something happens to them.  Containers report these events: `attach`, `commit`, `copy`, `create`, `destroy`, `detach`, `die`, `exec_create`, `exec_detach`, `exec_start`, `exec_die`, `export`, `health_status`, `kill`, `oom`, `pause`, `rename`, `resize`, `restart`, `start`, `stop`, `top`, `unpause`, `update`, and `prune`  Images report these events: `delete`, `import`, `load`, `pull`, `push`, `save`, `tag`, `untag`, and `prune`  Volumes report these events: `create`, `mount`, `unmount`, `destroy`, and `prune`  Networks report these events: `create`, `connect`, `disconnect`, `destroy`, `update`, `remove`, and `prune`  The Docker daemon reports these events: `reload`  Services report these events: `create`, `update`, and `remove`  Nodes report these events: `create`, `update`, and `remove`  Secrets report these events: `create`, `update`, and `remove`  Configs report these events: `create`, `update`, and `remove`  The Builder reports `prune` events 
+     * @summary Monitor events
+     * @param {string} [since] Show events created since this timestamp then stream new events.
+     * @param {string} [until] Show events created until this timestamp then stop streaming.
+     * @param {string} [filters] A JSON encoded value of filters (a &#x60;map[string][]string&#x60;) to process on the event list. Available filters:  - &#x60;config&#x3D;&lt;string&gt;&#x60; config name or ID - &#x60;container&#x3D;&lt;string&gt;&#x60; container name or ID - &#x60;daemon&#x3D;&lt;string&gt;&#x60; daemon name or ID - &#x60;event&#x3D;&lt;string&gt;&#x60; event type - &#x60;image&#x3D;&lt;string&gt;&#x60; image name or ID - &#x60;label&#x3D;&lt;string&gt;&#x60; image or container label - &#x60;network&#x3D;&lt;string&gt;&#x60; network name or ID - &#x60;node&#x3D;&lt;string&gt;&#x60; node ID - &#x60;plugin&#x60;&#x3D;&lt;string&gt; plugin name or ID - &#x60;scope&#x60;&#x3D;&lt;string&gt; local or swarm - &#x60;secret&#x3D;&lt;string&gt;&#x60; secret name or ID - &#x60;service&#x3D;&lt;string&gt;&#x60; service name or ID - &#x60;type&#x3D;&lt;string&gt;&#x60; object to filter by, one of &#x60;container&#x60;, &#x60;image&#x60;, &#x60;volume&#x60;, &#x60;network&#x60;, &#x60;daemon&#x60;, &#x60;plugin&#x60;, &#x60;node&#x60;, &#x60;service&#x60;, &#x60;secret&#x60; or &#x60;config&#x60; - &#x60;volume&#x3D;&lt;string&gt;&#x60; volume name 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public systemEvents(since?: string, until?: string, filters?: string, options?: RawAxiosRequestConfig) {
+        return SystemApiFp(this.configuration).systemEvents(since, until, filters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get system information
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public systemInfo(options?: RawAxiosRequestConfig) {
+        return SystemApiFp(this.configuration).systemInfo(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * This is a dummy endpoint you can use to test if the server is accessible.
+     * @summary Ping
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public systemPing(options?: RawAxiosRequestConfig) {
+        return SystemApiFp(this.configuration).systemPing(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * This is a dummy endpoint you can use to test if the server is accessible.
+     * @summary Ping
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public systemPingHead(options?: RawAxiosRequestConfig) {
+        return SystemApiFp(this.configuration).systemPingHead(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the version of Docker that is running and various information about the system that Docker is running on.
+     * @summary Get version
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public systemVersion(options?: RawAxiosRequestConfig) {
+        return SystemApiFp(this.configuration).systemVersion(options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * TaskApi - axios parameter creator
+ */
+export const TaskApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary Inspect a task
+         * @param {string} id ID of the task
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        taskInspect: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('taskInspect', 'id', id)
+            const localVarPath = `/tasks/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary List tasks
+         * @param {string} [filters] A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the tasks list.  Available filters:  - &#x60;desired-state&#x3D;(running | shutdown | accepted)&#x60; - &#x60;id&#x3D;&lt;task id&gt;&#x60; - &#x60;label&#x3D;key&#x60; or &#x60;label&#x3D;\&quot;key&#x3D;value\&quot;&#x60; - &#x60;name&#x3D;&lt;task name&gt;&#x60; - &#x60;node&#x3D;&lt;node id or name&gt;&#x60; - &#x60;service&#x3D;&lt;service name&gt;&#x60; 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        taskList: async (filters?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/tasks`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (filters !== undefined) {
+                localVarQueryParameter['filters'] = filters;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Get `stdout` and `stderr` logs from a task. See also [`/containers/{id}/logs`](#operation/ContainerLogs).  **Note**: This endpoint works only for services with the `local`, `json-file` or `journald` logging drivers. 
+         * @summary Get task logs
+         * @param {string} id ID of the task
+         * @param {boolean} [details] Show task context and extra details provided to logs.
+         * @param {boolean} [follow] Keep connection after returning logs.
+         * @param {boolean} [stdout] Return logs from &#x60;stdout&#x60;
+         * @param {boolean} [stderr] Return logs from &#x60;stderr&#x60;
+         * @param {number} [since] Only return logs since this time, as a UNIX timestamp
+         * @param {boolean} [timestamps] Add timestamps to every log line
+         * @param {string} [tail] Only return this number of log lines from the end of the logs. Specify as an integer or &#x60;all&#x60; to output all log lines. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        taskLogs: async (id: string, details?: boolean, follow?: boolean, stdout?: boolean, stderr?: boolean, since?: number, timestamps?: boolean, tail?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('taskLogs', 'id', id)
+            const localVarPath = `/tasks/{id}/logs`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (details !== undefined) {
+                localVarQueryParameter['details'] = details;
+            }
+
+            if (follow !== undefined) {
+                localVarQueryParameter['follow'] = follow;
+            }
+
+            if (stdout !== undefined) {
+                localVarQueryParameter['stdout'] = stdout;
+            }
+
+            if (stderr !== undefined) {
+                localVarQueryParameter['stderr'] = stderr;
+            }
+
+            if (since !== undefined) {
+                localVarQueryParameter['since'] = since;
+            }
+
+            if (timestamps !== undefined) {
+                localVarQueryParameter['timestamps'] = timestamps;
+            }
+
+            if (tail !== undefined) {
+                localVarQueryParameter['tail'] = tail;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * TaskApi - functional programming interface
+ */
+export const TaskApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = TaskApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary Inspect a task
+         * @param {string} id ID of the task
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async taskInspect(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Task>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.taskInspect(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['TaskApi.taskInspect']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary List tasks
+         * @param {string} [filters] A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the tasks list.  Available filters:  - &#x60;desired-state&#x3D;(running | shutdown | accepted)&#x60; - &#x60;id&#x3D;&lt;task id&gt;&#x60; - &#x60;label&#x3D;key&#x60; or &#x60;label&#x3D;\&quot;key&#x3D;value\&quot;&#x60; - &#x60;name&#x3D;&lt;task name&gt;&#x60; - &#x60;node&#x3D;&lt;node id or name&gt;&#x60; - &#x60;service&#x3D;&lt;service name&gt;&#x60; 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async taskList(filters?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Task>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.taskList(filters, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['TaskApi.taskList']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Get `stdout` and `stderr` logs from a task. See also [`/containers/{id}/logs`](#operation/ContainerLogs).  **Note**: This endpoint works only for services with the `local`, `json-file` or `journald` logging drivers. 
+         * @summary Get task logs
+         * @param {string} id ID of the task
+         * @param {boolean} [details] Show task context and extra details provided to logs.
+         * @param {boolean} [follow] Keep connection after returning logs.
+         * @param {boolean} [stdout] Return logs from &#x60;stdout&#x60;
+         * @param {boolean} [stderr] Return logs from &#x60;stderr&#x60;
+         * @param {number} [since] Only return logs since this time, as a UNIX timestamp
+         * @param {boolean} [timestamps] Add timestamps to every log line
+         * @param {string} [tail] Only return this number of log lines from the end of the logs. Specify as an integer or &#x60;all&#x60; to output all log lines. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async taskLogs(id: string, details?: boolean, follow?: boolean, stdout?: boolean, stderr?: boolean, since?: number, timestamps?: boolean, tail?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<File>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.taskLogs(id, details, follow, stdout, stderr, since, timestamps, tail, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['TaskApi.taskLogs']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * TaskApi - factory interface
+ */
+export const TaskApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = TaskApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary Inspect a task
+         * @param {string} id ID of the task
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        taskInspect(id: string, options?: any): AxiosPromise<Task> {
+            return localVarFp.taskInspect(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary List tasks
+         * @param {string} [filters] A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the tasks list.  Available filters:  - &#x60;desired-state&#x3D;(running | shutdown | accepted)&#x60; - &#x60;id&#x3D;&lt;task id&gt;&#x60; - &#x60;label&#x3D;key&#x60; or &#x60;label&#x3D;\&quot;key&#x3D;value\&quot;&#x60; - &#x60;name&#x3D;&lt;task name&gt;&#x60; - &#x60;node&#x3D;&lt;node id or name&gt;&#x60; - &#x60;service&#x3D;&lt;service name&gt;&#x60; 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        taskList(filters?: string, options?: any): AxiosPromise<Array<Task>> {
+            return localVarFp.taskList(filters, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Get `stdout` and `stderr` logs from a task. See also [`/containers/{id}/logs`](#operation/ContainerLogs).  **Note**: This endpoint works only for services with the `local`, `json-file` or `journald` logging drivers. 
+         * @summary Get task logs
+         * @param {string} id ID of the task
+         * @param {boolean} [details] Show task context and extra details provided to logs.
+         * @param {boolean} [follow] Keep connection after returning logs.
+         * @param {boolean} [stdout] Return logs from &#x60;stdout&#x60;
+         * @param {boolean} [stderr] Return logs from &#x60;stderr&#x60;
+         * @param {number} [since] Only return logs since this time, as a UNIX timestamp
+         * @param {boolean} [timestamps] Add timestamps to every log line
+         * @param {string} [tail] Only return this number of log lines from the end of the logs. Specify as an integer or &#x60;all&#x60; to output all log lines. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        taskLogs(id: string, details?: boolean, follow?: boolean, stdout?: boolean, stderr?: boolean, since?: number, timestamps?: boolean, tail?: string, options?: any): AxiosPromise<File> {
+            return localVarFp.taskLogs(id, details, follow, stdout, stderr, since, timestamps, tail, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * TaskApi - object-oriented interface
+ * @class TaskApi
+ * @extends {BaseAPI}
+ */
+export class TaskApi extends BaseAPI {
+    /**
+     * 
+     * @summary Inspect a task
+     * @param {string} id ID of the task
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public taskInspect(id: string, options?: RawAxiosRequestConfig) {
+        return TaskApiFp(this.configuration).taskInspect(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary List tasks
+     * @param {string} [filters] A JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the tasks list.  Available filters:  - &#x60;desired-state&#x3D;(running | shutdown | accepted)&#x60; - &#x60;id&#x3D;&lt;task id&gt;&#x60; - &#x60;label&#x3D;key&#x60; or &#x60;label&#x3D;\&quot;key&#x3D;value\&quot;&#x60; - &#x60;name&#x3D;&lt;task name&gt;&#x60; - &#x60;node&#x3D;&lt;node id or name&gt;&#x60; - &#x60;service&#x3D;&lt;service name&gt;&#x60; 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public taskList(filters?: string, options?: RawAxiosRequestConfig) {
+        return TaskApiFp(this.configuration).taskList(filters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Get `stdout` and `stderr` logs from a task. See also [`/containers/{id}/logs`](#operation/ContainerLogs).  **Note**: This endpoint works only for services with the `local`, `json-file` or `journald` logging drivers. 
+     * @summary Get task logs
+     * @param {string} id ID of the task
+     * @param {boolean} [details] Show task context and extra details provided to logs.
+     * @param {boolean} [follow] Keep connection after returning logs.
+     * @param {boolean} [stdout] Return logs from &#x60;stdout&#x60;
+     * @param {boolean} [stderr] Return logs from &#x60;stderr&#x60;
+     * @param {number} [since] Only return logs since this time, as a UNIX timestamp
+     * @param {boolean} [timestamps] Add timestamps to every log line
+     * @param {string} [tail] Only return this number of log lines from the end of the logs. Specify as an integer or &#x60;all&#x60; to output all log lines. 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public taskLogs(id: string, details?: boolean, follow?: boolean, stdout?: boolean, stderr?: boolean, since?: number, timestamps?: boolean, tail?: string, options?: RawAxiosRequestConfig) {
+        return TaskApiFp(this.configuration).taskLogs(id, details, follow, stdout, stderr, since, timestamps, tail, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * VolumeApi - axios parameter creator
+ */
+export const VolumeApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary Create a volume
+         * @param {VolumeCreateOptions} volumeConfig Volume configuration
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        volumeCreate: async (volumeConfig: VolumeCreateOptions, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'volumeConfig' is not null or undefined
+            assertParamExists('volumeCreate', 'volumeConfig', volumeConfig)
+            const localVarPath = `/volumes/create`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(volumeConfig, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Instruct the driver to remove the volume.
+         * @summary Remove a volume
+         * @param {string} name Volume name or ID
+         * @param {boolean} [force] Force the removal of the volume
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        volumeDelete: async (name: string, force?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'name' is not null or undefined
+            assertParamExists('volumeDelete', 'name', name)
+            const localVarPath = `/volumes/{name}`
+                .replace(`{${"name"}}`, encodeURIComponent(String(name)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (force !== undefined) {
+                localVarQueryParameter['force'] = force;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Inspect a volume
+         * @param {string} name Volume name or ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        volumeInspect: async (name: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'name' is not null or undefined
+            assertParamExists('volumeInspect', 'name', name)
+            const localVarPath = `/volumes/{name}`
+                .replace(`{${"name"}}`, encodeURIComponent(String(name)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary List volumes
+         * @param {string} [filters] JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the volumes list. Available filters:  - &#x60;dangling&#x3D;&lt;boolean&gt;&#x60; When set to &#x60;true&#x60; (or &#x60;1&#x60;), returns all    volumes that are not in use by a container. When set to &#x60;false&#x60;    (or &#x60;0&#x60;), only volumes that are in use by one or more    containers are returned. - &#x60;driver&#x3D;&lt;volume-driver-name&gt;&#x60; Matches volumes based on their driver. - &#x60;label&#x3D;&lt;key&gt;&#x60; or &#x60;label&#x3D;&lt;key&gt;:&lt;value&gt;&#x60; Matches volumes based on    the presence of a &#x60;label&#x60; alone or a &#x60;label&#x60; and a value. - &#x60;name&#x3D;&lt;volume-name&gt;&#x60; Matches all or part of a volume name. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        volumeList: async (filters?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/volumes`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (filters !== undefined) {
+                localVarQueryParameter['filters'] = filters;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Delete unused volumes
+         * @param {string} [filters] Filters to process on the prune list, encoded as JSON (a &#x60;map[string][]string&#x60;).  Available filters: - &#x60;label&#x60; (&#x60;label&#x3D;&lt;key&gt;&#x60;, &#x60;label&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60;, &#x60;label!&#x3D;&lt;key&gt;&#x60;, or &#x60;label!&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60;) Prune volumes with (or without, in case &#x60;label!&#x3D;...&#x60; is used) the specified labels. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        volumePrune: async (filters?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/volumes/prune`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (filters !== undefined) {
+                localVarQueryParameter['filters'] = filters;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * VolumeApi - functional programming interface
+ */
+export const VolumeApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = VolumeApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary Create a volume
+         * @param {VolumeCreateOptions} volumeConfig Volume configuration
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async volumeCreate(volumeConfig: VolumeCreateOptions, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Volume>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.volumeCreate(volumeConfig, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['VolumeApi.volumeCreate']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Instruct the driver to remove the volume.
+         * @summary Remove a volume
+         * @param {string} name Volume name or ID
+         * @param {boolean} [force] Force the removal of the volume
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async volumeDelete(name: string, force?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.volumeDelete(name, force, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['VolumeApi.volumeDelete']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Inspect a volume
+         * @param {string} name Volume name or ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async volumeInspect(name: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Volume>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.volumeInspect(name, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['VolumeApi.volumeInspect']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary List volumes
+         * @param {string} [filters] JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the volumes list. Available filters:  - &#x60;dangling&#x3D;&lt;boolean&gt;&#x60; When set to &#x60;true&#x60; (or &#x60;1&#x60;), returns all    volumes that are not in use by a container. When set to &#x60;false&#x60;    (or &#x60;0&#x60;), only volumes that are in use by one or more    containers are returned. - &#x60;driver&#x3D;&lt;volume-driver-name&gt;&#x60; Matches volumes based on their driver. - &#x60;label&#x3D;&lt;key&gt;&#x60; or &#x60;label&#x3D;&lt;key&gt;:&lt;value&gt;&#x60; Matches volumes based on    the presence of a &#x60;label&#x60; alone or a &#x60;label&#x60; and a value. - &#x60;name&#x3D;&lt;volume-name&gt;&#x60; Matches all or part of a volume name. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async volumeList(filters?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<VolumeListResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.volumeList(filters, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['VolumeApi.volumeList']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Delete unused volumes
+         * @param {string} [filters] Filters to process on the prune list, encoded as JSON (a &#x60;map[string][]string&#x60;).  Available filters: - &#x60;label&#x60; (&#x60;label&#x3D;&lt;key&gt;&#x60;, &#x60;label&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60;, &#x60;label!&#x3D;&lt;key&gt;&#x60;, or &#x60;label!&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60;) Prune volumes with (or without, in case &#x60;label!&#x3D;...&#x60; is used) the specified labels. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async volumePrune(filters?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<VolumePruneResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.volumePrune(filters, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['VolumeApi.volumePrune']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * VolumeApi - factory interface
+ */
+export const VolumeApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = VolumeApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary Create a volume
+         * @param {VolumeCreateOptions} volumeConfig Volume configuration
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        volumeCreate(volumeConfig: VolumeCreateOptions, options?: any): AxiosPromise<Volume> {
+            return localVarFp.volumeCreate(volumeConfig, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Instruct the driver to remove the volume.
+         * @summary Remove a volume
+         * @param {string} name Volume name or ID
+         * @param {boolean} [force] Force the removal of the volume
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        volumeDelete(name: string, force?: boolean, options?: any): AxiosPromise<void> {
+            return localVarFp.volumeDelete(name, force, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Inspect a volume
+         * @param {string} name Volume name or ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        volumeInspect(name: string, options?: any): AxiosPromise<Volume> {
+            return localVarFp.volumeInspect(name, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary List volumes
+         * @param {string} [filters] JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the volumes list. Available filters:  - &#x60;dangling&#x3D;&lt;boolean&gt;&#x60; When set to &#x60;true&#x60; (or &#x60;1&#x60;), returns all    volumes that are not in use by a container. When set to &#x60;false&#x60;    (or &#x60;0&#x60;), only volumes that are in use by one or more    containers are returned. - &#x60;driver&#x3D;&lt;volume-driver-name&gt;&#x60; Matches volumes based on their driver. - &#x60;label&#x3D;&lt;key&gt;&#x60; or &#x60;label&#x3D;&lt;key&gt;:&lt;value&gt;&#x60; Matches volumes based on    the presence of a &#x60;label&#x60; alone or a &#x60;label&#x60; and a value. - &#x60;name&#x3D;&lt;volume-name&gt;&#x60; Matches all or part of a volume name. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        volumeList(filters?: string, options?: any): AxiosPromise<VolumeListResponse> {
+            return localVarFp.volumeList(filters, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Delete unused volumes
+         * @param {string} [filters] Filters to process on the prune list, encoded as JSON (a &#x60;map[string][]string&#x60;).  Available filters: - &#x60;label&#x60; (&#x60;label&#x3D;&lt;key&gt;&#x60;, &#x60;label&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60;, &#x60;label!&#x3D;&lt;key&gt;&#x60;, or &#x60;label!&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60;) Prune volumes with (or without, in case &#x60;label!&#x3D;...&#x60; is used) the specified labels. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        volumePrune(filters?: string, options?: any): AxiosPromise<VolumePruneResponse> {
+            return localVarFp.volumePrune(filters, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * VolumeApi - object-oriented interface
+ * @class VolumeApi
+ * @extends {BaseAPI}
+ */
+export class VolumeApi extends BaseAPI {
+    /**
+     * 
+     * @summary Create a volume
+     * @param {VolumeCreateOptions} volumeConfig Volume configuration
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public volumeCreate(volumeConfig: VolumeCreateOptions, options?: RawAxiosRequestConfig) {
+        return VolumeApiFp(this.configuration).volumeCreate(volumeConfig, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Instruct the driver to remove the volume.
+     * @summary Remove a volume
+     * @param {string} name Volume name or ID
+     * @param {boolean} [force] Force the removal of the volume
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public volumeDelete(name: string, force?: boolean, options?: RawAxiosRequestConfig) {
+        return VolumeApiFp(this.configuration).volumeDelete(name, force, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Inspect a volume
+     * @param {string} name Volume name or ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public volumeInspect(name: string, options?: RawAxiosRequestConfig) {
+        return VolumeApiFp(this.configuration).volumeInspect(name, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary List volumes
+     * @param {string} [filters] JSON encoded value of the filters (a &#x60;map[string][]string&#x60;) to process on the volumes list. Available filters:  - &#x60;dangling&#x3D;&lt;boolean&gt;&#x60; When set to &#x60;true&#x60; (or &#x60;1&#x60;), returns all    volumes that are not in use by a container. When set to &#x60;false&#x60;    (or &#x60;0&#x60;), only volumes that are in use by one or more    containers are returned. - &#x60;driver&#x3D;&lt;volume-driver-name&gt;&#x60; Matches volumes based on their driver. - &#x60;label&#x3D;&lt;key&gt;&#x60; or &#x60;label&#x3D;&lt;key&gt;:&lt;value&gt;&#x60; Matches volumes based on    the presence of a &#x60;label&#x60; alone or a &#x60;label&#x60; and a value. - &#x60;name&#x3D;&lt;volume-name&gt;&#x60; Matches all or part of a volume name. 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public volumeList(filters?: string, options?: RawAxiosRequestConfig) {
+        return VolumeApiFp(this.configuration).volumeList(filters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Delete unused volumes
+     * @param {string} [filters] Filters to process on the prune list, encoded as JSON (a &#x60;map[string][]string&#x60;).  Available filters: - &#x60;label&#x60; (&#x60;label&#x3D;&lt;key&gt;&#x60;, &#x60;label&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60;, &#x60;label!&#x3D;&lt;key&gt;&#x60;, or &#x60;label!&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60;) Prune volumes with (or without, in case &#x60;label!&#x3D;...&#x60; is used) the specified labels. 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public volumePrune(filters?: string, options?: RawAxiosRequestConfig) {
+        return VolumeApiFp(this.configuration).volumePrune(filters, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
 
