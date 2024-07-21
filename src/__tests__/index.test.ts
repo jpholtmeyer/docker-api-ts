@@ -1,7 +1,7 @@
 import { Docker } from "../generated/index.js"
 import { describe, beforeAll, afterAll, expect, test } from "vitest"
 import { strict as assert } from "assert"
-import fs from 'fs'
+import * as fs from 'fs'
 import type {
   ConfigurationParameters
 } from "../generated/configuration.js"

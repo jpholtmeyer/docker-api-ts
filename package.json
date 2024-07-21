@@ -1,6 +1,6 @@
 {
   "name": "@jholtmeyer/docker-api-ts",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Typescript API client for the Docker daemon",
   "main": "dist/generated/index.js",
   "types": "dist/generated/index.d.ts",
