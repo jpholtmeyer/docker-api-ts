@@ -280,7 +280,7 @@ export {
   ImageBuildContentTypeEnum,
   ImageBuildVersionEnum,
   ServiceUpdateRegistryAuthFromEnum,
-} from "./api"
+} from "./api.js"
 
 // Prevent Axios from throwing errors for 4xx and 5xx responses
 axios.defaults.validateStatus = function () {
